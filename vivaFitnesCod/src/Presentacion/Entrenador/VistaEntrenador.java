@@ -1,53 +1,73 @@
-/**
- * 
+ï»¿/**
+ * Vista principal del menu de Entrenador.
+ * Muestra las opciones: Alta, Baja, Modificar, Mostrar, Crear Sesion.
  */
 package Presentacion.Entrenador;
 
-import javax.swing.JFrame;
-import Presentacion.FactoriaPresentacion.IGUI;
-import java.util.Set;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import Presentacion.FactoriaPresentacion.IGUI;
+import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Context;
+import Controlador.Controller;
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author azuri
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
 public class VistaEntrenador extends JFrame implements IGUI {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<JPanel> jPanel;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<ActionListener> actionListener;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<JButton> jButton;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<JLabel> jLabel;
 
+	private JPanel panel;
+	private JButton btnAlta, btnBaja, btnModificar, btnMostrar, btnCrearSesion, btnVolver;
+
+	public VistaEntrenador() {
+		setTitle("Gestion de Entrenadores - VivaFitness");
+		setSize(400, 350);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		panel = new JPanel();
+		panel.setLayout(new GridLayout(6, 1, 10, 10));
+		panel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
+
+		btnAlta = new JButton("Alta Entrenador");
+		btnBaja = new JButton("Baja Entrenador");
+		btnModificar = new JButton("Modificar Entrenador");
+		btnMostrar = new JButton("Mostrar Entrenador");
+		btnCrearSesion = new JButton("Crear Sesion");
+		btnVolver = new JButton("Volver");
+
+		btnAlta.addActionListener(e -> {
+			new VistaAltaEntrenador().setVisible(true);
+			dispose();
+		});
+		btnBaja.addActionListener(e -> {
+			new VistaBajaEntrenador().setVisible(true);
+			dispose();
+		});
+		btnModificar.addActionListener(e -> {
+			new VistaModificarEntrenador().setVisible(true);
+			dispose();
+		});
+		btnMostrar.addActionListener(e -> {
+			new VistaMostrarEntrenador().setVisible(true);
+			dispose();
+		});
+		btnCrearSesion.addActionListener(e -> {
+			new VistaCrearSesion().setVisible(true);
+			dispose();
+		});
+		btnVolver.addActionListener(e -> dispose());
+
+		panel.add(btnAlta);
+		panel.add(btnBaja);
+		panel.add(btnModificar);
+		panel.add(btnMostrar);
+		panel.add(btnCrearSesion);
+		panel.add(btnVolver);
+		add(panel);
+	}
+
+	@Override
 	public void update(Context context) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
-		// end-user-code
+		// La vista menu no procesa respuestas; las subvistas lo hacen.
 	}
 }

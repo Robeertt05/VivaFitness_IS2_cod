@@ -1,78 +1,68 @@
-/**
- * 
+ï»¿/**
+ * Contexto que se pasa entre la Vista y el Controlador.
+ * Contiene el evento (int) que disparo la accion y el objeto de datos asociado.
+ * Patron: Context Object - encapsula estado compartido entre capas.
  */
 package Controlador;
 
 import Presentacion.FactoriaPresentacion.Evento;
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author azuri
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
+/**
+ * <!-- begin-UML-doc -->
+ * <!-- end-UML-doc -->
+ * @author azuri
+ * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ */
 public class Context {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+
+	/** Objeto de datos que acompana al evento (TEntrenador, TCliente, etc.) */
 	private Object objeto;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object evento;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public Evento getEvento() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
+	/** Evento que disparo la accion en la vista (constante de Evento) */
+	private int evento;
+
+	/** Constructor por defecto */
+	public Context() {}
+
+	/**
+	 * Constructor con evento y datos.
+	 * @param evento constante int de la clase Evento
+	 * @param objeto datos asociados al evento
+	 */
+	public Context(int evento, Object objeto) {
+		this.evento = evento;
+		this.objeto = objeto;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param evento
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void setEvento(Evento evento) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
-		// end-user-code
+	/**
+	 * Devuelve el evento del contexto.
+	 * @return evento (constante int de Evento)
+	 */
+	public int getEvento() {
+		return this.evento;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void getObjeto() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
-		// end-user-code
+	/**
+	 * Establece el evento del contexto.
+	 * @param evento constante int de la clase Evento
+	 */
+	public void setEvento(int evento) {
+		this.evento = evento;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param objeto
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	/**
+	 * Devuelve el objeto de datos del contexto.
+	 * @return objeto (TEntrenador, Integer, etc.)
+	 */
+	public Object getObjeto() {
+		return this.objeto;
+	}
+
+	/**
+	 * Establece el objeto de datos del contexto.
+	 * @param objeto datos a transportar
+	 */
 	public void setObjeto(Object objeto) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
-		// end-user-code
+		this.objeto = objeto;
 	}
 }

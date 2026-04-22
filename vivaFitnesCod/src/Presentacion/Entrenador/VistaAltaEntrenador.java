@@ -1,60 +1,76 @@
-/**
- * 
+ï»¿/**
+ * Vista para dar de alta a un nuevo Entrenador.
  */
 package Presentacion.Entrenador;
 
-import javax.swing.JFrame;
-import Presentacion.FactoriaPresentacion.IGUI;
-import java.util.Set;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import Presentacion.FactoriaPresentacion.IGUI;
+import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Context;
+import Controlador.Controller;
+import Negocio.entrenador.TEntrenador;
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author azuri
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
 public class VistaAltaEntrenador extends JFrame implements IGUI {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<JPanel> jPanel;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<ActionListener> actionListener;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<JButton> jButton;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<JLabel> jLabel;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Set<JTextField> jTextField;
 
+	private JPanel panel;
+	private JLabel lblDni, lblNombre, lblTelefono;
+	private JTextField txtDni, txtNombre, txtTelefono;
+	private JButton btnAceptar, btnCancelar;
+
+	public VistaAltaEntrenador() {
+		setTitle("Alta Entrenador - VivaFitness");
+		setSize(400, 300);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		panel = new JPanel(new GridLayout(4, 2, 10, 10));
+		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+		lblDni = new JLabel("DNI:");
+		txtDni = new JTextField();
+		lblNombre = new JLabel("Nombre:");
+		txtNombre = new JTextField();
+		lblTelefono = new JLabel("Telefono:");
+		txtTelefono = new JTextField();
+
+		btnAceptar = new JButton("Aceptar");
+		btnCancelar = new JButton("Cancelar");
+
+		btnAceptar.addActionListener(e -> {
+			TEntrenador t = new TEntrenador();
+			t.set_dni(txtDni.getText().trim());
+			t.set_nombre(txtNombre.getText().trim());
+			t.set_telefono(txtTelefono.getText().trim());
+			Context ctx = new Context(Evento.ALTA_ENTRENADOR, t);
+			Context res = Controller.getInstance().action(ctx);
+			update(res);
+		});
+
+		btnCancelar.addActionListener(e -> dispose());
+
+		panel.add(lblDni);     panel.add(txtDni);
+		panel.add(lblNombre);  panel.add(txtNombre);
+		panel.add(lblTelefono); panel.add(txtTelefono);
+		panel.add(btnAceptar); panel.add(btnCancelar);
+		add(panel);
+	}
+
+	@Override
 	public void update(Context context) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
-		// end-user-code
+		if (context == null) return;
+		int evento = context.getEvento();
+		if (evento == Evento.RES_ALTA_ENTRENADOR_OK) {
+			JOptionPane.showMessageDialog(this,
+				"Entrenador dado de alta correctamente. ID: " + context.getObjeto(),
+				"Exito", JOptionPane.INFORMATION_MESSAGE);
+			dispose();
+		} else if (evento == Evento.RES_ALTA_ENTRENADOR_KO) {
+			JOptionPane.showMessageDialog(this,
+				"Error al dar de alta al entrenador. Compruebe los datos.",
+				"Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

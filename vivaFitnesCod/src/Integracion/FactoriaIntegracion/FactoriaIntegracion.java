@@ -1,86 +1,47 @@
-/**
- * 
+ï»¿/**
+ * Factoria abstracta de DAOs.
+ * Patron: Abstract Factory + Singleton.
+ * Permite desacoplar la creacion de DAOs de su implementacion concreta.
  */
 package Integracion.FactoriaIntegracion;
 
 import Integracion.Entrenador.DAOEntrenador;
+import Integracion.Cliente.DAOCliente;
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author azuri
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
-public class FactoriaIntegracion {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+/**
+ * <!-- begin-UML-doc -->
+ * <!-- end-UML-doc -->
+ * @author azuri
+ * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ */
+public abstract class FactoriaIntegracion {
+
+	/** Unica instancia de la factoria (Singleton). */
 	private static FactoriaIntegracion instance;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	/**
+	 * Devuelve la unica instancia de la factoria concreta (Singleton).
+	 * Si aun no existe, crea una instancia de FactoriaIntegracionImp.
+	 * @return instancia unica de FactoriaIntegracion
+	 */
 	public static FactoriaIntegracion getInstance() {
 		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
+		if (instance == null) {
+			instance = new FactoriaIntegracionImp();
+		}
+		return instance;
 		// end-user-code
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public DAOEntrenador generaDAOEntrenador() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
-	}
+	/**
+	 * Crea y devuelve una implementacion de DAOEntrenador.
+	 * @return DAOEntrenador
+	 */
+	public abstract DAOEntrenador generaDAOEntrenador();
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public DAOSala generaDAOSala() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public DAOSesion generaDAOSesion() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public DAOCliente generaDAOCliente() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
-	}
+	/**
+	 * Crea y devuelve una implementacion de DAOCliente.
+	 * @return DAOCliente
+	 */
+	public abstract DAOCliente generaDAOCliente();
 }

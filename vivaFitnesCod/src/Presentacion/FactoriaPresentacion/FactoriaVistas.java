@@ -1,48 +1,35 @@
-/**
- * 
+ï»¿/**
+ * Factoria abstracta de Vistas (IGUIs).
+ * Patron: Abstract Factory + Singleton.
  */
 package Presentacion.FactoriaPresentacion;
 
-import javax.swing.JFrame;
+/**
+ * <!-- begin-UML-doc -->
+ * <!-- end-UML-doc -->
+ * @author azuri
+ * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ */
+public abstract class FactoriaVistas {
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author azuri
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
-public class FactoriaVistas extends JFrame {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	/** Unica instancia (Singleton). */
 	private static FactoriaVistas instance;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	/**
+	 * Devuelve la unica instancia de FactoriaVistas (Singleton).
+	 * @return instancia de FactoriaVistas
+	 */
 	public static FactoriaVistas getInstance() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
+		if (instance == null) {
+			instance = new FactoriaVistasImp();
+		}
+		return instance;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param evento
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public IGUI generarVistas(Evento evento) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
-	}
+	/**
+	 * Crea y devuelve la vista correspondiente al evento indicado.
+	 * @param evento constante int de la clase Evento
+	 * @return IGUI (vista) correspondiente
+	 */
+	public abstract IGUI generarVistas(int evento);
 }
