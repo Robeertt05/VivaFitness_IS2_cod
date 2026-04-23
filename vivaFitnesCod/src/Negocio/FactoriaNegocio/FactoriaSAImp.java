@@ -3,11 +3,49 @@
  */
 package Negocio.FactoriaNegocio;
 
+import Integracion.FactoriaIntegracion.FactoriaIntegracion;
+import Integracion.FactoriaIntegracion.DAOSesion;
+
 /** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
+ * Service Application Factory Implementation
  * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class FactoriaSAImp extends FactoriaServicioAplicacion {
+	
+	private SASesion saSesion;
+	private SACliente saCliente;
+	private SASala saSala;
+	
+	public FactoriaSAImp() {
+		// Initialize DAO factory
+		FactoriaIntegracion daoFactory = FactoriaIntegracion.getInstance();
+		
+		// Create service applications
+		DAOSesion daoSesion = daoFactory.generaDAOSesion();
+		this.saSesion = new SASesionImp(daoSesion);
+	}
+	
+	/**
+	 * Get Session Service Application
+	 * @return SASesion instance
+	 */
+	public SASesion getSASesion() {
+		return this.saSesion;
+	}
+	
+	/**
+	 * Get Client Service Application  
+	 * @return SACliente instance
+	 */
+	public SACliente getSACliente() {
+		return this.saCliente;
+	}
+	
+	/**
+	 * Get Room Service Application
+	 * @return SASala instance
+	 */
+	public SASala getSASala() {
+		return this.saSala;
+	}
 }

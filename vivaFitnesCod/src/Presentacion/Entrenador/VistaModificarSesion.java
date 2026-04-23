@@ -8,57 +8,39 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Date;
 
 import Presentacion.FactoriaPresentacion.IGUI;
 import Controlador.Context;
 import Integracion.FactoriaIntegracion.TSesion;
 
 /** 
- * View for creating a new session
+ * View for modifying a session
  * @author azuri
  */
-public class VistaCrearSesion extends JFrame implements IGUI {
-	/** 
-	 * Action listeners
-	 */
+public class VistaModificarSesion extends JFrame implements IGUI {
+	
 	private Set<ActionListener> actionListener;
-	/** 
-	 * Buttons
-	 */
 	private Set<JButton> jButton;
-	/** 
-	 * Panels
-	 */
 	private Set<JPanel> jPanel;
-	/** 
-	 * Text fields
-	 */
 	private Set<JTextField> jTextField;
-	/** 
-	 * Labels
-	 */
 	private Set<JLabel> jLabel;
 	
+	private JComboBox<Integer> cbSesion;
 	private JTextField txtNombre;
 	private JTextField txtDescripcion;
 	private JTextField txtHora;
-	private JSpinner spinCapacidad;
-	private JComboBox<Integer> cbSala;
-	private JComboBox<Integer> cbEntrenador;
-	private JButton btnCrear;
+	private JButton btnModificar;
 	private JButton btnCancelar;
 	
-	public VistaCrearSesion() {
-		setTitle("Create Session");
-		setSize(400, 300);
+	public VistaModificarSesion() {
+		setTitle("Modify Session");
+		setSize(400, 250);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		actionListener = new HashSet<>();
@@ -71,11 +53,17 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 	}
 	
 	private void initComponents() {
-		JPanel mainPanel = new JPanel(new GridLayout(7, 2, 10, 10));
+		JPanel mainPanel = new JPanel(new GridLayout(5, 2, 10, 10));
 		
-		// Session name
-		jLabel.add(new JLabel("Session Name:"));
-		mainPanel.add(new JLabel("Session Name:"));
+		// Select Session
+		jLabel.add(new JLabel("Select Session:"));
+		mainPanel.add(new JLabel("Select Session:"));
+		cbSesion = new JComboBox<>();
+		mainPanel.add(cbSesion);
+		
+		// Name
+		jLabel.add(new JLabel("Name:"));
+		mainPanel.add(new JLabel("Name:"));
 		txtNombre = new JTextField();
 		jTextField.add(txtNombre);
 		mainPanel.add(txtNombre);
@@ -90,35 +78,17 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 		// Hour
 		jLabel.add(new JLabel("Hour:"));
 		mainPanel.add(new JLabel("Hour:"));
-		txtHora = new JTextField("10:00");
+		txtHora = new JTextField();
 		jTextField.add(txtHora);
 		mainPanel.add(txtHora);
 		
-		// Capacity
-		jLabel.add(new JLabel("Max Capacity:"));
-		mainPanel.add(new JLabel("Max Capacity:"));
-		spinCapacidad = new JSpinner();
-		mainPanel.add(spinCapacidad);
-		
-		// Room
-		jLabel.add(new JLabel("Room:"));
-		mainPanel.add(new JLabel("Room:"));
-		cbSala = new JComboBox<>();
-		mainPanel.add(cbSala);
-		
-		// Trainer
-		jLabel.add(new JLabel("Trainer:"));
-		mainPanel.add(new JLabel("Trainer:"));
-		cbEntrenador = new JComboBox<>();
-		mainPanel.add(cbEntrenador);
-		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
-		btnCrear = new JButton("Create");
+		btnModificar = new JButton("Modify");
 		btnCancelar = new JButton("Cancel");
-		jButton.add(btnCrear);
+		jButton.add(btnModificar);
 		jButton.add(btnCancelar);
-		buttonPanel.add(btnCrear);
+		buttonPanel.add(btnModificar);
 		buttonPanel.add(btnCancelar);
 		
 		jPanel.add(mainPanel);
@@ -128,20 +98,27 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 		add(buttonPanel, BorderLayout.SOUTH);
 	}
 	
+	public int getSelectedSessionId() {
+		Object selected = cbSesion.getSelectedItem();
+		return selected != null ? (Integer) selected : -1;
+	}
+	
 	public TSesion getSessionData() {
 		TSesion sesion = new TSesion();
 		sesion.setNombreSesion(txtNombre.getText());
 		sesion.setDescripcion(txtDescripcion.getText());
 		sesion.setHora(txtHora.getText());
-		sesion.setCapacidadMaxima((Integer) spinCapacidad.getValue());
-		sesion.setIdSala((Integer) cbSala.getSelectedItem());
-		sesion.setIdEntrenador((Integer) cbEntrenador.getSelectedItem());
-		sesion.setFecha(new Date());
 		return sesion;
 	}
 	
-	public void addCreateButtonListener(ActionListener listener) {
-		btnCrear.addActionListener(listener);
+	public void loadSessionData(TSesion sesion) {
+		txtNombre.setText(sesion.getNombreSesion());
+		txtDescripcion.setText(sesion.getDescripcion());
+		txtHora.setText(sesion.getHora());
+	}
+	
+	public void addModifyButtonListener(ActionListener listener) {
+		btnModificar.addActionListener(listener);
 		actionListener.add(listener);
 	}
 	
@@ -152,10 +129,8 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
-		// begin-user-code
 		if (context != null && context.isSuccess()) {
 			setVisible(false);
 		}
-		// end-user-code
 	}
 }
