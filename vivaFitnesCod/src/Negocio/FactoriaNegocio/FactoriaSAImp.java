@@ -4,7 +4,7 @@
  */
 package Negocio.FactoriaNegocio;
 
-import Negocio.entrenador.SAentrrenador;
+import Negocio.entrenador.SAEntrenador;
 import Negocio.entrenador.SAEntrenadorImp;
 import Negocio.Cliente.SACliente;
 import Negocio.Cliente.SAClienteImp;
@@ -22,7 +22,7 @@ public class FactoriaSAImp extends FactoriaServicioAplicacion {
 	 * @return SAentrrenador implementado por SAEntrenadorImp
 	 */
 	@Override
-	public SAentrrenador crearSAEntrenador() {
+	public SAEntrenador crearSAEntrenador() {
 		// begin-user-code
 		return new SAEntrenadorImp();
 		// end-user-code

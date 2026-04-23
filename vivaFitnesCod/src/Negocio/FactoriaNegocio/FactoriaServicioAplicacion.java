@@ -5,7 +5,7 @@
  */
 package Negocio.FactoriaNegocio;
 
-import Negocio.entrenador.SAentrrenador;
+import Negocio.entrenador.SAEntrenador;
 import Negocio.Cliente.SACliente;
 
 /**
@@ -37,7 +37,7 @@ public abstract class FactoriaServicioAplicacion {
 	 * Crea y devuelve un SA de Entrenador.
 	 * @return SAentrrenador
 	 */
-	public abstract SAentrrenador crearSAEntrenador();
+	public abstract SAEntrenador crearSAEntrenador();
 
 	/**
 	 * Crea y devuelve un SA de Cliente.

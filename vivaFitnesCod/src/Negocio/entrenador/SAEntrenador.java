@@ -12,7 +12,7 @@ import java.util.Set;
  * @author azuri
  * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public interface SAentrrenador {
+public interface SAEntrenador {
 
 	/**
 	 * Da de alta a un nuevo entrenador en el sistema.

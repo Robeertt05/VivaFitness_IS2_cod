@@ -7,6 +7,11 @@ package Integracion.Entrenador;
 
 import Negocio.entrenador.TEntrenador;
 import Integracion.Transaction.TManager;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,26 +28,44 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 	 * @param datos TEntrenador con los datos a persistir
 	 * @return id generado por la BD, o -1 si falla
 	 */
+	@Override
 	public int create(TEntrenador datos) {
-		// begin-user-code
-		try {
-			// Obtener la conexion de la transaccion activa
-			// Connection conn = TManager.getInstance().getTransaction().getConnection();
-			// String sql = "INSERT INTO entrenador(dni, nombre, telefono, activo) VALUES(?,?,?,?)";
-			// PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			// ps.setString(1, datos.get_dni());
-			// ps.setString(2, datos.get_nombre());
-			// ps.setString(3, datos.get_telefono());
-			// ps.setInt(4, datos.get_activo());
-			// ps.executeUpdate();
-			// ResultSet rs = ps.getGeneratedKeys();
-			// if (rs.next()) return rs.getInt(1);
-			return 0; // placeholder hasta conectar BD
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		}
-		// end-user-code
+		 int id = -1;
+	        Connection connection = null;
+	        PreparedStatement ps = null;
+	        ResultSet rs = null;
+	        
+	        try {
+	            connection = ConnectionManager.getConnection(); // Ajusta según tu clase
+	            
+	            String query = "INSERT INTO entrenador (nombreEntrenador, DNI_entrenador, telefonoEntrenador, activo) VALUES (?, ?, ?, ?)";
+	            ps = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+	            
+	            ps.setString(1, datos.get_nombreEntrenador());
+	            ps.setString(2, datos.get_dniEntrenador());
+	            ps.setString(3, datos.get_telefonoEntrenador());
+	            ps.setInt(4, datos.get_activo());
+	            
+	            ps.executeUpdate();
+	            
+	            rs = ps.getGeneratedKeys();
+	            if (rs.next()) {
+	                id = rs.getInt(1);
+	            }
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if (rs != null) rs.close();
+	                if (ps != null) ps.close();
+	                if (connection != null) connection.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        
+	        return id;
 	}
 
 	/**
@@ -50,29 +73,44 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 	 * @param idEntrenador identificador del entrenador
 	 * @return TEntrenador o null si no existe
 	 */
+	@Override
 	public TEntrenador read(int idEntrenador) {
-		// begin-user-code
-		try {
-			// Connection conn = TManager.getInstance().getTransaction().getConnection();
-			// String sql = "SELECT * FROM entrenador WHERE id_entrenador = ?";
-			// PreparedStatement ps = conn.prepareStatement(sql);
-			// ps.setInt(1, idEntrenador);
-			// ResultSet rs = ps.executeQuery();
-			// if (rs.next()) {
-			//     return new TEntrenador(
-			//         rs.getInt("id_entrenador"),
-			//         rs.getString("dni_entrenador"),
-			//         rs.getString("nombre"),
-			//         rs.getString("telefono"),
-			//         rs.getInt("activo")
-			//     );
-			// }
-			return null; // placeholder hasta conectar BD
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		// end-user-code
+		  TEntrenador entrenador = null;
+	        Connection connection = null;
+	        PreparedStatement ps = null;
+	        ResultSet rs = null;
+	        
+	        try {
+	            connection = ConnectionManager.getConnection();
+	            
+	            String query = "SELECT * FROM entrenador WHERE idEntrenador = ?";
+	            ps = connection.prepareStatement(query);
+	            ps.setInt(1, idEntrenador);
+	            
+	            rs = ps.executeQuery();
+	            
+	            if (rs.next()) {
+	                entrenador = new TEntrenador();
+	                entrenador.set_idEntrenador(rs.getInt("idEntrenador"));
+	                entrenador.set_nombreEntrenador(rs.getString("nombreEntrenador"));
+	                entrenador.set_dniEntrenador(rs.getString("DNI_entrenador"));
+	                entrenador.set_telefonoEntrenador(rs.getString("telefonoEntrenador"));
+	                entrenador.set_activo(rs.getInt("activo"));
+	            }
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if (rs != null) rs.close();
+	                if (ps != null) ps.close();
+	                if (connection != null) connection.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        
+	        return entrenador;
 	}
 
 	/**
@@ -80,24 +118,38 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 	 * @param tEntrenador TEntrenador con los datos actualizados
 	 * @return 0 si correcto, -1 si falla
 	 */
-	public int upadate(TEntrenador tEntrenador) {
-		// begin-user-code
-		try {
-			// Connection conn = TManager.getInstance().getTransaction().getConnection();
-			// String sql = "UPDATE entrenador SET dni_entrenador=?, nombre=?, telefono=?, activo=? WHERE id_entrenador=?";
-			// PreparedStatement ps = conn.prepareStatement(sql);
-			// ps.setString(1, tEntrenador.get_dni());
-			// ps.setString(2, tEntrenador.get_nombre());
-			// ps.setString(3, tEntrenador.get_telefono());
-			// ps.setInt(4, tEntrenador.get_activo());
-			// ps.setInt(5, tEntrenador.get_id());
-			// ps.executeUpdate();
-			return 0; // placeholder hasta conectar BD
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		}
-		// end-user-code
+	@Override
+	public int update(TEntrenador tEntrenador) {
+		 int result = -1;
+	        Connection connection = null;
+	        PreparedStatement ps = null;
+	        
+	        try {
+	            connection = ConnectionManager.getConnection();
+	            
+	            String query = "UPDATE entrenador SET nombreEntrenador = ?, DNI_entrenador = ?, telefonoEntrenador = ?, activo = ? WHERE idEntrenador = ?";
+	            ps = connection.prepareStatement(query);
+	            
+	            ps.setString(1, tEntrenador.get_nombreEntrenador());
+	            ps.setString(2, tEntrenador.get_dniEntrenador());
+	            ps.setString(3, tEntrenador.get_telefonoEntrenador());
+	            ps.setInt(4, tEntrenador.get_activo());
+	            ps.setInt(5, tEntrenador.get_idEntrenador());
+	            
+	            result = ps.executeUpdate();
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if (ps != null) ps.close();
+	                if (connection != null) connection.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        
+	        return result;
 	}
 
 	/**
@@ -106,20 +158,34 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 	 * @param idEntrenador identificador del entrenador
 	 * @return 0 si correcto, -1 si falla
 	 */
+	@Override
 	public int delete(int idEntrenador) {
-		// begin-user-code
-		try {
-			// Connection conn = TManager.getInstance().getTransaction().getConnection();
-			// String sql = "DELETE FROM entrenador WHERE id_entrenador = ?";
-			// PreparedStatement ps = conn.prepareStatement(sql);
-			// ps.setInt(1, idEntrenador);
-			// ps.executeUpdate();
-			return 0; // placeholder hasta conectar BD
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1;
-		}
-		// end-user-code
+		 int result = -1;
+	        Connection connection = null;
+	        PreparedStatement ps = null;
+	        
+	        try {
+	            connection = ConnectionManager.getConnection();
+	            
+	            // Baja lógica: activo = 0
+	            String query = "UPDATE entrenador SET activo = 0 WHERE idEntrenador = ?";
+	            ps = connection.prepareStatement(query);
+	            ps.setInt(1, idEntrenador);
+	            
+	            result = ps.executeUpdate();
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if (ps != null) ps.close();
+	                if (connection != null) connection.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        
+	        return result;
 	}
 
 	/**
@@ -127,28 +193,43 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 	 * @return Set de TEntrenador
 	 */
 	public Set<TEntrenador> read_all() {
-		// begin-user-code
-		Set<TEntrenador> resultado = new HashSet<>();
-		try {
-			// Connection conn = TManager.getInstance().getTransaction().getConnection();
-			// String sql = "SELECT * FROM entrenador";
-			// PreparedStatement ps = conn.prepareStatement(sql);
-			// ResultSet rs = ps.executeQuery();
-			// while (rs.next()) {
-			//     resultado.add(new TEntrenador(
-			//         rs.getInt("id_entrenador"),
-			//         rs.getString("dni_entrenador"),
-			//         rs.getString("nombre"),
-			//         rs.getString("telefono"),
-			//         rs.getInt("activo")
-			//     ));
-			// }
-			return resultado; // placeholder hasta conectar BD
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		// end-user-code
+		Set<TEntrenador> entrenadores = new HashSet<>();
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = ConnectionManager.getConnection();
+            
+            String query = "SELECT * FROM entrenador";
+            ps = connection.prepareStatement(query);
+            
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                TEntrenador entrenador = new TEntrenador();
+                entrenador.set_idEntrenador(rs.getInt("idEntrenador"));
+                entrenador.set_nombreEntrenador(rs.getString("nombreEntrenador"));
+                entrenador.set_dniEntrenador(rs.getString("DNI_entrenador"));
+                entrenador.set_telefonoEntrenador(rs.getString("telefonoEntrenador"));
+                entrenador.set_activo(rs.getInt("activo"));
+                
+                entrenadores.add(entrenador);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return entrenadores;
 	}
 
 	/**
@@ -156,28 +237,43 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 	 * @param dni DNI a buscar
 	 * @return TEntrenador o null si no existe
 	 */
-	public TEntrenador read_by_dni(Object dni) {
-		// begin-user-code
-		try {
-			// Connection conn = TManager.getInstance().getTransaction().getConnection();
-			// String sql = "SELECT * FROM entrenador WHERE dni_entrenador = ?";
-			// PreparedStatement ps = conn.prepareStatement(sql);
-			// ps.setString(1, (String) dni);
-			// ResultSet rs = ps.executeQuery();
-			// if (rs.next()) {
-			//     return new TEntrenador(
-			//         rs.getInt("id_entrenador"),
-			//         rs.getString("dni_entrenador"),
-			//         rs.getString("nombre"),
-			//         rs.getString("telefono"),
-			//         rs.getInt("activo")
-			//     );
-			// }
-			return null; // placeholder hasta conectar BD
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		// end-user-code
+	public TEntrenador read_by_dni(String dni) {
+        TEntrenador entrenador = null;
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = ConnectionManager.getConnection();
+            
+            String query = "SELECT * FROM entrenador WHERE DNI_entrenador = ?";
+            ps = connection.prepareStatement(query);
+            ps.setString(1, dni);
+            
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                entrenador = new TEntrenador();
+                entrenador.set_idEntrenador(rs.getInt("idEntrenador"));
+                entrenador.set_nombreEntrenador(rs.getString("nombreEntrenador"));
+                entrenador.set_dniEntrenador(rs.getString("DNI_entrenador"));
+                entrenador.set_telefonoEntrenador(rs.getString("telefonoEntrenador"));
+                entrenador.set_activo(rs.getInt("activo"));
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return entrenador;
+
 	}
 }

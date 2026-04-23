@@ -6,7 +6,7 @@ package Controlador.commands;
 
 import Controlador.Command;
 import Controlador.Context;
-import Negocio.entrenador.SAentrrenador;
+import Negocio.entrenador.SAEntrenador;
 import Negocio.entrenador.TEntrenador;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Presentacion.FactoriaPresentacion.Evento;
@@ -18,7 +18,7 @@ public class CmdMostrarEntrenador implements Command {
 		Context resultado = new Context();
 		try {
 			int id = (Integer) datos;
-			SAentrrenador sa = FactoriaServicioAplicacion.getInstance().crearSAEntrenador();
+			SAEntrenador sa = FactoriaServicioAplicacion.getInstance().crearSAEntrenador();
 			TEntrenador entrenador = sa.mostrar_entrenador(id);
 			if (entrenador != null) {
 				resultado.setEvento(Evento.RES_MOSTRAR_ENTRENADOR_OK);

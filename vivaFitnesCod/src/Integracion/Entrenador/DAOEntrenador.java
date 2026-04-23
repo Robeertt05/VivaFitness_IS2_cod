@@ -38,7 +38,7 @@ public interface DAOEntrenador {
 	* @return
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public int upadate(TEntrenador tEntrenador);
+	public int update(TEntrenador tEntrenador);
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -64,5 +64,5 @@ public interface DAOEntrenador {
 	* @return
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public TEntrenador read_by_dni(Object dni);
+	public TEntrenador read_by_dni(String dni);
 }
