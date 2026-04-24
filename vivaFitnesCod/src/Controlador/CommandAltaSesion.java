@@ -10,11 +10,11 @@ import Integracion.FactoriaIntegracion.TSesion;
  * Command to create a new session
  * @author azuri
  */
-public class CommandCrearSesion implements Command {
+public class CommandAltaSesion implements Command {
 	
 	private SASesion saSesion;
 	
-	public CommandCrearSesion(SASesion saSesion) {
+	public CommandAltaSesion(SASesion saSesion) {
 		this.saSesion = saSesion;
 	}
 
