@@ -41,9 +41,9 @@ public class VistaAltaEntrenador extends JFrame implements IGUI {
 
 		btnAceptar.addActionListener(e -> {
 			TEntrenador t = new TEntrenador();
-			t.set_dni(txtDni.getText().trim());
-			t.set_nombre(txtNombre.getText().trim());
-			t.set_telefono(txtTelefono.getText().trim());
+			t.set_dniEntrenador(txtDni.getText().trim());
+			t.set_nombreEntrenador(txtNombre.getText().trim());
+			t.set_telefonoEntrenador(txtTelefono.getText().trim());
 			Context ctx = new Context(Evento.ALTA_ENTRENADOR, t);
 			Context res = Controller.getInstance().action(ctx);
 			update(res);

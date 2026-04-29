@@ -36,7 +36,7 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 			try {
 				int id = Integer.parseInt(txtIdEntrenador.getText().trim());
 				TEntrenador t = new TEntrenador();
-				t.set_id(id);
+				t.set_idEntrenador(id);
 				Context ctx = new Context(Evento.CREAR_SESION, t);
 				Context res = Controller.getInstance().action(ctx);
 				update(res);

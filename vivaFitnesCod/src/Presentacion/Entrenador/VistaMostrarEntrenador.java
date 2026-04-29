@@ -67,10 +67,10 @@ public class VistaMostrarEntrenador extends JFrame implements IGUI {
 		if (evento == Evento.RES_MOSTRAR_ENTRENADOR_OK) {
 			TEntrenador t = (TEntrenador) context.getObjeto();
 			txtResultado.setText(
-				"ID: " + t.get_id() + "\n" +
-				"DNI: " + t.get_dni() + "\n" +
-				"Nombre: " + t.get_nombre() + "\n" +
-				"Telefono: " + t.get_telefono() + "\n" +
+				"ID: " + t.get_idEntrenador() + "\n" +
+				"DNI: " + t.get_dniEntrenador() + "\n" +
+				"Nombre: " + t.get_nombreEntrenador() + "\n" +
+				"Telefono: " + t.get_telefonoEntrenador() + "\n" +
 				"Activo: " + (t.get_activo() == 1 ? "Si" : "No")
 			);
 		} else if (evento == Evento.RES_MOSTRAR_ENTRENADOR_KO) {
