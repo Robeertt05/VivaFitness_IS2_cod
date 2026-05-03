@@ -4,77 +4,70 @@
 package Negocio.FactoriaNegocio;
 
 /** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
+ * Abstract Factory for Service Applications
+ * Defines interface for creating and accessing Service Application objects
  * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class FactoriaServicioAplicacion {
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * Singleton instance
+	 */
 	private static FactoriaServicioAplicacion instance;
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	 * Get singleton instance
+	 * @return FactoriaServicioAplicacion instance
+	 */
 	public static FactoriaServicioAplicacion getInstance() {
 		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
+		if (instance == null) {
+			instance = new FactoriaSAImp();
+		}
+		return instance;
+		// end-user-code
+	}
+
+	/** 
+	 * Generate Room Service Application
+	 * @return SASala implementation
+	 */
+	public SASala generaSASala() {
+		// begin-user-code
+		// TODO: Override in implementation
 		return null;
 		// end-user-code
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void crearSAEntrenador() {
+	 * Generate Session Service Application
+	 * @return SASesion implementation
+	 */
+	public SASesion generaSASesion() {
 		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
+		// TODO: Override in implementation
+		return null;
 		// end-user-code
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void crearSASala() {
+	 * Generate Client Service Application
+	 * @return SACliente implementation
+	 */
+	public SACliente generaSACliente() {
 		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
+		// TODO: Override in implementation
+		return null;
 		// end-user-code
 	}
 
 	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void crearSACliente() {
+	 * Generate Trainer Service Application
+	 * @return SAEntrenador implementation (if implemented)
+	 */
+	public Object generaSAEntrenador() {
 		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void crearSASesion() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
+		// TODO: Implement when Trainer SA is created
+		return null;
 		// end-user-code
 	}
 }

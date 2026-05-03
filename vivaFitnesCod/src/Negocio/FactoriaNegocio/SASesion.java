@@ -6,9 +6,10 @@ package Negocio.FactoriaNegocio;
 import Integracion.FactoriaIntegracion.TSesion;
 import Integracion.FactoriaIntegracion.TSala;
 import Negocio.entrenador.TEntrenador;
+import java.util.Set;
 
 /** 
- * Service Application interface for Sesion (SRS Cases 1-5)
+ * Service Application interface for Sesion (SRS Cases 1-5 + others)
  * @author azuri
  */
 public interface SASesion {
@@ -58,4 +59,17 @@ public interface SASesion {
 	 * @return Trainer transfer object (idEntrenador, nombreEntrenador, telefonoEntrenador, DNIEntrenador) or null if not found
 	 */
 	public TEntrenador mostrar_entrenador_sesion(int idSesion);
+	
+	/** 
+	 * Alta sesión - Create a new session
+	 * @param datos Session data
+	 * @return Session ID if successful, 0 otherwise
+	 */
+	public int alta_sesion(TSesion datos);
+	
+	/** 
+	 * Mostrar todas sesiones - Get all active sessions
+	 * @return Set of all active sessions
+	 */
+	public Set<TSesion> mostrar_todas_sesiones();
 }
