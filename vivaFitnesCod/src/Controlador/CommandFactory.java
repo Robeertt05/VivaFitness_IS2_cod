@@ -4,45 +4,40 @@
 package Controlador;
 
 import Presentacion.FactoriaPresentacion.Evento;
+import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
+import Negocio.FactoriaNegocio.SASesion;
 
 /** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author azuri
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
+ * Factory that maps an Evento to the corresponding Command
+ * @author azuri
+ */
 public class CommandFactory {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private static CommandFactory instance;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public static CommandFactory getInstance() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
-	}
+private static CommandFactory instance;
+private final SASesion saSesion;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param evento
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public Command getCommand(Evento evento) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
-	}
+private CommandFactory() {
+FactoriaServicioAplicacion factory = FactoriaServicioAplicacion.getInstance();
+this.saSesion = factory.getSASesion();
+}
+
+public static CommandFactory getInstance() {
+if (instance == null) {
+instance = new CommandFactory();
+}
+return instance;
+}
+
+public Command getCommand(Evento evento) {
+switch (evento) {
+case ALTA_SESION:             return new CommandAltaSesion(saSesion);
+case BAJA_SESION:             return new CommandEliminarSesion(saSesion);
+case MODIFICAR_SESION:        return new CommandModificarSesion(saSesion);
+case MOSTRAR_SESION:          return new CommandMostrarSesion(saSesion);
+case MOSTRAR_TODAS_SESIONES:  return new CommandMostrarTodasSesiones(saSesion);
+case MOSTRAR_SALA_SESION:     return new CommandMostrarSalaSesion(saSesion);
+case MOSTRAR_ENTRENADOR_SESION: return new CommandMostrarEntrenadorSesion(saSesion);
+default:                      return null;
+}
+}
 }

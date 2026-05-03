@@ -8,7 +8,7 @@ import Integracion.FactoriaIntegracion.TSala;
 
 /**
  * Command to display the room assigned to a session
- * CASO 4: Mostrar sala por sesión (SRS)
+ * CASO 4: Mostrar sala por sesiÃÂ³n (SRS)
  * Get the specific room assigned to a particular session
  * @author azuri
  */

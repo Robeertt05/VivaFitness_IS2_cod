@@ -27,28 +27,28 @@ public class TransactionMySQL implements Transaction {
 
 	public void start() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 
 		// end-user-code
 	}
 
 	public void commit() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 
 		// end-user-code
 	}
 
 	public void rollback() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 
 		// end-user-code
 	}
 
 	public void getResource() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 
 		// end-user-code
 	}

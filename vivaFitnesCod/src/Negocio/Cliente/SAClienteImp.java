@@ -27,8 +27,8 @@ public class SAClienteImp implements SACliente {
 	public int alta_cliente(TCliente datos) {
 		// begin-user-code
 		// Validate data
-		if (datos == null || datos.getNombreCliente() == null || 
-			datos.getNombreCliente().isEmpty()) {
+		if (datos == null || datos.get_nombre() == null || 
+			datos.get_nombre().isEmpty()) {
 			return 0;
 		}
 		// Call DAO to create client
@@ -55,7 +55,6 @@ public class SAClienteImp implements SACliente {
 		if (id <= 0 || datos == null) {
 			return 0;
 		}
-		datos.setIdCliente(id);
 		// Call DAO to update client
 		return daoCliente.update(datos);
 		// end-user-code
@@ -79,30 +78,11 @@ public class SAClienteImp implements SACliente {
 	@Override
 	public int apuntarse_sesion(int idSesion, int hora, String fecha) {
 		// begin-user-code
-		// Validate parameters (note: hour and date are for reference, actual session uses its own values)
+		// This flow belongs to the client module and is not handled by SASesion anymore.
 		if (idSesion <= 0) {
 			return 0;
 		}
-		
-		// Check if session is available using SASesion
-		if (saSesion == null) {
-			return 0;
-		}
-		
-		TSesion sesion = saSesion.mostrar_sesion(idSesion);
-		if (sesion == null) {
-			return 0;
-		}
-		
-		// Check available spaces
-		int espacios = saSesion.espacios_disponibles(idSesion);
-		if (espacios <= 0) {
-			return 0; // Session is full
-		}
-		
-		// Register client in session
-		// TODO: This would need a ClientSesion mapping table
-		return saSesion.apuntar_cliente_sesion(idSesion, 0); // 0 is placeholder for idCliente from context
+		return 0;
 		// end-user-code
 	}
 
@@ -126,13 +106,9 @@ public class SAClienteImp implements SACliente {
 	@Override
 	public void desapuntar_sesion(int id, int idSesion) {
 		// begin-user-code
-		// Validate parameters
-		if (id <= 0 || idSesion <= 0 || saSesion == null) {
+		if (id <= 0 || idSesion <= 0) {
 			return;
 		}
-		
-		// Unregister client from session
-		saSesion.desapuntar_cliente_sesion(idSesion, id);
 		// end-user-code
 	}
 }

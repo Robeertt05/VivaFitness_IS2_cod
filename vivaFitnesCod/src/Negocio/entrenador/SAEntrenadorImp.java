@@ -12,28 +12,28 @@ package Negocio.entrenador;
 public class SAEntrenadorImp implements SAentrrenador {
 	public void alta_entrenador() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 
 		// end-user-code
 	}
 
 	public void baja_entrenaodor() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 
 		// end-user-code
 	}
 
 	public void modificar_entrenador() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 
 		// end-user-code
 	}
 
 	public void crear_sesion() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 
 		// end-user-code
 	}

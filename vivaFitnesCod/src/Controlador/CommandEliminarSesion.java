@@ -7,7 +7,7 @@ import Negocio.FactoriaNegocio.SASesion;
 
 /**
  * Command to delete a session
- * CASO 1: Baja sesión (SRS)
+ * CASO 1: Baja sesiÃÂ³n (SRS)
  * Precondition: Session must not have registered clients
  * @author azuri
  */

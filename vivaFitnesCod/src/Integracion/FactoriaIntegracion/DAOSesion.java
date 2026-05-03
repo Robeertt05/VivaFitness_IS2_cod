@@ -8,11 +8,11 @@ import java.util.Set;
 /** 
  * Data Access Object interface for Sesion (SRS Aligned)
  * Supports 5 main SRS use cases:
- * 1. Baja sesión (delete with preconditions)
- * 2. Modificar sesión (update)
- * 3. Mostrar sesión (read details)
- * 4. Mostrar sala por sesión (get linked room)
- * 5. Mostrar entrenador por sesión (get linked trainer)
+ * 1. Baja sesiÃÂ³n (delete with preconditions)
+ * 2. Modificar sesiÃÂ³n (update)
+ * 3. Mostrar sesiÃÂ³n (read details)
+ * 4. Mostrar sala por sesiÃÂ³n (get linked room)
+ * 5. Mostrar entrenador por sesiÃÂ³n (get linked trainer)
  * @author azuri
  */
 public interface DAOSesion {
@@ -68,7 +68,7 @@ public interface DAOSesion {
 	
 	/** 
 	 * Get room associated with a session
-	 * CASO 4: Mostrar sala por sesión
+	 * CASO 4: Mostrar sala por sesiÃÂ³n
 	 * @param idSesion Session ID
 	 * @return TSala object with room details (idSala, nombreSala, aforo)
 	 */
@@ -76,7 +76,7 @@ public interface DAOSesion {
 	
 	/** 
 	 * Get trainer associated with a session
-	 * CASO 5: Mostrar entrenador por sesión
+	 * CASO 5: Mostrar entrenador por sesiÃÂ³n
 	 * @param idSesion Session ID
 	 * @return Trainer object with trainer details (idEntrenador, nombre, telefono, DNI)
 	 */

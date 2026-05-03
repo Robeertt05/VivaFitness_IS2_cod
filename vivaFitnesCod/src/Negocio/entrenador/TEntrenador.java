@@ -4,182 +4,68 @@
 package Negocio.entrenador;
 
 /** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
+ * Transfer Object for Entrenador
  * @author azuri
  * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class TEntrenador {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private int id_entrenador;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private int activo;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object dni_entrenador;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object nombre;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object telefono;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public int get_id() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return 0;
-		// end-user-code
-	}
+private int id_entrenador;
+private int activo;
+private String dni_entrenador;
+private String nombre;
+private String telefono;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public int get_activo() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return 0;
-		// end-user-code
-	}
+public int get_id() {
+return id_entrenador;
+}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void get_dni() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
+public void set_id(int id) {
+this.id_entrenador = id;
+}
 
-		// end-user-code
-	}
+public int get_activo() {
+return activo;
+}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void get_nombre() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
+public void set_activo(int activo) {
+this.activo = activo;
+}
 
-		// end-user-code
-	}
+public String get_dni() {
+return dni_entrenador;
+}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void get_telefono() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
+public void set_dni(Object dni) {
+this.dni_entrenador = dni != null ? dni.toString() : null;
+}
 
-		// end-user-code
-	}
+public String get_nombre() {
+return nombre;
+}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param activo
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void set_activo(int activo) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
+public void set_nombre(Object nombre) {
+this.nombre = nombre != null ? nombre.toString() : null;
+}
 
-		// end-user-code
-	}
+public String get_telefono() {
+return telefono;
+}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param nombre
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void set_nombre(Object nombre) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
+public void set_telefono(Object telefono) {
+this.telefono = telefono != null ? telefono.toString() : null;
+}
 
-		// end-user-code
-	}
+public void set_all(Object dni, Object nombre, Object telefono) {
+set_dni(dni);
+set_nombre(nombre);
+set_telefono(telefono);
+}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param telefono
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void set_telefono(Object telefono) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param dni
-	* @param nombre
-	* @param telefono
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void set_all(Object dni, Object nombre, Object telefono) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param dni
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void set_dni(Object dni) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param id
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void set_id(int id) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-
-		// end-user-code
-	}
+@Override
+public String toString() {
+return "TEntrenador [id=" + id_entrenador + ", nombre=" + nombre
++ ", dni=" + dni_entrenador + ", telefono=" + telefono
++ ", activo=" + activo + "]";
+}
 }

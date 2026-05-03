@@ -4,10 +4,15 @@
 package Presentacion.FactoriaPresentacion;
 
 /** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
+ * Enum of all UI events that trigger Controller actions
  * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class Evento {
+public enum Evento {
+ALTA_SESION,
+BAJA_SESION,
+MODIFICAR_SESION,
+MOSTRAR_SESION,
+MOSTRAR_TODAS_SESIONES,
+MOSTRAR_SALA_SESION,
+MOSTRAR_ENTRENADOR_SESION
 }

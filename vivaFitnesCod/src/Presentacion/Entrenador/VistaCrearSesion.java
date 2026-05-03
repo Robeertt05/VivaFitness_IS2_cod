@@ -22,7 +22,7 @@ import Controlador.Context;
 import Integracion.FactoriaIntegracion.TSesion;
 
 /** 
- * View for creating a new session
+ * Vista para crear una nueva sesion
  * @author azuri
  */
 public class VistaCrearSesion extends JFrame implements IGUI {
@@ -57,7 +57,7 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 	private JButton btnCancelar;
 	
 	public VistaCrearSesion() {
-		setTitle("Create Session");
+		setTitle("Crear Sesion");
 		setSize(400, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -74,48 +74,48 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 		JPanel mainPanel = new JPanel(new GridLayout(7, 2, 10, 10));
 		
 		// Session name
-		jLabel.add(new JLabel("Session Name:"));
-		mainPanel.add(new JLabel("Session Name:"));
+		jLabel.add(new JLabel("Nombre sesion:"));
+		mainPanel.add(new JLabel("Nombre sesion:"));
 		txtNombre = new JTextField();
 		jTextField.add(txtNombre);
 		mainPanel.add(txtNombre);
 		
 		// Description
-		jLabel.add(new JLabel("Description:"));
-		mainPanel.add(new JLabel("Description:"));
+		jLabel.add(new JLabel("Descripcion:"));
+		mainPanel.add(new JLabel("Descripcion:"));
 		txtDescripcion = new JTextField();
 		jTextField.add(txtDescripcion);
 		mainPanel.add(txtDescripcion);
 		
 		// Hour
-		jLabel.add(new JLabel("Hour:"));
-		mainPanel.add(new JLabel("Hour:"));
+		jLabel.add(new JLabel("Hora:"));
+		mainPanel.add(new JLabel("Hora:"));
 		txtHora = new JTextField("10:00");
 		jTextField.add(txtHora);
 		mainPanel.add(txtHora);
 		
 		// Capacity
-		jLabel.add(new JLabel("Max Capacity:"));
-		mainPanel.add(new JLabel("Max Capacity:"));
+		jLabel.add(new JLabel("Capacidad Maxima:"));
+		mainPanel.add(new JLabel("Capacidad Maxima:"));
 		spinCapacidad = new JSpinner();
 		mainPanel.add(spinCapacidad);
 		
 		// Room
-		jLabel.add(new JLabel("Room:"));
-		mainPanel.add(new JLabel("Room:"));
+		jLabel.add(new JLabel("Sala:"));
+		mainPanel.add(new JLabel("Sala:"));
 		cbSala = new JComboBox<>();
 		mainPanel.add(cbSala);
 		
 		// Trainer
-		jLabel.add(new JLabel("Trainer:"));
-		mainPanel.add(new JLabel("Trainer:"));
+		jLabel.add(new JLabel("Entrenador:"));
+		mainPanel.add(new JLabel("Entrenador:"));
 		cbEntrenador = new JComboBox<>();
 		mainPanel.add(cbEntrenador);
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
-		btnCrear = new JButton("Create");
-		btnCancelar = new JButton("Cancel");
+		btnCrear = new JButton("Crear");
+		btnCancelar = new JButton("Cancelar");
 		jButton.add(btnCrear);
 		jButton.add(btnCancelar);
 		buttonPanel.add(btnCrear);
@@ -136,7 +136,7 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 		sesion.setCapacidadMaxima((Integer) spinCapacidad.getValue());
 		sesion.setIdSala((Integer) cbSala.getSelectedItem());
 		sesion.setIdEntrenador((Integer) cbEntrenador.getSelectedItem());
-		sesion.setFecha(new Date());
+		sesion.setFecha(new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()));
 		return sesion;
 	}
 	

@@ -10,13 +10,14 @@ import java.awt.event.*;
 import Controlador.CommandMostrarSalaSesion;
 import Controlador.Context;
 import Integracion.FactoriaIntegracion.TSala;
+import Presentacion.FactoriaPresentacion.IGUI;
 
 /**
  * View to display room details for a specific session
- * CASO 4: Mostrar sala por sesión (SRS)
+ * CASO 4: Mostrar sala por sesiÃÂ³n (SRS)
  * @author azuri
  */
-public class VistaMostrarSalaSesion extends JFrame {
+public class VistaMostrarSalaSesion extends JFrame implements IGUI {
 	
 	private static final long serialVersionUID = 1L;
 	private CommandMostrarSalaSesion command;
@@ -27,13 +28,17 @@ public class VistaMostrarSalaSesion extends JFrame {
 	private JButton btnBuscar;
 	private JButton btnLimpiar;
 	
+	public VistaMostrarSalaSesion() {
+		initializeUI();
+	}
+
 	public VistaMostrarSalaSesion(CommandMostrarSalaSesion command) {
 		this.command = command;
 		initializeUI();
 	}
 	
 	private void initializeUI() {
-		setTitle("Mostrar Sala por Sesión");
+		setTitle("Mostrar Sala por SesiÃÂ³n");
 		setSize(400, 300);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -43,7 +48,7 @@ public class VistaMostrarSalaSesion extends JFrame {
 		panelPrincipal.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 		
 		// ID Session input
-		JLabel lblSesion = new JLabel("ID Sesión:");
+		JLabel lblSesion = new JLabel("ID SesiÃÂ³n:");
 		txtIdSesion = new JTextField(10);
 		panelPrincipal.add(lblSesion);
 		panelPrincipal.add(txtIdSesion);
@@ -100,7 +105,7 @@ public class VistaMostrarSalaSesion extends JFrame {
 		String idSesionStr = txtIdSesion.getText().trim();
 		
 		if (idSesionStr.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Por favor ingrese un ID de sesión", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Por favor ingrese un ID de sesiÃÂ³n", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
@@ -114,11 +119,11 @@ public class VistaMostrarSalaSesion extends JFrame {
 				lblNombreSala.setText(sala.getNombreSala());
 				lblAforo.setText(String.valueOf(sala.getAforo()));
 			} else {
-				JOptionPane.showMessageDialog(this, ctx.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, ctx.getMessage(), "InformaciÃÂ³n", JOptionPane.INFORMATION_MESSAGE);
 				limpiar();
 			}
 		} catch (NumberFormatException ex) {
-			JOptionPane.showMessageDialog(this, "El ID de sesión debe ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "El ID de sesiÃÂ³n debe ser un nÃÂºmero entero", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -128,5 +133,15 @@ public class VistaMostrarSalaSesion extends JFrame {
 		lblNombreSala.setText("-");
 		lblAforo.setText("-");
 		txtIdSesion.requestFocus();
+	}
+
+	@Override
+	public void update(Context context) {
+		if (context != null && context.isSuccess() && context.getData() instanceof TSala) {
+			TSala sala = (TSala) context.getData();
+			lblIdSala.setText(String.valueOf(sala.getIdSala()));
+			lblNombreSala.setText(sala.getNombreSala());
+			lblAforo.setText(String.valueOf(sala.getAforo()));
+		}
 	}
 }

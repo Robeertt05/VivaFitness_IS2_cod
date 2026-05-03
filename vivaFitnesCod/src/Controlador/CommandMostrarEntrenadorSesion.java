@@ -8,7 +8,7 @@ import Negocio.entrenador.TEntrenador;
 
 /**
  * Command to display the trainer assigned to a session
- * CASO 5: Mostrar entrenador por sesión (SRS)
+ * CASO 5: Mostrar entrenador por sesiÃÂ³n (SRS)
  * Get the specific trainer assigned to a particular session
  * @author azuri
  */

@@ -25,7 +25,7 @@ public class TManager {
 	*/
 	public static TManager getInstance() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 		return null;
 		// end-user-code
 	}
@@ -38,7 +38,7 @@ public class TManager {
 	*/
 	public Transaction createTransaction() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 		return null;
 		// end-user-code
 	}
@@ -51,7 +51,7 @@ public class TManager {
 	*/
 	public Transaction getTransaction() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 		return null;
 		// end-user-code
 	}
@@ -63,7 +63,7 @@ public class TManager {
 	*/
 	public void deleteTransaction() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 
 		// end-user-code
 	}

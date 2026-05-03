@@ -15,42 +15,42 @@ import java.util.Set;
 public class DAOEntrenadorImp implements DAOEntrenador {
 	public int create(TEntrenador datos) {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 		return 0;
 		// end-user-code
 	}
 
 	public TEntrenador read(int idEntrenador) {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 		return null;
 		// end-user-code
 	}
 
 	public int upadate(TEntrenador tEntrenador) {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 		return 0;
 		// end-user-code
 	}
 
 	public int delete(int idEntrenador) {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 		return 0;
 		// end-user-code
 	}
 
 	public Set<TEntrenador> read_all() {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 		return null;
 		// end-user-code
 	}
 
 	public TEntrenador read_by_dni(Object dni) {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 		return null;
 		// end-user-code
 	}

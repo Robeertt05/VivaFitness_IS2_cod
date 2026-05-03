@@ -4,42 +4,33 @@
 package Controlador;
 
 /** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
+ * Main controller: routes a Context through the appropriate Command
+ * and returns the result in the same Context.
  * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class Controller {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private static Controller instance;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public static Controller getInstance() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
-	}
+private static Controller instance;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param context
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void action(Context context) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
+protected Controller() {}
 
-		// end-user-code
-	}
+public static Controller getInstance() {
+if (instance == null) {
+instance = new ControllerImp();
+}
+return instance;
+}
+
+public Context action(Context context) {
+if (context == null || context.getEvento() == null) {
+return context;
+}
+Command command = CommandFactory.getInstance().getCommand(context.getEvento());
+if (command == null) {
+context.setSuccess(false);
+context.setMessage("No command found for event: " + context.getEvento());
+return context;
+}
+return command.execute(context.getData());
+}
 }

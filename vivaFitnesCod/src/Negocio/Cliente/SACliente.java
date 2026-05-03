@@ -3,6 +3,8 @@
  */
 package Negocio.Cliente;
 
+import Integracion.Cliente.TCliente;
+
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->

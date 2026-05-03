@@ -8,7 +8,7 @@ import Integracion.FactoriaIntegracion.TSesion;
 
 /**
  * Command to display a specific session
- * CASO 3: Mostrar sesión (SRS)
+ * CASO 3: Mostrar sesiÃÂ³n (SRS)
  * @author azuri
  */
 public class CommandMostrarSesion implements Command {

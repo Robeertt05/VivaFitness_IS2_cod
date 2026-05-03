@@ -10,13 +10,14 @@ import java.awt.event.*;
 import Controlador.CommandMostrarEntrenadorSesion;
 import Controlador.Context;
 import Negocio.entrenador.TEntrenador;
+import Presentacion.FactoriaPresentacion.IGUI;
 
 /**
  * View to display trainer details for a specific session
- * CASO 5: Mostrar entrenador por sesión (SRS)
+ * CASO 5: Mostrar entrenador por sesion (SRS)
  * @author azuri
  */
-public class VistaMostrarEntrenadorSesion extends JFrame {
+public class VistaMostrarEntrenadorSesion extends JFrame implements IGUI {
 	
 	private static final long serialVersionUID = 1L;
 	private CommandMostrarEntrenadorSesion command;
@@ -28,13 +29,17 @@ public class VistaMostrarEntrenadorSesion extends JFrame {
 	private JButton btnBuscar;
 	private JButton btnLimpiar;
 	
+	public VistaMostrarEntrenadorSesion() {
+		initializeUI();
+	}
+
 	public VistaMostrarEntrenadorSesion(CommandMostrarEntrenadorSesion command) {
 		this.command = command;
 		initializeUI();
 	}
 	
 	private void initializeUI() {
-		setTitle("Mostrar Entrenador por Sesión");
+		setTitle("Mostrar Entrenador por Sesion");
 		setSize(400, 300);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -44,7 +49,7 @@ public class VistaMostrarEntrenadorSesion extends JFrame {
 		panelPrincipal.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 		
 		// ID Session input
-		JLabel lblSesion = new JLabel("ID Sesión:");
+		JLabel lblSesion = new JLabel("ID Sesion:");
 		txtIdSesion = new JTextField(10);
 		panelPrincipal.add(lblSesion);
 		panelPrincipal.add(txtIdSesion);
@@ -64,7 +69,7 @@ public class VistaMostrarEntrenadorSesion extends JFrame {
 		panelPrincipal.add(lblNombre);
 		
 		// Trainer Phone (read-only)
-		JLabel lblTelefonoLabel = new JLabel("Teléfono:");
+		JLabel lblTelefonoLabel = new JLabel("Telefono:");
 		lblTelefono = new JLabel("-");
 		lblTelefono.setForeground(Color.BLUE);
 		panelPrincipal.add(lblTelefonoLabel);
@@ -108,7 +113,7 @@ public class VistaMostrarEntrenadorSesion extends JFrame {
 		String idSesionStr = txtIdSesion.getText().trim();
 		
 		if (idSesionStr.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Por favor ingrese un ID de sesión", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Por favor ingrese un ID de sesion", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
@@ -118,16 +123,16 @@ public class VistaMostrarEntrenadorSesion extends JFrame {
 			
 			if (ctx.isSuccess()) {
 				TEntrenador entrenador = (TEntrenador) ctx.getData();
-				lblIdEntrenador.setText(String.valueOf(entrenador.getIdEntrenador()));
-				lblNombre.setText(entrenador.getNombreEntrenador());
-				lblTelefono.setText(entrenador.getTelefonoEntrenador());
-				lblDNI.setText(entrenador.getDNIEntrenador());
+				lblIdEntrenador.setText(String.valueOf(entrenador.get_id()));
+				lblNombre.setText(entrenador.get_nombre());
+				lblTelefono.setText(entrenador.get_telefono());
+				lblDNI.setText(entrenador.get_dni());
 			} else {
-				JOptionPane.showMessageDialog(this, ctx.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, ctx.getMessage(), "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				limpiar();
 			}
 		} catch (NumberFormatException ex) {
-			JOptionPane.showMessageDialog(this, "El ID de sesión debe ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "El ID de sesion debe ser un numero entero", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -138,5 +143,16 @@ public class VistaMostrarEntrenadorSesion extends JFrame {
 		lblTelefono.setText("-");
 		lblDNI.setText("-");
 		txtIdSesion.requestFocus();
+	}
+
+	@Override
+	public void update(Context context) {
+		if (context != null && context.isSuccess() && context.getData() instanceof TEntrenador) {
+			TEntrenador e = (TEntrenador) context.getData();
+			lblIdEntrenador.setText(String.valueOf(e.get_id()));
+			lblNombre.setText(e.get_nombre());
+			lblTelefono.setText(e.get_telefono());
+			lblDNI.setText(e.get_dni());
+		}
 	}
 }

@@ -6,56 +6,60 @@ package Negocio.FactoriaNegocio;
 import Integracion.FactoriaIntegracion.TSesion;
 import Integracion.FactoriaIntegracion.TSala;
 import Negocio.entrenador.TEntrenador;
+import java.util.Set;
 
 /** 
- * Service Application interface for Sesion (SRS Cases 1-5)
+ * Service Application interface for Sesion
  * @author azuri
  */
 public interface SASesion {
 	
 	/** 
-	 * CASO 1: Baja sesión
-	 * Delete a session (only if no clients are registered)
-	 * Precondition: The session must not have registered clients to avoid loss of attendance data
+	 * Alta sesiÃÂ³n Ã¢ÂÂ crear nueva sesiÃÂ³n
+	 * @param datos Session data
+	 * @return ID de la sesiÃÂ³n creada, 0 si falla
+	 */
+	public int alta_sesion(TSesion datos);
+
+	/** 
+	 * CASO 1: Baja sesiÃÂ³n Ã¢ÂÂ eliminar sesiÃÂ³n (solo si no tiene clientes apuntados)
 	 * @param idSesion Session ID
-	 * @return 1 if successful, 0 if session has clients or doesn't exist
+	 * @return 1 si OK, 0 si tiene clientes o no existe
 	 */
 	public int baja_sesion(int idSesion);
 
 	/** 
-	 * CASO 2: Modificar sesión
-	 * Update a session attributes (except ID)
-	 * Precondition: Session must exist and be active. New room must have sufficient capacity for registered clients
+	 * CASO 2: Modificar sesiÃÂ³n Ã¢ÂÂ actualizar atributos (excepto ID)
 	 * @param idSesion Session ID
-	 * @param datos Updated session data (excluding ID)
-	 * @return 1 if successful, 0 if data invalid or constraints violated
+	 * @param datos Datos actualizados
+	 * @return 1 si OK, 0 si falla
 	 */
 	public int modificar_sesion(int idSesion, TSesion datos);
 
 	/** 
-	 * CASO 3: Mostrar sesión
-	 * Get session information (objetivo, duración, horario, idSesión)
-	 * Precondition: Session must exist and be active
+	 * CASO 3: Mostrar sesiÃÂ³n Ã¢ÂÂ obtener detalles de una sesiÃÂ³n
 	 * @param idSesion Session ID
-	 * @return Session transfer object or null if not found or inactive
+	 * @return TSesion o null si no existe
 	 */
 	public TSesion mostrar_sesion(int idSesion);
 
 	/** 
-	 * CASO 4: Mostrar sala por sesión
-	 * Get the room assigned to a specific session
-	 * Precondition: Session must exist and be active, must be linked to a room
+	 * Mostrar todas las sesiones activas
+	 * @return Set de todas las sesiones activas
+	 */
+	public Set<TSesion> mostrar_todas_sesiones();
+
+	/** 
+	 * CASO 4: Mostrar sala por sesiÃÂ³n
 	 * @param idSesion Session ID
-	 * @return Room transfer object (idSala, nombreSala, aforo) or null if not found
+	 * @return TSala o null si no existe
 	 */
 	public TSala mostrar_sala_sesion(int idSesion);
 
 	/** 
-	 * CASO 5: Mostrar entrenador por sesión
-	 * Get the trainer assigned to a specific session
-	 * Precondition: Session must exist and be active, must be linked to a trainer
+	 * CASO 5: Mostrar entrenador por sesiÃÂ³n
 	 * @param idSesion Session ID
-	 * @return Trainer transfer object (idEntrenador, nombreEntrenador, telefonoEntrenador, DNIEntrenador) or null if not found
+	 * @return TEntrenador o null si no existe
 	 */
 	public TEntrenador mostrar_entrenador_sesion(int idSesion);
 }

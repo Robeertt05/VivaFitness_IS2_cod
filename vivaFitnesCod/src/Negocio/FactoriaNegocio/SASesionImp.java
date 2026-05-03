@@ -7,15 +7,16 @@ import Integracion.FactoriaIntegracion.TSesion;
 import Integracion.FactoriaIntegracion.TSala;
 import Integracion.FactoriaIntegracion.DAOSesion;
 import Negocio.entrenador.TEntrenador;
+import java.util.Set;
 
 /** 
  * Service Application implementation for Sesion (SRS Aligned)
  * Implements 5 use cases from SRS:
- * 1. Baja sesión - Delete session (only if no clients registered)
- * 2. Modificar sesión - Update session attributes
- * 3. Mostrar sesión - View session details
- * 4. Mostrar sala por sesión - View room assigned to session
- * 5. Mostrar entrenador por sesión - View trainer assigned to session
+ * 1. Baja sesiÃÂ³n - Delete session (only if no clients registered)
+ * 2. Modificar sesiÃÂ³n - Update session attributes
+ * 3. Mostrar sesiÃÂ³n - View session details
+ * 4. Mostrar sala por sesiÃÂ³n - View room assigned to session
+ * 5. Mostrar entrenador por sesiÃÂ³n - View trainer assigned to session
  * @author azuri
  */
 public class SASesionImp implements SASesion {
@@ -27,7 +28,20 @@ public class SASesionImp implements SASesion {
 	}
 
 	/**
-	 * CASO 1: Baja sesión
+	 * Alta sesiÃÂ³n Ã¢ÂÂ crear nueva sesiÃÂ³n
+	 */
+	@Override
+	public int alta_sesion(TSesion datos) {
+		// begin-user-code
+		if (datos == null) {
+			return 0;
+		}
+		return daoSesion.create(datos);
+		// end-user-code
+	}
+
+	/**
+	 * CASO 1: Baja sesiÃÂ³n
 	 * Delete a session, but only if no clients are registered
 	 * Precondition: Session must not have registered clients to avoid loss of attendance data
 	 */
@@ -57,7 +71,7 @@ public class SASesionImp implements SASesion {
 	}
 
 	/**
-	 * CASO 2: Modificar sesión
+	 * CASO 2: Modificar sesiÃÂ³n
 	 * Update session attributes (except ID)
 	 * Precondition: Session must exist and be active.
 	 * If room changes, new room capacity must be >= current registered clients
@@ -91,8 +105,8 @@ public class SASesionImp implements SASesion {
 	}
 
 	/**
-	 * CASO 3: Mostrar sesión
-	 * Get session details: objetivo, duración, horario, idSesión
+	 * CASO 3: Mostrar sesiÃÂ³n
+	 * Get session details: objetivo, duraciÃÂ³n, horario, idSesiÃÂ³n
 	 * Precondition: Session must exist and be active
 	 */
 	@Override
@@ -109,59 +123,38 @@ public class SASesionImp implements SASesion {
 	}
 
 	/**
-	 * CASO 4: Mostrar sala por sesión
-	 * Get the room assigned to this session
-	 * Precondition: Session must exist, be active, and linked to a room
+	 * CASO 4: Mostrar sala por sesiÃÂ³n
 	 */
 	@Override
 	public TSala mostrar_sala_sesion(int idSesion) {
 		// begin-user-code
-		// Validate ID
 		if (idSesion <= 0) {
 			return null;
 		}
-		
-		// Get session
-		TSesion sesion = daoSesion.read(idSesion);
-		if (sesion == null) {
-			return null;
-		}
-		
-		// TODO: Get room details from DAO or room service
-		// This would need DAOSala or similar
-		TSala sala = new TSala();
-		sala.setIdSala(sesion.getIdSala());
-		// Get other room attributes from database
-		
-		return sala;
+		return daoSesion.getRoom(idSesion);
 		// end-user-code
 	}
 
 	/**
-	 * CASO 5: Mostrar entrenador por sesión
-	 * Get the trainer assigned to this session
-	 * Precondition: Session must exist, be active, and linked to a trainer
+	 * CASO 5: Mostrar entrenador por sesiÃÂ³n
 	 */
 	@Override
 	public TEntrenador mostrar_entrenador_sesion(int idSesion) {
 		// begin-user-code
-		// Validate ID
 		if (idSesion <= 0) {
 			return null;
 		}
-		
-		// Get session
-		TSesion sesion = daoSesion.read(idSesion);
-		if (sesion == null) {
-			return null;
-		}
-		
-		// TODO: Get trainer details from DAO or trainer service
-		// This would need DAOEntrenador or similar
-		TEntrenador entrenador = new TEntrenador();
-		// Set trainer ID and other attributes from database
-		
-		return entrenador;
+		return (TEntrenador) daoSesion.getTrainer(idSesion);
+		// end-user-code
+	}
+
+	/**
+	 * Mostrar todas las sesiones activas
+	 */
+	@Override
+	public Set<TSesion> mostrar_todas_sesiones() {
+		// begin-user-code
+		return daoSesion.read_all();
 		// end-user-code
 	}
 }

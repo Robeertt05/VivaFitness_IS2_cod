@@ -8,7 +8,7 @@ import Integracion.FactoriaIntegracion.TSesion;
 
 /**
  * Command to modify an existing session
- * CASO 2: Modificar sesión (SRS)
+ * CASO 2: Modificar sesiÃÂ³n (SRS)
  * @author azuri
  */
 public class CommandModificarSesion implements Command {

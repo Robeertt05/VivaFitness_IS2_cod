@@ -6,73 +6,45 @@ package Controlador;
 import Presentacion.FactoriaPresentacion.Evento;
 
 /** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author azuri
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
+ * Context object passed between Controller, Commands and Views
+ * @author azuri
+ */
 public class Context {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object objeto;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	private Object evento;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public Evento getEvento() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
-	}
+private Evento evento;
+private Object data;
+private boolean success;
+private String message;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param evento
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void setEvento(Evento evento) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
+public Evento getEvento() {
+return evento;
+}
 
-		// end-user-code
-	}
+public void setEvento(Evento evento) {
+this.evento = evento;
+}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void getObjeto() {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
+public Object getData() {
+return data;
+}
 
-		// end-user-code
-	}
+public void setData(Object data) {
+this.data = data;
+}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param objeto
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void setObjeto(Object objeto) {
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
+public boolean isSuccess() {
+return success;
+}
 
-		// end-user-code
-	}
+public void setSuccess(boolean success) {
+this.success = success;
+}
+
+public String getMessage() {
+return message;
+}
+
+public void setMessage(String message) {
+this.message = message;
+}
 }

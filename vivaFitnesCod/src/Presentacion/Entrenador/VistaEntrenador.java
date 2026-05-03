@@ -46,7 +46,7 @@ public class VistaEntrenador extends JFrame implements IGUI {
 
 	public void update(Context context) {
 		// begin-user-code
-		// TODO Ap�ndice de m�todo generado autom�ticamente
+		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
 
 		// end-user-code
 	}
