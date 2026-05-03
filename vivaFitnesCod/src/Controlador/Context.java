@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Contexto que se pasa entre la Vista y el Controlador.
  * Contiene el evento (int) que disparo la accion y el objeto de datos asociado.
  * Patron: Context Object - encapsula estado compartido entre capas.
@@ -20,6 +20,14 @@ public class Context {
 	private boolean success;
 	private String message;
 
+	public Context() {
+	}
+
+	public Context(Evento evento, Object data) {
+		this.evento = evento;
+		this.data = data;
+	}
+
 	public Evento getEvento() {
 		return evento;
 	}
@@ -34,6 +42,14 @@ public class Context {
 
 	public void setData(Object data) {
 		this.data = data;
+	}
+
+	public Object getObjeto() {
+		return data;
+	}
+
+	public void setObjeto(Object objeto) {
+		this.data = objeto;
 	}
 
 	public boolean isSuccess() {

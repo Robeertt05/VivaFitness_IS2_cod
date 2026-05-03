@@ -27,11 +27,11 @@ public class CommandMostrarTodasSesiones implements Command {
 		
 		if (sesiones != null && !sesiones.isEmpty()) {
 			ctx.setSuccess(true);
-			ctx.setMessage("Found " + sesiones.size() + " sessions");
+			ctx.setMessage("Se encontraron " + sesiones.size() + " sesiones");
 			ctx.setData(sesiones);
 		} else {
 			ctx.setSuccess(false);
-			ctx.setMessage("No sessions found");
+			ctx.setMessage("No se encontraron sesiones");
 		}
 		
 		return ctx;

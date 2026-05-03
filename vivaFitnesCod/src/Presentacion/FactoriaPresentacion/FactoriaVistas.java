@@ -3,13 +3,13 @@
  */
 package Presentacion.FactoriaPresentacion;
 
-import Presentacion.Entrenador.VistaCrearSesion;
-import Presentacion.Entrenador.VistaEliminarSesion;
-import Presentacion.Entrenador.VistaModificarSesion;
-import Presentacion.Entrenador.VistaMostrarSesion;
-import Presentacion.Entrenador.VistaMostrarTodasSesiones;
-import Presentacion.Entrenador.VistaMostrarSalaSesion;
-import Presentacion.Entrenador.VistaMostrarEntrenadorSesion;
+import Presentacion.Vistas.VistaCrearSesion;
+import Presentacion.Vistas.VistaEliminarSesion;
+import Presentacion.Vistas.VistaModificarSesion;
+import Presentacion.Vistas.VistaMostrarSesion;
+import Presentacion.Vistas.VistaMostrarTodasSesiones;
+import Presentacion.Vistas.VistaMostrarSalaSesion;
+import Presentacion.Vistas.VistaMostrarEntrenadorSesion;
 
 /** 
  * Factory that creates the appropriate IGUI view for a given Evento.

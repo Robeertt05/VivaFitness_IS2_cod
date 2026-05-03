@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Command: Baja logica de Entrenador.
  * Patron: Command.
  */

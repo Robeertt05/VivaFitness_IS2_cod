@@ -1,4 +1,4 @@
-﻿package Negocio.entrenador;
+package Negocio.entrenador;
 
 /** 
  * Transfer Object for Entrenador
@@ -12,7 +12,7 @@ public class TEntrenador {
 	private String nombre;
 	private String telefono;
 
-	// Constructor vacío
+	// Constructor vacio
 	public TEntrenador() {}
 
 	// Constructor completo

@@ -1,7 +1,7 @@
-﻿/**
+/**
  * Vista para dar de alta a un nuevo Entrenador.
  */
-package Presentacion.Entrenador;
+package Presentacion.Vistas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,7 +61,7 @@ public class VistaAltaEntrenador extends JFrame implements IGUI {
 	public void update(Context context) {
 		if (context == null) return;
 
-		int evento = context.getEvento();
+		Evento evento = context.getEvento();
 
 		if (evento == Evento.RES_ALTA_ENTRENADOR_OK) {
 			JOptionPane.showMessageDialog(this,

@@ -1,15 +1,17 @@
 /**
  * 
  */
-package Presentacion.Entrenador;
+package Presentacion.Vistas;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 import Controlador.CommandMostrarEntrenadorSesion;
+import Controlador.Controller;
 import Controlador.Context;
 import Negocio.entrenador.TEntrenador;
+import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.IGUI;
 
 /**
@@ -39,7 +41,7 @@ public class VistaMostrarEntrenadorSesion extends JFrame implements IGUI {
 	}
 	
 	private void initializeUI() {
-		setTitle("Mostrar Entrenador por Sesion");
+		setTitle("Mostrar entrenador por sesion");
 		setSize(400, 300);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -49,7 +51,7 @@ public class VistaMostrarEntrenadorSesion extends JFrame implements IGUI {
 		panelPrincipal.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 		
 		// ID Session input
-		JLabel lblSesion = new JLabel("ID Sesion:");
+		JLabel lblSesion = new JLabel("ID sesion:");
 		txtIdSesion = new JTextField(10);
 		panelPrincipal.add(lblSesion);
 		panelPrincipal.add(txtIdSesion);
@@ -119,7 +121,9 @@ public class VistaMostrarEntrenadorSesion extends JFrame implements IGUI {
 		
 		try {
 			int idSesion = Integer.parseInt(idSesionStr);
-			Context ctx = command.execute(idSesion);
+			Context ctx = command != null
+					? command.execute(idSesion)
+					: Controller.getInstance().action(new Context(Evento.MOSTRAR_ENTRENADOR_SESION, idSesion));
 			
 			if (ctx.isSuccess()) {
 				TEntrenador entrenador = (TEntrenador) ctx.getData();

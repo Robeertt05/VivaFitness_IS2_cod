@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Implementacion del DAO de Entrenador.
  * Patron: DAO (Data Access Object) - abstrae el acceso a la fuente de datos.
  * En un proyecto real conectaria con la BD via JDBC/JPA usando la transaccion activa.
@@ -7,7 +7,6 @@ package Integracion.Entrenador;
 
 import Negocio.entrenador.TEntrenador;
 import Integracion.ConnectionManager.ConnectionManager;
-import Integracion.Transaction.TManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,9 +41,9 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 			String query = "INSERT INTO entrenador (nombreEntrenador, DNI_entrenador, telefonoEntrenador, activo) VALUES (?, ?, ?, ?)";
 			ps = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 			
-			ps.setString(1, datos.get_nombreEntrenador());
-			ps.setString(2, datos.get_dniEntrenador());
-			ps.setString(3, datos.get_telefonoEntrenador());
+			ps.setString(1, datos.get_nombre());
+			ps.setString(2, datos.get_dni());
+			ps.setString(3, datos.get_telefono());
 			ps.setInt(4, datos.get_activo());
 			
 			ps.executeUpdate();
@@ -92,10 +91,10 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 			
 			if (rs.next()) {
 				entrenador = new TEntrenador();
-				entrenador.set_idEntrenador(rs.getInt("idEntrenador"));
-				entrenador.set_nombreEntrenador(rs.getString("nombreEntrenador"));
-				entrenador.set_dniEntrenador(rs.getString("DNI_entrenador"));
-				entrenador.set_telefonoEntrenador(rs.getString("telefonoEntrenador"));
+				entrenador.set_id(rs.getInt("idEntrenador"));
+				entrenador.set_nombre(rs.getString("nombreEntrenador"));
+				entrenador.set_dni(rs.getString("DNI_entrenador"));
+				entrenador.set_telefono(rs.getString("telefonoEntrenador"));
 				entrenador.set_activo(rs.getInt("activo"));
 			}
 			
@@ -131,11 +130,11 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 			String query = "UPDATE entrenador SET nombreEntrenador = ?, DNI_entrenador = ?, telefonoEntrenador = ?, activo = ? WHERE idEntrenador = ?";
 			ps = connection.prepareStatement(query);
 			
-			ps.setString(1, tEntrenador.get_nombreEntrenador());
-			ps.setString(2, tEntrenador.get_dniEntrenador());
-			ps.setString(3, tEntrenador.get_telefonoEntrenador());
+			ps.setString(1, tEntrenador.get_nombre());
+			ps.setString(2, tEntrenador.get_dni());
+			ps.setString(3, tEntrenador.get_telefono());
 			ps.setInt(4, tEntrenador.get_activo());
-			ps.setInt(5, tEntrenador.get_idEntrenador());
+			ps.setInt(5, tEntrenador.get_id());
 			
 			result = ps.executeUpdate();
 			
@@ -168,7 +167,7 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 		try {
 			connection = ConnectionManager.getConnection();
 			
-			// Baja lógica: activo = 0
+			// Baja logica: activo = 0
 			String query = "UPDATE entrenador SET activo = 0 WHERE idEntrenador = ?";
 			ps = connection.prepareStatement(query);
 			ps.setInt(1, idEntrenador);
@@ -209,10 +208,10 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 			
 			while (rs.next()) {
 				TEntrenador entrenador = new TEntrenador();
-				entrenador.set_idEntrenador(rs.getInt("idEntrenador"));
-				entrenador.set_nombreEntrenador(rs.getString("nombreEntrenador"));
-				entrenador.set_dniEntrenador(rs.getString("DNI_entrenador"));
-				entrenador.set_telefonoEntrenador(rs.getString("telefonoEntrenador"));
+				entrenador.set_id(rs.getInt("idEntrenador"));
+				entrenador.set_nombre(rs.getString("nombreEntrenador"));
+				entrenador.set_dni(rs.getString("DNI_entrenador"));
+				entrenador.set_telefono(rs.getString("telefonoEntrenador"));
 				entrenador.set_activo(rs.getInt("activo"));
 				
 				entrenadores.add(entrenador);
@@ -255,10 +254,10 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 			
 			if (rs.next()) {
 				entrenador = new TEntrenador();
-				entrenador.set_idEntrenador(rs.getInt("idEntrenador"));
-				entrenador.set_nombreEntrenador(rs.getString("nombreEntrenador"));
-				entrenador.set_dniEntrenador(rs.getString("DNI_entrenador"));
-				entrenador.set_telefonoEntrenador(rs.getString("telefonoEntrenador"));
+				entrenador.set_id(rs.getInt("idEntrenador"));
+				entrenador.set_nombre(rs.getString("nombreEntrenador"));
+				entrenador.set_dni(rs.getString("DNI_entrenador"));
+				entrenador.set_telefono(rs.getString("telefonoEntrenador"));
 				entrenador.set_activo(rs.getInt("activo"));
 			}
 			

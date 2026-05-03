@@ -55,7 +55,7 @@ public class TCliente {
 	*/
 	public int getId() {
 		// begin-user-code
-		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
+		// TODO Apndice de mtodo generado automticamente
 		return 0;
 		// end-user-code
 	}
@@ -68,7 +68,7 @@ public class TCliente {
 	*/
 	public String get_dni() {
 		// begin-user-code
-		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
+		// TODO Apndice de mtodo generado automticamente
 		return null;
 		// end-user-code
 	}
@@ -81,7 +81,7 @@ public class TCliente {
 	*/
 	public String get_nombre() {
 		// begin-user-code
-		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
+		// TODO Apndice de mtodo generado automticamente
 		return null;
 		// end-user-code
 	}
@@ -94,7 +94,7 @@ public class TCliente {
 	*/
 	public Boolean get_activo() {
 		// begin-user-code
-		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
+		// TODO Apndice de mtodo generado automticamente
 		return null;
 		// end-user-code
 	}
@@ -107,7 +107,7 @@ public class TCliente {
 	*/
 	public String get_telefono() {
 		// begin-user-code
-		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
+		// TODO Apndice de mtodo generado automticamente
 		return null;
 		// end-user-code
 	}
@@ -120,7 +120,7 @@ public class TCliente {
 	*/
 	public String get_correo() {
 		// begin-user-code
-		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
+		// TODO Apndice de mtodo generado automticamente
 		return null;
 		// end-user-code
 	}
@@ -133,7 +133,7 @@ public class TCliente {
 	*/
 	public void set_dni(String dni) {
 		// begin-user-code
-		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
+		// TODO Apndice de mtodo generado automticamente
 
 		// end-user-code
 	}
@@ -146,7 +146,7 @@ public class TCliente {
 	*/
 	public void set_nombre(String nombre) {
 		// begin-user-code
-		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
+		// TODO Apndice de mtodo generado automticamente
 
 		// end-user-code
 	}
@@ -159,7 +159,7 @@ public class TCliente {
 	*/
 	public void set_activo(Boolean activo) {
 		// begin-user-code
-		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
+		// TODO Apndice de mtodo generado automticamente
 
 		// end-user-code
 	}
@@ -172,7 +172,7 @@ public class TCliente {
 	*/
 	public void set_telefono(String telefono) {
 		// begin-user-code
-		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
+		// TODO Apndice de mtodo generado automticamente
 
 		// end-user-code
 	}
@@ -185,7 +185,7 @@ public class TCliente {
 	*/
 	public void set_correo(String correo) {
 		// begin-user-code
-		// TODO ApÃ©ndice de mÃ©todo generado automÃ¡ticamente
+		// TODO Apndice de mtodo generado automticamente
 
 		// end-user-code
 	}

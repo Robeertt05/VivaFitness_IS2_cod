@@ -7,7 +7,7 @@ import Negocio.FactoriaNegocio.SASesion;
 
 /**
  * Command to delete a session
- * CASO 1: Baja sesiÃÂ³n (SRS)
+ * CASO 1: Baja sesin (SRS)
  * Precondition: Session must not have registered clients
  * @author azuri
  */
@@ -25,7 +25,7 @@ public class CommandEliminarSesion implements Command {
 		
 		if (!(datos instanceof Integer)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Session ID must be an integer");
+			ctx.setMessage("El ID de sesion debe ser un numero entero");
 			return ctx;
 		}
 		
@@ -34,10 +34,10 @@ public class CommandEliminarSesion implements Command {
 		
 		if (resultado > 0) {
 			ctx.setSuccess(true);
-			ctx.setMessage("Session deleted successfully");
+			ctx.setMessage("Sesion eliminada correctamente");
 		} else {
 			ctx.setSuccess(false);
-			ctx.setMessage("Failed to delete session (may have registered clients)");
+			ctx.setMessage("No se pudo eliminar la sesion; puede tener clientes apuntados");
 		}
 		
 		return ctx;

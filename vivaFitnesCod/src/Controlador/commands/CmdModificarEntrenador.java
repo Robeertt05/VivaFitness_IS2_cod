@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Command: Modificar datos de Entrenador.
  * Patron: Command.
  */

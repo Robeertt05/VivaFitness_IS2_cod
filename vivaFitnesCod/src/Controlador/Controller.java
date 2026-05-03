@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Controlador principal de la aplicacion.
  * Patron: Front Controller + Singleton.
  * Recibe Context de la Presentacion, delega en CommandFactory para

@@ -1,13 +1,14 @@
 /**
  * 
  */
-package Presentacion.Entrenador;
+package Presentacion.Vistas;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -15,6 +16,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Presentacion.FactoriaPresentacion.IGUI;
+import Presentacion.FactoriaPresentacion.Evento;
+import Controlador.Controller;
 import Controlador.Context;
 
 /** 
@@ -33,8 +36,9 @@ public class VistaEliminarSesion extends JFrame implements IGUI {
 	private JButton btnCancelar;
 	
 	public VistaEliminarSesion() {
-		setTitle("Delete Session");
+		setTitle("Eliminar sesion");
 		setSize(300, 150);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		actionListener = new HashSet<>();
@@ -49,15 +53,16 @@ public class VistaEliminarSesion extends JFrame implements IGUI {
 		JPanel mainPanel = new JPanel(new GridLayout(2, 2, 10, 10));
 		
 		// Select Session
-		jLabel.add(new JLabel("Select Session:"));
-		mainPanel.add(new JLabel("Select Session:"));
+		jLabel.add(new JLabel("Seleccionar sesion:"));
+		mainPanel.add(new JLabel("Seleccionar sesion:"));
 		cbSesion = new JComboBox<>();
+		cargarIdsDemo(cbSesion);
 		mainPanel.add(cbSesion);
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
-		btnEliminar = new JButton("Delete");
-		btnCancelar = new JButton("Cancel");
+		btnEliminar = new JButton("Eliminar");
+		btnCancelar = new JButton("Cancelar");
 		jButton.add(btnEliminar);
 		jButton.add(btnCancelar);
 		buttonPanel.add(btnEliminar);
@@ -68,6 +73,19 @@ public class VistaEliminarSesion extends JFrame implements IGUI {
 		
 		add(mainPanel, BorderLayout.CENTER);
 		add(buttonPanel, BorderLayout.SOUTH);
+
+		btnEliminar.addActionListener(e -> {
+			Context result = Controller.getInstance().action(new Context(Evento.BAJA_SESION, getSelectedSessionId()));
+			JOptionPane.showMessageDialog(this, result.getMessage());
+			update(result);
+		});
+		btnCancelar.addActionListener(e -> dispose());
+	}
+
+	private void cargarIdsDemo(JComboBox<Integer> combo) {
+		for (int i = 1; i <= 20; i++) {
+			combo.addItem(i);
+		}
 	}
 	
 	public int getSelectedSessionId() {

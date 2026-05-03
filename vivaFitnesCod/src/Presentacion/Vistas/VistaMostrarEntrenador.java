@@ -1,7 +1,7 @@
-﻿/**
+/**
  * Vista para mostrar los datos de un Entrenador por ID.
  */
-package Presentacion.Entrenador;
+package Presentacion.Vistas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,7 +66,7 @@ public class VistaMostrarEntrenador extends JFrame implements IGUI {
 	public void update(Context context) {
 		if (context == null) return;
 
-		int evento = context.getEvento();
+		Evento evento = context.getEvento();
 
 		if (evento == Evento.RES_MOSTRAR_ENTRENADOR_OK) {
 			TEntrenador t = (TEntrenador) context.getObjeto();

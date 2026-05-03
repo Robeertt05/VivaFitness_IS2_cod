@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Presentacion.Entrenador;
+package Presentacion.Vistas;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,6 +14,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Presentacion.FactoriaPresentacion.IGUI;
+import Presentacion.FactoriaPresentacion.Evento;
+import Controlador.Controller;
 import Controlador.Context;
 
 /** 
@@ -31,8 +33,9 @@ public class VistaMostrarTodasSesiones extends JFrame implements IGUI {
 	private JButton btnCerrar;
 	
 	public VistaMostrarTodasSesiones() {
-		setTitle("All Sessions");
+		setTitle("Todas las sesiones");
 		setSize(500, 400);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		actionListener = new HashSet<>();
@@ -50,8 +53,8 @@ public class VistaMostrarTodasSesiones extends JFrame implements IGUI {
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
-		btnActualizar = new JButton("Refresh");
-		btnCerrar = new JButton("Close");
+		btnActualizar = new JButton("Actualizar");
+		btnCerrar = new JButton("Cerrar");
 		jButton.add(btnActualizar);
 		jButton.add(btnCerrar);
 		buttonPanel.add(btnActualizar);
@@ -61,6 +64,10 @@ public class VistaMostrarTodasSesiones extends JFrame implements IGUI {
 		
 		add(scrollPane, BorderLayout.CENTER);
 		add(buttonPanel, BorderLayout.SOUTH);
+
+		btnActualizar.addActionListener(e -> update(Controller.getInstance().action(
+				new Context(Evento.MOSTRAR_TODAS_SESIONES, null))));
+		btnCerrar.addActionListener(e -> dispose());
 	}
 	
 	public void displaySessions(String sessionsList) {
@@ -86,6 +93,8 @@ public class VistaMostrarTodasSesiones extends JFrame implements IGUI {
 				sb.append(sesion.toString()).append("\n\n");
 			}
 			displaySessions(sb.toString());
+		} else if (context != null) {
+			displaySessions(context.getMessage());
 		}
 	}
 }

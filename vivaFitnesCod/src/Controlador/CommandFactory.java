@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Factoria de Commands.
  * Patron: Command + Factory Method + Singleton.
  * Mapea cada evento (int) a su Command concreto correspondiente.
@@ -25,7 +25,7 @@ public class CommandFactory {
 	/** Constructor privado para forzar uso del Singleton. */
 	private CommandFactory() {
 		FactoriaServicioAplicacion factory = FactoriaServicioAplicacion.getInstance();
-		this.saSesion = factory.getSASesion();
+		this.saSesion = factory.crearSASesion();
 	}
 
 	/**
@@ -44,44 +44,44 @@ public class CommandFactory {
 	 * @param evento constante int de la clase Evento
 	 * @return Command a ejecutar, o null si no tiene Command asociado
 	 */
-	public Command getCommand(int evento) {
+	public Command getCommand(Evento evento) {
 		switch (evento) {
 			// --- Entrenador ---
-			case Evento.ALTA_ENTRENADOR:
+			case ALTA_ENTRENADOR:
 				return new CmdAltaEntrenador();
-			case Evento.BAJA_ENTRENADOR:
+			case BAJA_ENTRENADOR:
 				return new CmdBajaEntrenador();
-			case Evento.MODIFICAR_ENTRENADOR:
+			case MODIFICAR_ENTRENADOR:
 				return new CmdModificarEntrenador();
-			case Evento.MOSTRAR_ENTRENADOR:
+			case MOSTRAR_ENTRENADOR:
 				return new CmdMostrarEntrenador();
-			case Evento.MOSTRAR_ENTRENADORES:
+			case MOSTRAR_ENTRENADORES:
 				return new CmdMostrarEntrenadores();
-			case Evento.CREAR_SESION:
+			case CREAR_SESION:
 				return new CmdCrearSesion();
 			
 			// --- Cliente ---
-			case Evento.ALTA_CLIENTE:
+			case ALTA_CLIENTE:
 				return new CmdAltaCliente();
-			case Evento.BAJA_CLIENTE:
+			case BAJA_CLIENTE:
 				return new CmdBajaCliente();
-			case Evento.MODIFICAR_CLIENTE:
+			case MODIFICAR_CLIENTE:
 				return new CmdModificarCliente();
 			
-			// --- Sesión ---
-			case Evento.ALTA_SESION:
+			// --- Sesion ---
+			case ALTA_SESION:
 				return new CommandAltaSesion(saSesion);
-			case Evento.BAJA_SESION:
+			case BAJA_SESION:
 				return new CommandEliminarSesion(saSesion);
-			case Evento.MODIFICAR_SESION:
+			case MODIFICAR_SESION:
 				return new CommandModificarSesion(saSesion);
-			case Evento.MOSTRAR_SESION:
+			case MOSTRAR_SESION:
 				return new CommandMostrarSesion(saSesion);
-			case Evento.MOSTRAR_TODAS_SESIONES:
+			case MOSTRAR_TODAS_SESIONES:
 				return new CommandMostrarTodasSesiones(saSesion);
-			case Evento.MOSTRAR_SALA_SESION:
+			case MOSTRAR_SALA_SESION:
 				return new CommandMostrarSalaSesion(saSesion);
-			case Evento.MOSTRAR_ENTRENADOR_SESION:
+			case MOSTRAR_ENTRENADOR_SESION:
 				return new CommandMostrarEntrenadorSesion(saSesion);
 			
 			default:

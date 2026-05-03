@@ -8,7 +8,7 @@ import Integracion.FactoriaIntegracion.TSesion;
 
 /**
  * Command to modify an existing session
- * CASO 2: Modificar sesiÃÂ³n (SRS)
+ * CASO 2: Modificar sesin (SRS)
  * @author azuri
  */
 public class CommandModificarSesion implements Command {
@@ -25,14 +25,14 @@ public class CommandModificarSesion implements Command {
 		
 		if (!(datos instanceof Object[])) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Invalid parameters");
+			ctx.setMessage("Parametros no validos");
 			return ctx;
 		}
 		
 		Object[] params = (Object[]) datos;
 		if (params.length < 2 || !(params[0] instanceof Integer) || !(params[1] instanceof TSesion)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Expected (Integer sessionId, TSesion sesion)");
+			ctx.setMessage("Se esperaba un ID de sesion y los datos de la sesion");
 			return ctx;
 		}
 		
@@ -43,10 +43,10 @@ public class CommandModificarSesion implements Command {
 		
 		if (resultado > 0) {
 			ctx.setSuccess(true);
-			ctx.setMessage("Session modified successfully");
+			ctx.setMessage("Sesion modificada correctamente");
 		} else {
 			ctx.setSuccess(false);
-			ctx.setMessage("Failed to modify session");
+			ctx.setMessage("No se pudo modificar la sesion");
 		}
 		
 		return ctx;

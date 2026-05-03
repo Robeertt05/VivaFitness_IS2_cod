@@ -28,7 +28,7 @@ public class DAOSesionImp implements DAOSesion {
 	}
 
 	// -----------------------------------------------------------------------
-	// CRUD bÃÂ¡sico
+	// CRUD bsico
 	// -----------------------------------------------------------------------
 
 	@Override
@@ -178,7 +178,7 @@ public class DAOSesionImp implements DAOSesion {
 	}
 
 	// -----------------------------------------------------------------------
-	// CASO 4: Mostrar sala por sesiÃÂ³n
+	// CASO 4: Mostrar sala por sesin
 	// -----------------------------------------------------------------------
 
 	@Override
@@ -209,7 +209,7 @@ public class DAOSesionImp implements DAOSesion {
 	}
 
 	// -----------------------------------------------------------------------
-	// CASO 5: Mostrar entrenador por sesiÃÂ³n
+	// CASO 5: Mostrar entrenador por sesin
 	// -----------------------------------------------------------------------
 
 	@Override

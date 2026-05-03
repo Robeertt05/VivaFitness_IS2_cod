@@ -1,7 +1,7 @@
-﻿/**
+/**
  * Vista para dar de baja a un Entrenador.
  */
-package Presentacion.Entrenador;
+package Presentacion.Vistas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,7 +54,7 @@ public class VistaBajaEntrenador extends JFrame implements IGUI {
 	public void update(Context context) {
 		if (context == null) return;
 
-		int evento = context.getEvento();
+		Evento evento = context.getEvento();
 
 		if (evento == Evento.RES_BAJA_ENTRENADOR_OK) {
 			JOptionPane.showMessageDialog(this,

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Factoria abstracta de Servicios de Aplicacion.
  * Patron: Abstract Factory + Singleton.
  * Permite desacoplar la creacion de SA de su implementacion concreta.
@@ -37,4 +37,9 @@ public abstract class FactoriaServicioAplicacion {
 	 * Crea y devuelve un SA de Cliente.
 	 */
 	public abstract SACliente crearSACliente();
+
+	/**
+	 * Crea y devuelve un SA de Sesion.
+	 */
+	public abstract SASesion crearSASesion();
 }

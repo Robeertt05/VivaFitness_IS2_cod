@@ -1,9 +1,9 @@
-﻿package Controlador.commands;
+package Controlador.commands;
 
 import Controlador.Command;
 import Controlador.Context;
 import Negocio.Cliente.SACliente;
-import Negocio.Cliente.TCliente;
+import Integracion.Cliente.TCliente;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Presentacion.FactoriaPresentacion.Evento;
 

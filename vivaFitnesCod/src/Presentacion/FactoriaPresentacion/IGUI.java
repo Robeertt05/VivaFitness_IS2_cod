@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Interfaz grafica de usuario.
  * Patron: Observer - la vista se actualiza cuando recibe un Context del controlador.
  */

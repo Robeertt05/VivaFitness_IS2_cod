@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Implementacion concreta de la Factoria de Servicios de Aplicacion.
  * Patron: Factory Method - cada metodo crea la implementacion concreta del SA.
  */
@@ -8,6 +8,7 @@ import Negocio.entrenador.SAEntrenador;
 import Negocio.entrenador.SAEntrenadorImp;
 import Negocio.Cliente.SACliente;
 import Negocio.Cliente.SAClienteImp;
+import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 
 /**
  * Service Application Factory Implementation
@@ -28,6 +29,11 @@ public class FactoriaSAImp extends FactoriaServicioAplicacion {
 	 */
 	@Override
 	public SACliente crearSACliente() {
-		return new SAClienteImp();
+		return new SAClienteImp(FactoriaIntegracion.getInstance().generaDAOCliente(), crearSASesion());
+	}
+
+	@Override
+	public SASesion crearSASesion() {
+		return new SASesionImp(FactoriaIntegracion.getInstance().generaDAOSesion());
 	}
 }

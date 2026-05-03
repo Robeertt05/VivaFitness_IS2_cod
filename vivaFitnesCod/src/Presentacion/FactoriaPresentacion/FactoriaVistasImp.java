@@ -1,10 +1,10 @@
-﻿/**
+/**
  * Implementacion concreta de la Factoria de Vistas.
  * Patron: Factory Method - cada caso del switch crea la vista concreta.
  */
 package Presentacion.FactoriaPresentacion;
 
-import Presentacion.Entrenador.*;
+import Presentacion.Vistas.*;
 
 /**
  * <!-- begin-UML-doc -->
@@ -20,21 +20,21 @@ public class FactoriaVistasImp extends FactoriaVistas {
 	 * @return IGUI correspondiente, o null si el evento no tiene vista asociada
 	 */
 	@Override
-	public IGUI generarVistas(int evento) {
+	public IGUI generarVistas(Evento evento) {
 		switch (evento) {
-			case Evento.ALTA_ENTRENADOR:
+			case ALTA_ENTRENADOR:
 				return new VistaAltaEntrenador();
-			case Evento.BAJA_ENTRENADOR:
+			case BAJA_ENTRENADOR:
 				return new VistaBajaEntrenador();
-			case Evento.MODIFICAR_ENTRENADOR:
+			case MODIFICAR_ENTRENADOR:
 				return new VistaModificarEntrenador();
-			case Evento.MOSTRAR_ENTRENADOR:
-			case Evento.MOSTRAR_ENTRENADORES:
+			case MOSTRAR_ENTRENADOR:
+			case MOSTRAR_ENTRENADORES:
 				return new VistaMostrarEntrenador();
-			case Evento.CREAR_SESION:
+			case CREAR_SESION:
 				return new VistaCrearSesion();
 			default:
-				return null;
+				return super.generarVistas(evento);
 		}
 	}
 }

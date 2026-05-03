@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Command: Mostrar datos de un Entrenador.
  * Patron: Command.
  */

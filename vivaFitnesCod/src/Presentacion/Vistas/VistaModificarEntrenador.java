@@ -1,7 +1,7 @@
-﻿/**
+/**
  * Vista para modificar los datos de un Entrenador.
  */
-package Presentacion.Entrenador;
+package Presentacion.Vistas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +33,7 @@ public class VistaModificarEntrenador extends JFrame implements IGUI {
 		txtDni = new JTextField();
 		lblNombre = new JLabel("Nuevo Nombre:");
 		txtNombre = new JTextField();
-		lblTelefono = new JLabel("Nuevo Telefono:");
+		lblTelefono = new JLabel("Nuevo telefono:");
 		txtTelefono = new JTextField();
 
 		btnAceptar = new JButton("Modificar");
@@ -74,7 +74,7 @@ public class VistaModificarEntrenador extends JFrame implements IGUI {
 	public void update(Context context) {
 		if (context == null) return;
 
-		int evento = context.getEvento();
+		Evento evento = context.getEvento();
 
 		if (evento == Evento.RES_MODIFICAR_ENTRENADOR_OK) {
 			JOptionPane.showMessageDialog(this,

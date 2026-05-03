@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Servicio de Aplicacion para Entrenador.
  * Patron: Fachada (Facade) - expone las operaciones de negocio al Controlador.
  */

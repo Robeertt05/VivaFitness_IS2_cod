@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Implementacion concreta de la Factoria de DAOs.
  * Patron: Factory Method - cada metodo instancia el DAO concreto.
  */
@@ -37,5 +37,15 @@ public class FactoriaIntegracionImp extends FactoriaIntegracion {
 		// begin-user-code
 		return new DAOClienteImp();
 		// end-user-code
+	}
+
+	@Override
+	public DAOSala generaDAOSala() {
+		return new DAOSalaImp();
+	}
+
+	@Override
+	public DAOSesion generaDAOSesion() {
+		return new DAOSesionImp();
 	}
 }

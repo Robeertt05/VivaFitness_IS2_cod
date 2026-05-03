@@ -8,7 +8,7 @@ import Integracion.FactoriaIntegracion.TSesion;
 
 /**
  * Command to display a specific session
- * CASO 3: Mostrar sesiÃÂ³n (SRS)
+ * CASO 3: Mostrar sesin (SRS)
  * @author azuri
  */
 public class CommandMostrarSesion implements Command {
@@ -25,7 +25,7 @@ public class CommandMostrarSesion implements Command {
 		
 		if (!(datos instanceof Integer)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Session ID must be an integer");
+			ctx.setMessage("El ID de sesion debe ser un numero entero");
 			return ctx;
 		}
 		
@@ -34,11 +34,11 @@ public class CommandMostrarSesion implements Command {
 		
 		if (sesion != null) {
 			ctx.setSuccess(true);
-			ctx.setMessage("Session found");
+			ctx.setMessage("Sesion encontrada");
 			ctx.setData(sesion);
 		} else {
 			ctx.setSuccess(false);
-			ctx.setMessage("Session not found");
+			ctx.setMessage("Sesion no encontrada");
 		}
 		
 		return ctx;

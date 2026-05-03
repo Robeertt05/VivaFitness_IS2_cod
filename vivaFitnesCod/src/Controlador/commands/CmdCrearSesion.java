@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Command: Crear Sesion de entrenamiento.
  * Patron: Command.
  */

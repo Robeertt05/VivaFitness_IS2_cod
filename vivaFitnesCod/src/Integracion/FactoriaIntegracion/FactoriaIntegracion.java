@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Factoria abstracta de DAOs.
  * Patron: Abstract Factory + Singleton.
  * Permite desacoplar la creacion de DAOs de su implementacion concreta.
@@ -7,8 +7,6 @@ package Integracion.FactoriaIntegracion;
 
 import Integracion.Entrenador.DAOEntrenador;
 import Integracion.Cliente.DAOCliente;
-import Integracion.Sala.DAOSala;
-import Integracion.Sesion.DAOSesion;
 
 /**
  * <!-- begin-UML-doc -->

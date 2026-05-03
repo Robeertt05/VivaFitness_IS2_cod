@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Presentacion.Entrenador;
+package Presentacion.Vistas;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,6 +17,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Presentacion.FactoriaPresentacion.IGUI;
+import Presentacion.FactoriaPresentacion.Evento;
+import Controlador.Controller;
 import Controlador.Context;
 
 /** 
@@ -36,8 +38,9 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 	private JButton btnCerrar;
 	
 	public VistaMostrarSesion() {
-		setTitle("Session Details");
+		setTitle("Detalles de sesion");
 		setSize(400, 300);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		actionListener = new HashSet<>();
@@ -52,9 +55,10 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 		JPanel topPanel = new JPanel(new GridLayout(2, 1, 10, 10));
 		
 		// Select Session
-		jLabel.add(new JLabel("Select Session:"));
-		topPanel.add(new JLabel("Select Session:"));
+		jLabel.add(new JLabel("Seleccionar sesion:"));
+		topPanel.add(new JLabel("Seleccionar sesion:"));
 		cbSesion = new JComboBox<>();
+		cargarIdsDemo(cbSesion);
 		topPanel.add(cbSesion);
 		
 		// Details area
@@ -64,8 +68,8 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
-		btnMostrar = new JButton("Show");
-		btnCerrar = new JButton("Close");
+		btnMostrar = new JButton("Mostrar");
+		btnCerrar = new JButton("Cerrar");
 		jButton.add(btnMostrar);
 		jButton.add(btnCerrar);
 		buttonPanel.add(btnMostrar);
@@ -77,6 +81,16 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 		add(topPanel, BorderLayout.NORTH);
 		add(scrollPane, BorderLayout.CENTER);
 		add(buttonPanel, BorderLayout.SOUTH);
+
+		btnMostrar.addActionListener(e -> update(Controller.getInstance().action(
+				new Context(Evento.MOSTRAR_SESION, getSelectedSessionId()))));
+		btnCerrar.addActionListener(e -> dispose());
+	}
+
+	private void cargarIdsDemo(JComboBox<Integer> combo) {
+		for (int i = 1; i <= 20; i++) {
+			combo.addItem(i);
+		}
 	}
 	
 	public int getSelectedSessionId() {
@@ -100,8 +114,10 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
-		// begin-user-code
-		// Update display with context data
-		// end-user-code
+		if (context != null && context.isSuccess()) {
+			displaySessionDetails(String.valueOf(context.getData()));
+		} else if (context != null) {
+			displaySessionDetails(context.getMessage());
+		}
 	}
 }

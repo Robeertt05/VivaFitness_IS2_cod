@@ -24,7 +24,7 @@ public class CommandAltaSesion implements Command {
 		
 		if (!(datos instanceof TSesion)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Invalid session data");
+			ctx.setMessage("Datos de sesion no validos");
 			return ctx;
 		}
 		
@@ -33,11 +33,11 @@ public class CommandAltaSesion implements Command {
 		
 		if (resultado > 0) {
 			ctx.setSuccess(true);
-			ctx.setMessage("Session created successfully with ID: " + resultado);
+			ctx.setMessage("Sesion creada correctamente con ID: " + resultado);
 			ctx.setData(resultado);
 		} else {
 			ctx.setSuccess(false);
-			ctx.setMessage("Failed to create session");
+			ctx.setMessage("No se pudo crear la sesion");
 		}
 		
 		return ctx;

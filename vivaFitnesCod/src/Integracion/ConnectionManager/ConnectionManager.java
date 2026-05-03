@@ -3,7 +3,7 @@ package Integracion.ConnectionManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-//NO SE SI ESTO ESTÁ BIEN, ES LO DEFAULT QUE ME HA DADO CHATGPT
+//NO SE SI ESTO ESTA BIEN, ES LO DEFAULT QUE ME HA DADO CHATGPT
 public class ConnectionManager {
     
     private static final String URL = "jdbc:mysql://localhost:3306/nombre_base_datos";

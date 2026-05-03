@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Implementacion concreta del Controlador.
  * Patron: Singleton (instanciado por Controller.getInstance()).
  * Hereda la logica de enrutamiento de Controller.

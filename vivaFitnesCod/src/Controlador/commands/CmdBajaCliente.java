@@ -1,4 +1,4 @@
-﻿package Controlador.commands;
+package Controlador.commands;
 
 import Controlador.Command;
 import Controlador.Context;

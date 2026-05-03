@@ -6,6 +6,7 @@ package Presentacion;
 import javax.swing.*;
 import java.awt.*;
 import Presentacion.FactoriaPresentacion.IGUI;
+import Presentacion.Vistas.VistaEntrenador;
 import Controlador.Context;
 
 /** 
@@ -50,7 +51,7 @@ JButton btnSesiones = crearBotonEntidad("Sesiones");
 JButton btnSalas = crearBotonEntidad("Salas");
 
 btnClientes.addActionListener(e -> mostrarNoDisponible("Clientes"));
-btnEntrenadores.addActionListener(e -> mostrarNoDisponible("Entrenadores"));
+btnEntrenadores.addActionListener(e -> new VistaEntrenador().setVisible(true));
 btnSalas.addActionListener(e -> mostrarNoDisponible("Salas"));
 btnSesiones.addActionListener(e -> new VistaMenuSesiones().setVisible(true));
 
