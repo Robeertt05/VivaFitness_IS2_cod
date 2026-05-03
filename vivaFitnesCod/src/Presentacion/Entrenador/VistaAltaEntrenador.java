@@ -5,8 +5,6 @@ package Presentacion.Entrenador;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import Presentacion.FactoriaPresentacion.IGUI;
 import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Context;
@@ -41,9 +39,10 @@ public class VistaAltaEntrenador extends JFrame implements IGUI {
 
 		btnAceptar.addActionListener(e -> {
 			TEntrenador t = new TEntrenador();
-			t.set_dniEntrenador(txtDni.getText().trim());
-			t.set_nombreEntrenador(txtNombre.getText().trim());
-			t.set_telefonoEntrenador(txtTelefono.getText().trim());
+			t.set_dni(txtDni.getText().trim());
+			t.set_nombre(txtNombre.getText().trim());
+			t.set_telefono(txtTelefono.getText().trim());
+
 			Context ctx = new Context(Evento.ALTA_ENTRENADOR, t);
 			Context res = Controller.getInstance().action(ctx);
 			update(res);
@@ -61,13 +60,16 @@ public class VistaAltaEntrenador extends JFrame implements IGUI {
 	@Override
 	public void update(Context context) {
 		if (context == null) return;
+
 		int evento = context.getEvento();
+
 		if (evento == Evento.RES_ALTA_ENTRENADOR_OK) {
 			JOptionPane.showMessageDialog(this,
 				"Entrenador dado de alta correctamente. ID: " + context.getObjeto(),
 				"Exito", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
-		} else if (evento == Evento.RES_ALTA_ENTRENADOR_KO) {
+		} 
+		else if (evento == Evento.RES_ALTA_ENTRENADOR_KO) {
 			JOptionPane.showMessageDialog(this,
 				"Error al dar de alta al entrenador. Compruebe los datos.",
 				"Error", JOptionPane.ERROR_MESSAGE);

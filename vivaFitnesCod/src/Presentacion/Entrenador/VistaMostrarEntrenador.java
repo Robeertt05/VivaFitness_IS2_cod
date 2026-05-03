@@ -32,6 +32,7 @@ public class VistaMostrarEntrenador extends JFrame implements IGUI {
 		lblId = new JLabel("ID Entrenador:");
 		txtId = new JTextField();
 		btnBuscar = new JButton("Buscar");
+
 		panelSuperior.add(lblId);
 		panelSuperior.add(txtId);
 		panelSuperior.add(btnBuscar);
@@ -49,7 +50,8 @@ public class VistaMostrarEntrenador extends JFrame implements IGUI {
 				Context res = Controller.getInstance().action(ctx);
 				update(res);
 			} catch (NumberFormatException ex) {
-				JOptionPane.showMessageDialog(this, "Introduzca un ID valido.",
+				JOptionPane.showMessageDialog(this,
+					"Introduzca un ID valido.",
 					"Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
@@ -63,17 +65,21 @@ public class VistaMostrarEntrenador extends JFrame implements IGUI {
 	@Override
 	public void update(Context context) {
 		if (context == null) return;
+
 		int evento = context.getEvento();
+
 		if (evento == Evento.RES_MOSTRAR_ENTRENADOR_OK) {
 			TEntrenador t = (TEntrenador) context.getObjeto();
+
 			txtResultado.setText(
-				"ID: " + t.get_idEntrenador() + "\n" +
-				"DNI: " + t.get_dniEntrenador() + "\n" +
-				"Nombre: " + t.get_nombreEntrenador() + "\n" +
-				"Telefono: " + t.get_telefonoEntrenador() + "\n" +
+				"ID: " + t.get_id() + "\n" +
+				"DNI: " + t.get_dni() + "\n" +
+				"Nombre: " + t.get_nombre() + "\n" +
+				"Telefono: " + t.get_telefono() + "\n" +
 				"Activo: " + (t.get_activo() == 1 ? "Si" : "No")
 			);
-		} else if (evento == Evento.RES_MOSTRAR_ENTRENADOR_KO) {
+		} 
+		else if (evento == Evento.RES_MOSTRAR_ENTRENADOR_KO) {
 			txtResultado.setText("No se encontro el entrenador con ese ID.");
 		}
 	}

@@ -6,18 +6,18 @@
  */
 package Controlador;
 
-import Presentacion.FactoriaPresentacion.Evento;
-
 /**
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
  * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public abstract class Controller {
+public class Controller {
 
 	/** Unica instancia del controlador (Singleton). */
 	private static Controller instance;
+
+	/** Constructor protegido para Singleton */
+	protected Controller() {}
 
 	/**
 	 * Devuelve la unica instancia del controlador (Singleton).
@@ -33,16 +33,22 @@ public abstract class Controller {
 	/**
 	 * Punto de entrada unico para todas las acciones del sistema.
 	 * Obtiene el Command correspondiente al evento del Context y lo ejecuta.
-	 * @param context contexto con el evento (int) y los datos de la peticion
+	 * @param context contexto con el evento y los datos de la peticion
 	 * @return Context con el resultado para que la vista se actualice
 	 */
 	public Context action(Context context) {
-		if (context == null) return context;
-		int evento = context.getEvento();
-		Command cmd = CommandFactory.getInstance().getCommand(evento);
-		if (cmd != null) {
-			return cmd.execute(context.getObjeto());
+		if (context == null || context.getEvento() == null) {
+			return context;
 		}
-		return context;
+		
+		Command command = CommandFactory.getInstance().getCommand(context.getEvento());
+		
+		if (command == null) {
+			context.setSuccess(false);
+			context.setMessage("No command found for event: " + context.getEvento());
+			return context;
+		}
+		
+		return command.execute(context.getData());
 	}
 }

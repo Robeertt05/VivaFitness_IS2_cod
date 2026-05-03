@@ -79,7 +79,7 @@ public class SAEntrenadorImp implements SAEntrenador {
 				return -1;
 			}
 			entrenador.set_activo(0);
-			resultado = dao.upadate(entrenador);
+			resultado = dao.update(entrenador);
 			t.commit();
 		} catch (Exception e) {
 			t.rollback();
@@ -120,7 +120,7 @@ public class SAEntrenadorImp implements SAEntrenador {
 			if (datos.get_dni() != null && !datos.get_dni().isEmpty())
 				entrenador.set_dni(datos.get_dni());
 
-			resultado = dao.upadate(entrenador);
+			resultado = dao.update(entrenador);
 			t.commit();
 		} catch (Exception e) {
 			t.rollback();

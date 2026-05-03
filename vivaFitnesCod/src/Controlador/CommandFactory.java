@@ -7,6 +7,8 @@ package Controlador;
 
 import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.commands.*;
+import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
+import Negocio.FactoriaNegocio.SASesion;
 
 /**
  * <!-- begin-UML-doc -->
@@ -18,9 +20,13 @@ public class CommandFactory {
 
 	/** Unica instancia (Singleton). */
 	private static CommandFactory instance;
+	private final SASesion saSesion;
 
 	/** Constructor privado para forzar uso del Singleton. */
-	private CommandFactory() {}
+	private CommandFactory() {
+		FactoriaServicioAplicacion factory = FactoriaServicioAplicacion.getInstance();
+		this.saSesion = factory.getSASesion();
+	}
 
 	/**
 	 * Devuelve la unica instancia de CommandFactory (Singleton).
@@ -53,6 +59,7 @@ public class CommandFactory {
 				return new CmdMostrarEntrenadores();
 			case Evento.CREAR_SESION:
 				return new CmdCrearSesion();
+			
 			// --- Cliente ---
 			case Evento.ALTA_CLIENTE:
 				return new CmdAltaCliente();
@@ -60,6 +67,23 @@ public class CommandFactory {
 				return new CmdBajaCliente();
 			case Evento.MODIFICAR_CLIENTE:
 				return new CmdModificarCliente();
+			
+			// --- Sesión ---
+			case Evento.ALTA_SESION:
+				return new CommandAltaSesion(saSesion);
+			case Evento.BAJA_SESION:
+				return new CommandEliminarSesion(saSesion);
+			case Evento.MODIFICAR_SESION:
+				return new CommandModificarSesion(saSesion);
+			case Evento.MOSTRAR_SESION:
+				return new CommandMostrarSesion(saSesion);
+			case Evento.MOSTRAR_TODAS_SESIONES:
+				return new CommandMostrarTodasSesiones(saSesion);
+			case Evento.MOSTRAR_SALA_SESION:
+				return new CommandMostrarSalaSesion(saSesion);
+			case Evento.MOSTRAR_ENTRENADOR_SESION:
+				return new CommandMostrarEntrenadorSesion(saSesion);
+			
 			default:
 				return null;
 		}

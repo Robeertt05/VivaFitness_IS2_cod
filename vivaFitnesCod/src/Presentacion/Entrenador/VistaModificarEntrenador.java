@@ -35,22 +35,27 @@ public class VistaModificarEntrenador extends JFrame implements IGUI {
 		txtNombre = new JTextField();
 		lblTelefono = new JLabel("Nuevo Telefono:");
 		txtTelefono = new JTextField();
+
 		btnAceptar = new JButton("Modificar");
 		btnCancelar = new JButton("Cancelar");
 
 		btnAceptar.addActionListener(e -> {
 			try {
 				int id = Integer.parseInt(txtId.getText().trim());
+
 				TEntrenador t = new TEntrenador();
-				t.set_idEntrenador(id);
-				t.set_dniEntrenador(txtDni.getText().trim());
-				t.set_nombreEntrenador(txtNombre.getText().trim());
-				t.set_telefonoEntrenador(txtTelefono.getText().trim());
+				t.set_id(id);
+				t.set_dni(txtDni.getText().trim());
+				t.set_nombre(txtNombre.getText().trim());
+				t.set_telefono(txtTelefono.getText().trim());
+
 				Context ctx = new Context(Evento.MODIFICAR_ENTRENADOR, t);
 				Context res = Controller.getInstance().action(ctx);
 				update(res);
+
 			} catch (NumberFormatException ex) {
-				JOptionPane.showMessageDialog(this, "Introduzca un ID valido.",
+				JOptionPane.showMessageDialog(this,
+					"Introduzca un ID valido.",
 					"Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
@@ -68,13 +73,16 @@ public class VistaModificarEntrenador extends JFrame implements IGUI {
 	@Override
 	public void update(Context context) {
 		if (context == null) return;
+
 		int evento = context.getEvento();
+
 		if (evento == Evento.RES_MODIFICAR_ENTRENADOR_OK) {
 			JOptionPane.showMessageDialog(this,
 				"Entrenador modificado correctamente.",
 				"Exito", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
-		} else if (evento == Evento.RES_MODIFICAR_ENTRENADOR_KO) {
+		} 
+		else if (evento == Evento.RES_MODIFICAR_ENTRENADOR_KO) {
 			JOptionPane.showMessageDialog(this,
 				"Error al modificar el entrenador.",
 				"Error", JOptionPane.ERROR_MESSAGE);

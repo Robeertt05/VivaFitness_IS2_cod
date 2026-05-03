@@ -3,11 +3,158 @@
  */
 package Negocio.FactoriaNegocio;
 
+import Integracion.FactoriaIntegracion.TSesion;
+import Integracion.FactoriaIntegracion.TSala;
+import Integracion.FactoriaIntegracion.DAOSesion;
+import Negocio.entrenador.TEntrenador;
+import java.util.Set;
+
 /** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
+ * Service Application implementation for Sesion (SRS Aligned)
+ * Implements 5 use cases from SRS:
+ * 1. Baja sesiÃÂ³n - Delete session (only if no clients registered)
+ * 2. Modificar sesiÃÂ³n - Update session attributes
+ * 3. Mostrar sesiÃÂ³n - View session details
+ * 4. Mostrar sala por sesiÃÂ³n - View room assigned to session
+ * 5. Mostrar entrenador por sesiÃÂ³n - View trainer assigned to session
  * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class SASesionImp implements SASesion {
+	
+	private DAOSesion daoSesion;
+
+	public SASesionImp(DAOSesion daoSesion) {
+		this.daoSesion = daoSesion;
+	}
+
+	/**
+	 * Alta sesiÃÂ³n Ã¢ÂÂ crear nueva sesiÃÂ³n
+	 */
+	@Override
+	public int alta_sesion(TSesion datos) {
+		// begin-user-code
+		if (datos == null) {
+			return 0;
+		}
+		return daoSesion.create(datos);
+		// end-user-code
+	}
+
+	/**
+	 * CASO 1: Baja sesiÃÂ³n
+	 * Delete a session, but only if no clients are registered
+	 * Precondition: Session must not have registered clients to avoid loss of attendance data
+	 */
+	@Override
+	public int baja_sesion(int idSesion) {
+		// begin-user-code
+		// Validate ID
+		if (idSesion <= 0) {
+			return 0;
+		}
+		
+		// Get session to verify it exists and check participant count
+		TSesion sesion = daoSesion.read(idSesion);
+		if (sesion == null) {
+			return 0;
+		}
+		
+		// Check precondition: No clients should be registered
+		if (sesion.getParticipantsActuales() > 0) {
+			// Session has clients, cannot delete - return 0
+			return 0;
+		}
+		
+		// No clients registered, safe to delete
+		return daoSesion.delete(idSesion);
+		// end-user-code
+	}
+
+	/**
+	 * CASO 2: Modificar sesiÃÂ³n
+	 * Update session attributes (except ID)
+	 * Precondition: Session must exist and be active.
+	 * If room changes, new room capacity must be >= current registered clients
+	 */
+	@Override
+	public int modificar_sesion(int idSesion, TSesion datos) {
+		// begin-user-code
+		// Validate parameters
+		if (idSesion <= 0 || datos == null) {
+			return 0;
+		}
+		
+		// Get current session to verify it exists
+		TSesion sesionActual = daoSesion.read(idSesion);
+		if (sesionActual == null) {
+			return 0;
+		}
+		
+		// Verify room change doesn't violate capacity constraint
+		if (datos.getIdSala() != sesionActual.getIdSala()) {
+			// Room is being changed
+			// TODO: Verify new room has capacity >= current registered clients
+		}
+		
+		// Set ID to ensure it doesn't change
+		datos.setIdSesion(idSesion);
+		
+		// Call DAO to update session
+		return daoSesion.update(datos);
+		// end-user-code
+	}
+
+	/**
+	 * CASO 3: Mostrar sesiÃÂ³n
+	 * Get session details: objetivo, duraciÃÂ³n, horario, idSesiÃÂ³n
+	 * Precondition: Session must exist and be active
+	 */
+	@Override
+	public TSesion mostrar_sesion(int idSesion) {
+		// begin-user-code
+		// Validate ID
+		if (idSesion <= 0) {
+			return null;
+		}
+		
+		// Get and return session
+		return daoSesion.read(idSesion);
+		// end-user-code
+	}
+
+	/**
+	 * CASO 4: Mostrar sala por sesiÃÂ³n
+	 */
+	@Override
+	public TSala mostrar_sala_sesion(int idSesion) {
+		// begin-user-code
+		if (idSesion <= 0) {
+			return null;
+		}
+		return daoSesion.getRoom(idSesion);
+		// end-user-code
+	}
+
+	/**
+	 * CASO 5: Mostrar entrenador por sesiÃÂ³n
+	 */
+	@Override
+	public TEntrenador mostrar_entrenador_sesion(int idSesion) {
+		// begin-user-code
+		if (idSesion <= 0) {
+			return null;
+		}
+		return (TEntrenador) daoSesion.getTrainer(idSesion);
+		// end-user-code
+	}
+
+	/**
+	 * Mostrar todas las sesiones activas
+	 */
+	@Override
+	public Set<TSesion> mostrar_todas_sesiones() {
+		// begin-user-code
+		return daoSesion.read_all();
+		// end-user-code
+	}
 }

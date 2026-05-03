@@ -6,12 +6,8 @@ package Presentacion.Entrenador;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import Presentacion.FactoriaPresentacion.IGUI;
-import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Context;
-import Controlador.Controller;
 
 public class VistaEntrenador extends JFrame implements IGUI {
 

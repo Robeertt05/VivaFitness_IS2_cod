@@ -7,6 +7,8 @@ package Integracion.FactoriaIntegracion;
 
 import Integracion.Entrenador.DAOEntrenador;
 import Integracion.Cliente.DAOCliente;
+import Integracion.Sala.DAOSala;
+import Integracion.Sesion.DAOSesion;
 
 /**
  * <!-- begin-UML-doc -->
@@ -25,12 +27,10 @@ public abstract class FactoriaIntegracion {
 	 * @return instancia unica de FactoriaIntegracion
 	 */
 	public static FactoriaIntegracion getInstance() {
-		// begin-user-code
 		if (instance == null) {
 			instance = new FactoriaIntegracionImp();
 		}
 		return instance;
-		// end-user-code
 	}
 
 	/**
@@ -44,4 +44,16 @@ public abstract class FactoriaIntegracion {
 	 * @return DAOCliente
 	 */
 	public abstract DAOCliente generaDAOCliente();
+
+	/**
+	 * Crea y devuelve una implementacion de DAOSala.
+	 * @return DAOSala
+	 */
+	public abstract DAOSala generaDAOSala();
+
+	/**
+	 * Crea y devuelve una implementacion de DAOSesion.
+	 * @return DAOSesion
+	 */
+	public abstract DAOSesion generaDAOSesion();
 }

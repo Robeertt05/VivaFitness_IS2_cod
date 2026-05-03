@@ -1,35 +1,43 @@
-﻿/**
- * Factoria abstracta de Vistas (IGUIs).
- * Patron: Abstract Factory + Singleton.
+/**
+ * 
  */
 package Presentacion.FactoriaPresentacion;
 
-/**
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
+import Presentacion.Entrenador.VistaCrearSesion;
+import Presentacion.Entrenador.VistaEliminarSesion;
+import Presentacion.Entrenador.VistaModificarSesion;
+import Presentacion.Entrenador.VistaMostrarSesion;
+import Presentacion.Entrenador.VistaMostrarTodasSesiones;
+import Presentacion.Entrenador.VistaMostrarSalaSesion;
+import Presentacion.Entrenador.VistaMostrarEntrenadorSesion;
+
+/** 
+ * Factory that creates the appropriate IGUI view for a given Evento.
  * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public abstract class FactoriaVistas {
+public class FactoriaVistas {
 
-	/** Unica instancia (Singleton). */
-	private static FactoriaVistas instance;
+private static FactoriaVistas instance;
 
-	/**
-	 * Devuelve la unica instancia de FactoriaVistas (Singleton).
-	 * @return instancia de FactoriaVistas
-	 */
-	public static FactoriaVistas getInstance() {
-		if (instance == null) {
-			instance = new FactoriaVistasImp();
-		}
-		return instance;
-	}
+protected FactoriaVistas() {}
 
-	/**
-	 * Crea y devuelve la vista correspondiente al evento indicado.
-	 * @param evento constante int de la clase Evento
-	 * @return IGUI (vista) correspondiente
-	 */
-	public abstract IGUI generarVistas(int evento);
+public static FactoriaVistas getInstance() {
+if (instance == null) {
+instance = new FactoriaVistasImp();
+}
+return instance;
+}
+
+public IGUI generarVistas(Evento evento) {
+switch (evento) {
+case ALTA_SESION:               return new VistaCrearSesion();
+case BAJA_SESION:               return new VistaEliminarSesion();
+case MODIFICAR_SESION:          return new VistaModificarSesion();
+case MOSTRAR_SESION:            return new VistaMostrarSesion();
+case MOSTRAR_TODAS_SESIONES:    return new VistaMostrarTodasSesiones();
+case MOSTRAR_SALA_SESION:       return new VistaMostrarSalaSesion();
+case MOSTRAR_ENTRENADOR_SESION: return new VistaMostrarEntrenadorSesion();
+default:                        return null;
+}
+}
 }

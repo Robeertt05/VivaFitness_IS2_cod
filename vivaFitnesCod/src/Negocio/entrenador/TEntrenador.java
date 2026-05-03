@@ -1,22 +1,21 @@
-﻿
-package Negocio.entrenador;
+﻿package Negocio.entrenador;
 
-/**
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
+/** 
+ * Transfer Object for Entrenador
  * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class TEntrenador {
 
-	protected int id_entrenador;
-	protected int activo;
-	protected String dni_entrenador;
-	protected String nombre;
-	protected String telefono;
+	private int id_entrenador;
+	private int activo;
+	private String dni_entrenador;
+	private String nombre;
+	private String telefono;
 
+	// Constructor vacío
 	public TEntrenador() {}
 
+	// Constructor completo
 	public TEntrenador(int id, String dni, String nombre, String telefono, int activo) {
 		this.id_entrenador  = id;
 		this.dni_entrenador = dni;
@@ -25,9 +24,9 @@ public class TEntrenador {
 		this.activo         = activo;
 	}
 
-	// Getters 
-	
-	public int get_idEntrenador() {
+	// Getters
+
+	public int get_id() {
 		return id_entrenador;
 	}
 
@@ -35,21 +34,21 @@ public class TEntrenador {
 		return activo;
 	}
 
-	public String get_dniEntrenador() {
+	public String get_dni() {
 		return dni_entrenador;
 	}
 
-	public String get_nombreEntrenador() {
+	public String get_nombre() {
 		return nombre;
 	}
 
-	public String get_telefonoEntrenador() {
+	public String get_telefono() {
 		return telefono;
 	}
 
 	// Setters
 
-	public void set_idEntrenador(int id) {
+	public void set_id(int id) {
 		this.id_entrenador = id;
 	}
 
@@ -57,19 +56,18 @@ public class TEntrenador {
 		this.activo = activo;
 	}
 
-	public void set_dniEntrenador(String dni) {
+	public void set_dni(String dni) {
 		this.dni_entrenador = dni;
 	}
 
-	public void set_nombreEntrenador(String nombre) {
+	public void set_nombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public void set_telefonoEntrenador(String telefono) {
+	public void set_telefono(String telefono) {
 		this.telefono = telefono;
 	}
 
-	
 	public void set_all(String dni, String nombre, String telefono) {
 		this.dni_entrenador = dni;
 		this.nombre         = nombre;

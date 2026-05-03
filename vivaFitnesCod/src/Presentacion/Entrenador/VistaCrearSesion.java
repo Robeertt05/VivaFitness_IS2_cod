@@ -1,71 +1,161 @@
-﻿/**
- * Vista para crear una sesion de entrenamiento.
+/**
+ * 
  */
 package Presentacion.Entrenador;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.JComboBox;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Date;
+
 import Presentacion.FactoriaPresentacion.IGUI;
-import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Context;
-import Controlador.Controller;
-import Negocio.entrenador.TEntrenador;
+import Integracion.FactoriaIntegracion.TSesion;
 
+/** 
+ * Vista para crear una nueva sesion
+ * @author azuri
+ */
 public class VistaCrearSesion extends JFrame implements IGUI {
-
-	private JPanel panel;
-	private JLabel lblIdEntrenador;
-	private JTextField txtIdEntrenador;
-	private JButton btnCrear, btnCancelar;
-
+	/** 
+	 * Action listeners
+	 */
+	private Set<ActionListener> actionListener;
+	/** 
+	 * Buttons
+	 */
+	private Set<JButton> jButton;
+	/** 
+	 * Panels
+	 */
+	private Set<JPanel> jPanel;
+	/** 
+	 * Text fields
+	 */
+	private Set<JTextField> jTextField;
+	/** 
+	 * Labels
+	 */
+	private Set<JLabel> jLabel;
+	
+	private JTextField txtNombre;
+	private JTextField txtDescripcion;
+	private JTextField txtHora;
+	private JSpinner spinCapacidad;
+	private JComboBox<Integer> cbSala;
+	private JComboBox<Integer> cbEntrenador;
+	private JButton btnCrear;
+	private JButton btnCancelar;
+	
 	public VistaCrearSesion() {
-		setTitle("Crear Sesion - VivaFitness");
-		setSize(400, 200);
-		setLocationRelativeTo(null);
+		setTitle("Crear Sesion");
+		setSize(400, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-		panel = new JPanel(new GridLayout(2, 2, 10, 10));
-		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-		lblIdEntrenador = new JLabel("ID Entrenador:");
-		txtIdEntrenador = new JTextField();
-		btnCrear = new JButton("Crear Sesion");
+		
+		actionListener = new HashSet<>();
+		jButton = new HashSet<>();
+		jPanel = new HashSet<>();
+		jTextField = new HashSet<>();
+		jLabel = new HashSet<>();
+		
+		initComponents();
+	}
+	
+	private void initComponents() {
+		JPanel mainPanel = new JPanel(new GridLayout(7, 2, 10, 10));
+		
+		// Session name
+		jLabel.add(new JLabel("Nombre sesion:"));
+		mainPanel.add(new JLabel("Nombre sesion:"));
+		txtNombre = new JTextField();
+		jTextField.add(txtNombre);
+		mainPanel.add(txtNombre);
+		
+		// Description
+		jLabel.add(new JLabel("Descripcion:"));
+		mainPanel.add(new JLabel("Descripcion:"));
+		txtDescripcion = new JTextField();
+		jTextField.add(txtDescripcion);
+		mainPanel.add(txtDescripcion);
+		
+		// Hour
+		jLabel.add(new JLabel("Hora:"));
+		mainPanel.add(new JLabel("Hora:"));
+		txtHora = new JTextField("10:00");
+		jTextField.add(txtHora);
+		mainPanel.add(txtHora);
+		
+		// Capacity
+		jLabel.add(new JLabel("Capacidad Maxima:"));
+		mainPanel.add(new JLabel("Capacidad Maxima:"));
+		spinCapacidad = new JSpinner();
+		mainPanel.add(spinCapacidad);
+		
+		// Room
+		jLabel.add(new JLabel("Sala:"));
+		mainPanel.add(new JLabel("Sala:"));
+		cbSala = new JComboBox<>();
+		mainPanel.add(cbSala);
+		
+		// Trainer
+		jLabel.add(new JLabel("Entrenador:"));
+		mainPanel.add(new JLabel("Entrenador:"));
+		cbEntrenador = new JComboBox<>();
+		mainPanel.add(cbEntrenador);
+		
+		// Buttons
+		JPanel buttonPanel = new JPanel();
+		btnCrear = new JButton("Crear");
 		btnCancelar = new JButton("Cancelar");
-
-		btnCrear.addActionListener(e -> {
-			try {
-				int id = Integer.parseInt(txtIdEntrenador.getText().trim());
-				TEntrenador t = new TEntrenador();
-				t.set_idEntrenador(id);
-				Context ctx = new Context(Evento.CREAR_SESION, t);
-				Context res = Controller.getInstance().action(ctx);
-				update(res);
-			} catch (NumberFormatException ex) {
-				JOptionPane.showMessageDialog(this, "Introduzca un ID valido.",
-					"Error", JOptionPane.ERROR_MESSAGE);
-			}
-		});
-
-		btnCancelar.addActionListener(e -> dispose());
-
-		panel.add(lblIdEntrenador); panel.add(txtIdEntrenador);
-		panel.add(btnCrear);        panel.add(btnCancelar);
-		add(panel);
+		jButton.add(btnCrear);
+		jButton.add(btnCancelar);
+		buttonPanel.add(btnCrear);
+		buttonPanel.add(btnCancelar);
+		
+		jPanel.add(mainPanel);
+		jPanel.add(buttonPanel);
+		
+		add(mainPanel, BorderLayout.CENTER);
+		add(buttonPanel, BorderLayout.SOUTH);
+	}
+	
+	public TSesion getSessionData() {
+		TSesion sesion = new TSesion();
+		sesion.setNombreSesion(txtNombre.getText());
+		sesion.setDescripcion(txtDescripcion.getText());
+		sesion.setHora(txtHora.getText());
+		sesion.setCapacidadMaxima((Integer) spinCapacidad.getValue());
+		sesion.setIdSala((Integer) cbSala.getSelectedItem());
+		sesion.setIdEntrenador((Integer) cbEntrenador.getSelectedItem());
+		sesion.setFecha(new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()));
+		return sesion;
+	}
+	
+	public void addCreateButtonListener(ActionListener listener) {
+		btnCrear.addActionListener(listener);
+		actionListener.add(listener);
+	}
+	
+	public void addCancelButtonListener(ActionListener listener) {
+		btnCancelar.addActionListener(listener);
+		actionListener.add(listener);
 	}
 
 	@Override
 	public void update(Context context) {
-		if (context == null) return;
-		int evento = context.getEvento();
-		if (evento == Evento.RES_CREAR_SESION_OK) {
-			JOptionPane.showMessageDialog(this,
-				"Sesion creada correctamente.",
-				"Exito", JOptionPane.INFORMATION_MESSAGE);
-			dispose();
-		} else if (evento == Evento.RES_CREAR_SESION_KO) {
-			JOptionPane.showMessageDialog(this,
-				"Error al crear la sesion. El entrenador no existe o esta inactivo.",
-				"Error", JOptionPane.ERROR_MESSAGE);
+		// begin-user-code
+		if (context != null && context.isSuccess()) {
+			setVisible(false);
 		}
+		// end-user-code
 	}
 }

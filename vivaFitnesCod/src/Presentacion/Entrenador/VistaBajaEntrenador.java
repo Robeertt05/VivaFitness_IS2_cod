@@ -53,13 +53,16 @@ public class VistaBajaEntrenador extends JFrame implements IGUI {
 	@Override
 	public void update(Context context) {
 		if (context == null) return;
+
 		int evento = context.getEvento();
+
 		if (evento == Evento.RES_BAJA_ENTRENADOR_OK) {
 			JOptionPane.showMessageDialog(this,
 				"Entrenador dado de baja correctamente.",
 				"Exito", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
-		} else if (evento == Evento.RES_BAJA_ENTRENADOR_KO) {
+		} 
+		else if (evento == Evento.RES_BAJA_ENTRENADOR_KO) {
 			JOptionPane.showMessageDialog(this,
 				"Error al dar de baja. El entrenador no existe o ya esta inactivo.",
 				"Error", JOptionPane.ERROR_MESSAGE);
