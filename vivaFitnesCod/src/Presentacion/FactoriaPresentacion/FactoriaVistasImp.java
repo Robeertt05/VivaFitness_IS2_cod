@@ -29,8 +29,9 @@ public class FactoriaVistasImp extends FactoriaVistas {
 			case MODIFICAR_ENTRENADOR:
 				return new VistaModificarEntrenador();
 			case MOSTRAR_ENTRENADOR:
-			case MOSTRAR_ENTRENADORES:
 				return new VistaMostrarEntrenador();
+			case MOSTRAR_ENTRENADORES:
+				return new VistaMostrarEntrenadores();
 			case CREAR_SESION:
 				return new VistaCrearSesion();
 			default:

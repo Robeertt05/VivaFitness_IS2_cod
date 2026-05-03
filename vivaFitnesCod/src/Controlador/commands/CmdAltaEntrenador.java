@@ -30,6 +30,7 @@ public class CmdAltaEntrenador implements Command {
 		} catch (Exception e) {
 			resultado.setEvento(Evento.RES_ALTA_ENTRENADOR_KO);
 			resultado.setObjeto(null);
+			resultado.setMessage(e.getMessage());
 		}
 		return resultado;
 	}

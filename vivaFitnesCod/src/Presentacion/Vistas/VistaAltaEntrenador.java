@@ -70,8 +70,11 @@ public class VistaAltaEntrenador extends JFrame implements IGUI {
 			dispose();
 		} 
 		else if (evento == Evento.RES_ALTA_ENTRENADOR_KO) {
+			String mensaje = context.getMessage() != null
+					? context.getMessage()
+					: "Error al dar de alta al entrenador. Compruebe los datos.";
 			JOptionPane.showMessageDialog(this,
-				"Error al dar de alta al entrenador. Compruebe los datos.",
+				mensaje,
 				"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}

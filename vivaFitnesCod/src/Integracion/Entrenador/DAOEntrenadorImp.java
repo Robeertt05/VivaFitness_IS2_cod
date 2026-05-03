@@ -23,6 +23,12 @@ import java.util.Set;
  */
 public class DAOEntrenadorImp implements DAOEntrenador {
 
+	private RuntimeException databaseError(SQLException e) {
+		return new RuntimeException(
+				"No se pudo conectar con la base de datos. Comprueba que MySQL este iniciado en localhost:3306 y que exista la base vivafitness.",
+				e);
+	}
+
 	/**
 	 * Inserta un nuevo entrenador en la base de datos.
 	 * @param datos TEntrenador con los datos a persistir
@@ -54,14 +60,14 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw databaseError(e);
 		} finally {
 			try {
 				if (rs != null) rs.close();
 				if (ps != null) ps.close();
 				if (connection != null) connection.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw databaseError(e);
 			}
 		}
 		
@@ -99,14 +105,14 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw databaseError(e);
 		} finally {
 			try {
 				if (rs != null) rs.close();
 				if (ps != null) ps.close();
 				if (connection != null) connection.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw databaseError(e);
 			}
 		}
 		
@@ -139,13 +145,13 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 			result = ps.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw databaseError(e);
 		} finally {
 			try {
 				if (ps != null) ps.close();
 				if (connection != null) connection.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw databaseError(e);
 			}
 		}
 		
@@ -175,13 +181,13 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 			result = ps.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw databaseError(e);
 		} finally {
 			try {
 				if (ps != null) ps.close();
 				if (connection != null) connection.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw databaseError(e);
 			}
 		}
 		
@@ -218,14 +224,14 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw databaseError(e);
 		} finally {
 			try {
 				if (rs != null) rs.close();
 				if (ps != null) ps.close();
 				if (connection != null) connection.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw databaseError(e);
 			}
 		}
 		
@@ -262,14 +268,14 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw databaseError(e);
 		} finally {
 			try {
 				if (rs != null) rs.close();
 				if (ps != null) ps.close();
 				if (connection != null) connection.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw databaseError(e);
 			}
 		}
 		

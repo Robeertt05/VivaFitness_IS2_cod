@@ -4,13 +4,13 @@
 package Integracion.FactoriaIntegracion;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
+import Integracion.ConnectionManager.ConnectionManager;
 import Negocio.entrenador.TEntrenador;
 
 /** 
@@ -19,12 +19,8 @@ import Negocio.entrenador.TEntrenador;
  */
 public class DAOSesionImp implements DAOSesion {
 
-	private static final String DB_URL  = "jdbc:mysql://localhost:3306/vivafitness";
-	private static final String DB_USER = "root";
-	private static final String DB_PASS = "root";
-
 	private Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+		return ConnectionManager.getConnection();
 	}
 
 	// -----------------------------------------------------------------------

@@ -3,19 +3,22 @@ package Integracion.ConnectionManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-//NO SE SI ESTO ESTA BIEN, ES LO DEFAULT QUE ME HA DADO CHATGPT
+
 public class ConnectionManager {
     
-    private static final String URL = "jdbc:mysql://localhost:3306/nombre_base_datos";
-    private static final String USER = "root";
-    private static final String PASSWORD = "tu_password";
+    private static final String URL = System.getProperty(
+            "vivafitness.db.url",
+            "jdbc:mysql://127.0.0.1:3306/vivafitness?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
+    
+    private static final String USER = System.getProperty("vivafitness.db.user", "root");
+    
+    private static final String PASSWORD = System.getProperty("vivafitness.db.password", ""); 
     
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error al cargar el driver de MySQL", e);
+            throw new RuntimeException("No se encontro el driver JDBC de MySQL.", e);
         }
     }
     

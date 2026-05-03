@@ -64,6 +64,7 @@ src\Presentacion\Vistas\VistaEntrenador.java
 src\Presentacion\Vistas\VistaModificarEntrenador.java
 src\Presentacion\Vistas\VistaModificarSesion.java
 src\Presentacion\Vistas\VistaMostrarEntrenador.java
+src\Presentacion\Vistas\VistaMostrarEntrenadores.java
 src\Presentacion\Vistas\VistaMostrarEntrenadorSesion.java
 src\Presentacion\Vistas\VistaMostrarSalaSesion.java
 src\Presentacion\Vistas\VistaMostrarSesion.java
