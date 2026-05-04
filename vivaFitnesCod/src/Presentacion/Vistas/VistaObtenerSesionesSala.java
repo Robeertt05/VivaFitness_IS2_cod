@@ -6,10 +6,11 @@ package Presentacion.Vistas;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -17,7 +18,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Presentacion.FactoriaPresentacion.IGUI;
+import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Context;
+import Controlador.Controller;
 
 /** 
  * View for displaying all sessions in a room
@@ -31,7 +34,7 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 	private Set<JPanel> jPanel;
 	private Set<JLabel> jLabel;
 	
-	private JComboBox<Integer> cbSala;
+	private JTextField txtIdSala;
 	private JTextArea txtSesiones;
 	private JButton btnMostrar;
 	private JButton btnCerrar;
@@ -53,10 +56,10 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 		JPanel topPanel = new JPanel(new GridLayout(1, 2, 10, 10));
 		
 		// Select Room
-		jLabel.add(new JLabel("Select Room:"));
-		topPanel.add(new JLabel("Select Room:"));
-		cbSala = new JComboBox<>();
-		topPanel.add(cbSala);
+		jLabel.add(new JLabel("Room ID:"));
+		topPanel.add(new JLabel("Room ID:"));
+		txtIdSala = new JTextField();
+		topPanel.add(txtIdSala);
 		
 		// Sessions area
 		txtSesiones = new JTextArea();
@@ -67,6 +70,8 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 		JPanel buttonPanel = new JPanel();
 		btnMostrar = new JButton("Show Sessions");
 		btnCerrar = new JButton("Close");
+		btnMostrar.addActionListener(e -> mostrarSesionesSala());
+		btnCerrar.addActionListener(e -> dispose());
 		jButton.add(btnMostrar);
 		jButton.add(btnCerrar);
 		buttonPanel.add(btnMostrar);
@@ -80,15 +85,13 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 		add(buttonPanel, BorderLayout.SOUTH);
 	}
 	
-	public int getSelectedRoomId() {
-		Object selected = cbSala.getSelectedItem();
-		return selected != null ? (Integer) selected : -1;
-	}
-	
-	public void setRooms(Set<Integer> roomIds) {
-		cbSala.removeAllItems();
-		for (Integer id : roomIds) {
-			cbSala.addItem(id);
+	private void mostrarSesionesSala() {
+		try {
+			int idSala = Integer.parseInt(txtIdSala.getText().trim());
+			Context res = Controller.getInstance().action(new Context(Evento.OBTENER_SESIONES_SALA, idSala));
+			update(res);
+		} catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(this, "Introduzca un ID valido.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -108,13 +111,19 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
-		if (context != null && context.getData() instanceof Set) {
+		if (context != null && context.isSuccess() && context.getData() instanceof Set) {
 			Set<?> sesiones = (Set<?>) context.getData();
 			StringBuilder sb = new StringBuilder();
 			for (Object sesion : sesiones) {
 				sb.append(sesion.toString()).append("\n\n");
 			}
 			displaySessions(sb.toString());
+		} else if (context != null) {
+			displaySessions("");
+			JOptionPane.showMessageDialog(this,
+				context.getMessage() != null ? context.getMessage() : "No se encontraron sesiones para esta sala.",
+				"Informacion",
+				JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 }

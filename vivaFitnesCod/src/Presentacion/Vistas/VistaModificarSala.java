@@ -46,6 +46,7 @@ public class VistaModificarSala extends JFrame implements IGUI {
 				sala.setIdSala(id);
 				sala.setNombreSala(txtNombre.getText().trim());
 				sala.setAforo((Integer) spinAforo.getValue());
+				sala.setActivo(1);
 
 				Context ctx = new Context(Evento.MODIFICAR_SALA, sala);
 				Context res = Controller.getInstance().action(ctx);
@@ -71,17 +72,15 @@ public class VistaModificarSala extends JFrame implements IGUI {
 	public void update(Context context) {
 		if (context == null) return;
 
-		Evento evento = context.getEvento();
-
-		if (evento == Evento.RES_MODIFICAR_SALA_OK) {
+		if (context.isSuccess()) {
 			JOptionPane.showMessageDialog(this,
-				"Sala modificada correctamente.",
+				context.getMessage() != null ? context.getMessage() : "Sala modificada correctamente.",
 				"Exito", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 		} 
-		else if (evento == Evento.RES_MODIFICAR_SALA_KO) {
+		else {
 			JOptionPane.showMessageDialog(this,
-				"Error al modificar la sala.",
+				context.getMessage() != null ? context.getMessage() : "Error al modificar la sala.",
 				"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}

@@ -25,21 +25,20 @@ public class CommandModificarSala implements Command {
 	public Context execute(Object datos) {
 		Context ctx = new Context();
 		
-		if (!(datos instanceof Object[])) {
+		if (!(datos instanceof TSala)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Invalid data format. Expected [idSala, TSala]");
+			ctx.setMessage("Invalid data format. Expected TSala");
 			return ctx;
 		}
 		
-		Object[] arr = (Object[]) datos;
-		if (arr.length != 2 || !(arr[0] instanceof Integer) || !(arr[1] instanceof TSala)) {
+		TSala sala = (TSala) datos;
+		if (sala.getIdSala() <= 0) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Invalid data format. Expected [idSala(int), TSala(object)]");
+			ctx.setMessage("Invalid room id");
 			return ctx;
 		}
 		
-		int idSala = (Integer) arr[0];
-		TSala sala = (TSala) arr[1];
+		int idSala = sala.getIdSala();
 		int resultado = saSala.modificar_sala(idSala, sala);
 		
 		if (resultado > 0) {

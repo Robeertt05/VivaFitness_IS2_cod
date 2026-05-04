@@ -8,13 +8,16 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
 
 import Presentacion.FactoriaPresentacion.IGUI;
+import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Context;
+import Controlador.Controller;
 
 /** 
  * View for listing all rooms
@@ -52,6 +55,8 @@ public class VistaMostrarTodasSalas extends JFrame implements IGUI {
 		JPanel buttonPanel = new JPanel();
 		btnActualizar = new JButton("Refresh");
 		btnCerrar = new JButton("Close");
+		btnActualizar.addActionListener(e -> refrescarSalas());
+		btnCerrar.addActionListener(e -> dispose());
 		jButton.add(btnActualizar);
 		jButton.add(btnCerrar);
 		buttonPanel.add(btnActualizar);
@@ -61,6 +66,11 @@ public class VistaMostrarTodasSalas extends JFrame implements IGUI {
 		
 		add(scrollPane, BorderLayout.CENTER);
 		add(buttonPanel, BorderLayout.SOUTH);
+	}
+
+	private void refrescarSalas() {
+		Context res = Controller.getInstance().action(new Context(Evento.MOSTRAR_TODAS_SALAS, null));
+		update(res);
 	}
 	
 	public void displayRooms(String roomsList) {
@@ -79,13 +89,19 @@ public class VistaMostrarTodasSalas extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
-		if (context != null && context.getData() instanceof Set) {
+		if (context != null && context.isSuccess() && context.getData() instanceof Set) {
 			Set<?> salas = (Set<?>) context.getData();
 			StringBuilder sb = new StringBuilder();
 			for (Object sala : salas) {
 				sb.append(sala.toString()).append("\n\n");
 			}
 			displayRooms(sb.toString());
+		} else if (context != null) {
+			displayRooms("");
+			JOptionPane.showMessageDialog(this,
+				context.getMessage() != null ? context.getMessage() : "No se encontraron salas.",
+				"Informacion",
+				JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 }

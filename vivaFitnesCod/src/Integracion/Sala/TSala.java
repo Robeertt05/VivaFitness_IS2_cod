@@ -31,6 +31,7 @@ public class TSala {
 
 	// Constructors
 	public TSala() {
+		this.activo = 1;
 	}
 
 	public TSala(int idSala, String nombreSala, int aforo) {

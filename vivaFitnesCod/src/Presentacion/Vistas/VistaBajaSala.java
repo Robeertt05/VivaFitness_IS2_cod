@@ -54,17 +54,15 @@ public class VistaBajaSala extends JFrame implements IGUI {
 	public void update(Context context) {
 		if (context == null) return;
 
-		Evento evento = context.getEvento();
-
-		if (evento == Evento.RES_BAJA_SALA_OK) {
+		if (context.isSuccess()) {
 			JOptionPane.showMessageDialog(this,
-				"Sala eliminada correctamente.",
+				context.getMessage() != null ? context.getMessage() : "Sala eliminada correctamente.",
 				"Exito", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 		} 
-		else if (evento == Evento.RES_BAJA_SALA_KO) {
+		else {
 			JOptionPane.showMessageDialog(this,
-				"Error al eliminar la sala. La sala no existe, tiene sesiones activas o ya esta inactiva.",
+				context.getMessage() != null ? context.getMessage() : "Error al eliminar la sala. La sala no existe, tiene sesiones activas o ya esta inactiva.",
 				"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}

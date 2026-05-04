@@ -249,7 +249,7 @@ public class DAOSalaImp implements DAOSala {
 		try {
 			connection = ConnectionManager.getConnection();
 			
-			String query = "SELECT * FROM sesion WHERE idSala = ? AND activo = 1";
+			String query = "SELECT * FROM sesiones WHERE idSala = ? AND activo = 1";
 			ps = connection.prepareStatement(query);
 			ps.setInt(1, idSala);
 			

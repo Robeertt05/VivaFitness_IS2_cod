@@ -40,6 +40,7 @@ public class VistaAltaSala extends JFrame implements IGUI {
 			TSala sala = new TSala();
 			sala.setNombreSala(txtNombre.getText().trim());
 			sala.setAforo((Integer) spinAforo.getValue());
+			sala.setActivo(1);
 
 			Context ctx = new Context(Evento.ALTA_SALA, sala);
 			Context res = Controller.getInstance().action(ctx);
@@ -58,17 +59,15 @@ public class VistaAltaSala extends JFrame implements IGUI {
 	public void update(Context context) {
 		if (context == null) return;
 
-		Evento evento = context.getEvento();
-
-		if (evento == Evento.RES_ALTA_SALA_OK) {
+		if (context.isSuccess()) {
 			JOptionPane.showMessageDialog(this,
-				"Sala creada correctamente.",
+				context.getMessage() != null ? context.getMessage() : "Sala creada correctamente.",
 				"Exito", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 		} 
-		else if (evento == Evento.RES_ALTA_SALA_KO) {
+		else {
 			JOptionPane.showMessageDialog(this,
-				"Error al crear la sala. Datos invalidos.",
+				context.getMessage() != null ? context.getMessage() : "Error al crear la sala. Datos invalidos.",
 				"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}

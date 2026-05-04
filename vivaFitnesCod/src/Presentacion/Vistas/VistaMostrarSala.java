@@ -6,10 +6,11 @@ package Presentacion.Vistas;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -17,7 +18,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Presentacion.FactoriaPresentacion.IGUI;
+import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Context;
+import Controlador.Controller;
 
 /** 
  * View for displaying room details
@@ -30,7 +33,7 @@ public class VistaMostrarSala extends JFrame implements IGUI {
 	private Set<JPanel> jPanel;
 	private Set<JLabel> jLabel;
 	
-	private JComboBox<Integer> cbSala;
+	private JTextField txtIdSala;
 	private JTextArea txtDetalles;
 	private JButton btnMostrar;
 	private JButton btnCerrar;
@@ -52,10 +55,10 @@ public class VistaMostrarSala extends JFrame implements IGUI {
 		JPanel topPanel = new JPanel(new GridLayout(2, 1, 10, 10));
 		
 		// Select Room
-		jLabel.add(new JLabel("Select Room:"));
-		topPanel.add(new JLabel("Select Room:"));
-		cbSala = new JComboBox<>();
-		topPanel.add(cbSala);
+		jLabel.add(new JLabel("Room ID:"));
+		topPanel.add(new JLabel("Room ID:"));
+		txtIdSala = new JTextField();
+		topPanel.add(txtIdSala);
 		
 		// Details area
 		txtDetalles = new JTextArea();
@@ -66,6 +69,8 @@ public class VistaMostrarSala extends JFrame implements IGUI {
 		JPanel buttonPanel = new JPanel();
 		btnMostrar = new JButton("Show");
 		btnCerrar = new JButton("Close");
+		btnMostrar.addActionListener(e -> mostrarSala());
+		btnCerrar.addActionListener(e -> dispose());
 		jButton.add(btnMostrar);
 		jButton.add(btnCerrar);
 		buttonPanel.add(btnMostrar);
@@ -79,15 +84,13 @@ public class VistaMostrarSala extends JFrame implements IGUI {
 		add(buttonPanel, BorderLayout.SOUTH);
 	}
 	
-	public int getSelectedRoomId() {
-		Object selected = cbSala.getSelectedItem();
-		return selected != null ? (Integer) selected : -1;
-	}
-	
-	public void setRooms(Set<Integer> roomIds) {
-		cbSala.removeAllItems();
-		for (Integer id : roomIds) {
-			cbSala.addItem(id);
+	private void mostrarSala() {
+		try {
+			int idSala = Integer.parseInt(txtIdSala.getText().trim());
+			Context res = Controller.getInstance().action(new Context(Evento.MOSTRAR_SALA, idSala));
+			update(res);
+		} catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(this, "Introduzca un ID valido.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -107,8 +110,14 @@ public class VistaMostrarSala extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
-		if (context != null && context.getData() != null) {
+		if (context != null && context.isSuccess() && context.getData() != null) {
 			displayRoomDetails(context.getData().toString());
+		} else if (context != null) {
+			displayRoomDetails("");
+			JOptionPane.showMessageDialog(this,
+				context.getMessage() != null ? context.getMessage() : "No se pudo mostrar la sala.",
+				"Informacion",
+				JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 }
