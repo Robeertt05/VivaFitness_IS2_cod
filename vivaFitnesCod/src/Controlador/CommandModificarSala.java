@@ -27,14 +27,14 @@ public class CommandModificarSala implements Command {
 		
 		if (!(datos instanceof TSala)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Invalid data format. Expected TSala");
+			ctx.setMessage("Formato de datos inválido. Se esperaba TSala");
 			return ctx;
 		}
 		
 		TSala sala = (TSala) datos;
 		if (sala.getIdSala() <= 0) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Invalid room id");
+			ctx.setMessage("ID de sala inválido");
 			return ctx;
 		}
 		
@@ -43,10 +43,10 @@ public class CommandModificarSala implements Command {
 		
 		if (resultado > 0) {
 			ctx.setSuccess(true);
-			ctx.setMessage("Room updated successfully");
+			ctx.setMessage("Sala modificada correctamente");
 		} else {
 			ctx.setSuccess(false);
-			ctx.setMessage("Failed to update room");
+			ctx.setMessage("Error al modificar la sala");
 		}
 		
 		return ctx;
