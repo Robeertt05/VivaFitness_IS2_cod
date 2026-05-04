@@ -6,6 +6,7 @@ package Controlador;
 
 
 import Integracion.Sala.TSala;
+import Negocio.Sala.SASala;
 
 /**
  * Command to update room details

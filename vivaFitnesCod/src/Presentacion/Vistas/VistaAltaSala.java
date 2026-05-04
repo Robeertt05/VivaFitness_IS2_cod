@@ -1,113 +1,75 @@
 /**
- * 
+ * Vista para dar de alta a una nueva Sala.
  */
 package Presentacion.Vistas;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JSpinner;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.Set;
-
+import javax.swing.*;
+import java.awt.*;
 import Presentacion.FactoriaPresentacion.IGUI;
+import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Context;
+import Controlador.Controller;
 import Integracion.Sala.TSala;
 
-/** 
- * View for creating a new room
- * @author azuri
- */
 public class VistaAltaSala extends JFrame implements IGUI {
-	
-	private Set<ActionListener> actionListener;
-	private Set<JButton> jButton;
-	private Set<JPanel> jPanel;
-	private Set<JTextField> jTextField;
-	private Set<JLabel> jLabel;
-	
-	private JTextField txtNombreSala;
+
+	private JPanel panel;
+	private JLabel lblNombre, lblAforo;
+	private JTextField txtNombre;
 	private JSpinner spinAforo;
-	private JButton btnCrear;
-	private JButton btnCancelar;
-	
+	private JButton btnAceptar, btnCancelar;
+
 	public VistaAltaSala() {
-		setTitle("Create Room");
-		setSize(300, 250);
+		setTitle("Alta Sala - VivaFitness");
+		setSize(400, 250);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		actionListener = new HashSet<>();
-		jButton = new HashSet<>();
-		jPanel = new HashSet<>();
-		jTextField = new HashSet<>();
-		jLabel = new HashSet<>();
-		
-		initComponents();
-	}
-	
-	private void initComponents() {
-		JPanel mainPanel = new JPanel(new GridLayout(3, 2, 10, 10));
-		
-		// Room Name
-		jLabel.add(new JLabel("Room Name:"));
-		mainPanel.add(new JLabel("Room Name:"));
-		txtNombreSala = new JTextField();
-		jTextField.add(txtNombreSala);
-		mainPanel.add(txtNombreSala);
-		
-		// Capacity
-		jLabel.add(new JLabel("Capacity:"));
-		mainPanel.add(new JLabel("Capacity:"));
+
+		panel = new JPanel(new GridLayout(3, 2, 10, 10));
+		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+		lblNombre = new JLabel("Nombre Sala:");
+		txtNombre = new JTextField();
+		lblAforo = new JLabel("Aforo:");
 		spinAforo = new JSpinner();
-		mainPanel.add(spinAforo);
-		
-		// Buttons
-		JPanel buttonPanel = new JPanel();
-		btnCrear = new JButton("Create");
-		btnCancelar = new JButton("Cancel");
-		jButton.add(btnCrear);
-		jButton.add(btnCancelar);
-		buttonPanel.add(btnCrear);
-		buttonPanel.add(btnCancelar);
-		
-		jPanel.add(mainPanel);
-		jPanel.add(buttonPanel);
-		
-		add(mainPanel, BorderLayout.CENTER);
-		add(buttonPanel, BorderLayout.SOUTH);
-	}
-	
-	public TSala getRoomData() {
-		TSala sala = new TSala();
-		sala.setNombreSala(txtNombreSala.getText());
-		sala.setAforo((Integer) spinAforo.getValue());
-		return sala;
-	}
-	
-	public void clearFields() {
-		txtNombreSala.setText("");
-		spinAforo.setValue(0);
-	}
-	
-	public void addCreateButtonListener(ActionListener listener) {
-		btnCrear.addActionListener(listener);
-		actionListener.add(listener);
-	}
-	
-	public void addCancelButtonListener(ActionListener listener) {
-		btnCancelar.addActionListener(listener);
-		actionListener.add(listener);
+
+		btnAceptar = new JButton("Crear");
+		btnCancelar = new JButton("Cancelar");
+
+		btnAceptar.addActionListener(e -> {
+			TSala sala = new TSala();
+			sala.setNombreSala(txtNombre.getText().trim());
+			sala.setAforo((Integer) spinAforo.getValue());
+
+			Context ctx = new Context(Evento.ALTA_SALA, sala);
+			Context res = Controller.getInstance().action(ctx);
+			update(res);
+		});
+
+		btnCancelar.addActionListener(e -> dispose());
+
+		panel.add(lblNombre);   panel.add(txtNombre);
+		panel.add(lblAforo);    panel.add(spinAforo);
+		panel.add(btnAceptar);  panel.add(btnCancelar);
+		add(panel);
 	}
 
 	@Override
 	public void update(Context context) {
-		if (context != null && context.isSuccess()) {
-			clearFields();
+		if (context == null) return;
+
+		Evento evento = context.getEvento();
+
+		if (evento == Evento.RES_ALTA_SALA_OK) {
+			JOptionPane.showMessageDialog(this,
+				"Sala creada correctamente.",
+				"Exito", JOptionPane.INFORMATION_MESSAGE);
+			dispose();
+		} 
+		else if (evento == Evento.RES_ALTA_SALA_KO) {
+			JOptionPane.showMessageDialog(this,
+				"Error al crear la sala. Datos invalidos.",
+				"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
