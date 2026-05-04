@@ -122,7 +122,7 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 			TSesion s = (TSesion) context.getData();
 			String detalles = "ID: " + s.getIdSesion() + "\n"
 					+ "Objetivo: " + s.getObjetivo() + "\n"
-					+ "Duracion: " + s.getDuracion() + "\n"
+					+ "Duracion: " + s.getDuracion() + " min\n"
 					+ "Horario: " + s.getHorario() + "\n"
 					+ "Sala: " + s.getIdSala() + "\n"
 					+ "Entrenador: " + s.getIdEntrenador() + "\n"

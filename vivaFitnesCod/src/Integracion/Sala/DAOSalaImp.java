@@ -260,7 +260,7 @@ public class DAOSalaImp implements DAOSala {
 				sesion.setIdSesion(rs.getInt("idSesion"));
 				sesion.setIdSala(rs.getInt("idSala"));
 				sesion.setObjetivo(rs.getString("objetivo"));
-				sesion.setDuracion(rs.getString("duracion"));
+				sesion.setDuracion(rs.getInt("duracion"));
 				sesion.setHorario(rs.getString("horario"));
 				sesion.setActivo(rs.getInt("activo"));
 				

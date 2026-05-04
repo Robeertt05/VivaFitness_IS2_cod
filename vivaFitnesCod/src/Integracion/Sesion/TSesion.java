@@ -13,7 +13,7 @@ public class TSesion {
 
 	private int idSesion;
 	private String objetivo;
-	private String duracion;
+	private int duracion;
 	private String horario;
 	private int idSala;
 	private int idEntrenador;
@@ -23,7 +23,7 @@ public class TSesion {
 		this.activo = 1;
 	}
 
-	public TSesion(int idSesion, String objetivo, String duracion, String horario,
+	public TSesion(int idSesion, String objetivo, int duracion, String horario,
 			int idSala, int idEntrenador) {
 		this.idSesion = idSesion;
 		this.objetivo = objetivo;
@@ -40,8 +40,8 @@ public class TSesion {
 	public String getObjetivo() { return objetivo; }
 	public void setObjetivo(String objetivo) { this.objetivo = objetivo; }
 
-	public String getDuracion() { return duracion; }
-	public void setDuracion(String duracion) { this.duracion = duracion; }
+	public int getDuracion() { return duracion; }
+	public void setDuracion(int duracion) { this.duracion = duracion; }
 
 	public String getHorario() { return horario; }
 	public void setHorario(String horario) { this.horario = horario; }

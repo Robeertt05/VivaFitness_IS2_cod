@@ -73,15 +73,15 @@ public class VistaModificarSesion extends JFrame implements IGUI {
 		mainPanel.add(txtObjetivo);
 		
 		// Description
-		jLabel.add(new JLabel("Duracion:"));
-		mainPanel.add(new JLabel("Duracion:"));
+		jLabel.add(new JLabel("Duracion (min):"));
+		mainPanel.add(new JLabel("Duracion (min):"));
 		txtDuracion = new JTextField();
 		jTextField.add(txtDuracion);
 		mainPanel.add(txtDuracion);
 		
 		// Hour
-		jLabel.add(new JLabel("Horario:"));
-		mainPanel.add(new JLabel("Horario:"));
+		jLabel.add(new JLabel("Horario (yyyy-MM-dd):"));
+		mainPanel.add(new JLabel("Horario (yyyy-MM-dd):"));
 		txtHorario = new JTextField();
 		jTextField.add(txtHorario);
 		mainPanel.add(txtHorario);
@@ -126,14 +126,14 @@ public class VistaModificarSesion extends JFrame implements IGUI {
 	public TSesion getSessionData() {
 		TSesion sesion = new TSesion();
 		sesion.setObjetivo(txtObjetivo.getText());
-		sesion.setDuracion(txtDuracion.getText());
+		try { sesion.setDuracion(Integer.parseInt(txtDuracion.getText().trim())); } catch (NumberFormatException ex) { sesion.setDuracion(0); }
 		sesion.setHorario(txtHorario.getText());
 		return sesion;
 	}
 	
 	public void loadSessionData(TSesion sesion) {
 		txtObjetivo.setText(sesion.getObjetivo());
-		txtDuracion.setText(sesion.getDuracion());
+		txtDuracion.setText(String.valueOf(sesion.getDuracion()));
 		txtHorario.setText(sesion.getHorario());
 	}
 	

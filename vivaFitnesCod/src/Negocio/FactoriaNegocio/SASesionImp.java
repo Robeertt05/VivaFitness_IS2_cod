@@ -124,8 +124,8 @@ public class SASesionImp implements SASesion {
 			throw new IllegalArgumentException("El horario de la sesion es obligatorio.");
 		}
 
-		if (datos.getDuracion() == null || datos.getDuracion().trim().isEmpty()) {
-			throw new IllegalArgumentException("La duracion de la sesion es obligatoria.");
+		if (datos.getDuracion() <= 0) {
+			throw new IllegalArgumentException("La duracion de la sesion debe ser mayor que 0.");
 		}
 
 		if (datos.getIdSala() <= 0) {
@@ -146,8 +146,8 @@ public class SASesionImp implements SASesion {
 			throw new IllegalArgumentException("El horario de la sesion es obligatorio.");
 		}
 
-		if (datos.getDuracion() == null || datos.getDuracion().trim().isEmpty()) {
-			throw new IllegalArgumentException("La duracion de la sesion es obligatoria.");
+		if (datos.getDuracion() <= 0) {
+			throw new IllegalArgumentException("La duracion de la sesion debe ser mayor que 0.");
 		}
 
 		if (datos.getIdSala() <= 0) {
@@ -163,7 +163,7 @@ public class SASesionImp implements SASesion {
 		TSesion merged = new TSesion();
 		merged.setIdSesion(existente.getIdSesion());
 		merged.setObjetivo(obtenerTexto(cambios.getObjetivo(), existente.getObjetivo()));
-		merged.setDuracion(obtenerTexto(cambios.getDuracion(), existente.getDuracion()));
+		merged.setDuracion(cambios.getDuracion() > 0 ? cambios.getDuracion() : existente.getDuracion());
 		merged.setHorario(obtenerTexto(cambios.getHorario(), existente.getHorario()));
 		merged.setIdSala(cambios.getIdSala() > 0 ? cambios.getIdSala() : existente.getIdSala());
 		merged.setIdEntrenador(cambios.getIdEntrenador() > 0 ? cambios.getIdEntrenador() : existente.getIdEntrenador());
