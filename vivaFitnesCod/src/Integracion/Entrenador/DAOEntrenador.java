@@ -3,7 +3,6 @@
  */
 package Integracion.Entrenador;
 
-import Negocio.entrenador.TEntrenador;
 import java.util.Set;
 
 /** 

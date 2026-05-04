@@ -10,7 +10,7 @@ import java.awt.event.*;
 import Controlador.CommandMostrarEntrenadorSesion;
 import Controlador.Controller;
 import Controlador.Context;
-import Negocio.entrenador.TEntrenador;
+import Integracion.Entrenador.TEntrenador;
 import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.IGUI;
 

@@ -1,4 +1,4 @@
-package Negocio.entrenador;
+package Integracion.Entrenador;
 
 /** 
  * Transfer Object for Entrenador

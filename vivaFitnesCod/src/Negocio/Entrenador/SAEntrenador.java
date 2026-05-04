@@ -5,6 +5,7 @@
 package Negocio.Entrenador;
 
 import java.util.Set;
+import Integracion.Entrenador.TEntrenador;
 
 /**
  * <!-- begin-UML-doc -->

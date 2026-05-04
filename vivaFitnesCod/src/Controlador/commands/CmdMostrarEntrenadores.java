@@ -7,7 +7,7 @@ package Controlador.commands;
 import Controlador.Command;
 import Controlador.Context;
 import Negocio.Entrenador.SAEntrenador;
-import Negocio.Entrenador.TEntrenador;
+import Integracion.Entrenador.TEntrenador;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Presentacion.FactoriaPresentacion.Evento;
 import java.util.Set;

@@ -3,7 +3,7 @@
  */
 package Controlador;
 
-import Negocio.Entrenador.TEntrenador;
+import Integracion.Entrenador.TEntrenador;
 import Negocio.FactoriaNegocio.SASesion;
 
 /**

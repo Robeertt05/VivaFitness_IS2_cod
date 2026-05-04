@@ -6,6 +6,7 @@ package Negocio.Entrenador;
 
 import java.util.Set;
 
+import Integracion.Entrenador.TEntrenador;
 import Integracion.Entrenador.DAOEntrenador;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 

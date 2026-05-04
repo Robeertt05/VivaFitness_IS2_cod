@@ -12,7 +12,7 @@ import java.util.Set;
 
 import Integracion.ConnectionManager.ConnectionManager;
 import Integracion.Sala.TSala;
-import Negocio.entrenador.TEntrenador;
+import Integracion.Entrenador.TEntrenador;
 
 /** 
  * Data Access Object implementation for Sesion (SRS Aligned)

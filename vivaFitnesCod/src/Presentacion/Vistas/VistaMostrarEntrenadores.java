@@ -6,7 +6,7 @@ import java.util.Set;
 
 import Controlador.Context;
 import Controlador.Controller;
-import Negocio.entrenador.TEntrenador;
+import Integracion.Entrenador.TEntrenador;
 import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.IGUI;
 

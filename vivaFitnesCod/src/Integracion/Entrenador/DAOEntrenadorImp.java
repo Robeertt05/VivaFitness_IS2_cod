@@ -5,7 +5,7 @@
  */
 package Integracion.Entrenador;
 
-import Negocio.entrenador.TEntrenador;
+
 import Integracion.ConnectionManager.ConnectionManager;
 
 import java.sql.Connection;
