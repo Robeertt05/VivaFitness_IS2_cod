@@ -21,7 +21,7 @@ public class VistaPrincipal extends JFrame implements IGUI {
 private static final long serialVersionUID = 1L;
 
 public VistaPrincipal() {
-setTitle("Vista Principal");
+setTitle("VivaFitness");
 setSize(760, 520);
 setLocationRelativeTo(null);
 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,7 +33,7 @@ JPanel root = new JPanel(new BorderLayout(10, 20));
 root.setBorder(BorderFactory.createEmptyBorder(18, 24, 24, 24));
 root.setBackground(new Color(236, 236, 236));
 
-JLabel titulo = new JLabel("Vista Principal", SwingConstants.CENTER);
+JLabel titulo = new JLabel("VivaFitness", SwingConstants.CENTER);
 titulo.setFont(new Font("SansSerif", Font.BOLD, 36));
 
 JLabel subtitulo = new JLabel("", SwingConstants.LEFT);
