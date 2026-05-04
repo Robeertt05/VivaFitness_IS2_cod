@@ -1,114 +1,100 @@
-/**
- * 
- */
 package Negocio.Cliente;
 
-import Integracion.Cliente.TCliente;
-import Integracion.Cliente.DAOCliente;
-import Negocio.FactoriaNegocio.SASesion;
-import Integracion.Sesion.TSesion;
 import java.util.Set;
 
-/** 
- * Service Application implementation for Client
- * @author azuri
- */
+import Integracion.Cliente.DAOCliente;
+import Integracion.Cliente.TCliente;
+import Integracion.Sesion.TClienteSesion;
+import Integracion.Sesion.TSesion;
+import Negocio.FactoriaNegocio.SASesion;
+
 public class SAClienteImp implements SACliente {
-	
+
 	private DAOCliente daoCliente;
+	@SuppressWarnings("unused")
 	private SASesion saSesion;
-	
+
 	public SAClienteImp(DAOCliente daoCliente, SASesion saSesion) {
 		this.daoCliente = daoCliente;
 		this.saSesion = saSesion;
 	}
-	
+
 	@Override
 	public int alta_cliente(TCliente datos) {
-		// begin-user-code
-		// Validate data
-		if (datos == null || datos.get_nombre() == null || 
-			datos.get_nombre().isEmpty()) {
-			return 0;
+		if (!clienteValido(datos) || daoCliente.readByDni(datos.get_dni()) != null) {
+			return -1;
 		}
-		// Call DAO to create client
+		if (datos.get_activo() == null) {
+			datos.set_activo(true);
+		}
 		return daoCliente.create(datos);
-		// end-user-code
 	}
 
 	@Override
 	public int baja_cliente(int id) {
-		// begin-user-code
-		// Validate ID
-		if (id <= 0) {
-			return 0;
+		if (id <= 0 || daoCliente.read(id) == null) {
+			return -1;
 		}
-		// Call DAO to delete client
 		return daoCliente.delete(id);
-		// end-user-code
 	}
 
 	@Override
 	public int modificar_cliente(int id, TCliente datos) {
-		// begin-user-code
-		// Validate data
-		if (id <= 0 || datos == null) {
-			return 0;
+		if (id <= 0 || !clienteValido(datos) || daoCliente.read(id) == null) {
+			return -1;
 		}
-		// Call DAO to update client
+		TCliente existenteDni = daoCliente.readByDni(datos.get_dni());
+		if (existenteDni != null && existenteDni.getId() != id) {
+			return -2;
+		}
+		datos.setId(id);
 		return daoCliente.update(datos);
-		// end-user-code
 	}
 
 	@Override
-	public void mostrar_cliente(int id) {
-		// begin-user-code
-		// Validate ID
-		if (id <= 0) {
-			return;
-		}
-		// Call DAO to retrieve client
-		TCliente cliente = daoCliente.read(id);
-		if (cliente != null) {
-			System.out.println(cliente.toString());
-		}
-		// end-user-code
+	public TCliente mostrar_cliente(int id) {
+		return id > 0 ? daoCliente.read(id) : null;
 	}
 
 	@Override
-	public int apuntarse_sesion(int idSesion, int hora, String fecha) {
-		// begin-user-code
-		// This flow belongs to the client module and is not handled by SASesion anymore.
-		if (idSesion <= 0) {
-			return 0;
-		}
-		return 0;
-		// end-user-code
+	public Set<TCliente> mostrar_todos_clientes() {
+		return daoCliente.read_all();
 	}
 
 	@Override
-	public void mostrar_sesiones() {
-		// begin-user-code
-		// Get all sessions
-		if (saSesion == null) {
-			return;
+	public int apuntarse_sesion(TClienteSesion datos) {
+		if (datos == null || datos.getIdCliente() <= 0 || datos.getIdSesion() <= 0
+				|| datos.getFecha() == null || datos.getHora() == null || datos.getHora().trim().isEmpty()) {
+			return -1;
 		}
-		
-		Set<TSesion> sesiones = saSesion.mostrar_todas_sesiones();
-		if (sesiones != null) {
-			for (TSesion sesion : sesiones) {
-				System.out.println(sesion.toString());
-			}
-		}
-		// end-user-code
+		return daoCliente.apuntarSesion(datos);
 	}
 
 	@Override
-	public void desapuntar_sesion(int id, int idSesion) {
-		// begin-user-code
+	public Set<TSesion> mostrar_sesiones() {
+		return daoCliente.readSesionesDisponibles();
+	}
+
+	@Override
+	public int desapuntar_sesion(int id, int idSesion) {
 		if (id <= 0 || idSesion <= 0) {
-			return;
+			return -1;
 		}
-		// end-user-code
+		return daoCliente.desapuntarSesion(id, idSesion);
+	}
+
+	@Override
+	public Set<TSesion> mostrar_sesiones_cliente(int idCliente) {
+		return idCliente > 0 ? daoCliente.readSesionesCliente(idCliente) : null;
+	}
+
+	private boolean clienteValido(TCliente datos) {
+		return datos != null
+				&& texto(datos.get_dni())
+				&& texto(datos.get_nombre());
+	}
+
+	private boolean texto(String value) {
+		return value != null && !value.trim().isEmpty();
 	}
 }

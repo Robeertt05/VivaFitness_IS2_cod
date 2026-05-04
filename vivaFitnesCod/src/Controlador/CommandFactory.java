@@ -70,6 +70,18 @@ public class CommandFactory {
 				return new CmdBajaCliente();
 			case MODIFICAR_CLIENTE:
 				return new CmdModificarCliente();
+			case MOSTRAR_CLIENTE:
+				return new CmdMostrarCliente();
+			case MOSTRAR_CLIENTES:
+				return new CmdMostrarClientes();
+			case APUNTARSE_SESION:
+				return new CmdApuntarseSesion();
+			case DESAPUNTARSE_SESION:
+				return new CmdDesapuntarseSesion();
+			case MOSTRAR_SESIONES_DISPONIBLES_CLIENTE:
+				return new CmdMostrarSesionesDisponiblesCliente();
+			case MOSTRAR_SESIONES_CLIENTE:
+				return new CmdMostrarSesionesCliente();
 
 			// --- Sala ---
 			case ALTA_SALA:

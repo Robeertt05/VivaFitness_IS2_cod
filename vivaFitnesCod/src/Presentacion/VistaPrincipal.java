@@ -8,6 +8,7 @@ import java.awt.*;
 import Presentacion.FactoriaPresentacion.IGUI;
 import Presentacion.Vistas.VistaEntrenador;
 import Presentacion.Vistas.VistaSala;
+import Presentacion.Vistas.VistaCliente;
 import Controlador.Context;
 
 /** 
@@ -51,7 +52,7 @@ JButton btnEntrenadores = crearBotonEntidad("Entrenadores");
 JButton btnSesiones = crearBotonEntidad("Sesiones");
 JButton btnSalas = crearBotonEntidad("Salas");
 
-btnClientes.addActionListener(e -> mostrarNoDisponible("Clientes"));
+btnClientes.addActionListener(e -> new VistaCliente().setVisible(true));
 btnEntrenadores.addActionListener(e -> new VistaEntrenador().setVisible(true));
 btnSalas.addActionListener(e -> new VistaSala().setVisible(true));
 btnSesiones.addActionListener(e -> new VistaMenuSesiones().setVisible(true));
@@ -74,13 +75,6 @@ button.setBackground(new Color(188, 208, 225));
 button.setOpaque(true);
 button.setBorder(BorderFactory.createLineBorder(new Color(55, 55, 55), 2, true));
 return button;
-}
-
-private void mostrarNoDisponible(String entidad) {
-JOptionPane.showMessageDialog(this,
-"El modulo de " + entidad + " aun no esta implementado.",
-"Informacion",
-JOptionPane.INFORMATION_MESSAGE);
 }
 
 @Override

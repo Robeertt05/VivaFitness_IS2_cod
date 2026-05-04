@@ -1,192 +1,96 @@
 /**
- * 
+ * Transfer Object para Cliente
  */
 package Integracion.Cliente;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class TCliente {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	private int idCliente;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	private String dni_cliente;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	private String nombreCliente;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	private Boolean activo;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	private String telefonoCliente;
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	private String correoCliente;
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	public TCliente() {
+		this.activo = true;
+	}
+
+	public TCliente(int idCliente, String dni_cliente, String nombreCliente, String telefonoCliente, String correoCliente, Boolean activo) {
+		this.idCliente = idCliente;
+		this.dni_cliente = dni_cliente;
+		this.nombreCliente = nombreCliente;
+		this.telefonoCliente = telefonoCliente;
+		this.correoCliente = correoCliente;
+		this.activo = activo;
+	}
+
+	public TCliente(String dni_cliente, String nombreCliente, String telefonoCliente, String correoCliente) {
+		this.dni_cliente = dni_cliente;
+		this.nombreCliente = nombreCliente;
+		this.telefonoCliente = telefonoCliente;
+		this.correoCliente = correoCliente;
+		this.activo = true;
+	}
+
 	public int getId() {
-		// begin-user-code
-		// TODO Apndice de mtodo generado automticamente
-		return 0;
-		// end-user-code
+		return idCliente;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setId(int idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+
 	public String get_dni() {
-		// begin-user-code
-		// TODO Apndice de mtodo generado automticamente
-		return null;
-		// end-user-code
+		return dni_cliente;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	public void set_dni(String dni_cliente) {
+		this.dni_cliente = dni_cliente;
+	}
+
 	public String get_nombre() {
-		// begin-user-code
-		// TODO Apndice de mtodo generado automticamente
-		return null;
-		// end-user-code
+		return nombreCliente;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	public void set_nombre(String nombreCliente) {
+		this.nombreCliente = nombreCliente;
+	}
+
 	public Boolean get_activo() {
-		// begin-user-code
-		// TODO Apndice de mtodo generado automticamente
-		return null;
-		// end-user-code
+		return activo;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public String get_telefono() {
-		// begin-user-code
-		// TODO Apndice de mtodo generado automticamente
-		return null;
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public String get_correo() {
-		// begin-user-code
-		// TODO Apndice de mtodo generado automticamente
-		return null;
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param dni
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void set_dni(String dni) {
-		// begin-user-code
-		// TODO Apndice de mtodo generado automticamente
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param nombre
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void set_nombre(String nombre) {
-		// begin-user-code
-		// TODO Apndice de mtodo generado automticamente
-
-		// end-user-code
-	}
-
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param activo
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public void set_activo(Boolean activo) {
-		// begin-user-code
-		// TODO Apndice de mtodo generado automticamente
-
-		// end-user-code
+		this.activo = activo;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param telefono
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void set_telefono(String telefono) {
-		// begin-user-code
-		// TODO Apndice de mtodo generado automticamente
-
-		// end-user-code
+	public String get_telefono() {
+		return telefonoCliente;
 	}
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param correo
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void set_correo(String correo) {
-		// begin-user-code
-		// TODO Apndice de mtodo generado automticamente
+	public void set_telefono(String telefonoCliente) {
+		this.telefonoCliente = telefonoCliente;
+	}
 
-		// end-user-code
+	public String get_correo() {
+		return correoCliente;
+	}
+
+	public void set_correo(String correoCliente) {
+		this.correoCliente = correoCliente;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [ID=" + idCliente + ", DNI=" + dni_cliente + ", Nombre=" + nombreCliente 
+			+ ", Telefono=" + telefonoCliente + ", Correo=" + correoCliente + ", Activo=" + activo + "]";
 	}
 }

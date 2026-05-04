@@ -4,6 +4,9 @@
 package Negocio.Cliente;
 
 import Integracion.Cliente.TCliente;
+import Integracion.Sesion.TClienteSesion;
+import Integracion.Sesion.TSesion;
+import java.util.Set;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -46,7 +49,9 @@ public interface SACliente {
 	* @param id
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void mostrar_cliente(int id);
+	public TCliente mostrar_cliente(int id);
+
+	public Set<TCliente> mostrar_todos_clientes();
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -57,14 +62,14 @@ public interface SACliente {
 	* @return
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public int apuntarse_sesion(int idSesion, int hora, String fecha);
+	public int apuntarse_sesion(TClienteSesion datos);
 
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void mostrar_sesiones();
+	public Set<TSesion> mostrar_sesiones();
 
 	/** 
 	* <!-- begin-UML-doc -->
@@ -73,5 +78,7 @@ public interface SACliente {
 	* @param idSesion
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
-	public void desapuntar_sesion(int id, int idSesion);
+	public int desapuntar_sesion(int id, int idSesion);
+
+	public Set<TSesion> mostrar_sesiones_cliente(int idCliente);
 }

@@ -15,16 +15,20 @@ public class CmdModificarCliente implements Command {
 			TCliente t = (TCliente) datos;
 			SACliente sa = FactoriaServicioAplicacion.getInstance().crearSACliente();
 			int res = sa.modificar_cliente(t.getId(), t);
-			if (res >= 0) {
+			if (res > 0) {
 				resultado.setEvento(Evento.RES_MODIFICAR_CLIENTE_OK);
 				resultado.setObjeto(t);
+				resultado.setSuccess(true);
+				resultado.setMessage("Cliente modificado correctamente.");
 			} else {
 				resultado.setEvento(Evento.RES_MODIFICAR_CLIENTE_KO);
 				resultado.setObjeto(null);
+				resultado.setMessage("No se pudo modificar el cliente.");
 			}
 		} catch (Exception e) {
 			resultado.setEvento(Evento.RES_MODIFICAR_CLIENTE_KO);
 			resultado.setObjeto(null);
+			resultado.setMessage(e.getMessage());
 		}
 		return resultado;
 	}

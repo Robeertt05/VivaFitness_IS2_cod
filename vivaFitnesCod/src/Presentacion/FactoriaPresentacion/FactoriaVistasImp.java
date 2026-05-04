@@ -34,6 +34,22 @@ public class FactoriaVistasImp extends FactoriaVistas {
 				return new VistaMostrarEntrenadores();
 			case CREAR_SESION:
 				return new VistaCrearSesion();
+			case ALTA_CLIENTE:
+				return new VistaAltaCliente();
+			case BAJA_CLIENTE:
+				return new VistaBajaCliente();
+			case MODIFICAR_CLIENTE:
+				return new VistaModificarCliente();
+			case MOSTRAR_CLIENTE:
+				return new VistaMostrarCliente();
+			case MOSTRAR_CLIENTES:
+				return new VistaMostrarClientes();
+			case APUNTARSE_SESION:
+				return new VistaApuntarseSesion();
+			case DESAPUNTARSE_SESION:
+				return new VistaDesapuntarseSesion();
+			case MOSTRAR_SESIONES_CLIENTE:
+				return new VistaMostrarSesionesCliente();
 			case ALTA_SALA:
 				return new VistaAltaSala();
 			case BAJA_SALA:

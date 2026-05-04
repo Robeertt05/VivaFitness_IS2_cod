@@ -2,31 +2,25 @@ package Controlador.commands;
 
 import Controlador.Command;
 import Controlador.Context;
+import Integracion.Cliente.TCliente;
 import Negocio.Cliente.SACliente;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Presentacion.FactoriaPresentacion.Evento;
 
-public class CmdBajaCliente implements Command {
+public class CmdMostrarCliente implements Command {
 	@Override
 	public Context execute(Object datos) {
 		Context resultado = new Context();
 		try {
 			int id = (Integer) datos;
 			SACliente sa = FactoriaServicioAplicacion.getInstance().crearSACliente();
-			int res = sa.baja_cliente(id);
-			if (res > 0) {
-				resultado.setEvento(Evento.RES_BAJA_CLIENTE_OK);
-				resultado.setObjeto(id);
-				resultado.setSuccess(true);
-				resultado.setMessage("Cliente dado de baja correctamente.");
-			} else {
-				resultado.setEvento(Evento.RES_BAJA_CLIENTE_KO);
-				resultado.setObjeto(null);
-				resultado.setMessage("No se pudo dar de baja el cliente.");
-			}
+			TCliente cliente = sa.mostrar_cliente(id);
+			resultado.setObjeto(cliente);
+			resultado.setSuccess(cliente != null);
+			resultado.setEvento(cliente != null ? Evento.RES_MOSTRAR_CLIENTE_OK : Evento.RES_MOSTRAR_CLIENTE_KO);
+			resultado.setMessage(cliente != null ? "Cliente encontrado." : "Cliente no encontrado.");
 		} catch (Exception e) {
-			resultado.setEvento(Evento.RES_BAJA_CLIENTE_KO);
-			resultado.setObjeto(null);
+			resultado.setEvento(Evento.RES_MOSTRAR_CLIENTE_KO);
 			resultado.setMessage(e.getMessage());
 		}
 		return resultado;
