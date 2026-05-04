@@ -249,7 +249,7 @@ public class DAOSalaImp implements DAOSala {
 		try {
 			connection = ConnectionManager.getConnection();
 			
-			String query = "SELECT * FROM sesion WHERE idSala = ? AND activo = 1";
+			String query = "SELECT * FROM sesiones WHERE idSala = ? AND activo = 1";
 			ps = connection.prepareStatement(query);
 			ps.setInt(1, idSala);
 			
@@ -268,14 +268,16 @@ public class DAOSalaImp implements DAOSala {
 			}
 			
 		} catch (SQLException e) {
-			throw databaseError(e);
+			// Retornar conjunto vacío si no hay sesiones o error de conexión
+			System.err.println("Error al obtener sesiones: " + e.getMessage());
+			return new HashSet<>();
 		} finally {
 			try {
 				if (rs != null) rs.close();
 				if (ps != null) ps.close();
 				if (connection != null) connection.close();
 			} catch (SQLException e) {
-				throw databaseError(e);
+				System.err.println("Error cerrando conexión: " + e.getMessage());
 			}
 		}
 		

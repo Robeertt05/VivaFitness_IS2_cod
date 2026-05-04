@@ -113,11 +113,19 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 	public void update(Context context) {
 		if (context != null && context.isSuccess() && context.getData() instanceof Set) {
 			Set<?> sesiones = (Set<?>) context.getData();
-			StringBuilder sb = new StringBuilder();
-			for (Object sesion : sesiones) {
-				sb.append(sesion.toString()).append("\n\n");
+			if (sesiones.isEmpty()) {
+				displaySessions("");
+				JOptionPane.showMessageDialog(this,
+					"No hay sesiones disponibles para esta sala.",
+					"Sin Sesiones",
+					JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				StringBuilder sb = new StringBuilder();
+				for (Object sesion : sesiones) {
+					sb.append(sesion.toString()).append("\n\n");
+				}
+				displaySessions(sb.toString());
 			}
-			displaySessions(sb.toString());
 		} else if (context != null) {
 			displaySessions("");
 			JOptionPane.showMessageDialog(this,
