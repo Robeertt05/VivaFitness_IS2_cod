@@ -157,4 +157,39 @@ public class SASesionImp implements SASesion {
 		return daoSesion.read_all();
 		// end-user-code
 	}
+	
+	/**
+	 * Alta sesión - Create a new session
+	 * Validates session data before creation
+	 */
+	@Override
+	public int alta_sesion(TSesion datos) {
+		// begin-user-code
+		if (datos == null) {
+			return 0;
+		}
+		
+		// Validate basic fields
+		if (datos.getIdSala() <= 0 || datos.getIdEntrenador() <= 0) {
+			return 0;
+		}
+		
+		if (datos.getObjetivo() == null || datos.getObjetivo().trim().isEmpty()) {
+			return 0;
+		}
+		
+		// Proceed with creation
+		return daoSesion.create(datos);
+		// end-user-code
+	}
+	
+	/**
+	 * Mostrar todas sesiones - Get all active sessions
+	 */
+	@Override
+	public Set<TSesion> mostrar_todas_sesiones() {
+		// begin-user-code
+		return daoSesion.read_all();
+		// end-user-code
+	}
 }
