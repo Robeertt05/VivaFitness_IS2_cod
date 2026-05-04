@@ -25,7 +25,7 @@ public class CommandAltaSala implements Command {
 		
 		if (!(datos instanceof TSala)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Datos de sala inválidos");
+			ctx.setMessage("Datos de sala invalidos");
 			return ctx;
 		}
 		

@@ -25,7 +25,7 @@ public class CommandBajaSala implements Command {
 		
 		if (!(datos instanceof Integer)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("El ID de la sala debe ser un número entero");
+			ctx.setMessage("El ID de la sala debe ser un numero entero");
 			return ctx;
 		}
 		
@@ -37,7 +37,7 @@ public class CommandBajaSala implements Command {
 			ctx.setMessage("Sala eliminada correctamente");
 		} else {
 			ctx.setSuccess(false);
-			ctx.setMessage("Error al eliminar la sala. La sala no existe, tiene sesiones activas o ya está inactiva");
+			ctx.setMessage("Error al eliminar la sala. La sala no existe, tiene sesiones activas o ya esta inactiva");
 		}
 		
 		return ctx;

@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 /** 
  * View for displaying all sessions in a room
- * CASO 6: Obtener sesiones de una sala (Relación 1-N)
+	 * CASO 6: Obtener sesiones de una sala (Relacion 1-N)
  * @author azuri
  */
 public class VistaObtenerSesionesSala extends JFrame implements IGUI {

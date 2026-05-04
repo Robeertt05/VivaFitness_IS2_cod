@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * Command to get all sessions for a specific room
- * CASO 6: Obtener sesiones de una sala (Relación 1-N)
+	 * CASO 6: Obtener sesiones de una sala (Relacion 1-N)
  * @author azuri
  */
 public class CommandObtenerSesionesSala implements Command {
@@ -26,7 +26,7 @@ public class CommandObtenerSesionesSala implements Command {
 		
 		if (!(datos instanceof Integer)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("El ID de la sala debe ser un número entero");
+			ctx.setMessage("El ID de la sala debe ser un numero entero");
 			return ctx;
 		}
 		

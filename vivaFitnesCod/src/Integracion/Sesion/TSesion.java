@@ -57,9 +57,9 @@ public class TSesion {
 
 	@Override
 	public String toString() {
-		return "TSesion [idSesion=" + idSesion + ", objetivo=" + objetivo +
-				", duracion=" + duracion + ", horario=" + horario +
+		return "idSesion=" + idSesion + ", objetivo=" + objetivo +
+				", duracion=" + duracion + " (min), horario=" + horario +
 				", idSala=" + idSala + ", idEntrenador=" + idEntrenador +
-				", activo=" + activo + "]";
+				", activo=" + activo;
 	}
 }

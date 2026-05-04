@@ -27,14 +27,14 @@ public class CommandModificarSala implements Command {
 		
 		if (!(datos instanceof TSala)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Formato de datos inválido. Se esperaba TSala");
+			ctx.setMessage("Formato de datos invalido. Se esperaba TSala");
 			return ctx;
 		}
 		
 		TSala sala = (TSala) datos;
 		if (sala.getIdSala() <= 0) {
 			ctx.setSuccess(false);
-			ctx.setMessage("ID de sala inválido");
+			ctx.setMessage("ID de sala invalido");
 			return ctx;
 		}
 		

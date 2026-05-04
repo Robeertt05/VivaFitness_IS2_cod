@@ -25,7 +25,7 @@ public class CommandMostrarSala implements Command {
 		
 		if (!(datos instanceof Integer)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("El ID de la sala debe ser un número entero");
+			ctx.setMessage("El ID de la sala debe ser un numero entero");
 			return ctx;
 		}
 		
