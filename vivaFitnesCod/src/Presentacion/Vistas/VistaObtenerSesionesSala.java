@@ -3,24 +3,23 @@
  */
 package Presentacion.Vistas;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.JOptionPane;
+import Controlador.Context;
+import Controlador.Controller;
+import Presentacion.FactoriaPresentacion.Evento;
+import Presentacion.FactoriaPresentacion.IGUI;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
-
-import Presentacion.FactoriaPresentacion.IGUI;
-import Presentacion.FactoriaPresentacion.Evento;
-import Controlador.Context;
-import Controlador.Controller;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /** 
  * View for displaying all sessions in a room
@@ -40,8 +39,9 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 	private JButton btnCerrar;
 	
 	public VistaObtenerSesionesSala() {
-		setTitle("Room Sessions");
+		setTitle("Sesiones de Sala");
 		setSize(500, 400);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		actionListener = new HashSet<>();
@@ -56,8 +56,8 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 		JPanel topPanel = new JPanel(new GridLayout(1, 2, 10, 10));
 		
 		// Select Room
-		jLabel.add(new JLabel("Room ID:"));
-		topPanel.add(new JLabel("Room ID:"));
+		jLabel.add(new JLabel("ID Sala:"));
+		topPanel.add(new JLabel("ID Sala:"));
 		txtIdSala = new JTextField();
 		topPanel.add(txtIdSala);
 		
@@ -68,8 +68,8 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
-		btnMostrar = new JButton("Show Sessions");
-		btnCerrar = new JButton("Close");
+		btnMostrar = new JButton("Mostrar Sesiones");
+		btnCerrar = new JButton("Cerrar");
 		btnMostrar.addActionListener(e -> mostrarSesionesSala());
 		btnCerrar.addActionListener(e -> dispose());
 		jButton.add(btnMostrar);
