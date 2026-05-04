@@ -181,7 +181,7 @@ public class DAOSesionImp implements DAOSesion {
 		// begin-user-code
 		String sql = "SELECT sa.idSala, sa.nombreSala, sa.aforo, sa.activo "
 				+ "FROM sesion s "
-				+ "JOIN salas sa ON s.idSala = sa.idSala "
+				+ "JOIN sala sa ON s.idSala = sa.idSala "
 				+ "WHERE s.idSesion = ? AND s.activo = 1";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
@@ -210,9 +210,9 @@ public class DAOSesionImp implements DAOSesion {
 	@Override
 	public Object getTrainer(int idSesion) {
 		// begin-user-code
-		String sql = "SELECT e.id_entrenador, e.dni_entrenador, e.nombre, e.telefono, e.activo "
+		String sql = "SELECT e.idEntrenador, e.DNI_entrenador, e.nombreEntrenador, e.telefonoEntrenador, e.activo "
 				+ "FROM sesion s "
-				+ "JOIN entrenadores e ON s.idEntrenador = e.id_entrenador "
+				+ "JOIN entrenador e ON s.idEntrenador = e.idEntrenador "
 				+ "WHERE s.idSesion = ? AND s.activo = 1";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
@@ -221,9 +221,9 @@ public class DAOSesionImp implements DAOSesion {
 				if (rs.next()) {
 					TEntrenador entrenador = new TEntrenador();
 					entrenador.set_activo(rs.getInt("activo"));
-					entrenador.set_nombre(rs.getString("nombre"));
-					entrenador.set_telefono(rs.getString("telefono"));
-					entrenador.set_dni(rs.getString("dni_entrenador"));
+					entrenador.set_nombre(rs.getString("nombreEntrenador"));
+					entrenador.set_telefono(rs.getString("telefonoEntrenador"));
+					entrenador.set_dni(rs.getString("DNI_entrenador"));
 					return entrenador;
 				}
 			}
