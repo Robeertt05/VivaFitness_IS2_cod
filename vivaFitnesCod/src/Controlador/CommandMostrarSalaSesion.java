@@ -4,7 +4,7 @@
 package Controlador;
 
 import Negocio.FactoriaNegocio.SASesion;
-import Integracion.FactoriaIntegracion.TSala;
+import Integracion.Sala.TSala;
 
 /**
  * Command to display the room assigned to a session

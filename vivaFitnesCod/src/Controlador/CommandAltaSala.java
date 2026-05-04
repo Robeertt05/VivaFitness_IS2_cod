@@ -4,7 +4,7 @@
 package Controlador;
 
 import Negocio.FactoriaNegocio.SASala;
-import Integracion.FactoriaIntegracion.TSala;
+import Integracion.Sala.TSala;
 
 /**
  * Command to create a new room

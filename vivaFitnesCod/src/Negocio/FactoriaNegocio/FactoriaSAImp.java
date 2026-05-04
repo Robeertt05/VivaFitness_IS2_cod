@@ -10,9 +10,9 @@ import Negocio.Cliente.SACliente;
 import Negocio.Cliente.SAClienteImp;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 
-import Integracion.FactoriaIntegracion.DAOSesion;
-import Integracion.FactoriaIntegracion.DAOSala;
-import Integracion.FactoriaIntegracion.DAOCliente;
+import Integracion.Sesion.DAOSesion;
+import Integracion.Sala.DAOSala;
+import Integracion.Cliente.DAOCliente;
 
 /**
  * Service Application Factory Implementation
@@ -42,7 +42,7 @@ public class FactoriaSAImp extends FactoriaServicioAplicacion {
 		
 		// Create Client Service Application
 		DAOCliente daoCliente = daoFactory.generaDAOCliente();
-		this.saCliente = new SAClienteImp(daoCliente);
+		this.saCliente = new SAClienteImp(daoCliente, this.saSesion);
 	}
 	
 	

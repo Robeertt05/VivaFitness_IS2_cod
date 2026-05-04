@@ -9,6 +9,7 @@ import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.commands.*;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.FactoriaNegocio.SASesion;
+import Negocio.FactoriaNegocio.SASala;
 
 /**
  * <!-- begin-UML-doc -->
@@ -21,11 +22,13 @@ public class CommandFactory {
 	/** Unica instancia (Singleton). */
 	private static CommandFactory instance;
 	private final SASesion saSesion;
+	private final SASala saSala;
 
 	/** Constructor privado para forzar uso del Singleton. */
 	private CommandFactory() {
 		FactoriaServicioAplicacion factory = FactoriaServicioAplicacion.getInstance();
 		this.saSesion = factory.crearSASesion();
+		this.saSala = factory.generaSASala();
 	}
 
 	/**
@@ -67,6 +70,20 @@ public class CommandFactory {
 				return new CmdBajaCliente();
 			case MODIFICAR_CLIENTE:
 				return new CmdModificarCliente();
+
+			// --- Sala ---
+			case ALTA_SALA:
+				return new CommandAltaSala(saSala);
+			case BAJA_SALA:
+				return new CommandBajaSala(saSala);
+			case MODIFICAR_SALA:
+				return new CommandModificarSala(saSala);
+			case MOSTRAR_SALA:
+				return new CommandMostrarSala(saSala);
+			case MOSTRAR_TODAS_SALAS:
+				return new CommandMostrarTodasSalas(saSala);
+			case OBTENER_SESIONES_SALA:
+				return new CommandObtenerSesionesSala(saSala);
 			
 			// --- Sesion ---
 			case ALTA_SESION:

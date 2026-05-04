@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Integracion.FactoriaIntegracion;
+package Integracion.Sesion;
 
 import java.util.Date;
 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Integracion.FactoriaIntegracion;
+package Integracion.Sala;
 
 /** 
  * Transfer Object for Sala (Room/Gym Space)

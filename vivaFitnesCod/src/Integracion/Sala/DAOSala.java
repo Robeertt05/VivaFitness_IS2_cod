@@ -1,9 +1,10 @@
 /**
  * 
  */
-package Integracion.FactoriaIntegracion;
+package Integracion.Sala;
 
 import java.util.Set;
+import Integracion.Sesion.TSesion;
 
 /** 
  * Data Access Object interface for Sala (Room)

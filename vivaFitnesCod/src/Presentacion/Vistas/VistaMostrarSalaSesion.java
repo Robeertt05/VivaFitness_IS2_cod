@@ -6,7 +6,7 @@ import java.awt.*;
 import Controlador.CommandMostrarSalaSesion;
 import Controlador.Controller;
 import Controlador.Context;
-import Integracion.FactoriaIntegracion.TSala;
+import Integracion.Sala.TSala;
 import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.IGUI;
 

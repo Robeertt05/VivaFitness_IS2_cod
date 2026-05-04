@@ -1,9 +1,10 @@
 /**
  * 
  */
-package Integracion.FactoriaIntegracion;
+package Integracion.Sesion;
 
 import java.util.Set;
+import Integracion.Sala.TSala;
 
 /** 
  * Data Access Object interface for Sesion (SRS Aligned)

@@ -25,7 +25,7 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 
 	private RuntimeException databaseError(SQLException e) {
 		return new RuntimeException(
-				"No se pudo conectar con la base de datos. Compruebe que está encendida.",
+				"No se pudo conectar con la base de datos. Compruebe que estï¿½ encendida.",
 				e);
 	}
 

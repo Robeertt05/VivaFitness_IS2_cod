@@ -3,8 +3,8 @@
  */
 package Negocio.FactoriaNegocio;
 
-import Integracion.FactoriaIntegracion.TSala;
-import Integracion.FactoriaIntegracion.TSesion;
+import Integracion.Sala.TSala;
+import Integracion.Sesion.TSesion;
 import java.util.Set;
 
 /** 

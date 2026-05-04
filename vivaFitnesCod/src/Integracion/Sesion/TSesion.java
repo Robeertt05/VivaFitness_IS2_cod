@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Integracion.FactoriaIntegracion;
+package Integracion.Sesion;
 
 /** 
  * Transfer Object for Sesion

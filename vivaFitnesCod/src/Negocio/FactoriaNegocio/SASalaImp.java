@@ -3,9 +3,9 @@
  */
 package Negocio.FactoriaNegocio;
 
-import Integracion.FactoriaIntegracion.TSala;
-import Integracion.FactoriaIntegracion.TSesion;
-import Integracion.FactoriaIntegracion.DAOSala;
+import Integracion.Sala.TSala;
+import Integracion.Sesion.TSesion;
+import Integracion.Sala.DAOSala;
 import java.util.Set;
 
 /** 
