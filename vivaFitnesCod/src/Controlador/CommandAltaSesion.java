@@ -29,15 +29,14 @@ public class CommandAltaSesion implements Command {
 		}
 		
 		TSesion sesion = (TSesion) datos;
-		int resultado = saSesion.alta_sesion(sesion);
-		
-		if (resultado > 0) {
+		try {
+			int resultado = saSesion.alta_sesion(sesion);
 			ctx.setSuccess(true);
 			ctx.setMessage("Sesion creada correctamente con ID: " + resultado);
 			ctx.setData(resultado);
-		} else {
+		} catch (Exception e) {
 			ctx.setSuccess(false);
-			ctx.setMessage("No se pudo crear la sesion");
+			ctx.setMessage(e.getMessage());
 		}
 		
 		return ctx;

@@ -30,14 +30,14 @@ public class CommandEliminarSesion implements Command {
 		}
 		
 		int idSesion = (Integer) datos;
-		int resultado = saSesion.baja_sesion(idSesion);
-		
-		if (resultado > 0) {
+		try {
+			int resultado = saSesion.baja_sesion(idSesion);
 			ctx.setSuccess(true);
 			ctx.setMessage("Sesion eliminada correctamente");
-		} else {
+			ctx.setData(resultado);
+		} catch (Exception e) {
 			ctx.setSuccess(false);
-			ctx.setMessage("No se pudo eliminar la sesion; puede tener clientes apuntados");
+			ctx.setMessage(e.getMessage());
 		}
 		
 		return ctx;

@@ -39,14 +39,14 @@ public class CommandModificarSesion implements Command {
 		int idSesion = (Integer) params[0];
 		TSesion sesion = (TSesion) params[1];
 		
-		int resultado = saSesion.modificar_sesion(idSesion, sesion);
-		
-		if (resultado > 0) {
+		try {
+			int resultado = saSesion.modificar_sesion(idSesion, sesion);
 			ctx.setSuccess(true);
 			ctx.setMessage("Sesion modificada correctamente");
-		} else {
+			ctx.setData(resultado);
+		} catch (Exception e) {
 			ctx.setSuccess(false);
-			ctx.setMessage("No se pudo modificar la sesion");
+			ctx.setMessage(e.getMessage());
 		}
 		
 		return ctx;

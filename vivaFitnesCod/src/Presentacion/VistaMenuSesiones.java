@@ -30,10 +30,9 @@ public class VistaMenuSesiones extends JFrame {
         JLabel title = new JLabel("Menu de Sesiones", SwingConstants.CENTER);
         title.setFont(new Font("SansSerif", Font.BOLD, 34));
 
-        JPanel grid = new JPanel(new GridLayout(4, 2, 24, 20));
+        JPanel grid = new JPanel(new GridLayout(3, 2, 24, 20));
         grid.setOpaque(false);
 
-        JButton btnAlta = crearBotonAccion("Alta sesion");
         JButton btnMostrar = crearBotonAccion("Mostrar sesion");
         JButton btnBaja = crearBotonAccion("Baja sesion");
         JButton btnMostrarTodas = crearBotonAccion("Mostrar todas las sesiones");
@@ -41,7 +40,6 @@ public class VistaMenuSesiones extends JFrame {
         JButton btnMostrarSala = crearBotonAccion("Mostrar sala de sesion");
         JButton btnMostrarEntrenador = crearBotonAccion("Mostrar entrenador de sesion");
 
-        btnAlta.addActionListener(e -> abrirVista(Evento.ALTA_SESION));
         btnBaja.addActionListener(e -> abrirVista(Evento.BAJA_SESION));
         btnModificar.addActionListener(e -> abrirVista(Evento.MODIFICAR_SESION));
         btnMostrar.addActionListener(e -> abrirVista(Evento.MOSTRAR_SESION));
@@ -49,14 +47,12 @@ public class VistaMenuSesiones extends JFrame {
         btnMostrarSala.addActionListener(e -> abrirVista(Evento.MOSTRAR_SALA_SESION));
         btnMostrarEntrenador.addActionListener(e -> abrirVista(Evento.MOSTRAR_ENTRENADOR_SESION));
 
-        grid.add(btnAlta);
         grid.add(btnMostrar);
         grid.add(btnBaja);
         grid.add(btnMostrarTodas);
         grid.add(btnModificar);
         grid.add(btnMostrarSala);
         grid.add(btnMostrarEntrenador);
-        grid.add(new JLabel(""));
 
         root.add(title, BorderLayout.NORTH);
         root.add(grid, BorderLayout.CENTER);

@@ -1,14 +1,13 @@
 /**
  * 
  */
-package Presentacion.Vistas;
+package Presentacion.Entrenador;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -16,13 +15,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Presentacion.FactoriaPresentacion.IGUI;
-import Presentacion.FactoriaPresentacion.Evento;
-import Controlador.Controller;
 import Controlador.Context;
 import Integracion.Sesion.TSesion;
 
 /** 
- * View for modifying a session
+ * Vista para modificar una sesion
  * @author azuri
  */
 public class VistaModificarSesion extends JFrame implements IGUI {
@@ -41,9 +38,8 @@ public class VistaModificarSesion extends JFrame implements IGUI {
 	private JButton btnCancelar;
 	
 	public VistaModificarSesion() {
-		setTitle("Modificar sesion");
+		setTitle("Modificar Sesion");
 		setSize(400, 250);
-		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		actionListener = new HashSet<>();
@@ -59,8 +55,8 @@ public class VistaModificarSesion extends JFrame implements IGUI {
 		JPanel mainPanel = new JPanel(new GridLayout(5, 2, 10, 10));
 		
 		// Session ID input
-		jLabel.add(new JLabel("ID sesion:"));
-		mainPanel.add(new JLabel("ID sesion:"));
+		jLabel.add(new JLabel("ID Sesion:"));
+		mainPanel.add(new JLabel("ID Sesion:"));
 		txtIdSesion = new JTextField(10);
 		jTextField.add(txtIdSesion);
 		mainPanel.add(txtIdSesion);
@@ -100,27 +96,10 @@ public class VistaModificarSesion extends JFrame implements IGUI {
 		
 		add(mainPanel, BorderLayout.CENTER);
 		add(buttonPanel, BorderLayout.SOUTH);
-
-		btnModificar.addActionListener(e -> {
-			int id = getSelectedSessionId();
-			if (id <= 0) {
-				JOptionPane.showMessageDialog(this, "Introduzca un ID de sesion valido", "Error", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-			Object[] params = { id, getSessionData() };
-			Context result = Controller.getInstance().action(new Context(Evento.MODIFICAR_SESION, params));
-			JOptionPane.showMessageDialog(this, result.getMessage());
-			update(result);
-		});
-		btnCancelar.addActionListener(e -> dispose());
 	}
-
+	
 	public int getSelectedSessionId() {
-		try {
-			return Integer.parseInt(txtIdSesion.getText().trim());
-		} catch (NumberFormatException ex) {
-			return -1;
-		}
+		try { return Integer.parseInt(txtIdSesion.getText().trim()); } catch (NumberFormatException ex) { return -1; }
 	}
 	
 	public TSesion getSessionData() {

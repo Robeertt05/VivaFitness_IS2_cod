@@ -31,7 +31,7 @@ public class DAOSesionImp implements DAOSesion {
 	@Override
 	public int create(TSesion datos) {
 		// begin-user-code
-		String sql = "INSERT INTO sesiones "
+		String sql = "INSERT INTO sesion "
 				+ "(nombreSesion, descripcion, fecha, hora, idSala, idEntrenador, "
 				+ "capacidadMaxima, participantsActuales, activo) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -55,7 +55,7 @@ public class DAOSesionImp implements DAOSesion {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Error SQL al crear la sesion.", e);
 		}
 		return 0;
 		// end-user-code
@@ -64,7 +64,7 @@ public class DAOSesionImp implements DAOSesion {
 	@Override
 	public TSesion read(int idSesion) {
 		// begin-user-code
-		String sql = "SELECT * FROM sesiones WHERE idSesion = ? AND activo = 1";
+		String sql = "SELECT * FROM sesion WHERE idSesion = ? AND activo = 1";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, idSesion);
@@ -74,7 +74,7 @@ public class DAOSesionImp implements DAOSesion {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Error SQL al consultar la sesion con ID " + idSesion + ".", e);
 		}
 		return null;
 		// end-user-code
@@ -83,7 +83,7 @@ public class DAOSesionImp implements DAOSesion {
 	@Override
 	public int update(TSesion tSesion) {
 		// begin-user-code
-		String sql = "UPDATE sesiones SET nombreSesion=?, descripcion=?, fecha=?, hora=?, "
+		String sql = "UPDATE sesion SET nombreSesion=?, descripcion=?, fecha=?, hora=?, "
 				+ "idSala=?, idEntrenador=?, capacidadMaxima=?, participantsActuales=?, activo=? "
 				+ "WHERE idSesion=?";
 		try (Connection con = getConnection();
@@ -100,9 +100,8 @@ public class DAOSesionImp implements DAOSesion {
 			ps.setInt(10, tSesion.getIdSesion());
 			return ps.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Error SQL al modificar la sesion con ID " + tSesion.getIdSesion() + ".", e);
 		}
-		return 0;
 		// end-user-code
 	}
 
@@ -110,15 +109,14 @@ public class DAOSesionImp implements DAOSesion {
 	public int delete(int idSesion) {
 		// begin-user-code
 		// Precondition enforced in SQL: only deletes when no participants registered
-		String sql = "DELETE FROM sesiones WHERE idSesion = ? AND participantsActuales = 0";
+		String sql = "DELETE FROM sesion WHERE idSesion = ? AND participantsActuales = 0";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, idSesion);
 			return ps.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Error SQL al eliminar la sesion con ID " + idSesion + ".", e);
 		}
-		return 0;
 		// end-user-code
 	}
 
@@ -129,7 +127,7 @@ public class DAOSesionImp implements DAOSesion {
 	@Override
 	public Set<TSesion> read_all() {
 		// begin-user-code
-		String sql = "SELECT * FROM sesiones WHERE activo = 1";
+		String sql = "SELECT * FROM sesion WHERE activo = 1";
 		Set<TSesion> sesiones = new HashSet<>();
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql);
@@ -138,7 +136,7 @@ public class DAOSesionImp implements DAOSesion {
 				sesiones.add(mapRow(rs));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Error SQL al listar todas las sesiones.", e);
 		}
 		return sesiones;
 		// end-user-code
@@ -147,14 +145,14 @@ public class DAOSesionImp implements DAOSesion {
 	@Override
 	public Set<TSesion> readByEntrenador(int idEntrenador) {
 		// begin-user-code
-		return readByField("SELECT * FROM sesiones WHERE idEntrenador = ? AND activo = 1", idEntrenador);
+		return readByField("SELECT * FROM sesion WHERE idEntrenador = ? AND activo = 1", idEntrenador);
 		// end-user-code
 	}
 
 	@Override
 	public Set<TSesion> readBySala(int idSala) {
 		// begin-user-code
-		return readByField("SELECT * FROM sesiones WHERE idSala = ? AND activo = 1", idSala);
+		return readByField("SELECT * FROM sesion WHERE idSala = ? AND activo = 1", idSala);
 		// end-user-code
 	}
 
@@ -169,20 +167,20 @@ public class DAOSesionImp implements DAOSesion {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Error SQL al filtrar sesiones.", e);
 		}
 		return sesiones;
 	}
 
 	// -----------------------------------------------------------------------
-	// CASO 4: Mostrar sala por sesin
+	// CASO 4: Mostrar sala por sesion
 	// -----------------------------------------------------------------------
 
 	@Override
 	public TSala getRoom(int idSesion) {
 		// begin-user-code
 		String sql = "SELECT sa.idSala, sa.nombreSala, sa.aforo, sa.activo "
-				+ "FROM sesiones s "
+				+ "FROM sesion s "
 				+ "JOIN salas sa ON s.idSala = sa.idSala "
 				+ "WHERE s.idSesion = ? AND s.activo = 1";
 		try (Connection con = getConnection();
@@ -199,21 +197,21 @@ public class DAOSesionImp implements DAOSesion {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Error SQL al obtener la sala de la sesion.", e);
 		}
 		return null;
 		// end-user-code
 	}
 
 	// -----------------------------------------------------------------------
-	// CASO 5: Mostrar entrenador por sesin
+	// CASO 5: Mostrar entrenador por sesion
 	// -----------------------------------------------------------------------
 
 	@Override
 	public Object getTrainer(int idSesion) {
 		// begin-user-code
 		String sql = "SELECT e.id_entrenador, e.dni_entrenador, e.nombre, e.telefono, e.activo "
-				+ "FROM sesiones s "
+				+ "FROM sesion s "
 				+ "JOIN entrenadores e ON s.idEntrenador = e.id_entrenador "
 				+ "WHERE s.idSesion = ? AND s.activo = 1";
 		try (Connection con = getConnection();
@@ -230,7 +228,7 @@ public class DAOSesionImp implements DAOSesion {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Error SQL al obtener el entrenador de la sesion.", e);
 		}
 		return null;
 		// end-user-code

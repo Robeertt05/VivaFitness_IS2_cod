@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Presentacion.Vistas;
+package Presentacion.Entrenador;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,7 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
-import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -18,10 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Presentacion.FactoriaPresentacion.IGUI;
-import Presentacion.FactoriaPresentacion.Evento;
-import Controlador.Controller;
 import Controlador.Context;
-import Integracion.Sesion.TSesion;
 
 /** 
  * View for displaying session details
@@ -40,9 +36,8 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 	private JButton btnCerrar;
 	
 	public VistaMostrarSesion() {
-		setTitle("Detalles de sesion");
+		setTitle("Detalles de la Sesion");
 		setSize(400, 300);
-		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		actionListener = new HashSet<>();
@@ -57,8 +52,8 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 		JPanel topPanel = new JPanel(new GridLayout(2, 1, 10, 10));
 		
 		// Session ID input
-		jLabel.add(new JLabel("ID sesion:"));
-		topPanel.add(new JLabel("ID sesion:"));
+		jLabel.add(new JLabel("ID Sesion:"));
+		topPanel.add(new JLabel("ID Sesion:"));
 		txtIdSesion = new JTextField(10);
 		topPanel.add(txtIdSesion);
 		
@@ -82,24 +77,10 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 		add(topPanel, BorderLayout.NORTH);
 		add(scrollPane, BorderLayout.CENTER);
 		add(buttonPanel, BorderLayout.SOUTH);
-
-		btnMostrar.addActionListener(e -> {
-			int id = getSelectedSessionId();
-			if (id <= 0) {
-				JOptionPane.showMessageDialog(this, "Introduzca un ID de sesion valido", "Error", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-			update(Controller.getInstance().action(new Context(Evento.MOSTRAR_SESION, id)));
-		});
-		btnCerrar.addActionListener(e -> dispose());
 	}
-
+	
 	public int getSelectedSessionId() {
-		try {
-			return Integer.parseInt(txtIdSesion.getText().trim());
-		} catch (NumberFormatException ex) {
-			return -1;
-		}
+		try { return Integer.parseInt(txtIdSesion.getText().trim()); } catch (NumberFormatException ex) { return -1; }
 	}
 	
 	public void displaySessionDetails(String details) {
@@ -118,21 +99,8 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
-		if (context != null && context.isSuccess() && context.getData() instanceof TSesion) {
-			TSesion s = (TSesion) context.getData();
-			String detalles = "ID: " + s.getIdSesion() + "\n"
-					+ "Nombre: " + s.getNombreSesion() + "\n"
-					+ "Descripcion: " + s.getDescripcion() + "\n"
-					+ "Fecha: " + s.getFecha() + "\n"
-					+ "Hora: " + s.getHora() + "\n"
-					+ "Sala: " + s.getIdSala() + "\n"
-					+ "Entrenador: " + s.getIdEntrenador() + "\n"
-					+ "Capacidad maxima: " + s.getCapacidadMaxima() + "\n"
-					+ "Participantes actuales: " + s.getParticipantsActuales() + "\n"
-					+ "Activo: " + s.getActivo();
-			displaySessionDetails(detalles);
-		} else if (context != null) {
-			displaySessionDetails(context.getMessage());
-		}
+		// begin-user-code
+		// Update display with context data
+		// end-user-code
 	}
 }

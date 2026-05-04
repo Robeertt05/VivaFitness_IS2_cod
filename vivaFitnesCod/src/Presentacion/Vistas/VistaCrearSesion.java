@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -54,8 +53,8 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 	private JTextField txtDescripcion;
 	private JTextField txtHora;
 	private JSpinner spinCapacidad;
-	private JComboBox<Integer> cbSala;
-	private JComboBox<Integer> cbEntrenador;
+	private JTextField txtIdSala;
+	private JTextField txtIdEntrenador;
 	private JButton btnCrear;
 	private JButton btnCancelar;
 	
@@ -105,18 +104,18 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 		mainPanel.add(spinCapacidad);
 		
 		// Room
-		jLabel.add(new JLabel("Sala:"));
-		mainPanel.add(new JLabel("Sala:"));
-		cbSala = new JComboBox<>();
-		cargarIdsDemo(cbSala);
-		mainPanel.add(cbSala);
+		jLabel.add(new JLabel("ID Sala:"));
+		mainPanel.add(new JLabel("ID Sala:"));
+		txtIdSala = new JTextField();
+		jTextField.add(txtIdSala);
+		mainPanel.add(txtIdSala);
 		
 		// Trainer
-		jLabel.add(new JLabel("Entrenador:"));
-		mainPanel.add(new JLabel("Entrenador:"));
-		cbEntrenador = new JComboBox<>();
-		cargarIdsDemo(cbEntrenador);
-		mainPanel.add(cbEntrenador);
+		jLabel.add(new JLabel("ID Entrenador:"));
+		mainPanel.add(new JLabel("ID Entrenador:"));
+		txtIdEntrenador = new JTextField();
+		jTextField.add(txtIdEntrenador);
+		mainPanel.add(txtIdEntrenador);
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
@@ -141,20 +140,14 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 		btnCancelar.addActionListener(e -> dispose());
 	}
 
-	private void cargarIdsDemo(JComboBox<Integer> combo) {
-		for (int i = 1; i <= 10; i++) {
-			combo.addItem(i);
-		}
-	}
-	
 	public TSesion getSessionData() {
 		TSesion sesion = new TSesion();
 		sesion.setNombreSesion(txtNombre.getText());
 		sesion.setDescripcion(txtDescripcion.getText());
 		sesion.setHora(txtHora.getText());
 		sesion.setCapacidadMaxima((Integer) spinCapacidad.getValue());
-		sesion.setIdSala((Integer) cbSala.getSelectedItem());
-		sesion.setIdEntrenador((Integer) cbEntrenador.getSelectedItem());
+		try { sesion.setIdSala(Integer.parseInt(txtIdSala.getText().trim())); } catch (NumberFormatException ex) { sesion.setIdSala(0); }
+		try { sesion.setIdEntrenador(Integer.parseInt(txtIdEntrenador.getText().trim())); } catch (NumberFormatException ex) { sesion.setIdEntrenador(0); }
 		sesion.setFecha(new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()));
 		return sesion;
 	}
