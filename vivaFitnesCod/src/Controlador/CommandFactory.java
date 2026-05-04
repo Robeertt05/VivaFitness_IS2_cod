@@ -9,7 +9,7 @@ import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.commands.*;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.FactoriaNegocio.SASesion;
-import Negocio.FactoriaNegocio.SASala;
+import Negocio.Sala.SASala;
 
 /**
  * <!-- begin-UML-doc -->

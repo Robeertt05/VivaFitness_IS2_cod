@@ -8,7 +8,7 @@ import Presentacion.Vistas.VistaEliminarSesion;
 import Presentacion.Vistas.VistaModificarSesion;
 import Presentacion.Vistas.VistaMostrarSesion;
 import Presentacion.Vistas.VistaMostrarTodasSesiones;
-import Presentacion.Sala.VistaMostrarSalaSesion;
+import Presentacion.Vistas.VistaMostrarSalaSesion;
 import Presentacion.Vistas.VistaMostrarEntrenadorSesion;
 
 /** 

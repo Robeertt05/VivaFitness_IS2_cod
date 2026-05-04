@@ -1,99 +1,71 @@
 /**
- * 
+ * Vista para dar de baja a una Sala.
  */
 package Presentacion.Vistas;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.Set;
-
+import javax.swing.*;
+import java.awt.*;
 import Presentacion.FactoriaPresentacion.IGUI;
+import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Context;
+import Controlador.Controller;
 
-/** 
- * View for deleting a room
- * @author azuri
- */
 public class VistaBajaSala extends JFrame implements IGUI {
-	
-	private Set<ActionListener> actionListener;
-	private Set<JButton> jButton;
-	private Set<JPanel> jPanel;
-	private Set<JLabel> jLabel;
-	
-	private JComboBox<Integer> cbSala;
-	private JButton btnEliminar;
-	private JButton btnCancelar;
-	
+
+	private JPanel panel;
+	private JLabel lblId;
+	private JTextField txtId;
+	private JButton btnAceptar, btnCancelar;
+
 	public VistaBajaSala() {
-		setTitle("Delete Room");
-		setSize(300, 150);
+		setTitle("Baja Sala - VivaFitness");
+		setSize(400, 200);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		actionListener = new HashSet<>();
-		jButton = new HashSet<>();
-		jPanel = new HashSet<>();
-		jLabel = new HashSet<>();
-		
-		initComponents();
-	}
-	
-	private void initComponents() {
-		JPanel mainPanel = new JPanel(new GridLayout(1, 2, 10, 10));
-		
-		// Select Room
-		jLabel.add(new JLabel("Select Room:"));
-		mainPanel.add(new JLabel("Select Room:"));
-		cbSala = new JComboBox<>();
-		mainPanel.add(cbSala);
-		
-		// Buttons
-		JPanel buttonPanel = new JPanel();
-		btnEliminar = new JButton("Delete");
-		btnCancelar = new JButton("Cancel");
-		jButton.add(btnEliminar);
-		jButton.add(btnCancelar);
-		buttonPanel.add(btnEliminar);
-		buttonPanel.add(btnCancelar);
-		
-		jPanel.add(mainPanel);
-		jPanel.add(buttonPanel);
-		
-		add(mainPanel, BorderLayout.CENTER);
-		add(buttonPanel, BorderLayout.SOUTH);
-	}
-	
-	public int getSelectedRoomId() {
-		Object selected = cbSala.getSelectedItem();
-		return selected != null ? (Integer) selected : -1;
-	}
-	
-	public void setRooms(Set<Integer> roomIds) {
-		cbSala.removeAllItems();
-		for (Integer id : roomIds) {
-			cbSala.addItem(id);
-		}
-	}
-	
-	public void addDeleteButtonListener(ActionListener listener) {
-		btnEliminar.addActionListener(listener);
-		actionListener.add(listener);
-	}
-	
-	public void addCancelButtonListener(ActionListener listener) {
-		btnCancelar.addActionListener(listener);
-		actionListener.add(listener);
+
+		panel = new JPanel(new GridLayout(2, 2, 10, 10));
+		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+		lblId = new JLabel("ID Sala:");
+		txtId = new JTextField();
+		btnAceptar = new JButton("Dar de Baja");
+		btnCancelar = new JButton("Cancelar");
+
+		btnAceptar.addActionListener(e -> {
+			try {
+				int id = Integer.parseInt(txtId.getText().trim());
+				Context ctx = new Context(Evento.BAJA_SALA, id);
+				Context res = Controller.getInstance().action(ctx);
+				update(res);
+			} catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(this, "Introduzca un ID valido.",
+					"Error", JOptionPane.ERROR_MESSAGE);
+			}
+		});
+
+		btnCancelar.addActionListener(e -> dispose());
+
+		panel.add(lblId);      panel.add(txtId);
+		panel.add(btnAceptar); panel.add(btnCancelar);
+		add(panel);
 	}
 
 	@Override
 	public void update(Context context) {
-		// Update room list when rooms are refreshed
+		if (context == null) return;
+
+		Evento evento = context.getEvento();
+
+		if (evento == Evento.RES_BAJA_SALA_OK) {
+			JOptionPane.showMessageDialog(this,
+				"Sala eliminada correctamente.",
+				"Exito", JOptionPane.INFORMATION_MESSAGE);
+			dispose();
+		} 
+		else if (evento == Evento.RES_BAJA_SALA_KO) {
+			JOptionPane.showMessageDialog(this,
+				"Error al eliminar la sala. La sala no existe, tiene sesiones activas o ya esta inactiva.",
+				"Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

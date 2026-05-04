@@ -5,9 +5,6 @@
 package Presentacion.FactoriaPresentacion;
 
 import Presentacion.Vistas.*;
-import Presentacion.Sala.*;
-import Presentacion.Sala.VistaAltaSala;
-import Presentacion.Sala.VistaBajaSala;
 
 /**
  * <!-- begin-UML-doc -->
