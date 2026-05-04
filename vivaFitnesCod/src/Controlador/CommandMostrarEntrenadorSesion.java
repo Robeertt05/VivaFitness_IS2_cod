@@ -5,7 +5,7 @@ package Controlador;
 
 import Integracion.Entrenador.TEntrenador;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
-import Negocio.FactoriaNegocio.SASesion;
+import Negocio.Sesion.SASesion;
 
 /**
  * Command to display the trainer assigned to a session
@@ -14,16 +14,6 @@ import Negocio.FactoriaNegocio.SASesion;
  * @author azuri
  */
 public class CommandMostrarEntrenadorSesion implements Command {
-	
-	private SASesion saSesion;
-
-	public CommandMostrarEntrenadorSesion() {
-		this(FactoriaServicioAplicacion.getInstance().crearSASesion());
-	}
-	
-	public CommandMostrarEntrenadorSesion(SASesion saSesion) {
-		this.saSesion = saSesion;
-	}
 
 	@Override
 	public Context execute(Object datos) {
@@ -36,6 +26,7 @@ public class CommandMostrarEntrenadorSesion implements Command {
 		}
 		
 		int idSesion = (Integer) datos;
+		SASesion saSesion = FactoriaServicioAplicacion.getInstance().crearSASesion();
 		TEntrenador entrenador = saSesion.mostrar_entrenador_sesion(idSesion);
 		
 		if (entrenador != null) {

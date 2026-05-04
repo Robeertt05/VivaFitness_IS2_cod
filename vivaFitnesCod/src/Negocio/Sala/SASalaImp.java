@@ -6,6 +6,7 @@ package Negocio.Sala;
 import Integracion.Sala.TSala;
 import Integracion.Sesion.TSesion;
 import Integracion.Sala.DAOSala;
+import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import java.util.Set;
 
 /** 
@@ -14,12 +15,6 @@ import java.util.Set;
  * @author azuri
  */
 public class SASalaImp implements SASala {
-	
-	private DAOSala daoSala;
-
-	public SASalaImp(DAOSala daoSala) {
-		this.daoSala = daoSala;
-	}
 
 	/**
 	 * CASO 1: Alta sala - Create a new room
@@ -45,6 +40,7 @@ public class SASalaImp implements SASala {
 		}
 		
 		// Proceed with creation
+		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
 		return daoSala.create(datos);
 		// end-user-code
 	}
@@ -60,6 +56,8 @@ public class SASalaImp implements SASala {
 		if (idSala <= 0) {
 			return 0;
 		}
+		
+		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
 		
 		// Get room to verify it exists
 		TSala sala = daoSala.read(idSala);
@@ -90,6 +88,8 @@ public class SASalaImp implements SASala {
 		if (idSala <= 0 || datos == null) {
 			return 0;
 		}
+		
+		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
 		
 		// Get current room to verify it exists
 		TSala salaActual = daoSala.read(idSala);
@@ -127,6 +127,7 @@ public class SASalaImp implements SASala {
 		}
 		
 		// Get room from DAO
+		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
 		return daoSala.read(idSala);
 		// end-user-code
 	}
@@ -138,6 +139,7 @@ public class SASalaImp implements SASala {
 	public Set<TSala> mostrar_todas_salas() {
 		// begin-user-code
 		// Get all rooms from DAO
+		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
 		return daoSala.read_all();
 		// end-user-code
 	}
@@ -153,6 +155,8 @@ public class SASalaImp implements SASala {
 		if (idSala <= 0) {
 			return null;
 		}
+		
+		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
 		
 		// Verify room exists
 		TSala sala = daoSala.read(idSala);

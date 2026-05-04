@@ -10,11 +10,8 @@ import Negocio.Cliente.SACliente;
 import Negocio.Cliente.SAClienteImp;
 import Negocio.Entrenador.SAEntrenador;
 import Negocio.Entrenador.SAEntrenadorImp;
-import Integracion.FactoriaIntegracion.FactoriaIntegracion;
-
-import Integracion.Sala.DAOSala;
-import Integracion.Cliente.DAOCliente;
-import Integracion.Sesion.DAOSesion;
+import Negocio.Sesion.SASesion;
+import Negocio.Sesion.SASesionImp;
 
 
 /**
@@ -24,51 +21,23 @@ import Integracion.Sesion.DAOSesion;
  */
 public class FactoriaSAImp extends FactoriaServicioAplicacion {
 
-
-
-	
-	private SASesion saSesion;
-	private SACliente saCliente;
-	private SASala saSala;
-	
-	public FactoriaSAImp() {
-		// Initialize DAO factory
-		FactoriaIntegracion daoFactory = FactoriaIntegracion.getInstance();
-		
-		// Create service applications
-		DAOSesion daoSesion = daoFactory.generaDAOSesion();
-		this.saSesion = new SASesionImp(daoSesion);
-		
-		// Create Room Service Application
-		DAOSala daoSala = daoFactory.generaDAOSala();
-		this.saSala = new SASalaImp(daoSala);
-		
-		// Create Client Service Application
-		DAOCliente daoCliente = daoFactory.generaDAOCliente();
-		this.saCliente = new SAClienteImp(daoCliente, this.saSesion);
-	}
-	
-	
 	@Override
 	public SASala generaSASala() {
-		return this.saSala;
+		return new SASalaImp();
 	}
-	
-
 
 	@Override
 	public SAEntrenador crearSAEntrenador() {
 		return new SAEntrenadorImp();
 	}
 
-	
 	@Override
 	public SACliente crearSACliente() {
-		return this.saCliente;
+		return new SAClienteImp();
 	}
 
 	@Override
 	public SASesion crearSASesion() {
-		return this.saSesion;
+		return new SASesionImp();
 	}
 }

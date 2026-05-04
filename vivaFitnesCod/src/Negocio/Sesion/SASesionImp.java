@@ -1,26 +1,21 @@
-package Negocio.FactoriaNegocio;
-
+package Negocio.Sesion;
 
 import Integracion.Sala.TSala;
 import Integracion.Sesion.DAOSesion;
 import Integracion.Sesion.TSesion;
 import Integracion.Entrenador.TEntrenador;
+import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 
 import java.util.Set;
 
 public class SASesionImp implements SASesion {
-
-	private DAOSesion daoSesion;
-
-	public SASesionImp(DAOSesion daoSesion) {
-		this.daoSesion = daoSesion;
-	}
 
 	@Override
 	public int alta_sesion(TSesion datos) {
 		validarSesionAlta(datos);
 		datos.setActivo(1);
 
+		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
 		try {
 			int id = daoSesion.create(datos);
 			if (id <= 0) {
@@ -38,6 +33,7 @@ public class SASesionImp implements SASesion {
 			throw new IllegalArgumentException("El ID de sesion debe ser mayor que 0.");
 		}
 
+		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
 		TSesion sesion;
 		try {
 			sesion = daoSesion.read(idSesion);
@@ -66,6 +62,7 @@ public class SASesionImp implements SASesion {
 			throw new IllegalArgumentException("Los datos de la sesion no pueden ser nulos.");
 		}
 
+		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
 		TSesion existente = daoSesion.read(idSesion);
 
 		if (existente == null) {
@@ -87,11 +84,13 @@ public class SASesionImp implements SASesion {
 		if (idSesion <= 0) {
 			return null;
 		}
+		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
 		return daoSesion.read(idSesion);
 	}
 
 	@Override
 	public Set<TSesion> mostrar_todas_sesiones() {
+		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
 		return daoSesion.read_all();
 	}
 
@@ -100,6 +99,7 @@ public class SASesionImp implements SASesion {
 		if (idSesion <= 0) {
 			return null;
 		}
+		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
 		return daoSesion.getRoom(idSesion);
 	}
 
@@ -108,6 +108,7 @@ public class SASesionImp implements SASesion {
 		if (idSesion <= 0) {
 			return null;
 		}
+		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
 		return (TEntrenador) daoSesion.getTrainer(idSesion);
 	}
 

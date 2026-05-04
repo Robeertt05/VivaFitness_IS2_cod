@@ -4,7 +4,7 @@
 package Controlador;
 
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
-import Negocio.FactoriaNegocio.SASesion;
+import Negocio.Sesion.SASesion;
 
 /**
  * Command to delete a session
@@ -13,16 +13,6 @@ import Negocio.FactoriaNegocio.SASesion;
  * @author azuri
  */
 public class CommandEliminarSesion implements Command {
-	
-	private SASesion saSesion;
-
-	public CommandEliminarSesion() {
-		this(FactoriaServicioAplicacion.getInstance().crearSASesion());
-	}
-	
-	public CommandEliminarSesion(SASesion saSesion) {
-		this.saSesion = saSesion;
-	}
 
 	@Override
 	public Context execute(Object datos) {
@@ -36,6 +26,7 @@ public class CommandEliminarSesion implements Command {
 		
 		int idSesion = (Integer) datos;
 		try {
+			SASesion saSesion = FactoriaServicioAplicacion.getInstance().crearSASesion();
 			int resultado = saSesion.baja_sesion(idSesion);
 			ctx.setSuccess(true);
 			ctx.setMessage("Sesion eliminada correctamente");

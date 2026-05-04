@@ -4,7 +4,7 @@
 package Controlador;
 
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
-import Negocio.FactoriaNegocio.SASesion;
+import Negocio.Sesion.SASesion;
 import Integracion.Sesion.TSesion;
 
 /**
@@ -13,16 +13,6 @@ import Integracion.Sesion.TSesion;
  * @author azuri
  */
 public class CommandMostrarSesion implements Command {
-	
-	private SASesion saSesion;
-
-	public CommandMostrarSesion() {
-		this(FactoriaServicioAplicacion.getInstance().crearSASesion());
-	}
-	
-	public CommandMostrarSesion(SASesion saSesion) {
-		this.saSesion = saSesion;
-	}
 
 	@Override
 	public Context execute(Object datos) {
@@ -35,6 +25,7 @@ public class CommandMostrarSesion implements Command {
 		}
 		
 		int idSesion = (Integer) datos;
+		SASesion saSesion = FactoriaServicioAplicacion.getInstance().crearSASesion();
 		TSesion sesion = saSesion.mostrar_sesion(idSesion);
 		
 		if (sesion != null) {

@@ -1,4 +1,4 @@
-package Negocio.FactoriaNegocio;
+package Negocio.Sesion;
 
 import Integracion.Sesion.TSesion;
 import Integracion.Sala.TSala;

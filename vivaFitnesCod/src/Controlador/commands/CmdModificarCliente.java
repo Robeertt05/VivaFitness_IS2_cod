@@ -8,21 +8,13 @@ import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Presentacion.FactoriaPresentacion.Evento;
 
 public class CmdModificarCliente implements Command {
-	private final SACliente saCliente;
-
-	public CmdModificarCliente() {
-		this(FactoriaServicioAplicacion.getInstance().crearSACliente());
-	}
-
-	public CmdModificarCliente(SACliente saCliente) {
-		this.saCliente = saCliente;
-	}
 
 	@Override
 	public Context execute(Object datos) {
 		Context resultado = new Context();
 		try {
 			TCliente t = (TCliente) datos;
+			SACliente saCliente = FactoriaServicioAplicacion.getInstance().crearSACliente();
 			int res = saCliente.modificar_cliente(t.getId(), t);
 			if (res > 0) {
 				resultado.setEvento(Evento.RES_MODIFICAR_CLIENTE_OK);

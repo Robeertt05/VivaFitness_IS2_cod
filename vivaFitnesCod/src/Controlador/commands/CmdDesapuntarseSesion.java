@@ -7,15 +7,6 @@ import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Presentacion.FactoriaPresentacion.Evento;
 
 public class CmdDesapuntarseSesion implements Command {
-	private final SACliente saCliente;
-
-	public CmdDesapuntarseSesion() {
-		this(FactoriaServicioAplicacion.getInstance().crearSACliente());
-	}
-
-	public CmdDesapuntarseSesion(SACliente saCliente) {
-		this.saCliente = saCliente;
-	}
 
 	@Override
 	public Context execute(Object datos) {
@@ -24,6 +15,7 @@ public class CmdDesapuntarseSesion implements Command {
 			Object[] params = (Object[]) datos;
 			int idCliente = (Integer) params[0];
 			int idSesion = (Integer) params[1];
+			SACliente saCliente = FactoriaServicioAplicacion.getInstance().crearSACliente();
 			int res = saCliente.desapuntar_sesion(idCliente, idSesion);
 			resultado.setObjeto(res);
 			resultado.setSuccess(res > 0);

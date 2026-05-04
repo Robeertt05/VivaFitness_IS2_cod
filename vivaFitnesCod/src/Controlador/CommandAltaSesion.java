@@ -3,7 +3,7 @@
  */
 package Controlador;
 
-import Negocio.FactoriaNegocio.SASesion;
+import Negocio.Sesion.SASesion;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Integracion.Sesion.TSesion;
 
@@ -12,16 +12,6 @@ import Integracion.Sesion.TSesion;
  * @author azuri
  */
 public class CommandAltaSesion implements Command {
-	
-	private SASesion saSesion;
-
-	public CommandAltaSesion() {
-		this(FactoriaServicioAplicacion.getInstance().crearSASesion());
-	}
-	
-	public CommandAltaSesion(SASesion saSesion) {
-		this.saSesion = saSesion;
-	}
 
 	@Override
 	public Context execute(Object datos) {
@@ -35,6 +25,7 @@ public class CommandAltaSesion implements Command {
 		
 		TSesion sesion = (TSesion) datos;
 		try {
+			SASesion saSesion = FactoriaServicioAplicacion.getInstance().crearSASesion();
 			int resultado = saSesion.alta_sesion(sesion);
 			ctx.setSuccess(true);
 			ctx.setMessage("Sesion creada correctamente con ID: " + resultado);

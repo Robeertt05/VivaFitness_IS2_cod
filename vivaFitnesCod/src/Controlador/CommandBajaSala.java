@@ -4,6 +4,7 @@
 package Controlador;
 
 import Negocio.Sala.SASala;
+import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 
 /**
  * Command to delete a room
@@ -12,26 +13,20 @@ import Negocio.Sala.SASala;
  * @author azuri
  */
 public class CommandBajaSala implements Command {
-	
-	private SASala saSala;
-	
-	public CommandBajaSala(SASala saSala) {
-		this.saSala = saSala;
-	}
 
-	@Override
-	public Context execute(Object datos) {
-		Context ctx = new Context();
-		
-		if (!(datos instanceof Integer)) {
-			ctx.setSuccess(false);
-			ctx.setMessage("El ID de la sala debe ser un numero entero");
-			return ctx;
-		}
-		
-		int idSala = (Integer) datos;
-		int resultado = saSala.baja_sala(idSala);
-		
+        @Override
+        public Context execute(Object datos) {
+                Context ctx = new Context();
+
+                if (!(datos instanceof Integer)) {
+                        ctx.setSuccess(false);
+                        ctx.setMessage("El ID de la sala debe ser un numero entero");
+                        return ctx;
+                }
+					int idSala = (Integer) datos;
+			 		SASala saSala = FactoriaServicioAplicacion.getInstance().generaSASala();
+			 		int resultado = saSala.baja_sala(idSala);
+				
 		if (resultado > 0) {
 			ctx.setSuccess(true);
 			ctx.setMessage("Sala eliminada correctamente");
