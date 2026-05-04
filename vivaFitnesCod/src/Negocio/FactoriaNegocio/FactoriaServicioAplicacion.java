@@ -4,8 +4,8 @@
  * Permite desacoplar la creacion de SA de su implementacion concreta.
  */
 package Negocio.FactoriaNegocio;
-import Negocio.entrenador.SAEntrenador;
 import Negocio.Cliente.SACliente;
+import Negocio.Entrenador.SAEntrenador;
 
 /**
  * Abstract factory for Service Application objects.

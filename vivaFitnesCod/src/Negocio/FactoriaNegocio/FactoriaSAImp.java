@@ -4,10 +4,10 @@
  */
 package Negocio.FactoriaNegocio;
 
-import Negocio.entrenador.SAEntrenador;
-import Negocio.entrenador.SAEntrenadorImp;
 import Negocio.Cliente.SACliente;
 import Negocio.Cliente.SAClienteImp;
+import Negocio.Entrenador.SAEntrenador;
+import Negocio.Entrenador.SAEntrenadorImp;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 
 import Integracion.Sesion.DAOSesion;

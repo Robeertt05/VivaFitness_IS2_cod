@@ -3,7 +3,7 @@ package Negocio.FactoriaNegocio;
 import Integracion.Sala.TSala;
 import Integracion.Sesion.DAOSesion;
 import Integracion.Sesion.TSesion;
-import Negocio.entrenador.TEntrenador;
+import Integracion.Entrenador.TEntrenador;
 import java.util.Set;
 
 public class SASesionImp implements SASesion {
