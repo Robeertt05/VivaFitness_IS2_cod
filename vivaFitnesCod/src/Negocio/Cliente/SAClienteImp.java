@@ -5,8 +5,6 @@ package Negocio.Cliente;
 
 import Integracion.Cliente.TCliente;
 import Integracion.Cliente.DAOCliente;
-import Negocio.FactoriaNegocio.SASesion;
-import Integracion.FactoriaIntegracion.TSesion;
 import java.util.Set;
 
 /** 
@@ -16,16 +14,13 @@ import java.util.Set;
 public class SAClienteImp implements SACliente {
 	
 	private DAOCliente daoCliente;
-	private SASesion saSesion;
 	
-	public SAClienteImp(DAOCliente daoCliente, SASesion saSesion) {
+	public SAClienteImp(DAOCliente daoCliente) {
 		this.daoCliente = daoCliente;
-		this.saSesion = saSesion;
 	}
 	
 	@Override
 	public int alta_cliente(TCliente datos) {
-		// begin-user-code
 		// Validate data
 		if (datos == null || datos.getNombreCliente() == null || 
 			datos.getNombreCliente().isEmpty()) {
@@ -33,24 +28,20 @@ public class SAClienteImp implements SACliente {
 		}
 		// Call DAO to create client
 		return daoCliente.create(datos);
-		// end-user-code
 	}
 
 	@Override
 	public int baja_cliente(int id) {
-		// begin-user-code
 		// Validate ID
 		if (id <= 0) {
 			return 0;
 		}
 		// Call DAO to delete client
 		return daoCliente.delete(id);
-		// end-user-code
 	}
 
 	@Override
 	public int modificar_cliente(int id, TCliente datos) {
-		// begin-user-code
 		// Validate data
 		if (id <= 0 || datos == null) {
 			return 0;
@@ -58,25 +49,20 @@ public class SAClienteImp implements SACliente {
 		datos.setIdCliente(id);
 		// Call DAO to update client
 		return daoCliente.update(datos);
-		// end-user-code
 	}
 
 	@Override
-	public void mostrar_cliente(int id) {
-		// begin-user-code
+	public TCliente mostrar_cliente(int id) {
 		// Validate ID
 		if (id <= 0) {
-			return;
+			return null;
 		}
 		// Call DAO to retrieve client
-		TCliente cliente = daoCliente.read(id);
-		if (cliente != null) {
-			System.out.println(cliente.toString());
-		}
-		// end-user-code
+		return daoCliente.read(id);
 	}
 
 	@Override
+<<<<<<< Updated upstream
 	public int apuntarse_sesion(int idSesion, int hora, String fecha) {
 		// begin-user-code
 		// Validate parameters (note: hour and date are for reference, actual session uses its own values)
@@ -104,26 +90,30 @@ public class SAClienteImp implements SACliente {
 		// TODO: This would need a ClientSesion mapping table
 		return saSesion.apuntar_cliente_sesion(idSesion, 0); // 0 is placeholder for idCliente from context
 		// end-user-code
+=======
+	public Set<TCliente> mostrar_todos_clientes() {
+		// Get all clients
+		return daoCliente.read_all();
 	}
 
 	@Override
-	public void mostrar_sesiones() {
-		// begin-user-code
-		// Get all sessions
-		if (saSesion == null) {
-			return;
+	public int apuntarse_sesion(int idCliente, int idSesion) {
+		// Validate parameters
+		if (idCliente <= 0 || idSesion <= 0) {
+			return 0;
 		}
-		
-		Set<TSesion> sesiones = saSesion.mostrar_todas_sesiones();
-		if (sesiones != null) {
-			for (TSesion sesion : sesiones) {
-				System.out.println(sesion.toString());
-			}
-		}
-		// end-user-code
+		// TODO: Implement when ClientSesion mapping table is available
+		return 1; // Placeholder success
+>>>>>>> Stashed changes
 	}
 
 	@Override
+	public void mostrar_sesiones(int idCliente) {
+		// TODO: Implement when ClientSesion mapping table is available
+	}
+
+	@Override
+<<<<<<< Updated upstream
 	public void desapuntar_sesion(int id, int idSesion) {
 		// begin-user-code
 		// Validate parameters
@@ -134,5 +124,22 @@ public class SAClienteImp implements SACliente {
 		// Unregister client from session
 		saSesion.desapuntar_cliente_sesion(idSesion, id);
 		// end-user-code
+=======
+	public int desapuntar_sesion(int idCliente, int idSesion) {
+		// Validate parameters
+		if (idCliente <= 0 || idSesion <= 0) {
+			return 0;
+		}
+		// TODO: Implement when ClientSesion mapping table is available
+		return 1; // Placeholder success
+	}
+
+	@Override
+	public TCliente read_by_dni(String dni) {
+		if (dni == null || dni.isEmpty()) {
+			return null;
+		}
+		return daoCliente.read_by_dni(dni);
+>>>>>>> Stashed changes
 	}
 }

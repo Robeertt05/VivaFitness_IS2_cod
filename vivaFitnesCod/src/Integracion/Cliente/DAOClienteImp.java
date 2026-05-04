@@ -46,4 +46,10 @@ public class DAOClienteImp implements DAOCliente {
 		return null;
 		// end-user-code
 	}
-}
+	@Override
+	public TCliente read_by_dni(String dni) {
+		// begin-user-code
+		// TODO Apéndice de método generado automáticamente
+		return null;
+		// end-user-code
+	}}

@@ -37,8 +37,14 @@ public class FactoriaSAImp extends FactoriaServicioAplicacion {
 	 * Get Client Service Application  
 	 * @return SACliente instance
 	 */
+<<<<<<< Updated upstream
 	public SACliente getSACliente() {
 		return this.saCliente;
+=======
+	@Override
+	public SACliente crearSACliente() {
+		return new SAClienteImp(FactoriaIntegracion.getInstance().generaDAOCliente());
+>>>>>>> Stashed changes
 	}
 	
 	/**

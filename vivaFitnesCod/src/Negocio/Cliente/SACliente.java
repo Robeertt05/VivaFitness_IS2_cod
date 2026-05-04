@@ -3,48 +3,36 @@
  */
 package Negocio.Cliente;
 
+<<<<<<< Updated upstream
+=======
+import Integracion.Cliente.TCliente;
+import java.util.Set;
+
+>>>>>>> Stashed changes
 /** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
+ * Service Application interface for Client
  * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public interface SACliente {
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param datos
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	public int alta_cliente(TCliente datos);
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param id
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public int baja_cliente(int id);
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param id
-	* @param datos
-	* @return
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
 	public int modificar_cliente(int id, TCliente datos);
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @param id
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
-	public void mostrar_cliente(int id);
+	public TCliente mostrar_cliente(int id);
+
+	public Set<TCliente> mostrar_todos_clientes();
+
+	public int apuntarse_sesion(int idCliente, int idSesion);
+
+	public void mostrar_sesiones(int idCliente);
+
+	public int desapuntar_sesion(int idCliente, int idSesion);
+
+	public TCliente read_by_dni(String dni);
+}
 
 	/** 
 	* <!-- begin-UML-doc -->
