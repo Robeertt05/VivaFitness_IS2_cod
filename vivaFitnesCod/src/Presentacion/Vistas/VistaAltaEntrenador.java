@@ -9,7 +9,7 @@ import Presentacion.FactoriaPresentacion.IGUI;
 import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Context;
 import Controlador.Controller;
-import Negocio.entrenador.TEntrenador;
+import Integracion.Entrenador.TEntrenador;
 
 public class VistaAltaEntrenador extends JFrame implements IGUI {
 
