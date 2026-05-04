@@ -4,15 +4,9 @@
 package Integracion.Cliente;
 
 import java.util.Set;
+import Integracion.FactoriaIntegracion.TSesion;
 import Integracion.Sesion.TClienteSesion;
-import Integracion.Sesion.TSesion;
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author azuri
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
 public interface DAOCliente {
 	/** 
 	* <!-- begin-UML-doc -->
@@ -58,13 +52,18 @@ public interface DAOCliente {
 	*/
 	public Set<TCliente> read_all();
 
+	/** 
+	* Read a client by DNI
+	* @param dni
+	* @return TCliente or null
+	*/
 	public TCliente readByDni(String dni);
 
-	public int apuntarSesion(TClienteSesion datos);
+	public int apuntarSesion(Integracion.Sesion.TClienteSesion datos);
 
 	public int desapuntarSesion(int idCliente, int idSesion);
 
-	public Set<TSesion> readSesionesCliente(int idCliente);
-
 	public Set<TSesion> readSesionesDisponibles();
+
+	public Set<TSesion> readSesionesCliente(int idCliente);
 }
