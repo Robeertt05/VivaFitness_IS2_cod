@@ -3,6 +3,7 @@
  */
 package Controlador;
 
+import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.FactoriaNegocio.SASesion;
 import Integracion.Sesion.TSesion;
 import java.util.Set;
@@ -14,6 +15,10 @@ import java.util.Set;
 public class CommandMostrarTodasSesiones implements Command {
 	
 	private SASesion saSesion;
+
+	public CommandMostrarTodasSesiones() {
+		this(FactoriaServicioAplicacion.getInstance().crearSASesion());
+	}
 	
 	public CommandMostrarTodasSesiones(SASesion saSesion) {
 		this.saSesion = saSesion;

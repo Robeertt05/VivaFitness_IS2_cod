@@ -64,11 +64,11 @@ public class FactoriaSAImp extends FactoriaServicioAplicacion {
 	
 	@Override
 	public SACliente crearSACliente() {
-		return new SAClienteImp(FactoriaIntegracion.getInstance().generaDAOCliente(), crearSASesion());
+		return this.saCliente;
 	}
 
 	@Override
 	public SASesion crearSASesion() {
-		return new SASesionImp(FactoriaIntegracion.getInstance().generaDAOSesion());
+		return this.saSesion;
 	}
 }

@@ -10,8 +10,6 @@ import Integracion.Sala.DAOSala;
 import Integracion.Sala.DAOSalaImp;
 import Integracion.Cliente.DAOCliente;
 import Integracion.Cliente.DAOClienteImp;
-import Integracion.Sala.DAOSala;
-import Integracion.Sala.DAOSalaImp;
 import Integracion.Sesion.DAOSesion;
 import Integracion.Sesion.DAOSesionImp;
 

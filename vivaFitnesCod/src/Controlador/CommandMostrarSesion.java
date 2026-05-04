@@ -3,6 +3,7 @@
  */
 package Controlador;
 
+import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.FactoriaNegocio.SASesion;
 import Integracion.Sesion.TSesion;
 
@@ -14,6 +15,10 @@ import Integracion.Sesion.TSesion;
 public class CommandMostrarSesion implements Command {
 	
 	private SASesion saSesion;
+
+	public CommandMostrarSesion() {
+		this(FactoriaServicioAplicacion.getInstance().crearSASesion());
+	}
 	
 	public CommandMostrarSesion(SASesion saSesion) {
 		this.saSesion = saSesion;

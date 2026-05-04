@@ -3,6 +3,7 @@
  */
 package Controlador;
 
+import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.FactoriaNegocio.SASesion;
 
 /**
@@ -14,6 +15,10 @@ import Negocio.FactoriaNegocio.SASesion;
 public class CommandEliminarSesion implements Command {
 	
 	private SASesion saSesion;
+
+	public CommandEliminarSesion() {
+		this(FactoriaServicioAplicacion.getInstance().crearSASesion());
+	}
 	
 	public CommandEliminarSesion(SASesion saSesion) {
 		this.saSesion = saSesion;

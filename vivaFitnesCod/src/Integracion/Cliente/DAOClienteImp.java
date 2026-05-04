@@ -215,10 +215,7 @@ public class DAOClienteImp implements DAOCliente {
 				PreparedStatement ps = con.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery()) {
 			while (rs.next()) {
-				TSesion sesion = mapSesionSql(rs);
-				sesion.setCapacidadMaxima(rs.getInt("aforo"));
-				sesion.setParticipantsActuales(rs.getInt("inscritos"));
-				sesiones.add(sesion);
+				sesiones.add(mapSesionSql(rs));
 			}
 			return sesiones;
 		} catch (SQLException e) {
@@ -271,18 +268,15 @@ public class DAOClienteImp implements DAOCliente {
 	private TSesion mapSesionSql(ResultSet rs) throws SQLException {
 		TSesion sesion = new TSesion();
 		sesion.setIdSesion(rs.getInt("idSesion"));
-		sesion.setNombreSesion(rs.getString("objetivo"));
-		sesion.setDescripcion(rs.getString("objetivo"));
+		sesion.setObjetivo(rs.getString("objetivo"));
+		sesion.setDuracion(rs.getInt("duracion"));
 		sesion.setIdEntrenador(rs.getInt("idEntrenador"));
 		sesion.setIdSala(rs.getInt("idSala"));
 		sesion.setActivo(rs.getInt("activo"));
 		java.sql.Timestamp horario = rs.getTimestamp("horario");
 		if (horario != null) {
-			sesion.setFecha(horario.toLocalDateTime().toLocalDate().toString());
-			sesion.setHora(horario.toLocalDateTime().toLocalTime().toString());
+			sesion.setHorario(horario.toLocalDateTime().toLocalDate().toString());
 		}
-		sesion.setCapacidadMaxima(0);
-		sesion.setParticipantsActuales(0);
 		return sesion;
 	}
 

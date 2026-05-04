@@ -10,12 +10,21 @@ import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Presentacion.FactoriaPresentacion.Evento;
 
 public class CmdMostrarSesionesDisponiblesCliente implements Command {
+	private final SACliente saCliente;
+
+	public CmdMostrarSesionesDisponiblesCliente() {
+		this(FactoriaServicioAplicacion.getInstance().crearSACliente());
+	}
+
+	public CmdMostrarSesionesDisponiblesCliente(SACliente saCliente) {
+		this.saCliente = saCliente;
+	}
+
 	@Override
 	public Context execute(Object datos) {
 		Context resultado = new Context();
 		try {
-			SACliente sa = FactoriaServicioAplicacion.getInstance().crearSACliente();
-			Set<TSesion> sesiones = sa.mostrar_sesiones();
+			Set<TSesion> sesiones = saCliente.mostrar_sesiones();
 			resultado.setObjeto(sesiones);
 			resultado.setSuccess(sesiones != null);
 			resultado.setEvento(sesiones != null ? Evento.RES_MOSTRAR_SESIONES_DISPONIBLES_CLIENTE_OK

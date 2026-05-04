@@ -10,12 +10,21 @@ import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Presentacion.FactoriaPresentacion.Evento;
 
 public class CmdMostrarClientes implements Command {
+	private final SACliente saCliente;
+
+	public CmdMostrarClientes() {
+		this(FactoriaServicioAplicacion.getInstance().crearSACliente());
+	}
+
+	public CmdMostrarClientes(SACliente saCliente) {
+		this.saCliente = saCliente;
+	}
+
 	@Override
 	public Context execute(Object datos) {
 		Context resultado = new Context();
 		try {
-			SACliente sa = FactoriaServicioAplicacion.getInstance().crearSACliente();
-			Set<TCliente> clientes = sa.mostrar_todos_clientes();
+			Set<TCliente> clientes = saCliente.mostrar_todos_clientes();
 			resultado.setObjeto(clientes);
 			resultado.setSuccess(clientes != null);
 			resultado.setEvento(clientes != null ? Evento.RES_MOSTRAR_CLIENTES_OK : Evento.RES_MOSTRAR_CLIENTES_KO);

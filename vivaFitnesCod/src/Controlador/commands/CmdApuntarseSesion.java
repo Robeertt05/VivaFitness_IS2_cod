@@ -8,12 +8,21 @@ import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Presentacion.FactoriaPresentacion.Evento;
 
 public class CmdApuntarseSesion implements Command {
+	private final SACliente saCliente;
+
+	public CmdApuntarseSesion() {
+		this(FactoriaServicioAplicacion.getInstance().crearSACliente());
+	}
+
+	public CmdApuntarseSesion(SACliente saCliente) {
+		this.saCliente = saCliente;
+	}
+
 	@Override
 	public Context execute(Object datos) {
 		Context resultado = new Context();
 		try {
-			SACliente sa = FactoriaServicioAplicacion.getInstance().crearSACliente();
-			int res = sa.apuntarse_sesion((TClienteSesion) datos);
+			int res = saCliente.apuntarse_sesion((TClienteSesion) datos);
 			if (res > 0) {
 				resultado.setEvento(Evento.RES_APUNTARSE_SESION_OK);
 				resultado.setSuccess(true);

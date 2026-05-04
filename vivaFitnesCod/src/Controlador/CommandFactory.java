@@ -8,7 +8,6 @@ package Controlador;
 import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.commands.*;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
-import Negocio.FactoriaNegocio.SASesion;
 import Negocio.Sala.SASala;
 
 /**
@@ -21,13 +20,11 @@ public class CommandFactory {
 
 	/** Unica instancia (Singleton). */
 	private static CommandFactory instance;
-	private final SASesion saSesion;
 	private final SASala saSala;
 
 	/** Constructor privado para forzar uso del Singleton. */
 	private CommandFactory() {
 		FactoriaServicioAplicacion factory = FactoriaServicioAplicacion.getInstance();
-		this.saSesion = factory.crearSASesion();
 		this.saSala = factory.generaSASala();
 	}
 
@@ -99,19 +96,19 @@ public class CommandFactory {
 			
 			// --- Sesion ---
 			case ALTA_SESION:
-				return new CommandAltaSesion(saSesion);
+				return new CommandAltaSesion();
 			case BAJA_SESION:
-				return new CommandEliminarSesion(saSesion);
+				return new CommandEliminarSesion();
 			case MODIFICAR_SESION:
-				return new CommandModificarSesion(saSesion);
+				return new CommandModificarSesion();
 			case MOSTRAR_SESION:
-				return new CommandMostrarSesion(saSesion);
+				return new CommandMostrarSesion();
 			case MOSTRAR_TODAS_SESIONES:
-				return new CommandMostrarTodasSesiones(saSesion);
+				return new CommandMostrarTodasSesiones();
 			case MOSTRAR_SALA_SESION:
-				return new CommandMostrarSalaSesion(saSesion);
+				return new CommandMostrarSalaSesion();
 			case MOSTRAR_ENTRENADOR_SESION:
-				return new CommandMostrarEntrenadorSesion(saSesion);
+				return new CommandMostrarEntrenadorSesion();
 			
 			default:
 				return null;
