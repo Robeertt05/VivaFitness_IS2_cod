@@ -5,6 +5,8 @@ package Integracion.Sala;
 
 import java.util.Set;
 
+import Integracion.Sesion.TSesion;
+
 /** 
  * Data Access Object interface for Sala (Room)
  * Supports CRUD operations and queries for gym rooms/spaces

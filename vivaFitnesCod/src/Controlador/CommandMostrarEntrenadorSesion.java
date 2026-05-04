@@ -3,8 +3,8 @@
  */
 package Controlador;
 
+import Negocio.Entrenador.TEntrenador;
 import Negocio.FactoriaNegocio.SASesion;
-import Negocio.entrenador.TEntrenador;
 
 /**
  * Command to display the trainer assigned to a session

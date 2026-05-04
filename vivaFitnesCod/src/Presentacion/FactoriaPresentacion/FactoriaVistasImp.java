@@ -35,6 +35,18 @@ public class FactoriaVistasImp extends FactoriaVistas {
 				return new VistaMostrarEntrenadores();
 			case CREAR_SESION:
 				return new VistaCrearSesion();
+			case ALTA_SALA:
+				return new VistaAltaSala();
+			case BAJA_SALA:
+				return new VistaBajaSala();
+			case MODIFICAR_SALA:
+				return new VistaModificarSala();
+			case MOSTRAR_SALA:
+				return new VistaMostrarSala();
+			case MOSTRAR_TODAS_SALAS:
+				return new VistaMostrarTodasSalas();
+			case OBTENER_SESIONES_SALA:
+				return new VistaObtenerSesionesSala();
 			default:
 				return super.generarVistas(evento);
 		}

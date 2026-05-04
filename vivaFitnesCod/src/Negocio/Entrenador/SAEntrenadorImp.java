@@ -2,7 +2,7 @@
  * Implementacion del Servicio de Aplicacion de Entrenador.
  * Patron: Fachada + coordina con la capa de Integracion via FactoriaIntegracion.
  */
-package Negocio.entrenador;
+package Negocio.Entrenador;
 
 import java.util.Set;
 

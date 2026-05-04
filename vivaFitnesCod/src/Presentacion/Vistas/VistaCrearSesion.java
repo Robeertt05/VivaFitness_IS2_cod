@@ -22,7 +22,7 @@ import Presentacion.FactoriaPresentacion.IGUI;
 import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Controller;
 import Controlador.Context;
-import Integracion.FactoriaIntegracion.TSesion;
+import Integracion.Sesion.TSesion;
 
 /** 
  * Vista para crear una nueva sesion

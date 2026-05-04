@@ -4,7 +4,8 @@
 package Negocio.FactoriaNegocio;
 
 import Integracion.Sala.TSala;
-import Integracion.Sala.TSesion;
+import Integracion.Sesion.TSesion;
+import Negocio.Sala.SASala;
 import Integracion.Sala.DAOSala;
 import java.util.Set;
 

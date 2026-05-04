@@ -5,6 +5,8 @@ package Integracion.Sala;
 
 import java.util.Set;
 
+import Integracion.Sesion.TSesion;
+
 /** 
  * Data Access Object implementation for Sala (Room)
  * Handles database operations for room management

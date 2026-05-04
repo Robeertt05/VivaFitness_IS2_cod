@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Presentacion.Entrenador;
+package Presentacion.Vistas;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

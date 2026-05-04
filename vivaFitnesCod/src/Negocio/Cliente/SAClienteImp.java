@@ -6,7 +6,7 @@ package Negocio.Cliente;
 import Integracion.Cliente.TCliente;
 import Integracion.Cliente.DAOCliente;
 import Negocio.FactoriaNegocio.SASesion;
-import Integracion.FactoriaIntegracion.TSesion;
+import Integracion.Sesion.TSesion;
 import java.util.Set;
 
 /** 

@@ -4,7 +4,7 @@
 package Negocio.Sala;
 
 import Integracion.Sala.TSala;
-import Integracion.Sala.TSesion;
+import Integracion.Sesion.TSesion;
 import java.util.Set;
 
 /** 

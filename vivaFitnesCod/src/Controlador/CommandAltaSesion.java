@@ -4,7 +4,7 @@
 package Controlador;
 
 import Negocio.FactoriaNegocio.SASesion;
-import Integracion.FactoriaIntegracion.TSesion;
+import Integracion.Sesion.TSesion;
 
 /**
  * Command to create a new session

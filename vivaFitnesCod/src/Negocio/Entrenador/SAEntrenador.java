@@ -2,7 +2,7 @@
  * Servicio de Aplicacion para Entrenador.
  * Patron: Fachada (Facade) - expone las operaciones de negocio al Controlador.
  */
-package Negocio.entrenador;
+package Negocio.Entrenador;
 
 import java.util.Set;
 

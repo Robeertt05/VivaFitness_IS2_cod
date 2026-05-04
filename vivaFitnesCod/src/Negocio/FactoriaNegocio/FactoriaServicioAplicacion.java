@@ -4,7 +4,7 @@
  * Permite desacoplar la creacion de SA de su implementacion concreta.
  */
 package Negocio.FactoriaNegocio;
-import Negocio.entrenador.SAEntrenador;
+import Negocio.Entrenador.SAEntrenador;
 import Negocio.Sala.SASala;
 import Negocio.Cliente.SACliente;
 

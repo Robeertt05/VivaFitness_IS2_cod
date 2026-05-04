@@ -8,6 +8,8 @@ package Integracion.FactoriaIntegracion;
 import Integracion.Entrenador.DAOEntrenador;
 import Integracion.Sala.DAOSala;
 import Integracion.Cliente.DAOCliente;
+import Integracion.Sala.DAOSala;
+import Integracion.Sesion.DAOSesion;
 
 /**
  * <!-- begin-UML-doc -->

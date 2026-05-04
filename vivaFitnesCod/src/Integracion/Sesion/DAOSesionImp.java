@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Integracion.FactoriaIntegracion;
+package Integracion.Sesion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import Integracion.ConnectionManager.ConnectionManager;
+import Integracion.Sala.TSala;
 import Negocio.entrenador.TEntrenador;
 
 /** 
