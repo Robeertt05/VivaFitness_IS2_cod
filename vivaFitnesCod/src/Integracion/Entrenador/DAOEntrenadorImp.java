@@ -25,7 +25,7 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 
 	private RuntimeException databaseError(SQLException e) {
 		return new RuntimeException(
-				"No se pudo conectar con la base de datos. Comprueba que MySQL este iniciado en localhost:3306 y que exista la base vivafitness.",
+				"No se pudo conectar con la base de datos. Compruebe que está encendida.",
 				e);
 	}
 
