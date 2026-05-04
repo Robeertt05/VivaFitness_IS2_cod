@@ -4,7 +4,6 @@
  * Permite desacoplar la creacion de SA de su implementacion concreta.
  */
 package Negocio.FactoriaNegocio;
-
 import Negocio.entrenador.SAEntrenador;
 import Negocio.Cliente.SACliente;
 
@@ -22,10 +21,12 @@ public abstract class FactoriaServicioAplicacion {
 	 * Devuelve la unica instancia de la factoria concreta (Singleton).
 	 */
 	public static FactoriaServicioAplicacion getInstance() {
+
 		if (instance == null) {
 			instance = new FactoriaSAImp();
 		}
 		return instance;
+
 	}
 
 	/**
@@ -42,4 +43,14 @@ public abstract class FactoriaServicioAplicacion {
 	 * Crea y devuelve un SA de Sesion.
 	 */
 	public abstract SASesion crearSASesion();
+
+
+	
+	public SASala generaSASala() {
+
+		return null;
+		// end-user-code
+	}
+
+	
 }

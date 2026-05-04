@@ -9,7 +9,7 @@ import Negocio.entrenador.TEntrenador;
 import java.util.Set;
 
 /** 
- * Service Application interface for Sesion
+
  * @author azuri
  */
 public interface SASesion {
@@ -62,4 +62,17 @@ public interface SASesion {
 	 * @return TEntrenador o null si no existe
 	 */
 	public TEntrenador mostrar_entrenador_sesion(int idSesion);
+	
+	/** 
+	 * Alta sesión - Create a new session
+	 * @param datos Session data
+	 * @return Session ID if successful, 0 otherwise
+	 */
+	public int alta_sesion(TSesion datos);
+	
+	/** 
+	 * Mostrar todas sesiones - Get all active sessions
+	 * @return Set of all active sessions
+	 */
+	public Set<TSesion> mostrar_todas_sesiones();
 }
