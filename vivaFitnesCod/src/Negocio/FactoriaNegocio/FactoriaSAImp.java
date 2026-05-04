@@ -6,12 +6,14 @@ package Negocio.FactoriaNegocio;
 
 import Negocio.entrenador.SAEntrenador;
 import Negocio.entrenador.SAEntrenadorImp;
+import Negocio.Sala.SASala;
+import Negocio.Sala.SASalaImp;
 import Negocio.Cliente.SACliente;
 import Negocio.Cliente.SAClienteImp;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 
 import Integracion.FactoriaIntegracion.DAOSesion;
-import Integracion.FactoriaIntegracion.DAOSala;
+import Integracion.Sala.DAOSala;
 import Integracion.FactoriaIntegracion.DAOCliente;
 
 /**

@@ -1,4 +1,4 @@
-package Presentacion.Vistas;
+package Presentacion.Sala;
 
 import javax.swing.*;
 import java.awt.*;

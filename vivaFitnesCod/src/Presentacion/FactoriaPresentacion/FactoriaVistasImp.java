@@ -5,6 +5,7 @@
 package Presentacion.FactoriaPresentacion;
 
 import Presentacion.Vistas.*;
+import Presentacion.Sala.*;
 
 /**
  * <!-- begin-UML-doc -->

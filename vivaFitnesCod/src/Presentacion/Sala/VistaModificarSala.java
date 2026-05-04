@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Presentacion.Entrenador;
+package Presentacion.Sala;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -102,18 +102,19 @@ public class VistaModificarSala extends JFrame implements IGUI {
 		}
 	}
 	
-	public void displayRoomData(TSala sala) {
+	public TSala getRoomData() {
+		TSala sala = new TSala();
+		sala.setIdSala(getSelectedRoomId());
+		sala.setNombreSala(txtNombreSala.getText());
+		sala.setAforo((Integer) spinAforo.getValue());
+		return sala;
+	}
+	
+	public void loadRoomData(TSala sala) {
 		if (sala != null) {
 			txtNombreSala.setText(sala.getNombreSala());
 			spinAforo.setValue(sala.getAforo());
 		}
-	}
-	
-	public TSala getUpdatedRoomData() {
-		TSala sala = new TSala();
-		sala.setNombreSala(txtNombreSala.getText());
-		sala.setAforo((Integer) spinAforo.getValue());
-		return sala;
 	}
 	
 	public void addUpdateButtonListener(ActionListener listener) {
@@ -128,6 +129,6 @@ public class VistaModificarSala extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
-		// Update when room data is loaded
+		// Update with result from controller
 	}
 }

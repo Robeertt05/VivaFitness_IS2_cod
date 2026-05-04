@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Negocio.FactoriaNegocio;
+package Negocio.Sala;
 
 import Integracion.Sala.TSala;
 import Integracion.Sala.TSesion;

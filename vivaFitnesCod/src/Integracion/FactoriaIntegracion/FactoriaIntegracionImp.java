@@ -6,6 +6,8 @@ package Integracion.FactoriaIntegracion;
 
 import Integracion.Entrenador.DAOEntrenador;
 import Integracion.Entrenador.DAOEntrenadorImp;
+import Integracion.Sala.DAOSala;
+import Integracion.Sala.DAOSalaImp;
 import Integracion.Cliente.DAOCliente;
 import Integracion.Cliente.DAOClienteImp;
 

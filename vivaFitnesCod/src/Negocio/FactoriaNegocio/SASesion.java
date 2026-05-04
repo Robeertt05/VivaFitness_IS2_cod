@@ -4,7 +4,7 @@
 package Negocio.FactoriaNegocio;
 
 import Integracion.FactoriaIntegracion.TSesion;
-import Integracion.FactoriaIntegracion.TSala;
+import Integracion.Sala.TSala;
 import Negocio.entrenador.TEntrenador;
 import java.util.Set;
 

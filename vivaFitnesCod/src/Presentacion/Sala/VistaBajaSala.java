@@ -1,15 +1,13 @@
 /**
  * 
  */
-package Presentacion.Entrenador;
+package Presentacion.Sala;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JSpinner;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -18,42 +16,37 @@ import java.util.Set;
 
 import Presentacion.FactoriaPresentacion.IGUI;
 import Controlador.Context;
-import Integracion.Sala.TSala;
 
 /** 
- * View for updating room details
+ * View for deleting a room
  * @author azuri
  */
-public class VistaModificarSala extends JFrame implements IGUI {
+public class VistaBajaSala extends JFrame implements IGUI {
 	
 	private Set<ActionListener> actionListener;
 	private Set<JButton> jButton;
 	private Set<JPanel> jPanel;
-	private Set<JTextField> jTextField;
 	private Set<JLabel> jLabel;
 	
 	private JComboBox<Integer> cbSala;
-	private JTextField txtNombreSala;
-	private JSpinner spinAforo;
-	private JButton btnModificar;
+	private JButton btnEliminar;
 	private JButton btnCancelar;
 	
-	public VistaModificarSala() {
-		setTitle("Update Room");
-		setSize(300, 250);
+	public VistaBajaSala() {
+		setTitle("Delete Room");
+		setSize(300, 150);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		actionListener = new HashSet<>();
 		jButton = new HashSet<>();
 		jPanel = new HashSet<>();
-		jTextField = new HashSet<>();
 		jLabel = new HashSet<>();
 		
 		initComponents();
 	}
 	
 	private void initComponents() {
-		JPanel mainPanel = new JPanel(new GridLayout(4, 2, 10, 10));
+		JPanel mainPanel = new JPanel(new GridLayout(1, 2, 10, 10));
 		
 		// Select Room
 		jLabel.add(new JLabel("Select Room:"));
@@ -61,26 +54,13 @@ public class VistaModificarSala extends JFrame implements IGUI {
 		cbSala = new JComboBox<>();
 		mainPanel.add(cbSala);
 		
-		// Room Name
-		jLabel.add(new JLabel("Room Name:"));
-		mainPanel.add(new JLabel("Room Name:"));
-		txtNombreSala = new JTextField();
-		jTextField.add(txtNombreSala);
-		mainPanel.add(txtNombreSala);
-		
-		// Capacity
-		jLabel.add(new JLabel("Capacity:"));
-		mainPanel.add(new JLabel("Capacity:"));
-		spinAforo = new JSpinner();
-		mainPanel.add(spinAforo);
-		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
-		btnModificar = new JButton("Update");
+		btnEliminar = new JButton("Delete");
 		btnCancelar = new JButton("Cancel");
-		jButton.add(btnModificar);
+		jButton.add(btnEliminar);
 		jButton.add(btnCancelar);
-		buttonPanel.add(btnModificar);
+		buttonPanel.add(btnEliminar);
 		buttonPanel.add(btnCancelar);
 		
 		jPanel.add(mainPanel);
@@ -102,22 +82,8 @@ public class VistaModificarSala extends JFrame implements IGUI {
 		}
 	}
 	
-	public void displayRoomData(TSala sala) {
-		if (sala != null) {
-			txtNombreSala.setText(sala.getNombreSala());
-			spinAforo.setValue(sala.getAforo());
-		}
-	}
-	
-	public TSala getUpdatedRoomData() {
-		TSala sala = new TSala();
-		sala.setNombreSala(txtNombreSala.getText());
-		sala.setAforo((Integer) spinAforo.getValue());
-		return sala;
-	}
-	
-	public void addUpdateButtonListener(ActionListener listener) {
-		btnModificar.addActionListener(listener);
+	public void addDeleteButtonListener(ActionListener listener) {
+		btnEliminar.addActionListener(listener);
 		actionListener.add(listener);
 	}
 	
@@ -128,6 +94,6 @@ public class VistaModificarSala extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
-		// Update when room data is loaded
+		// Update room list when rooms are refreshed
 	}
 }

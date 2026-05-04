@@ -17,7 +17,7 @@ import java.util.Set;
 
 import Presentacion.FactoriaPresentacion.IGUI;
 import Controlador.Context;
-import Integracion.FactoriaIntegracion.TSala;
+import Integracion.Sala.TSala;
 
 /** 
  * View for creating a new room

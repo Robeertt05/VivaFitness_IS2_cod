@@ -1,10 +1,10 @@
 /**
  * 
  */
-package Negocio.FactoriaNegocio;
+package Negocio.Sala;
 
-import Integracion.FactoriaIntegracion.TSala;
-import Integracion.FactoriaIntegracion.TSesion;
+import Integracion.Sala.TSala;
+import Integracion.Sala.TSesion;
 import java.util.Set;
 
 /** 

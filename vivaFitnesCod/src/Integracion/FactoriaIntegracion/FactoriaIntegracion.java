@@ -6,6 +6,7 @@
 package Integracion.FactoriaIntegracion;
 
 import Integracion.Entrenador.DAOEntrenador;
+import Integracion.Sala.DAOSala;
 import Integracion.Cliente.DAOCliente;
 
 /**

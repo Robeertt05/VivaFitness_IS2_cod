@@ -3,8 +3,8 @@
  */
 package Controlador;
 
-import Negocio.FactoriaNegocio.SASala;
-import Integracion.FactoriaIntegracion.TSala;
+import Negocio.Sala.SASala;
+import Integracion.Sala.TSala;
 import java.util.Set;
 
 /**

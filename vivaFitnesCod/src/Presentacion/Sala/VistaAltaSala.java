@@ -1,12 +1,11 @@
 /**
  * 
  */
-package Presentacion.Entrenador;
+package Presentacion.Sala;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
@@ -21,10 +20,10 @@ import Controlador.Context;
 import Integracion.Sala.TSala;
 
 /** 
- * View for updating room details
+ * View for creating a new room
  * @author azuri
  */
-public class VistaModificarSala extends JFrame implements IGUI {
+public class VistaAltaSala extends JFrame implements IGUI {
 	
 	private Set<ActionListener> actionListener;
 	private Set<JButton> jButton;
@@ -32,14 +31,13 @@ public class VistaModificarSala extends JFrame implements IGUI {
 	private Set<JTextField> jTextField;
 	private Set<JLabel> jLabel;
 	
-	private JComboBox<Integer> cbSala;
 	private JTextField txtNombreSala;
 	private JSpinner spinAforo;
-	private JButton btnModificar;
+	private JButton btnCrear;
 	private JButton btnCancelar;
 	
-	public VistaModificarSala() {
-		setTitle("Update Room");
+	public VistaAltaSala() {
+		setTitle("Create Room");
 		setSize(300, 250);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -53,13 +51,7 @@ public class VistaModificarSala extends JFrame implements IGUI {
 	}
 	
 	private void initComponents() {
-		JPanel mainPanel = new JPanel(new GridLayout(4, 2, 10, 10));
-		
-		// Select Room
-		jLabel.add(new JLabel("Select Room:"));
-		mainPanel.add(new JLabel("Select Room:"));
-		cbSala = new JComboBox<>();
-		mainPanel.add(cbSala);
+		JPanel mainPanel = new JPanel(new GridLayout(3, 2, 10, 10));
 		
 		// Room Name
 		jLabel.add(new JLabel("Room Name:"));
@@ -76,11 +68,11 @@ public class VistaModificarSala extends JFrame implements IGUI {
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
-		btnModificar = new JButton("Update");
+		btnCrear = new JButton("Create");
 		btnCancelar = new JButton("Cancel");
-		jButton.add(btnModificar);
+		jButton.add(btnCrear);
 		jButton.add(btnCancelar);
-		buttonPanel.add(btnModificar);
+		buttonPanel.add(btnCrear);
 		buttonPanel.add(btnCancelar);
 		
 		jPanel.add(mainPanel);
@@ -90,44 +82,25 @@ public class VistaModificarSala extends JFrame implements IGUI {
 		add(buttonPanel, BorderLayout.SOUTH);
 	}
 	
-	public int getSelectedRoomId() {
-		Object selected = cbSala.getSelectedItem();
-		return selected != null ? (Integer) selected : -1;
-	}
-	
-	public void setRooms(Set<Integer> roomIds) {
-		cbSala.removeAllItems();
-		for (Integer id : roomIds) {
-			cbSala.addItem(id);
-		}
-	}
-	
-	public void displayRoomData(TSala sala) {
-		if (sala != null) {
-			txtNombreSala.setText(sala.getNombreSala());
-			spinAforo.setValue(sala.getAforo());
-		}
-	}
-	
-	public TSala getUpdatedRoomData() {
+	public TSala getRoomData() {
 		TSala sala = new TSala();
 		sala.setNombreSala(txtNombreSala.getText());
 		sala.setAforo((Integer) spinAforo.getValue());
 		return sala;
 	}
 	
-	public void addUpdateButtonListener(ActionListener listener) {
-		btnModificar.addActionListener(listener);
-		actionListener.add(listener);
+	public void clearFields() {
+		txtNombreSala.setText("");
+		spinAforo.setValue(0);
 	}
 	
-	public void addCancelButtonListener(ActionListener listener) {
-		btnCancelar.addActionListener(listener);
+	public void addCreateButtonListener(ActionListener listener) {
+		btnCrear.addActionListener(listener);
 		actionListener.add(listener);
 	}
 
 	@Override
 	public void update(Context context) {
-		// Update when room data is loaded
+		// Update with result from controller
 	}
 }

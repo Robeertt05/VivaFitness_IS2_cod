@@ -3,7 +3,7 @@
  */
 package Controlador;
 
-import Negocio.FactoriaNegocio.SASala;
+import Negocio.Sala.SASala;
 
 /**
  * Command to delete a room
