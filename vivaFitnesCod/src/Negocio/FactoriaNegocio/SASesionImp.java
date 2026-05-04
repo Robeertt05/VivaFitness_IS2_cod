@@ -19,10 +19,6 @@ public class SASesionImp implements SASesion {
 	@Override
 	public int alta_sesion(TSesion datos) {
 		validarSesionAlta(datos);
-
-		if (datos.getParticipantsActuales() < 0) {
-			datos.setParticipantsActuales(0);
-		}
 		datos.setActivo(1);
 
 		try {
@@ -51,11 +47,6 @@ public class SASesionImp implements SASesion {
 
 		if (sesion == null) {
 			throw new IllegalArgumentException("La sesion con ID " + idSesion + " no existe.");
-		}
-
-		if (sesion.getParticipantsActuales() > 0) {
-			throw new IllegalArgumentException(
-				"No se puede eliminar la sesion porque tiene " + sesion.getParticipantsActuales() + " participantes.");
 		}
 
 		int result = daoSesion.delete(idSesion);
@@ -125,16 +116,16 @@ public class SASesionImp implements SASesion {
 			throw new IllegalArgumentException("Los datos de la sesion no pueden ser nulos.");
 		}
 
-		if (datos.getNombreSesion() == null || datos.getNombreSesion().trim().isEmpty()) {
-			throw new IllegalArgumentException("El nombre de la sesion es obligatorio.");
+		if (datos.getObjetivo() == null || datos.getObjetivo().trim().isEmpty()) {
+			throw new IllegalArgumentException("El objetivo de la sesion es obligatorio.");
 		}
 
-		if (datos.getHora() == null || datos.getHora().trim().isEmpty()) {
-			throw new IllegalArgumentException("La hora de la sesion es obligatoria.");
+		if (datos.getHorario() == null || datos.getHorario().trim().isEmpty()) {
+			throw new IllegalArgumentException("El horario de la sesion es obligatorio.");
 		}
 
-		if (datos.getFecha() == null || datos.getFecha().trim().isEmpty()) {
-			throw new IllegalArgumentException("La fecha de la sesion es obligatoria.");
+		if (datos.getDuracion() == null || datos.getDuracion().trim().isEmpty()) {
+			throw new IllegalArgumentException("La duracion de la sesion es obligatoria.");
 		}
 
 		if (datos.getIdSala() <= 0) {
@@ -143,28 +134,20 @@ public class SASesionImp implements SASesion {
 
 		if (datos.getIdEntrenador() <= 0) {
 			throw new IllegalArgumentException("Debe indicar un entrenador valido para la sesion.");
-		}
-
-		if (datos.getCapacidadMaxima() <= 0) {
-			throw new IllegalArgumentException("La capacidad maxima debe ser mayor que 0.");
-		}
-
-		if (datos.getParticipantsActuales() > datos.getCapacidadMaxima()) {
-			throw new IllegalArgumentException("Los participantes actuales no pueden superar la capacidad maxima.");
 		}
 	}
 
 	private void validarSesionModificacion(TSesion datos) {
-		if (datos.getNombreSesion() == null || datos.getNombreSesion().trim().isEmpty()) {
-			throw new IllegalArgumentException("El nombre de la sesion es obligatorio.");
+		if (datos.getObjetivo() == null || datos.getObjetivo().trim().isEmpty()) {
+			throw new IllegalArgumentException("El objetivo de la sesion es obligatorio.");
 		}
 
-		if (datos.getHora() == null || datos.getHora().trim().isEmpty()) {
-			throw new IllegalArgumentException("La hora de la sesion es obligatoria.");
+		if (datos.getHorario() == null || datos.getHorario().trim().isEmpty()) {
+			throw new IllegalArgumentException("El horario de la sesion es obligatorio.");
 		}
 
-		if (datos.getFecha() == null || datos.getFecha().trim().isEmpty()) {
-			throw new IllegalArgumentException("La fecha de la sesion es obligatoria.");
+		if (datos.getDuracion() == null || datos.getDuracion().trim().isEmpty()) {
+			throw new IllegalArgumentException("La duracion de la sesion es obligatoria.");
 		}
 
 		if (datos.getIdSala() <= 0) {
@@ -173,33 +156,17 @@ public class SASesionImp implements SASesion {
 
 		if (datos.getIdEntrenador() <= 0) {
 			throw new IllegalArgumentException("Debe indicar un entrenador valido para la sesion.");
-		}
-
-		if (datos.getCapacidadMaxima() <= 0) {
-			throw new IllegalArgumentException("La capacidad maxima debe ser mayor que 0.");
-		}
-
-		if (datos.getParticipantsActuales() < 0) {
-			throw new IllegalArgumentException("Los participantes actuales no pueden ser negativos.");
-		}
-
-		if (datos.getParticipantsActuales() > datos.getCapacidadMaxima()) {
-			throw new IllegalArgumentException("Los participantes actuales no pueden superar la capacidad maxima.");
 		}
 	}
 
 	private TSesion combinarDatos(TSesion existente, TSesion cambios) {
 		TSesion merged = new TSesion();
 		merged.setIdSesion(existente.getIdSesion());
-		merged.setNombreSesion(obtenerTexto(cambios.getNombreSesion(), existente.getNombreSesion()));
-		merged.setDescripcion(obtenerTexto(cambios.getDescripcion(), existente.getDescripcion()));
-		merged.setFecha(obtenerTexto(cambios.getFecha(), existente.getFecha()));
-		merged.setHora(obtenerTexto(cambios.getHora(), existente.getHora()));
+		merged.setObjetivo(obtenerTexto(cambios.getObjetivo(), existente.getObjetivo()));
+		merged.setDuracion(obtenerTexto(cambios.getDuracion(), existente.getDuracion()));
+		merged.setHorario(obtenerTexto(cambios.getHorario(), existente.getHorario()));
 		merged.setIdSala(cambios.getIdSala() > 0 ? cambios.getIdSala() : existente.getIdSala());
 		merged.setIdEntrenador(cambios.getIdEntrenador() > 0 ? cambios.getIdEntrenador() : existente.getIdEntrenador());
-		merged.setCapacidadMaxima(cambios.getCapacidadMaxima() > 0 ? cambios.getCapacidadMaxima() : existente.getCapacidadMaxima());
-		merged.setParticipantsActuales(
-				cambios.getParticipantsActuales() > 0 ? cambios.getParticipantsActuales() : existente.getParticipantsActuales());
 		merged.setActivo(existente.getActivo());
 		return merged;
 	}

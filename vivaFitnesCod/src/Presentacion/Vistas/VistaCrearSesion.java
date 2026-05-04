@@ -8,14 +8,12 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JSpinner;
 import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Date;
 
 import Presentacion.FactoriaPresentacion.IGUI;
 import Presentacion.FactoriaPresentacion.Evento;
@@ -49,10 +47,9 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 	 */
 	private Set<JLabel> jLabel;
 	
-	private JTextField txtNombre;
-	private JTextField txtDescripcion;
-	private JTextField txtHora;
-	private JSpinner spinCapacidad;
+	private JTextField txtObjetivo;
+	private JTextField txtDuracion;
+	private JTextField txtHorario;
 	private JTextField txtIdSala;
 	private JTextField txtIdEntrenador;
 	private JButton btnCrear;
@@ -74,34 +71,28 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 	}
 	
 	private void initComponents() {
-		JPanel mainPanel = new JPanel(new GridLayout(7, 2, 10, 10));
+		JPanel mainPanel = new JPanel(new GridLayout(5, 2, 10, 10));
 		
-		// Session name
-		jLabel.add(new JLabel("Nombre sesion:"));
-		mainPanel.add(new JLabel("Nombre sesion:"));
-		txtNombre = new JTextField();
-		jTextField.add(txtNombre);
-		mainPanel.add(txtNombre);
+		// Objetivo
+		jLabel.add(new JLabel("Objetivo:"));
+		mainPanel.add(new JLabel("Objetivo:"));
+		txtObjetivo = new JTextField();
+		jTextField.add(txtObjetivo);
+		mainPanel.add(txtObjetivo);
 		
-		// Description
-		jLabel.add(new JLabel("Descripcion:"));
-		mainPanel.add(new JLabel("Descripcion:"));
-		txtDescripcion = new JTextField();
-		jTextField.add(txtDescripcion);
-		mainPanel.add(txtDescripcion);
+		// Duracion
+		jLabel.add(new JLabel("Duracion:"));
+		mainPanel.add(new JLabel("Duracion:"));
+		txtDuracion = new JTextField();
+		jTextField.add(txtDuracion);
+		mainPanel.add(txtDuracion);
 		
-		// Hour
-		jLabel.add(new JLabel("Hora:"));
-		mainPanel.add(new JLabel("Hora:"));
-		txtHora = new JTextField("10:00");
-		jTextField.add(txtHora);
-		mainPanel.add(txtHora);
-		
-		// Capacity
-		jLabel.add(new JLabel("Capacidad maxima:"));
-		mainPanel.add(new JLabel("Capacidad maxima:"));
-		spinCapacidad = new JSpinner();
-		mainPanel.add(spinCapacidad);
+		// Horario
+		jLabel.add(new JLabel("Horario:"));
+		mainPanel.add(new JLabel("Horario:"));
+		txtHorario = new JTextField();
+		jTextField.add(txtHorario);
+		mainPanel.add(txtHorario);
 		
 		// Room
 		jLabel.add(new JLabel("ID Sala:"));
@@ -142,13 +133,11 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 
 	public TSesion getSessionData() {
 		TSesion sesion = new TSesion();
-		sesion.setNombreSesion(txtNombre.getText());
-		sesion.setDescripcion(txtDescripcion.getText());
-		sesion.setHora(txtHora.getText());
-		sesion.setCapacidadMaxima((Integer) spinCapacidad.getValue());
+		sesion.setObjetivo(txtObjetivo.getText());
+		sesion.setDuracion(txtDuracion.getText());
+		sesion.setHorario(txtHorario.getText());
 		try { sesion.setIdSala(Integer.parseInt(txtIdSala.getText().trim())); } catch (NumberFormatException ex) { sesion.setIdSala(0); }
 		try { sesion.setIdEntrenador(Integer.parseInt(txtIdEntrenador.getText().trim())); } catch (NumberFormatException ex) { sesion.setIdEntrenador(0); }
-		sesion.setFecha(new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()));
 		return sesion;
 	}
 	

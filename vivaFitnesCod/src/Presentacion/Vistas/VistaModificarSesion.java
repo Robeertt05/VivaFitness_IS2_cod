@@ -34,9 +34,9 @@ public class VistaModificarSesion extends JFrame implements IGUI {
 	private Set<JLabel> jLabel;
 	
 	private JTextField txtIdSesion;
-	private JTextField txtNombre;
-	private JTextField txtDescripcion;
-	private JTextField txtHora;
+	private JTextField txtObjetivo;
+	private JTextField txtDuracion;
+	private JTextField txtHorario;
 	private JButton btnModificar;
 	private JButton btnCancelar;
 	
@@ -66,25 +66,25 @@ public class VistaModificarSesion extends JFrame implements IGUI {
 		mainPanel.add(txtIdSesion);
 		
 		// Name
-		jLabel.add(new JLabel("Nombre:"));
-		mainPanel.add(new JLabel("Nombre:"));
-		txtNombre = new JTextField();
-		jTextField.add(txtNombre);
-		mainPanel.add(txtNombre);
+		jLabel.add(new JLabel("Objetivo:"));
+		mainPanel.add(new JLabel("Objetivo:"));
+		txtObjetivo = new JTextField();
+		jTextField.add(txtObjetivo);
+		mainPanel.add(txtObjetivo);
 		
 		// Description
-		jLabel.add(new JLabel("Descripcion:"));
-		mainPanel.add(new JLabel("Descripcion:"));
-		txtDescripcion = new JTextField();
-		jTextField.add(txtDescripcion);
-		mainPanel.add(txtDescripcion);
+		jLabel.add(new JLabel("Duracion:"));
+		mainPanel.add(new JLabel("Duracion:"));
+		txtDuracion = new JTextField();
+		jTextField.add(txtDuracion);
+		mainPanel.add(txtDuracion);
 		
 		// Hour
-		jLabel.add(new JLabel("Hora:"));
-		mainPanel.add(new JLabel("Hora:"));
-		txtHora = new JTextField();
-		jTextField.add(txtHora);
-		mainPanel.add(txtHora);
+		jLabel.add(new JLabel("Horario:"));
+		mainPanel.add(new JLabel("Horario:"));
+		txtHorario = new JTextField();
+		jTextField.add(txtHorario);
+		mainPanel.add(txtHorario);
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
@@ -125,16 +125,16 @@ public class VistaModificarSesion extends JFrame implements IGUI {
 	
 	public TSesion getSessionData() {
 		TSesion sesion = new TSesion();
-		sesion.setNombreSesion(txtNombre.getText());
-		sesion.setDescripcion(txtDescripcion.getText());
-		sesion.setHora(txtHora.getText());
+		sesion.setObjetivo(txtObjetivo.getText());
+		sesion.setDuracion(txtDuracion.getText());
+		sesion.setHorario(txtHorario.getText());
 		return sesion;
 	}
 	
 	public void loadSessionData(TSesion sesion) {
-		txtNombre.setText(sesion.getNombreSesion());
-		txtDescripcion.setText(sesion.getDescripcion());
-		txtHora.setText(sesion.getHora());
+		txtObjetivo.setText(sesion.getObjetivo());
+		txtDuracion.setText(sesion.getDuracion());
+		txtHorario.setText(sesion.getHorario());
 	}
 	
 	public void addModifyButtonListener(ActionListener listener) {

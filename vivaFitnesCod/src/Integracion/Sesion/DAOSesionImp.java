@@ -32,20 +32,16 @@ public class DAOSesionImp implements DAOSesion {
 	public int create(TSesion datos) {
 		// begin-user-code
 		String sql = "INSERT INTO sesion "
-				+ "(nombreSesion, descripcion, fecha, hora, idSala, idEntrenador, "
-				+ "capacidadMaxima, participantsActuales, activo) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "(objetivo, duracion, horario, idSala, idEntrenador, activo) "
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-			ps.setString(1, datos.getNombreSesion());
-			ps.setString(2, datos.getDescripcion());
-			ps.setString(3, datos.getFecha());
-			ps.setString(4, datos.getHora());
-			ps.setInt(5, datos.getIdSala());
-			ps.setInt(6, datos.getIdEntrenador());
-			ps.setInt(7, datos.getCapacidadMaxima());
-			ps.setInt(8, datos.getParticipantsActuales());
-			ps.setInt(9, datos.getActivo());
+			ps.setString(1, datos.getObjetivo());
+			ps.setString(2, datos.getDuracion());
+			ps.setString(3, datos.getHorario());
+			ps.setInt(4, datos.getIdSala());
+			ps.setInt(5, datos.getIdEntrenador());
+			ps.setInt(6, datos.getActivo());
 			int rows = ps.executeUpdate();
 			if (rows > 0) {
 				try (ResultSet keys = ps.getGeneratedKeys()) {
@@ -83,21 +79,18 @@ public class DAOSesionImp implements DAOSesion {
 	@Override
 	public int update(TSesion tSesion) {
 		// begin-user-code
-		String sql = "UPDATE sesion SET nombreSesion=?, descripcion=?, fecha=?, hora=?, "
-				+ "idSala=?, idEntrenador=?, capacidadMaxima=?, participantsActuales=?, activo=? "
+		String sql = "UPDATE sesion SET objetivo=?, duracion=?, horario=?, "
+				+ "idSala=?, idEntrenador=?, activo=? "
 				+ "WHERE idSesion=?";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
-			ps.setString(1, tSesion.getNombreSesion());
-			ps.setString(2, tSesion.getDescripcion());
-			ps.setString(3, tSesion.getFecha());
-			ps.setString(4, tSesion.getHora());
-			ps.setInt(5, tSesion.getIdSala());
-			ps.setInt(6, tSesion.getIdEntrenador());
-			ps.setInt(7, tSesion.getCapacidadMaxima());
-			ps.setInt(8, tSesion.getParticipantsActuales());
-			ps.setInt(9, tSesion.getActivo());
-			ps.setInt(10, tSesion.getIdSesion());
+			ps.setString(1, tSesion.getObjetivo());
+			ps.setString(2, tSesion.getDuracion());
+			ps.setString(3, tSesion.getHorario());
+			ps.setInt(4, tSesion.getIdSala());
+			ps.setInt(5, tSesion.getIdEntrenador());
+			ps.setInt(6, tSesion.getActivo());
+			ps.setInt(7, tSesion.getIdSesion());
 			return ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("Error SQL al modificar la sesion con ID " + tSesion.getIdSesion() + ".", e);
@@ -108,8 +101,7 @@ public class DAOSesionImp implements DAOSesion {
 	@Override
 	public int delete(int idSesion) {
 		// begin-user-code
-		// Precondition enforced in SQL: only deletes when no participants registered
-		String sql = "DELETE FROM sesion WHERE idSesion = ? AND participantsActuales = 0";
+		String sql = "DELETE FROM sesion WHERE idSesion = ?";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, idSesion);
@@ -241,14 +233,11 @@ public class DAOSesionImp implements DAOSesion {
 	private TSesion mapRow(ResultSet rs) throws SQLException {
 		TSesion sesion = new TSesion();
 		sesion.setIdSesion(rs.getInt("idSesion"));
-		sesion.setNombreSesion(rs.getString("nombreSesion"));
-		sesion.setDescripcion(rs.getString("descripcion"));
-		sesion.setFecha(rs.getString("fecha"));
-		sesion.setHora(rs.getString("hora"));
+		sesion.setObjetivo(rs.getString("objetivo"));
+		sesion.setDuracion(rs.getString("duracion"));
+		sesion.setHorario(rs.getString("horario"));
 		sesion.setIdSala(rs.getInt("idSala"));
 		sesion.setIdEntrenador(rs.getInt("idEntrenador"));
-		sesion.setCapacidadMaxima(rs.getInt("capacidadMaxima"));
-		sesion.setParticipantsActuales(rs.getInt("participantsActuales"));
 		sesion.setActivo(rs.getInt("activo"));
 		return sesion;
 	}

@@ -121,14 +121,11 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 		if (context != null && context.isSuccess() && context.getData() instanceof TSesion) {
 			TSesion s = (TSesion) context.getData();
 			String detalles = "ID: " + s.getIdSesion() + "\n"
-					+ "Nombre: " + s.getNombreSesion() + "\n"
-					+ "Descripcion: " + s.getDescripcion() + "\n"
-					+ "Fecha: " + s.getFecha() + "\n"
-					+ "Hora: " + s.getHora() + "\n"
+					+ "Objetivo: " + s.getObjetivo() + "\n"
+					+ "Duracion: " + s.getDuracion() + "\n"
+					+ "Horario: " + s.getHorario() + "\n"
 					+ "Sala: " + s.getIdSala() + "\n"
 					+ "Entrenador: " + s.getIdEntrenador() + "\n"
-					+ "Capacidad maxima: " + s.getCapacidadMaxima() + "\n"
-					+ "Participantes actuales: " + s.getParticipantsActuales() + "\n"
 					+ "Activo: " + s.getActivo();
 			displaySessionDetails(detalles);
 		} else if (context != null) {
