@@ -3,8 +3,8 @@
  */
 package Controlador;
 
-import Negocio.Sala.SASala;
 import Integracion.Sesion.TSesion;
+import Negocio.Sala.SASala;
 import java.util.Set;
 
 /**
@@ -26,7 +26,7 @@ public class CommandObtenerSesionesSala implements Command {
 		
 		if (!(datos instanceof Integer)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Room ID must be an integer");
+			ctx.setMessage("El ID de la sala debe ser un número entero");
 			return ctx;
 		}
 		
@@ -35,11 +35,11 @@ public class CommandObtenerSesionesSala implements Command {
 		
 		if (sesiones != null && !sesiones.isEmpty()) {
 			ctx.setSuccess(true);
-			ctx.setMessage("Found " + sesiones.size() + " sessions in this room");
+			ctx.setMessage("Se encontraron " + sesiones.size() + " sesiones en esta sala");
 			ctx.setData(sesiones);
 		} else {
 			ctx.setSuccess(false);
-			ctx.setMessage("No sessions found for this room");
+			ctx.setMessage("No se encontraron sesiones para esta sala");
 		}
 		
 		return ctx;

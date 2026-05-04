@@ -3,9 +3,8 @@
  */
 package Controlador;
 
-import Negocio.Sala.SASala;
-
 import Integracion.Sala.TSala;
+import Negocio.Sala.SASala;
 import java.util.Set;
 
 /**
@@ -29,11 +28,11 @@ public class CommandMostrarTodasSalas implements Command {
 		
 		if (salas != null && !salas.isEmpty()) {
 			ctx.setSuccess(true);
-			ctx.setMessage("Found " + salas.size() + " rooms");
+			ctx.setMessage("Se encontraron " + salas.size() + " salas");
 			ctx.setData(salas);
 		} else {
 			ctx.setSuccess(false);
-			ctx.setMessage("No rooms found");
+			ctx.setMessage("No se encontraron salas");
 		}
 		
 		return ctx;

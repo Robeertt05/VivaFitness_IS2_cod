@@ -3,9 +3,8 @@
  */
 package Controlador;
 
-import Negocio.Sala.SASala;
-
 import Integracion.Sala.TSala;
+import Negocio.Sala.SASala;
 
 /**
  * Command to create a new room
@@ -26,7 +25,7 @@ public class CommandAltaSala implements Command {
 		
 		if (!(datos instanceof TSala)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Invalid room data");
+			ctx.setMessage("Datos de sala inválidos");
 			return ctx;
 		}
 		
@@ -35,11 +34,11 @@ public class CommandAltaSala implements Command {
 		
 		if (resultado > 0) {
 			ctx.setSuccess(true);
-			ctx.setMessage("Room created successfully with ID: " + resultado);
+			ctx.setMessage("Sala creada correctamente con ID: " + resultado);
 			ctx.setData(resultado);
 		} else {
 			ctx.setSuccess(false);
-			ctx.setMessage("Failed to create room");
+			ctx.setMessage("Error al crear la sala");
 		}
 		
 		return ctx;

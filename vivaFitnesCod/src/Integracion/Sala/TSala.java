@@ -76,7 +76,7 @@ public class TSala {
 
 	@Override
 	public String toString() {
-		return "TSala [idSala=" + idSala + ", nombreSala=" + nombreSala + 
-				", aforo=" + aforo + ", activo=" + activo + "]";
+		return "idSala=" + idSala + ", nombreSala=" + nombreSala + 
+				", aforo=" + aforo + ", activo=" + activo;
 	}
 }
