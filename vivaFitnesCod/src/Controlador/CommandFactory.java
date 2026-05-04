@@ -5,12 +5,7 @@ package Controlador;
 
 import Presentacion.FactoriaPresentacion.Evento;
 
-/** 
-* <!-- begin-UML-doc -->
-* <!-- end-UML-doc -->
-* @author azuri
-* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-*/
+
 public class CommandFactory {
 	/** 
 	* <!-- begin-UML-doc -->
@@ -27,7 +22,7 @@ public class CommandFactory {
 	*/
 	public static CommandFactory getInstance() {
 		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
+		// TODO Apï¿½ndice de mï¿½todo generado automï¿½ticamente
 		return null;
 		// end-user-code
 	}
@@ -40,12 +35,6 @@ public class CommandFactory {
 	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	*/
 	public Command getCommand(Evento evento) {
-<<<<<<< Updated upstream
-		// begin-user-code
-		// TODO Apéndice de método generado automáticamente
-		return null;
-		// end-user-code
-=======
 		switch (evento) {
 			// --- Entrenador ---
 			case ALTA_ENTRENADOR:
@@ -98,6 +87,5 @@ public class CommandFactory {
 			default:
 				return null;
 		}
->>>>>>> Stashed changes
 	}
 }

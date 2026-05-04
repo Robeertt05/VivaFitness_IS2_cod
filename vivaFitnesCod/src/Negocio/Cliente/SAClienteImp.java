@@ -1,16 +1,10 @@
-/**
- * 
- */
+
 package Negocio.Cliente;
 
 import Integracion.Cliente.TCliente;
 import Integracion.Cliente.DAOCliente;
 import java.util.Set;
 
-/** 
- * Service Application implementation for Client
- * @author azuri
- */
 public class SAClienteImp implements SACliente {
 	
 	private DAOCliente daoCliente;
@@ -62,35 +56,6 @@ public class SAClienteImp implements SACliente {
 	}
 
 	@Override
-<<<<<<< Updated upstream
-	public int apuntarse_sesion(int idSesion, int hora, String fecha) {
-		// begin-user-code
-		// Validate parameters (note: hour and date are for reference, actual session uses its own values)
-		if (idSesion <= 0) {
-			return 0;
-		}
-		
-		// Check if session is available using SASesion
-		if (saSesion == null) {
-			return 0;
-		}
-		
-		TSesion sesion = saSesion.mostrar_sesion(idSesion);
-		if (sesion == null) {
-			return 0;
-		}
-		
-		// Check available spaces
-		int espacios = saSesion.espacios_disponibles(idSesion);
-		if (espacios <= 0) {
-			return 0; // Session is full
-		}
-		
-		// Register client in session
-		// TODO: This would need a ClientSesion mapping table
-		return saSesion.apuntar_cliente_sesion(idSesion, 0); // 0 is placeholder for idCliente from context
-		// end-user-code
-=======
 	public Set<TCliente> mostrar_todos_clientes() {
 		// Get all clients
 		return daoCliente.read_all();
@@ -104,7 +69,6 @@ public class SAClienteImp implements SACliente {
 		}
 		// TODO: Implement when ClientSesion mapping table is available
 		return 1; // Placeholder success
->>>>>>> Stashed changes
 	}
 
 	@Override
@@ -113,18 +77,6 @@ public class SAClienteImp implements SACliente {
 	}
 
 	@Override
-<<<<<<< Updated upstream
-	public void desapuntar_sesion(int id, int idSesion) {
-		// begin-user-code
-		// Validate parameters
-		if (id <= 0 || idSesion <= 0 || saSesion == null) {
-			return;
-		}
-		
-		// Unregister client from session
-		saSesion.desapuntar_cliente_sesion(idSesion, id);
-		// end-user-code
-=======
 	public int desapuntar_sesion(int idCliente, int idSesion) {
 		// Validate parameters
 		if (idCliente <= 0 || idSesion <= 0) {
@@ -140,6 +92,5 @@ public class SAClienteImp implements SACliente {
 			return null;
 		}
 		return daoCliente.read_by_dni(dni);
->>>>>>> Stashed changes
 	}
 }

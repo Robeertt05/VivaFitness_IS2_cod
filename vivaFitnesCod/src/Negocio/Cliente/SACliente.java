@@ -3,16 +3,10 @@
  */
 package Negocio.Cliente;
 
-<<<<<<< Updated upstream
-=======
 import Integracion.Cliente.TCliente;
 import java.util.Set;
 
->>>>>>> Stashed changes
-/** 
- * Service Application interface for Client
- * @author azuri
- */
+
 public interface SACliente {
 	
 	public int alta_cliente(TCliente datos);
@@ -45,11 +39,7 @@ public interface SACliente {
 	*/
 	public int apuntarse_sesion(int idSesion, int hora, String fecha);
 
-	/** 
-	* <!-- begin-UML-doc -->
-	* <!-- end-UML-doc -->
-	* @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	*/
+	
 	public void mostrar_sesiones();
 
 	/** 
