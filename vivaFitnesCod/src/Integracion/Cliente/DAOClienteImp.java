@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -154,10 +157,10 @@ public class DAOClienteImp implements DAOCliente {
 	public int apuntarSesion(TClienteSesion datos) {
 		String existeCliente = "SELECT activo FROM cliente WHERE idCliente = ?";
 		String existeSesion = "SELECT s.idSesion, s.horario, sa.aforo, "
-				+ "(SELECT COUNT(*) FROM apunta a WHERE a.idSesion = s.idSesion) AS inscritos "
+				+ "(SELECT COUNT(*) FROM apunta a WHERE a.idSesion = s.idSesion AND a.activo = 1) AS inscritos "
 				+ "FROM sesion s JOIN sala sa ON s.idSala = sa.idSala "
 				+ "WHERE s.idSesion = ? AND s.activo = 1 AND sa.activo = 1";
-		String existeApunte = "SELECT 1 FROM apunta WHERE idCliente = ? AND idSesion = ?";
+		String existeApunte = "SELECT 1 FROM apunta WHERE idCliente = ? AND idSesion = ? AND activo = 1";
 		String insertar = "INSERT INTO apunta (idCliente, idSesion, fecha, hora) VALUES (?, ?, ?, ?)";
 
 		try (Connection con = ConnectionManager.getConnection()) {
@@ -169,11 +172,50 @@ public class DAOClienteImp implements DAOCliente {
 					return -2;
 				}
 
+				// Validar que fecha u hora no sean null
+				if (datos.getFecha() == null || datos.getHora() == null) {
+					con.rollback();
+					return -6; // Fecha u hora inválidas
+				}
+				LocalDate fechaRegistro = datos.getFecha().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
 				SesionInscripcion sesion = sesionParaInscripcion(con, existeSesion, datos.getIdSesion());
 				if (sesion == null) {
 					con.rollback();
 					return -3;
 				}
+				
+				// Validar que la fecha de registro sea anterior o igual a la fecha de la sesión
+				// y si es el mismo día, que sea al menos 10 minutos antes
+				LocalTime horaRegistro = LocalTime.parse(datos.getHora());
+				LocalTime horaRegistro10Min = horaRegistro.plusMinutes(10);
+				if (sesion.horario != null) {
+					try {
+						String[] partes = sesion.horario.split(" ");
+						if (partes.length >= 2) {
+							LocalDate fechaSesion = LocalDate.parse(partes[0]);
+							LocalTime horaSesion = LocalTime.parse(partes[1]);
+							
+							// Validar que la fecha de registro es anterior o igual a la de la sesión
+							if (fechaRegistro.isAfter(fechaSesion)) {
+								con.rollback();
+								return -7; // El registro debe ser el mismo día o anterior a la sesión
+							}
+							
+							// Si es el mismo día, validar que el registro es al menos 10 minutos antes
+							if (fechaRegistro.equals(fechaSesion)) {
+								if (horaRegistro10Min.isAfter(horaSesion)) {
+									con.rollback();
+									return -8; // No hay suficiente anticipación (debe ser al menos 10 minutos antes)
+								}
+							}
+						}
+					} catch (Exception e) {
+						con.rollback();
+						return -6; // Error al parsear fecha/hora de la sesión
+					}
+				}
+				
 				if (yaApuntado(con, existeApunte, datos.getIdCliente(), datos.getIdSesion())) {
 					con.rollback();
 					return -4;
@@ -238,7 +280,7 @@ public class DAOClienteImp implements DAOCliente {
 
 	@Override
 	public Set<TSesion> readSesionesDisponibles() {
-		String sql = "SELECT s.*, sa.aforo, (SELECT COUNT(*) FROM apunta a WHERE a.idSesion = s.idSesion) AS inscritos "
+		String sql = "SELECT s.*, sa.aforo, (SELECT COUNT(*) FROM apunta a WHERE a.idSesion = s.idSesion AND a.activo = 1) AS inscritos "
 				+ "FROM sesion s JOIN sala sa ON s.idSala = sa.idSala "
 				+ "WHERE s.activo = 1 AND sa.activo = 1 ORDER BY s.horario";
 		Set<TSesion> sesiones = new HashSet<>();
@@ -246,7 +288,8 @@ public class DAOClienteImp implements DAOCliente {
 				PreparedStatement ps = con.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery()) {
 			while (rs.next()) {
-				sesiones.add(mapSesionSql(rs));
+				TSesion sesion = mapSesionSql(rs);
+				sesiones.add(sesion);
 			}
 			return sesiones;
 		} catch (SQLException e) {
@@ -270,7 +313,7 @@ public class DAOClienteImp implements DAOCliente {
 				if (!rs.next()) {
 					return null;
 				}
-				return new SesionInscripcion(rs.getInt("aforo"), rs.getInt("inscritos"));
+				return new SesionInscripcion(rs.getInt("aforo"), rs.getInt("inscritos"), rs.getString("horario"));
 			}
 		}
 	}
@@ -311,10 +354,12 @@ public class DAOClienteImp implements DAOCliente {
 	private static class SesionInscripcion {
 		private final int aforo;
 		private final int inscritos;
+		private final String horario;
 
-		private SesionInscripcion(int aforo, int inscritos) {
+		private SesionInscripcion(int aforo, int inscritos, String horario) {
 			this.aforo = aforo;
 			this.inscritos = inscritos;
+			this.horario = horario;
 		}
 	}
 }

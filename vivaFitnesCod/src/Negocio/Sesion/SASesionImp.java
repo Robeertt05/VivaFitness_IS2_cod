@@ -102,6 +102,20 @@ public class SASesionImp implements SASesion {
 		TSesion actualizada = combinarDatos(existente, datos);
 		validarSesionModificacion(actualizada);
 
+		// Verificar que la sala existe y está activa
+		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
+		TSala sala = daoSala.read(actualizada.getIdSala());
+		if (sala == null || sala.getActivo() != 1) {
+			throw new IllegalArgumentException("Sala inválida o inactiva: ID " + actualizada.getIdSala());
+		}
+
+		// Verificar que el entrenador existe y está activo
+		DAOEntrenador daoEntrenador = FactoriaIntegracion.getInstance().generaDAOEntrenador();
+		TEntrenador entrenador = daoEntrenador.read(actualizada.getIdEntrenador());
+		if (entrenador == null || entrenador.get_activo() != 1) {
+			throw new IllegalArgumentException("Entrenador inválido o inactivo: ID " + actualizada.getIdEntrenador());
+		}
+
 		// Check for time conflicts if sala, horario, or duracion changed
 		if (actualizada.getIdSala() != existente.getIdSala() || 
 			!actualizada.getFechaHora().equals(existente.getFechaHora()) ||

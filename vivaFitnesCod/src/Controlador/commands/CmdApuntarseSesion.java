@@ -33,11 +33,14 @@ public class CmdApuntarseSesion implements Command {
 
 	private String mensajeError(int codigo) {
 		switch (codigo) {
-			case -2: return "El cliente no existe o no esta activo.";
-			case -3: return "La sesion no existe o no esta activa.";
-			case -4: return "El cliente ya esta apuntado a esta sesion.";
-			case -5: return "La sesion no tiene plazas disponibles.";
-			default: return "No se pudo apuntar al cliente a la sesion.";
+			case -2: return "El cliente no existe o no está activo.";
+			case -3: return "La sesión no existe o no está activa.";
+			case -4: return "El cliente ya está apuntado a esta sesión.";
+			case -5: return "La sesión no tiene plazas disponibles.";
+			case -6: return "La fecha u hora son inválidas o error al procesar los datos.";
+			case -7: return "El registro debe efectuarse el mismo día que la sesión.";
+			case -8: return "Debe registrarse como mínimo 10 minutos antes de que comience la sesión.";
+			default: return "No se pudo apuntar al cliente a la sesión.";
 		}
 	}
 }
