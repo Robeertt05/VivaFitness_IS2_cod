@@ -8,6 +8,8 @@ import java.util.Set;
 
 import Integracion.Entrenador.TEntrenador;
 import Integracion.Entrenador.DAOEntrenador;
+import Integracion.Sesion.DAOSesion;
+import Integracion.Sesion.TSesion;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 
 /**
@@ -45,6 +47,13 @@ public class SAEntrenadorImp implements SAEntrenador {
 		TEntrenador entrenador = dao.read(id);
 		if (entrenador == null || entrenador.get_activo() == 0) {
 			return -1;
+		}
+
+		// Comprobar si el entrenador tiene sesiones activas asociadas
+		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
+		Set<TSesion> sesiones = daoSesion.readByEntrenador(id);
+		if (sesiones != null && !sesiones.isEmpty()) {
+			return -2; // No se puede dar de baja: tiene sesiones activas
 		}
 
 		entrenador.set_activo(0);

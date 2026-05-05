@@ -26,4 +26,9 @@ public interface DAOSesion {
 	 * Count active sessions in sala at specific horario
 	 */
 	public int countSalaHorario(int idSala, String horario);
+
+	/**
+	 * Count active client inscriptions for a specific session
+	 */
+	public int countClientesActivos(int idSesion);
 }

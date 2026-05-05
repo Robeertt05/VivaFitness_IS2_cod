@@ -28,6 +28,7 @@ public class FactoriaIntegracionStub extends FactoriaIntegracion {
 		// Conectar stubs entre sí para relaciones
 		daoSesion.setDAOSalaStub(daoSala);
 		daoSesion.setDAOEntrenadorStub(daoEntrenador);
+		daoSesion.setDAOClienteStub(daoCliente);
 		daoSala.setDAOSesionStub(daoSesion);
 		daoCliente.setDAOSesionStub(daoSesion);
 	}

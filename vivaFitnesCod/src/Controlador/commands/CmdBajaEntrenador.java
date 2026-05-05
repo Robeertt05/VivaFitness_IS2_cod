@@ -22,6 +22,9 @@ public class CmdBajaEntrenador implements Command {
 			if (res >= 0) {
 				resultado.setEvento(Evento.RES_BAJA_ENTRENADOR_OK);
 				resultado.setObjeto(id);
+			} else if (res == -2) {
+				resultado.setEvento(Evento.RES_BAJA_ENTRENADOR_SESION_ACTIVA);
+				resultado.setObjeto(null);
 			} else {
 				resultado.setEvento(Evento.RES_BAJA_ENTRENADOR_KO);
 				resultado.setObjeto(null);

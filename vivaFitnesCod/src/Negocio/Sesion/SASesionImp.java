@@ -1,5 +1,6 @@
 package Negocio.Sesion;
 
+import Integracion.Cliente.DAOCliente;
 import Integracion.Entrenador.DAOEntrenador;
 import Integracion.Entrenador.TEntrenador;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
@@ -7,6 +8,7 @@ import Integracion.Sala.DAOSala;
 import Integracion.Sala.TSala;
 import Integracion.Sesion.DAOSesion;
 import Integracion.Sesion.TSesion;
+import Integracion.Sesion.TClienteSesion;
 import java.util.Set;
 
 public class SASesionImp implements SASesion {
@@ -68,6 +70,13 @@ public class SASesionImp implements SASesion {
 			throw new IllegalArgumentException("La sesion con ID " + idSesion + " no existe.");
 		}
 
+		// Comprobar si la sesion tiene clientes apuntados activos
+		int clientesActivos = daoSesion.countClientesActivos(idSesion);
+		if (clientesActivos > 0) {
+			return -2; // No se puede dar de baja: tiene clientes inscritos
+		}
+
+		// Si tiene sala o entrenador, el DAO limpiara las referencias antes de desactivar
 		int result = daoSesion.delete(idSesion);
 		if (result <= 0) {
 			throw new RuntimeException("No se pudo eliminar la sesion en base de datos.");

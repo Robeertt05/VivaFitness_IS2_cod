@@ -62,6 +62,11 @@ public class VistaBajaEntrenador extends JFrame implements IGUI {
 				"Exito", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 		} 
+		else if (evento == Evento.RES_BAJA_ENTRENADOR_SESION_ACTIVA) {
+			JOptionPane.showMessageDialog(this,
+				"No se puede dar de baja al entrenador porque tiene sesiones activas asociadas.\nElimine o reasigne sus sesiones antes de darlo de baja.",
+				"Error - Sesiones activas", JOptionPane.WARNING_MESSAGE);
+		}
 		else if (evento == Evento.RES_BAJA_ENTRENADOR_KO) {
 			JOptionPane.showMessageDialog(this,
 				"Error al dar de baja. El entrenador no existe o ya esta inactivo.",

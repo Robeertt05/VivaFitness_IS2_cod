@@ -114,6 +114,27 @@ public class DAOSesionStub implements DAOSesion {
 		return count;
 	}
 
+	@Override
+	public int countClientesActivos(int idSesion) {
+		if (daoClienteStub != null) {
+			int count = 0;
+			for (Integracion.Sesion.TClienteSesion cs : daoClienteStub.getInscripciones()) {
+				if (cs.getIdSesion() == idSesion) {
+					count++;
+				}
+			}
+			return count;
+		}
+		return 0;
+	}
+
+	// Referencia al stub de clientes para consultas cruzadas
+	private DAOClienteStub daoClienteStub;
+
+	public void setDAOClienteStub(DAOClienteStub stub) {
+		this.daoClienteStub = stub;
+	}
+
 	public void clear() {
 		sesiones.clear();
 		nextId = 1;
