@@ -1,6 +1,4 @@
-/**
- * Vista para dar de baja a una Sala.
- */
+
 package Presentacion.Vistas;
 
 import javax.swing.*;

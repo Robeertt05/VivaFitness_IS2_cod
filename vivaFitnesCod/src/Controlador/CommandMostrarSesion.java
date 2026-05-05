@@ -1,17 +1,11 @@
-/**
- * 
- */
+ 
 package Controlador;
 
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.Sesion.SASesion;
 import Integracion.Sesion.TSesion;
 
-/**
- * Command to display a specific session
- * CASO 3: Mostrar sesin (SRS)
- * @author azuri
- */
+ 
 public class CommandMostrarSesion implements Command {
 
 	@Override

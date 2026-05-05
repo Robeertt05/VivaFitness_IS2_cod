@@ -37,7 +37,7 @@ public class VistaMostrarCliente extends JFrame implements IGUI {
 		btnBuscar.addActionListener(e -> buscar());
 		top.add(btnBuscar);
 		
-		// Create table
+		
 		String[] columnNames = {"ID", "DNI", "Nombre", "Telefono", "Correo"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override

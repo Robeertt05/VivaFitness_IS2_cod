@@ -1,18 +1,11 @@
-/**
- * 
- */
+ 
 package Controlador;
 
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.Sesion.SASesion;
 import Integracion.Sala.TSala;
 
-/**
- * Command to display the room assigned to a session
- * CASO 4: Mostrar sala por sesin (SRS)
- * Get the specific room assigned to a particular session
- * @author azuri
- */
+ 
 public class CommandMostrarSalaSesion implements Command {
 
 	@Override

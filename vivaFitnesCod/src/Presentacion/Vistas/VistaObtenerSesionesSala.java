@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Presentacion.Vistas;
 
 import Controlador.Context;
@@ -25,11 +22,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-/** 
- * View for displaying all sessions in a room in table format
- * CASO 6: Obtener sesiones de una sala (Relacion 1-N)
- * @author azuri
- */
 public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 	
 	private static final long serialVersionUID = 1L;
@@ -61,13 +53,13 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 	private void initComponents() {
 		JPanel topPanel = new JPanel(new GridLayout(1, 2, 10, 10));
 		
-		// Select Room
+		
 		jLabel.add(new JLabel("ID Sala:"));
 		topPanel.add(new JLabel("ID Sala:"));
 		txtIdSala = new JTextField();
 		topPanel.add(txtIdSala);
 		
-		// Create table
+		
 		String[] columnNames = {"ID", "Objetivo", "Duracion (min)", "Fecha y Hora", "Sala", "Entrenador"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override
@@ -80,7 +72,7 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		JScrollPane scrollPane = new JScrollPane(table);
 		
-		// Buttons
+		
 		JPanel buttonPanel = new JPanel();
 		btnMostrar = new JButton("Mostrar Sesiones");
 		btnCerrar = new JButton("Cerrar");
@@ -131,7 +123,7 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 					"Sin Sesiones",
 					JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				// Sort by ID and add to table
+				
 				List<TSesion> sesionList = sesiones.stream()
 					.filter(s -> s instanceof TSesion)
 					.map(s -> (TSesion) s)

@@ -1,31 +1,16 @@
-/**
- * Factoria de Commands.
- * Patron: Command + Factory Method + Singleton.
- * Mapea cada evento (int) a su Command concreto correspondiente.
- */
+
 package Controlador;
 
 import Controlador.commands.*;
 import Presentacion.FactoriaPresentacion.Evento;
 
-/**
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class CommandFactory {
 
-	/** Unica instancia (Singleton). */
 	private static CommandFactory instance;
 
-	/** Constructor privado para forzar uso del Singleton. */
 	private CommandFactory() {}
 
-	/**
-	 * Devuelve la unica instancia de CommandFactory (Singleton).
-	 * @return instancia de CommandFactory
-	 */
+	 
 	public static CommandFactory getInstance() {
 		if (instance == null) {
 			instance = new CommandFactory();
@@ -33,14 +18,9 @@ public class CommandFactory {
 		return instance;
 	}
 
-	/**
-	 * Devuelve el Command asociado al evento (int) recibido.
-	 * @param evento constante int de la clase Evento
-	 * @return Command a ejecutar, o null si no tiene Command asociado
-	 */
+	 
 	public Command getCommand(Evento evento) {
-		switch (evento) {
-			// --- Entrenador ---
+		switch (evento) { 
 			case ALTA_ENTRENADOR:
 				return new CmdAltaEntrenador();
 			case BAJA_ENTRENADOR:
@@ -53,8 +33,7 @@ public class CommandFactory {
 				return new CmdMostrarEntrenadores();
 			case CREAR_SESION:
 				return new CmdCrearSesion();
-			
-			// --- Cliente ---
+			 
 			case ALTA_CLIENTE:
 				return new CmdAltaCliente();
 			case BAJA_CLIENTE:
@@ -73,8 +52,7 @@ public class CommandFactory {
 				return new CmdMostrarSesionesDisponiblesCliente();
 			case MOSTRAR_SESIONES_CLIENTE:
 				return new CmdMostrarSesionesCliente();
-
-			// --- Sala ---
+ 
 			case ALTA_SALA:
 				return new CommandAltaSala();
 			case BAJA_SALA:
@@ -87,8 +65,7 @@ public class CommandFactory {
 			return new CommandMostrarTodasSalas();
 		case OBTENER_SESIONES_SALA:
 			return new CommandObtenerSesionesSala();
-			
-			// --- Sesion ---
+			 
 			case ALTA_SESION:
 				return new CommandAltaSesion();
 			case BAJA_SESION:

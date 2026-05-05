@@ -1,8 +1,4 @@
-/**
- * Implementacion del DAO de Entrenador.
- * Patron: DAO (Data Access Object) - abstrae el acceso a la fuente de datos.
- * En un proyecto real conectaria con la BD via JDBC/JPA usando la transaccion activa.
- */
+
 package Integracion.Entrenador;
 
 
@@ -15,12 +11,6 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class DAOEntrenadorImp implements DAOEntrenador {
 
 	private RuntimeException databaseError(SQLException e) {
@@ -29,11 +19,6 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 				e);
 	}
 
-	/**
-	 * Inserta un nuevo entrenador en la base de datos.
-	 * @param datos TEntrenador con los datos a persistir
-	 * @return id generado por la BD, o -1 si falla
-	 */
 	@Override
 	public int create(TEntrenador datos) {
 		int id = -1;
@@ -74,11 +59,6 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 		return id;
 	}
 
-	/**
-	 * Lee un entrenador por su identificador.
-	 * @param idEntrenador identificador del entrenador
-	 * @return TEntrenador o null si no existe
-	 */
 	@Override
 	public TEntrenador read(int idEntrenador) {
 		TEntrenador entrenador = null;
@@ -119,11 +99,6 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 		return entrenador;
 	}
 
-	/**
-	 * Actualiza los datos de un entrenador existente.
-	 * @param tEntrenador TEntrenador con los datos actualizados
-	 * @return 0 si correcto, -1 si falla
-	 */
 	@Override
 	public int update(TEntrenador tEntrenador) {
 		int result = -1;
@@ -158,12 +133,6 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 		return result;
 	}
 
-	/**
-	 * Elimina fisicamente un entrenador por su id.
-	 * (Normalmente se usa baja logica; este metodo es para administracion.)
-	 * @param idEntrenador identificador del entrenador
-	 * @return 0 si correcto, -1 si falla
-	 */
 	@Override
 	public int delete(int idEntrenador) {
 		// Validar que no existan sesiones activas para el entrenador
@@ -192,7 +161,6 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 		try {
 			connection = ConnectionManager.getConnection();
 			
-			// Baja logica: activo = 0
 			String query = "UPDATE entrenador SET activo = 0 WHERE idEntrenador = ?";
 			ps = connection.prepareStatement(query);
 			ps.setInt(1, idEntrenador);
@@ -213,10 +181,6 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 		return result;
 	}
 
-	/**
-	 * Devuelve todos los entrenadores de la base de datos.
-	 * @return Set de TEntrenador
-	 */
 	public Set<TEntrenador> read_all() {
 		Set<TEntrenador> entrenadores = new HashSet<>();
 		Connection connection = null;
@@ -257,11 +221,6 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 		return entrenadores;
 	}
 
-	/**
-	 * Busca un entrenador por su DNI.
-	 * @param dni DNI a buscar
-	 * @return TEntrenador o null si no existe
-	 */
 	public TEntrenador read_by_dni(String dni) {
 		TEntrenador entrenador = null;
 		Connection connection = null;

@@ -1,17 +1,11 @@
-/**
- * 
- */
+ 
 package Controlador;
 
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.Sesion.SASesion;
 import Integracion.Sesion.TSesion;
 
-/**
- * Command to modify an existing session
- * CASO 2: Modificar sesin (SRS)
- * @author azuri
- */
+ 
 public class CommandModificarSesion implements Command {
 
 	@Override

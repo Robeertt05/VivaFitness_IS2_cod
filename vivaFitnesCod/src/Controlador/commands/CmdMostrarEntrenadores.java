@@ -1,7 +1,4 @@
-/**
- * Command: Mostrar todos los Entrenadores.
- * Patron: Command.
- */
+
 package Controlador.commands;
 
 import Controlador.Command;

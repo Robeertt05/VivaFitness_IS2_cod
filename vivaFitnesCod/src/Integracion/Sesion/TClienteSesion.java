@@ -1,38 +1,19 @@
-/**
- * 
- */
+
 package Integracion.Sesion;
 
 import java.util.Date;
 
-/** 
- * Transfer Object for the "apunta" relationship (M:N) between Cliente and Sesion
- * Represents a client's registration to a session with date and time
- * @author azuri
- */
+
 public class TClienteSesion {
-	
-	/** 
-	 * Client ID (Foreign Key)
-	 */
+
 	private int idCliente;
-	
-	/** 
-	 * Session ID (Foreign Key)
-	 */
+
 	private int idSesion;
-	
-	/** 
-	 * Registration date (when the client signed up)
-	 */
+
 	private Date fecha;
-	
-	/** 
-	 * Registration time (when the client signed up)
-	 */
+
 	private String hora;
 
-	// Constructors
 	public TClienteSesion() {
 	}
 
@@ -43,7 +24,6 @@ public class TClienteSesion {
 		this.hora = hora;
 	}
 
-	// Getters and Setters
 	public int getIdCliente() {
 		return idCliente;
 	}

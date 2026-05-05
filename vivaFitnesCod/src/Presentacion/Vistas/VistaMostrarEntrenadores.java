@@ -33,7 +33,7 @@ public class VistaMostrarEntrenadores extends JFrame implements IGUI {
 		JPanel panel = new JPanel(new BorderLayout(10, 10));
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-		// Create table
+		
 		String[] columnNames = {"ID", "DNI", "Nombre", "Telefono"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override
@@ -81,7 +81,7 @@ public class VistaMostrarEntrenadores extends JFrame implements IGUI {
 				return;
 			}
 
-			// Sort by ID and add to table
+			
 			List<TEntrenador> entrenadorList = entrenadores.stream()
 				.filter(e -> e instanceof TEntrenador)
 				.map(e -> (TEntrenador) e)

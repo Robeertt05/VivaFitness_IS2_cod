@@ -1,6 +1,4 @@
-/**
- * Transfer Object para Cliente
- */
+
 package Integracion.Cliente;
 
 public class TCliente {

@@ -1,6 +1,4 @@
-/**
- * Vista para dar de baja a un Entrenador.
- */
+
 package Presentacion.Vistas;
 
 import javax.swing.*;

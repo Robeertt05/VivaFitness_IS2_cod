@@ -30,7 +30,7 @@ public class VistaMostrarClientes extends JFrame implements IGUI {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		// Create table
+		
 		String[] columnNames = {"ID", "DNI", "Nombre", "Telefono", "Correo"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override
@@ -72,7 +72,7 @@ public class VistaMostrarClientes extends JFrame implements IGUI {
 				return;
 			}
 			
-			// Sort by ID and add to table
+			
 			List<TCliente> clienteList = clientes.stream()
 				.filter(c -> c instanceof TCliente)
 				.map(c -> (TCliente) c)

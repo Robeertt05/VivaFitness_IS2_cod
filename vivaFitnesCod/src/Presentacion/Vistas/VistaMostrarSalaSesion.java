@@ -10,9 +10,7 @@ import Integracion.Sala.TSala;
 import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.IGUI;
 
-/**
- * Vista para mostrar los datos de la sala asociada a una sesion.
- */
+
 public class VistaMostrarSalaSesion extends JFrame implements IGUI {
 
 	private static final long serialVersionUID = 1L;

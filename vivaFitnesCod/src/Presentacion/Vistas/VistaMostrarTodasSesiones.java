@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Presentacion.Vistas;
 
 import Controlador.Context;
@@ -22,10 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/** 
- * View for listing all sessions in a table format
- * @author azuri
- */
+
 public class VistaMostrarTodasSesiones extends JFrame implements IGUI {
 	
 	private static final long serialVersionUID = 1L;
@@ -58,7 +53,7 @@ public class VistaMostrarTodasSesiones extends JFrame implements IGUI {
 	}
 	
 	private void initComponents() {
-		// Create table
+		
 		String[] columnNames = {"ID", "Objetivo", "Duracion (min)", "Fecha y Hora", "Sala", "Entrenador"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override

@@ -1,8 +1,4 @@
-/**
- * Implementacion del DAO de Sala.
- * Patron: DAO (Data Access Object) - abstrae el acceso a la fuente de datos.
- * En un proyecto real conectaria con la BD via JDBC/JPA usando la transaccion activa.
- */
+
 package Integracion.Sala;
 
 import Integracion.ConnectionManager.ConnectionManager;
@@ -14,24 +10,14 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Data Access Object implementation for Sala (Room)
- * Handles database operations for room management
- * @author azuri
- */
 public class DAOSalaImp implements DAOSala {
 
 	private Connection getConnection() throws SQLException {
 		return ConnectionManager.getConnection();
 	}
 
-	// -----------------------------------------------------------------------
-	// CRUD básico
-	// -----------------------------------------------------------------------
-
 	@Override
 	public int create(TSala datos) {
-		// begin-user-code
 		String sql = "INSERT INTO sala (nombreSala, aforo, activo) VALUES (?, ?, ?)";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -50,12 +36,10 @@ public class DAOSalaImp implements DAOSala {
 			throw new RuntimeException("Error SQL al crear la sala: " + e.getMessage(), e);
 		}
 		return 0;
-		// end-user-code
 	}
 
 	@Override
 	public TSala read(int idSala) {
-		// begin-user-code
 		String sql = "SELECT * FROM sala WHERE idSala = ?";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
@@ -69,12 +53,10 @@ public class DAOSalaImp implements DAOSala {
 			throw new RuntimeException("Error SQL al consultar la sala con ID " + idSala + ".", e);
 		}
 		return null;
-		// end-user-code
 	}
 
 	@Override
 	public int update(TSala tSala) {
-		// begin-user-code
 		String sql = "UPDATE sala SET nombreSala=?, aforo=?, activo=? WHERE idSala=?";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
@@ -86,13 +68,10 @@ public class DAOSalaImp implements DAOSala {
 		} catch (SQLException e) {
 			throw new RuntimeException("Error SQL al modificar la sala con ID " + tSala.getIdSala() + ": " + e.getMessage(), e);
 		}
-		// end-user-code
 	}
 
 	@Override
 	public int delete(int idSala) {
-		// begin-user-code
-		// Validar que no existan sesiones activas en la sala
 		Set<TSesion> sesionesActivas = readSessionsByRoom(idSala);
 		if (!sesionesActivas.isEmpty()) {
 			throw new RuntimeException(
@@ -108,16 +87,10 @@ public class DAOSalaImp implements DAOSala {
 		} catch (SQLException e) {
 			throw new RuntimeException("Error SQL al eliminar la sala con ID " + idSala + ".", e);
 		}
-		// end-user-code
 	}
-
-	// -----------------------------------------------------------------------
-	// Consultas
-	// -----------------------------------------------------------------------
-
+	
 	@Override
 	public Set<TSala> read_all() {
-		// begin-user-code
 		String sql = "SELECT * FROM sala";
 		Set<TSala> salas = new HashSet<>();
 		try (Connection con = getConnection();
@@ -130,12 +103,10 @@ public class DAOSalaImp implements DAOSala {
 			throw new RuntimeException("Error SQL al listar todas las salas.", e);
 		}
 		return salas;
-		// end-user-code
 	}
 
 	@Override
 	public Set<TSesion> readSessionsByRoom(int idSala) {
-		// begin-user-code
 		String sql = "SELECT * FROM sesion WHERE idSala = ? AND activo = 1";
 		Set<TSesion> sesiones = new HashSet<>();
 		try (Connection con = getConnection();
@@ -150,12 +121,7 @@ public class DAOSalaImp implements DAOSala {
 			throw new RuntimeException("Error SQL al obtener sesiones de la sala con ID " + idSala + ".", e);
 		}
 		return sesiones;
-		// end-user-code
 	}
-
-	// -----------------------------------------------------------------------
-	// Métodos auxiliares
-	// -----------------------------------------------------------------------
 
 	private TSala mapRow(ResultSet rs) throws SQLException {
 		TSala sala = new TSala();

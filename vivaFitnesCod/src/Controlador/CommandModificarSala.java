@@ -3,12 +3,7 @@ package Controlador;
 import Integracion.Sala.TSala;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.Sala.SASala;
-
-/**
- * Command to update room details
- * CASO 3: Modificar sala (SRS)
- * @author azuri
- */
+ 
 public class CommandModificarSala implements Command {
 
 	@Override

@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Presentacion.Vistas;
 
 import Controlador.Context;
@@ -23,10 +21,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-/** 
- * View for displaying room details in table format
- * @author azuri
- */
 public class VistaMostrarSala extends JFrame implements IGUI {
 	
 	private static final long serialVersionUID = 1L;
@@ -58,7 +52,7 @@ public class VistaMostrarSala extends JFrame implements IGUI {
 	private void initComponents() {
 		JPanel topPanel = new JPanel(new GridLayout(1, 3, 10, 10));
 		
-		// Select Room
+		
 		jLabel.add(new JLabel("ID Sala:"));
 		topPanel.add(new JLabel("ID Sala:"));
 		txtIdSala = new JTextField();
@@ -66,7 +60,7 @@ public class VistaMostrarSala extends JFrame implements IGUI {
 		btnMostrar = new JButton("Mostrar");
 		topPanel.add(btnMostrar);
 		
-		// Create table
+		
 		String[] columnNames = {"ID", "Nombre", "Aforo"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override

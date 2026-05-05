@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Presentacion.Vistas;
 
 import javax.swing.JFrame;
@@ -24,10 +22,7 @@ import Controlador.Controller;
 import Controlador.Context;
 import Integracion.Sesion.TSesion;
 
-/** 
- * View for displaying session details in table format
- * @author azuri
- */
+
 public class VistaMostrarSesion extends JFrame implements IGUI {
 	
 	private static final long serialVersionUID = 1L;
@@ -59,7 +54,7 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 	private void initComponents() {
 		JPanel topPanel = new JPanel(new GridLayout(1, 3, 10, 10));
 		
-		// Session ID input
+		
 		jLabel.add(new JLabel("ID sesion:"));
 		topPanel.add(new JLabel("ID sesion:"));
 		txtIdSesion = new JTextField(10);
@@ -67,7 +62,7 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 		btnMostrar = new JButton("Mostrar");
 		topPanel.add(btnMostrar);
 		
-		// Create table
+		
 		String[] columnNames = {"ID", "Objetivo", "Duracion (min)", "Fecha y Hora", "Sala", "Entrenador"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override

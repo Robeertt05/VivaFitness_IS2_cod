@@ -1,6 +1,4 @@
-/**
- * Vista para dar de alta a una nueva Sala.
- */
+
 package Presentacion.Vistas;
 
 import javax.swing.*;

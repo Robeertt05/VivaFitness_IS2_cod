@@ -1,7 +1,4 @@
-/**
- * Command: Baja logica de Entrenador.
- * Patron: Command.
- */
+
 package Controlador.commands;
 
 import Controlador.Command;

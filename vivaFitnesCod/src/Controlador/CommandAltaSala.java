@@ -4,11 +4,6 @@ import Integracion.Sala.TSala;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.Sala.SASala;
 
-/**
- * Command to create a new room
- * CASO 1: Alta sala (SRS)
- * @author azuri
- */
 public class CommandAltaSala implements Command {
 
 	@Override

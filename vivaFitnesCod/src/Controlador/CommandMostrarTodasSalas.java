@@ -1,6 +1,4 @@
-/**
- * 
- */
+ 
 package Controlador;
 
 import Integracion.Sala.TSala;
@@ -8,11 +6,7 @@ import Negocio.Sala.SASala;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import java.util.Set;
 
-/**
- * Command to list all rooms
- * CASO 5: Mostrar todas salas (SRS)
- * @author azuri
- */
+ 
 public class CommandMostrarTodasSalas implements Command {
 
 	@Override

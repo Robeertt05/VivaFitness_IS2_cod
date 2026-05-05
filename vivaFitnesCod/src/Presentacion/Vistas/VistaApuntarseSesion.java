@@ -36,7 +36,7 @@ public class VistaApuntarseSesion extends JFrame implements IGUI {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		// Panel superior con campos de entrada
+		
 		JPanel panelSuperior = new JPanel(new GridLayout(3, 2, 8, 8));
 		panelSuperior.add(new JLabel("ID cliente:"));
 		panelSuperior.add(idCliente);
@@ -45,7 +45,7 @@ public class VistaApuntarseSesion extends JFrame implements IGUI {
 		panelSuperior.add(new JLabel("Fecha apunte (yyyy-MM-dd):"));
 		panelSuperior.add(fecha);
 		
-		// Panel de botones
+		
 		JPanel panelBotones = new JPanel(new GridLayout(1, 3, 8, 8));
 		JButton apuntar = new JButton("Apuntar");
 		JButton limpiar = new JButton("Limpiar");
@@ -57,7 +57,7 @@ public class VistaApuntarseSesion extends JFrame implements IGUI {
 		panelBotones.add(limpiar);
 		panelBotones.add(recargar);
 		
-		// Panel con hora
+		
 		JPanel panelHora = new JPanel(new GridLayout(1, 2, 8, 8));
 		panelHora.add(new JLabel("Hora apunte (HH:mm):"));
 		panelHora.add(hora);
@@ -67,7 +67,7 @@ public class VistaApuntarseSesion extends JFrame implements IGUI {
 		panelControles.add(panelHora, BorderLayout.CENTER);
 		panelControles.add(panelBotones, BorderLayout.SOUTH);
 		
-		// Panel de tabla de sesiones disponibles - copiada de VistaMostrarTodasSesiones
+		
 		String[] columnNames = {"ID", "Objetivo", "Duracion (min)", "Fecha y Hora", "Sala", "Entrenador"};
 		modeloTabla = new DefaultTableModel(columnNames, 0) {
 			@Override
@@ -93,14 +93,14 @@ public class VistaApuntarseSesion extends JFrame implements IGUI {
 		
 		JScrollPane scrollPane = new JScrollPane(tablaSesiones);
 		
-		// Panel principal
+		
 		JPanel panelPrincipal = new JPanel(new BorderLayout(8, 8));
 		panelPrincipal.add(panelControles, BorderLayout.NORTH);
 		panelPrincipal.add(scrollPane, BorderLayout.CENTER);
 		
 		setContentPane(panelPrincipal);
 		
-		// Cargar sesiones al abrir
+		
 		cargarSesionesDisponibles();
 	}
 
@@ -115,7 +115,7 @@ public class VistaApuntarseSesion extends JFrame implements IGUI {
 				actualizarTabla(sesiones);
 			} else {
 				modeloTabla.setRowCount(0);
-				JOptionPane.showMessageDialog(this, "No hay sesiones disponibles.", "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "No hay sesiones disponibles.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 			}
 		} catch (Exception e) {
 			modeloTabla.setRowCount(0);

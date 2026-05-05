@@ -1,7 +1,4 @@
-/**
- * Command: Crear Sesion de entrenamiento.
- * Patron: Command.
- */
+
 package Controlador.commands;
 
 import Controlador.Command;

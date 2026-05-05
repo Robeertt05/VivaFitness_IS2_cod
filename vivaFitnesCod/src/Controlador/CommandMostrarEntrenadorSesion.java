@@ -1,18 +1,11 @@
-/**
- * 
- */
+ 
 package Controlador;
 
 import Integracion.Entrenador.TEntrenador;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.Sesion.SASesion;
 
-/**
- * Command to display the trainer assigned to a session
- * CASO 5: Mostrar entrenador por sesin (SRS)
- * Get the specific trainer assigned to a particular session
- * @author azuri
- */
+ 
 public class CommandMostrarEntrenadorSesion implements Command {
 
 	@Override

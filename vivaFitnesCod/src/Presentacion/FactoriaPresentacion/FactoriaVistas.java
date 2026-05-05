@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Presentacion.FactoriaPresentacion;
 
 import Presentacion.Vistas.VistaCrearSesion;
@@ -11,10 +9,7 @@ import Presentacion.Vistas.VistaMostrarTodasSesiones;
 import Presentacion.Vistas.VistaMostrarSalaSesion;
 import Presentacion.Vistas.VistaMostrarEntrenadorSesion;
 
-/** 
- * Factory that creates the appropriate IGUI view for a given Evento.
- * @author azuri
- */
+
 public class FactoriaVistas {
 
 private static FactoriaVistas instance;

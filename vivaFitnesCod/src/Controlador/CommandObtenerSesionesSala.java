@@ -1,6 +1,4 @@
-/**
- * 
- */
+ 
 package Controlador;
 
 import Integracion.Sesion.TSesion;
@@ -8,11 +6,7 @@ import Negocio.Sala.SASala;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import java.util.Set;
 
-/**
- * Command to get all sessions for a specific room
-	 * CASO 6: Obtener sesiones de una sala (Relacion 1-N)
- * @author azuri
- */
+ 
 public class CommandObtenerSesionesSala implements Command {
 
 	@Override

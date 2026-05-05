@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Integracion.Sesion;
 
 import Integracion.ConnectionManager.ConnectionManager;
@@ -13,23 +11,15 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-/** 
- * Data Access Object implementation for Sesion (SRS Aligned)
- * @author azuri
- */
+
 public class DAOSesionImp implements DAOSesion {
 
 	private Connection getConnection() throws SQLException {
 		return ConnectionManager.getConnection();
 	}
 
-	// -----------------------------------------------------------------------
-	// CRUD bsico
-	// -----------------------------------------------------------------------
-
 	@Override
 	public int create(TSesion datos) {
-		// begin-user-code
 		String sql = "INSERT INTO sesion "
 				+ "(objetivo, duracion, horario, idSala, idEntrenador, activo) "
 				+ "VALUES (?, ?, ?, ?, ?, ?)";
@@ -53,12 +43,10 @@ public class DAOSesionImp implements DAOSesion {
 			throw new RuntimeException("Error SQL al crear la sesion: " + e.getMessage(), e);
 		}
 		return 0;
-		// end-user-code
 	}
 
 	@Override
 	public TSesion read(int idSesion) {
-		// begin-user-code
 		String sql = "SELECT * FROM sesion WHERE idSesion = ? AND activo = 1";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
@@ -72,12 +60,10 @@ public class DAOSesionImp implements DAOSesion {
 			throw new RuntimeException("Error SQL al consultar la sesion con ID " + idSesion + ".", e);
 		}
 		return null;
-		// end-user-code
 	}
 
 	@Override
 	public int update(TSesion tSesion) {
-		// begin-user-code
 		String sql = "UPDATE sesion SET objetivo=?, duracion=?, horario=?, "
 				+ "idSala=?, idEntrenador=?, activo=? "
 				+ "WHERE idSesion=?";
@@ -94,13 +80,10 @@ public class DAOSesionImp implements DAOSesion {
 		} catch (SQLException e) {
 			throw new RuntimeException("Error SQL al modificar la sesion con ID " + tSesion.getIdSesion() + ": " + e.getMessage(), e);
 		}
-		// end-user-code
 	}
 
 	@Override
 	public int delete(int idSesion) {
-		// begin-user-code
-		// Baja lógica: solo desactivar (no limpiar sala/entrenador que son NOT NULL)
 		String sql = "UPDATE sesion SET activo = 0 WHERE idSesion = ?";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
@@ -109,16 +92,10 @@ public class DAOSesionImp implements DAOSesion {
 		} catch (SQLException e) {
 			throw new RuntimeException("Error SQL al eliminar la sesion con ID " + idSesion + ".", e);
 		}
-		// end-user-code
 	}
-
-	// -----------------------------------------------------------------------
-	// Consultas
-	// -----------------------------------------------------------------------
 
 	@Override
 	public Set<TSesion> read_all() {
-		// begin-user-code
 		String sql = "SELECT * FROM sesion WHERE activo = 1";
 		Set<TSesion> sesiones = new HashSet<>();
 		try (Connection con = getConnection();
@@ -131,21 +108,16 @@ public class DAOSesionImp implements DAOSesion {
 			throw new RuntimeException("Error SQL al listar todas las sesiones.", e);
 		}
 		return sesiones;
-		// end-user-code
 	}
 
 	@Override
 	public Set<TSesion> readByEntrenador(int idEntrenador) {
-		// begin-user-code
 		return readByField("SELECT * FROM sesion WHERE idEntrenador = ? AND activo = 1", idEntrenador);
-		// end-user-code
 	}
 
 	@Override
 	public Set<TSesion> readBySala(int idSala) {
-		// begin-user-code
 		return readByField("SELECT * FROM sesion WHERE idSala = ? AND activo = 1", idSala);
-		// end-user-code
 	}
 
 	private Set<TSesion> readByField(String sql, int id) {
@@ -164,13 +136,9 @@ public class DAOSesionImp implements DAOSesion {
 		return sesiones;
 	}
 
-	// -----------------------------------------------------------------------
-	// CASO 4: Mostrar sala por sesion
-	// -----------------------------------------------------------------------
 
 	@Override
 	public TSala getRoom(int idSesion) {
-		// begin-user-code
 		String sql = "SELECT sa.idSala, sa.nombreSala, sa.aforo, sa.activo "
 				+ "FROM sesion s "
 				+ "JOIN sala sa ON s.idSala = sa.idSala "
@@ -192,16 +160,10 @@ public class DAOSesionImp implements DAOSesion {
 			throw new RuntimeException("Error SQL al obtener la sala de la sesion.", e);
 		}
 		return null;
-		// end-user-code
 	}
-
-	// -----------------------------------------------------------------------
-	// CASO 5: Mostrar entrenador por sesion
-	// -----------------------------------------------------------------------
 
 	@Override
 	public Object getTrainer(int idSesion) {
-		// begin-user-code
 		String sql = "SELECT e.idEntrenador, e.DNI_entrenador, e.nombreEntrenador, e.telefonoEntrenador, e.activo "
 				+ "FROM sesion s "
 				+ "JOIN entrenador e ON s.idEntrenador = e.idEntrenador "
@@ -224,12 +186,7 @@ public class DAOSesionImp implements DAOSesion {
 			throw new RuntimeException("Error SQL al obtener el entrenador de la sesion.", e);
 		}
 		return null;
-		// end-user-code
 	}
-
-	// -----------------------------------------------------------------------
-	// Helper
-	// -----------------------------------------------------------------------
 
 	private TSesion mapRow(ResultSet rs) throws SQLException {
 		TSesion sesion = new TSesion();
@@ -263,8 +220,6 @@ public class DAOSesionImp implements DAOSesion {
 
 	@Override
 	public int countConflictoHorarioSala(int idSala, String horario, int duracion) {
-		// Check if there are any sessions in the same room that overlap with the given time slot
-		// Two time slots overlap if: start1 < end2 AND end1 > start2
 		String sql = "SELECT COUNT(*) FROM sesion s1 " +
 				"WHERE s1.idSala = ? " +
 				"AND s1.activo = 1 " +
@@ -291,8 +246,6 @@ public class DAOSesionImp implements DAOSesion {
 
 	@Override
 	public int countConflictoHorarioSalaExcluyendo(int idSala, String horario, int duracion, int idSesionExcluir) {
-		// Check if there are any other sessions in the same room that overlap with the given time slot
-		// Excludes the specified session from the check
 		String sql = "SELECT COUNT(*) FROM sesion s1 " +
 				"WHERE s1.idSala = ? " +
 				"AND s1.idSesion != ? " +

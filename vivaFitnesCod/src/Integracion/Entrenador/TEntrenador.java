@@ -1,9 +1,5 @@
 package Integracion.Entrenador;
 
-/** 
- * Transfer Object for Entrenador
- * @author azuri
- */
 public class TEntrenador {
 
 	private int id_entrenador;
@@ -12,10 +8,8 @@ public class TEntrenador {
 	private String nombre;
 	private String telefono;
 
-	// Constructor vacio
 	public TEntrenador() {}
 
-	// Constructor completo
 	public TEntrenador(int id, String dni, String nombre, String telefono, int activo) {
 		this.id_entrenador  = id;
 		this.dni_entrenador = dni;
@@ -24,7 +18,6 @@ public class TEntrenador {
 		this.activo         = activo;
 	}
 
-	// Getters
 
 	public int get_id() {
 		return id_entrenador;
@@ -46,7 +39,6 @@ public class TEntrenador {
 		return telefono;
 	}
 
-	// Setters
 
 	public void set_id(int id) {
 		this.id_entrenador = id;

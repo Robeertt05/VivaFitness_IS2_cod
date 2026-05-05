@@ -1,16 +1,10 @@
-/**
- * 
- */
+
 package Controlador;
 
 import Integracion.Sesion.TSesion;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.Sesion.SASesion;
 
-/**
- * Command to create a new session
- * @author azuri
- */
 public class CommandAltaSesion implements Command {
 
 	@Override

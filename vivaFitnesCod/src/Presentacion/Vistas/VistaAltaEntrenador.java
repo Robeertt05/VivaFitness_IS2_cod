@@ -1,6 +1,4 @@
-/**
- * Vista para dar de alta a un nuevo Entrenador.
- */
+
 package Presentacion.Vistas;
 
 import javax.swing.*;

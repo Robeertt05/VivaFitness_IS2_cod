@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Presentacion.Vistas;
 
 import javax.swing.JFrame;
@@ -20,10 +18,6 @@ import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Controller;
 import Controlador.Context;
 
-/** 
- * View for deleting a session
- * @author azuri
- */
 public class VistaEliminarSesion extends JFrame implements IGUI {
 	
 	private Set<ActionListener> actionListener;
@@ -52,14 +46,14 @@ public class VistaEliminarSesion extends JFrame implements IGUI {
 	private void initComponents() {
 		JPanel mainPanel = new JPanel(new GridLayout(2, 2, 10, 10));
 		
-		// Session ID input
+		
 		JLabel lblId = new JLabel("ID sesion:");
 		jLabel.add(lblId);
 		mainPanel.add(lblId);
 		txtIdSesion = new JTextField(10);
 		mainPanel.add(txtIdSesion);
 		
-		// Buttons
+		
 		JPanel buttonPanel = new JPanel();
 		btnEliminar = new JButton("Eliminar");
 		btnCancelar = new JButton("Cancelar");

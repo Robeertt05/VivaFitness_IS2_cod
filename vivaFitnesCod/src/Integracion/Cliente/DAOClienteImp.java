@@ -99,7 +99,6 @@ public class DAOClienteImp implements DAOCliente {
 		try {
 			con = ConnectionManager.getConnection();
 			
-			// Validar que no existan inscripciones activas para el cliente
 			String checkQuery = "SELECT COUNT(idClienteSesion) as count FROM apunta WHERE idCliente = ? AND activo = 1";
 			try (PreparedStatement checkPs = con.prepareStatement(checkQuery)) {
 				checkPs.setInt(1, idCliente);
@@ -115,7 +114,6 @@ public class DAOClienteImp implements DAOCliente {
 				}
 			}
 			
-			// Actualizar cliente a inactivo
 			String sql = "UPDATE cliente SET activo = 0 WHERE idCliente = ?";
 			try (PreparedStatement ps = con.prepareStatement(sql)) {
 				ps.setInt(1, idCliente);
@@ -131,7 +129,6 @@ public class DAOClienteImp implements DAOCliente {
 				try {
 					con.close();
 				} catch (SQLException e) {
-					// Ignorar error al cerrar conexion
 				}
 			}
 		}
@@ -172,10 +169,9 @@ public class DAOClienteImp implements DAOCliente {
 					return -2;
 				}
 
-				// Validar que fecha u hora no sean null
 				if (datos.getFecha() == null || datos.getHora() == null) {
 					con.rollback();
-					return -6; // Fecha u hora inválidas
+					return -6; 
 				}
 				LocalDate fechaRegistro = datos.getFecha().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
@@ -185,8 +181,6 @@ public class DAOClienteImp implements DAOCliente {
 					return -3;
 				}
 				
-				// Validar que la fecha de registro sea anterior o igual a la fecha de la sesión
-				// y si es el mismo día, que sea al menos 10 minutos antes
 				LocalTime horaRegistro = LocalTime.parse(datos.getHora());
 				LocalTime horaRegistro10Min = horaRegistro.plusMinutes(10);
 				if (sesion.horario != null) {
@@ -196,23 +190,21 @@ public class DAOClienteImp implements DAOCliente {
 							LocalDate fechaSesion = LocalDate.parse(partes[0]);
 							LocalTime horaSesion = LocalTime.parse(partes[1]);
 							
-							// Validar que la fecha de registro es anterior o igual a la de la sesión
 							if (fechaRegistro.isAfter(fechaSesion)) {
 								con.rollback();
-								return -7; // El registro debe ser el mismo día o anterior a la sesión
+								return -7;
 							}
 							
-							// Si es el mismo día, validar que el registro es al menos 10 minutos antes
 							if (fechaRegistro.equals(fechaSesion)) {
 								if (horaRegistro10Min.isAfter(horaSesion)) {
 									con.rollback();
-									return -8; // No hay suficiente anticipación (debe ser al menos 10 minutos antes)
+									return -8; 
 								}
 							}
 						}
 					} catch (Exception e) {
 						con.rollback();
-						return -6; // Error al parsear fecha/hora de la sesión
+						return -6;
 					}
 				}
 				

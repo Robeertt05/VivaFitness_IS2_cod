@@ -1,18 +1,9 @@
-/**
- * Contexto que se pasa entre la Vista y el Controlador.
- * Contiene el evento (int) que disparo la accion y el objeto de datos asociado.
- * Patron: Context Object - encapsula estado compartido entre capas.
- */
+ 
 package Controlador;
 
 import Presentacion.FactoriaPresentacion.Evento;
 
-/**
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
+ 
 public class Context {
 
 	private Evento evento;

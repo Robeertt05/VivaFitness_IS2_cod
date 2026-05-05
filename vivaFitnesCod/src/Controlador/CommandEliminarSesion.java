@@ -1,17 +1,10 @@
-/**
- * 
- */
+
 package Controlador;
 
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.Sesion.SASesion;
 
-/**
- * Command to delete a session
- * CASO 1: Baja sesin (SRS)
- * Precondition: Session must not have registered clients
- * @author azuri
- */
+
 public class CommandEliminarSesion implements Command {
 
 	@Override

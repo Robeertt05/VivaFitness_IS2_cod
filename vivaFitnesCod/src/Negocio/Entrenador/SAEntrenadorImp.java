@@ -1,7 +1,3 @@
-/**
- * Implementacion del Servicio de Aplicacion de Entrenador.
- * Patron: Fachada + coordina con la capa de Integracion via FactoriaIntegracion.
- */
 package Negocio.Entrenador;
 
 import java.util.Set;
@@ -13,12 +9,7 @@ import Integracion.Sesion.DAOSesion;
 import Integracion.Sesion.TSesion;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 
-/**
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author azuri
- * @generated "UML a Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
+
 public class SAEntrenadorImp implements SAEntrenador {
 
 	@Override
@@ -57,11 +48,10 @@ public class SAEntrenadorImp implements SAEntrenador {
 			return -1;
 		}
 
-		// Comprobar si el entrenador tiene sesiones activas asociadas
 		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
 		Set<TSesion> sesiones = daoSesion.readByEntrenador(id);
 		if (sesiones != null && !sesiones.isEmpty()) {
-			return -2; // No se puede dar de baja: tiene sesiones activas
+			return -2; 
 		}
 
 		entrenador.set_activo(0);
@@ -92,7 +82,7 @@ public class SAEntrenadorImp implements SAEntrenador {
 				if (existenteDni.get_activo() == 1) {
 					return -2;
 				}
-				// Libera el DNI del registro inactivo para reutilizarlo.
+				
 				existenteDni.set_dni(null);
 				if (dao.update(existenteDni) <= 0) {
 					return -1;

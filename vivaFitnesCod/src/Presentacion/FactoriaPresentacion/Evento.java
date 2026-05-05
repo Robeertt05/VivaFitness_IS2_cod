@@ -1,12 +1,7 @@
-/**
- * 
- */
+
 package Presentacion.FactoriaPresentacion;
 
-/** 
- * Enum of all UI events that trigger Controller actions
- * @author azuri
- */
+
 public enum Evento {
 	ALTA_ENTRENADOR,
 	BAJA_ENTRENADOR,

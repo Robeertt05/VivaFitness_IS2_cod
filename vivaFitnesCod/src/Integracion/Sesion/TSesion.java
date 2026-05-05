@@ -1,14 +1,7 @@
-/**
- * 
- */
+
 package Integracion.Sesion;
 
-/** 
- * Transfer Object for Sesion
- * Attributes (aligned with DB table sesion):
- *   idSesion, objetivo, duracion, horario, idSala, idEntrenador, activo
- * @author azuri
- */
+
 public class TSesion {
 
 	private int idSesion;

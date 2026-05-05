@@ -6,9 +6,7 @@ import Presentacion.FactoriaPresentacion.IGUI;
 import java.awt.*;
 import javax.swing.*;
 
-/**
- * Session actions menu opened from the main entities screen.
- */
+
 public class VistaMenuSesiones extends JFrame {
 
     private static final long serialVersionUID = 1L;

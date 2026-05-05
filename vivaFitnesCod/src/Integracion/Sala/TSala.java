@@ -1,35 +1,17 @@
-/**
- * 
- */
+
 package Integracion.Sala;
 
-/** 
- * Transfer Object for Sala (Room/Gym Space)
- * @author azuri
- */
 public class TSala {
 	
-	/** 
-	 * Room ID
-	 */
+
 	private int idSala;
 	
-	/** 
-	 * Room name
-	 */
 	private String nombreSala;
 	
-	/** 
-	 * Room capacity (aforo)
-	 */
 	private int aforo;
-	
-	/** 
-	 * Room status (1 = active, 0 = inactive)
-	 */
+
 	private int activo;
 
-	// Constructors
 	public TSala() {
 		this.activo = 1;
 	}
@@ -41,7 +23,6 @@ public class TSala {
 		this.activo = 1;
 	}
 
-	// Getters and Setters
 	public int getIdSala() {
 		return idSala;
 	}

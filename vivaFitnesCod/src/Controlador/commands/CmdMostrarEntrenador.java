@@ -1,7 +1,4 @@
-/**
- * Command: Mostrar datos de un Entrenador.
- * Patron: Command.
- */
+
 package Controlador.commands;
 
 import Controlador.Command;

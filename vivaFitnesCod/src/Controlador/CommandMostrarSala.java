@@ -1,17 +1,10 @@
-/**
- * 
- */
+ 
 package Controlador;
 
 import Integracion.Sala.TSala;
 import Negocio.Sala.SASala;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
-
-/**
- * Command to display a specific room
- * CASO 4: Mostrar sala (SRS)
- * @author azuri
- */
+ 
 public class CommandMostrarSala implements Command {
 
 	@Override

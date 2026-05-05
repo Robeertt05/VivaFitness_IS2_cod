@@ -1,6 +1,4 @@
-/**
- * Vista para modificar los datos de una Sala.
- */
+
 package Presentacion.Vistas;
 
 import javax.swing.*;

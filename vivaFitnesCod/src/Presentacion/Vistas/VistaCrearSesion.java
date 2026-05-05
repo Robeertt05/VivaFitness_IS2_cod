@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Presentacion.Vistas;
 
 import Controlador.Context;
@@ -20,30 +18,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/** 
- * Vista para crear una nueva sesion
- * @author azuri
- */
 public class VistaCrearSesion extends JFrame implements IGUI {
-	/** 
-	 * Action listeners
-	 */
+	
 	private Set<ActionListener> actionListener;
-	/** 
-	 * Buttons
-	 */
 	private Set<JButton> jButton;
-	/** 
-	 * Panels
-	 */
 	private Set<JPanel> jPanel;
-	/** 
-	 * Text fields
-	 */
 	private Set<JTextField> jTextField;
-	/** 
-	 * Labels
-	 */
 	private Set<JLabel> jLabel;
 	
 	private JTextField txtObjetivo;
@@ -72,42 +52,42 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 	private void initComponents() {
 		JPanel mainPanel = new JPanel(new GridLayout(5, 2, 10, 10));
 		
-		// Objetivo
+		
 		jLabel.add(new JLabel("Objetivo:"));
 		mainPanel.add(new JLabel("Objetivo:"));
 		txtObjetivo = new JTextField();
 		jTextField.add(txtObjetivo);
 		mainPanel.add(txtObjetivo);
 		
-		// Duracion
+		
 		jLabel.add(new JLabel("Duracion (min):"));
 		mainPanel.add(new JLabel("Duracion (min):"));
 		txtDuracion = new JTextField();
 		jTextField.add(txtDuracion);
 		mainPanel.add(txtDuracion);
 		
-		// Horario
+		
 		jLabel.add(new JLabel("Horario (yyyy-MM-dd HH:mm):"));
 		mainPanel.add(new JLabel("Horario (yyyy-MM-dd HH:mm):"));
 		txtHorario = new JTextField("2026-05-10 10:00");
 		jTextField.add(txtHorario);
 		mainPanel.add(txtHorario);
 		
-		// Room
+		
 		jLabel.add(new JLabel("ID Sala:"));
 		mainPanel.add(new JLabel("ID Sala:"));
 		txtIdSala = new JTextField();
 		jTextField.add(txtIdSala);
 		mainPanel.add(txtIdSala);
 		
-		// Trainer
+		
 		jLabel.add(new JLabel("ID Entrenador:"));
 		mainPanel.add(new JLabel("ID Entrenador:"));
 		txtIdEntrenador = new JTextField();
 		jTextField.add(txtIdEntrenador);
 		mainPanel.add(txtIdEntrenador);
 		
-		// Buttons
+		
 		JPanel buttonPanel = new JPanel();
 		btnCrear = new JButton("Crear");
 		btnCancelar = new JButton("Cancelar");
@@ -177,7 +157,7 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 			JOptionPane.showMessageDialog(this, "ID Entrenador debe ser numero > 0.", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
-		// Basic date format check
+		
 		if (!hor.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}")) {
 			JOptionPane.showMessageDialog(this, "Horario formato: yyyy-MM-dd HH:mm.", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;

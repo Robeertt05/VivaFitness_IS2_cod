@@ -1,17 +1,11 @@
-/**
- * 
- */
+ 
 package Controlador;
 
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Negocio.Sesion.SASesion;
 import Integracion.Sesion.TSesion;
 import java.util.Set;
-
-/**
- * Command to list all sessions
- * @author azuri
- */
+ 
 public class CommandMostrarTodasSesiones implements Command {
 
 	@Override

@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Presentacion.Vistas;
 
 import Controlador.Context;
@@ -22,10 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/** 
- * View for listing all rooms in a table format
- * @author azuri
- */
+
 public class VistaMostrarTodasSalas extends JFrame implements IGUI {
 	
 	private static final long serialVersionUID = 1L;
@@ -53,7 +48,7 @@ public class VistaMostrarTodasSalas extends JFrame implements IGUI {
 	}
 	
 	private void initComponents() {
-		// Create table
+		
 		String[] columnNames = {"ID", "Nombre", "Aforo"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override
@@ -66,7 +61,7 @@ public class VistaMostrarTodasSalas extends JFrame implements IGUI {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		JScrollPane scrollPane = new JScrollPane(table);
 		
-		// Buttons
+		
 		JPanel buttonPanel = new JPanel();
 		btnActualizar = new JButton("Actualizar");
 		btnCerrar = new JButton("Cerrar");

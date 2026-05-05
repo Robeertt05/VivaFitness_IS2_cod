@@ -1,6 +1,4 @@
-/**
- * Vista para mostrar los datos de un Entrenador por ID.
- */
+
 package Presentacion.Vistas;
 
 import Controlador.Context;
@@ -39,7 +37,6 @@ public class VistaMostrarEntrenador extends JFrame implements IGUI {
 		panelSuperior.add(txtId);
 		panelSuperior.add(btnBuscar);
 
-		// Create table
 		String[] columnNames = {"ID", "DNI", "Nombre", "Telefono"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override

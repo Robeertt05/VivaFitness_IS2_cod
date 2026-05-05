@@ -1,17 +1,10 @@
-/**
- * 
- */
+
 package Controlador;
 
 import Negocio.Sala.SASala;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 
-/**
- * Command to delete a room
- * CASO 2: Baja sala (SRS)
- * Precondition: Room must not have active sessions
- * @author azuri
- */
+
 public class CommandBajaSala implements Command {
 
 	@Override

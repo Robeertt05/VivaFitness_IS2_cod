@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Presentacion.Vistas;
 
 import Controlador.Context;
@@ -20,10 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/** 
- * View for modifying a session
- * @author azuri
- */
+
 public class VistaModificarSesion extends JFrame implements IGUI {
 	
 	private Set<ActionListener> actionListener;
@@ -57,35 +52,35 @@ public class VistaModificarSesion extends JFrame implements IGUI {
 	private void initComponents() {
 		JPanel mainPanel = new JPanel(new GridLayout(5, 2, 10, 10));
 		
-		// Session ID input
+		
 		jLabel.add(new JLabel("ID sesion:"));
 		mainPanel.add(new JLabel("ID sesion:"));
 		txtIdSesion = new JTextField(10);
 		jTextField.add(txtIdSesion);
 		mainPanel.add(txtIdSesion);
 		
-		// Name
+		
 		jLabel.add(new JLabel("Objetivo:"));
 		mainPanel.add(new JLabel("Objetivo:"));
 		txtObjetivo = new JTextField();
 		jTextField.add(txtObjetivo);
 		mainPanel.add(txtObjetivo);
 		
-		// Description
+		
 		jLabel.add(new JLabel("Duracion (min):"));
 		mainPanel.add(new JLabel("Duracion (min):"));
 		txtDuracion = new JTextField();
 		jTextField.add(txtDuracion);
 		mainPanel.add(txtDuracion);
 		
-		// Hour
+		
 		jLabel.add(new JLabel("Horario (yyyy-MM-dd HH:mm):"));
 		mainPanel.add(new JLabel("Horario (yyyy-MM-dd HH:mm):"));
 		txtHorario = new JTextField();
 		jTextField.add(txtHorario);
 		mainPanel.add(txtHorario);
 		
-		// Buttons
+		
 		JPanel buttonPanel = new JPanel();
 		btnModificar = new JButton("Modificar");
 		btnCancelar = new JButton("Cancelar");

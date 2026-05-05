@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Presentacion.Vistas;
 
 import javax.swing.*;
@@ -14,11 +12,7 @@ import Integracion.Entrenador.TEntrenador;
 import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.IGUI;
 
-/**
- * View to display trainer details for a specific session
- * CASO 5: Mostrar entrenador por sesion (SRS)
- * @author azuri
- */
+
 public class VistaMostrarEntrenadorSesion extends JFrame implements IGUI {
 	
 	private static final long serialVersionUID = 1L;
@@ -46,45 +40,45 @@ public class VistaMostrarEntrenadorSesion extends JFrame implements IGUI {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		// Main panel with GridLayout
+		
 		JPanel panelPrincipal = new JPanel(new GridLayout(6, 2, 10, 10));
 		panelPrincipal.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 		
-		// ID Session input
+		
 		JLabel lblSesion = new JLabel("ID sesion:");
 		txtIdSesion = new JTextField(10);
 		panelPrincipal.add(lblSesion);
 		panelPrincipal.add(txtIdSesion);
 		
-		// Trainer ID (read-only)
+		
 		JLabel lblTrainerId = new JLabel("ID Entrenador:");
 		lblIdEntrenador = new JLabel("-");
 		lblIdEntrenador.setForeground(Color.BLUE);
 		panelPrincipal.add(lblTrainerId);
 		panelPrincipal.add(lblIdEntrenador);
 		
-		// Trainer Name (read-only)
+		
 		JLabel lblNombreLabel = new JLabel("Nombre:");
 		lblNombre = new JLabel("-");
 		lblNombre.setForeground(Color.BLUE);
 		panelPrincipal.add(lblNombreLabel);
 		panelPrincipal.add(lblNombre);
 		
-		// Trainer Phone (read-only)
+		
 		JLabel lblTelefonoLabel = new JLabel("Telefono:");
 		lblTelefono = new JLabel("-");
 		lblTelefono.setForeground(Color.BLUE);
 		panelPrincipal.add(lblTelefonoLabel);
 		panelPrincipal.add(lblTelefono);
 		
-		// Trainer DNI (read-only)
+		
 		JLabel lblDNILabel = new JLabel("DNI:");
 		lblDNI = new JLabel("-");
 		lblDNI.setForeground(Color.BLUE);
 		panelPrincipal.add(lblDNILabel);
 		panelPrincipal.add(lblDNI);
 		
-		// Buttons panel
+		
 		JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
 		btnBuscar = new JButton("Buscar");
 		btnLimpiar = new JButton("Limpiar");
@@ -92,7 +86,7 @@ public class VistaMostrarEntrenadorSesion extends JFrame implements IGUI {
 		panelBotones.add(btnLimpiar);
 		panelPrincipal.add(panelBotones);
 		
-		// Add action listeners
+		
 		btnBuscar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -107,7 +101,7 @@ public class VistaMostrarEntrenadorSesion extends JFrame implements IGUI {
 			}
 		});
 		
-		// Add main panel to frame
+		
 		add(panelPrincipal);
 	}
 	

@@ -39,7 +39,6 @@ public class VistaMostrarSesionesCliente extends JFrame implements IGUI {
 		buscar.addActionListener(e -> buscar());
 		top.add(buscar);
 		
-		// Create table
 		String[] columnNames = {"ID", "Objetivo", "Duracion (min)", "Fecha y Hora", "Sala", "Entrenador"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override
@@ -76,7 +75,7 @@ public class VistaMostrarSesionesCliente extends JFrame implements IGUI {
 				return;
 			}
 			
-			// Sort by ID and add to table
+			
 			List<TSesion> sesionList = sesiones.stream()
 				.filter(s -> s instanceof TSesion)
 				.map(s -> (TSesion) s)

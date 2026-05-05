@@ -1,6 +1,4 @@
-/**
- * Vista para modificar los datos de un Entrenador.
- */
+
 package Presentacion.Vistas;
 
 import javax.swing.*;

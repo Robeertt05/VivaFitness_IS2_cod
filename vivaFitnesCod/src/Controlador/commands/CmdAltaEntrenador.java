@@ -1,7 +1,4 @@
-/**
- * Command: Alta de Entrenador.
- * Patron: Command - encapsula la logica de invocacion del SA.
- */
+
 package Controlador.commands;
 
 import Controlador.Command;

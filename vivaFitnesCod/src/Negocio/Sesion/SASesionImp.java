@@ -15,21 +15,18 @@ public class SASesionImp implements SASesion {
 	public int alta_sesion(TSesion datos) {
 		validarSesionAlta(datos);
 		
-		// Verificar que la sala existe y está activa
 		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
 		TSala sala = daoSala.read(datos.getIdSala());
 		if (sala == null || sala.getActivo() != 1) {
 			throw new IllegalArgumentException("Sala inválida o inactiva: ID " + datos.getIdSala());
 		}
 		
-		// Verificar que el entrenador existe y está activo
 		DAOEntrenador daoEntrenador = FactoriaIntegracion.getInstance().generaDAOEntrenador();
 		TEntrenador entrenador = daoEntrenador.read(datos.getIdEntrenador());
 		if (entrenador == null || entrenador.get_activo() != 1) {
 			throw new IllegalArgumentException("Entrenador invalidos o inactivo: ID " + datos.getIdEntrenador());
 		}
 		
-		// Check sala ocupada - verify no time conflicts considering duration
 		DAOSesion daoCheck = FactoriaIntegracion.getInstance().generaDAOSesion();
 		int count = daoCheck.countConflictoHorarioSala(datos.getIdSala(), datos.getFechaHora(), datos.getDuracion());
 		if (count > 0) {
@@ -68,13 +65,11 @@ public class SASesionImp implements SASesion {
 			throw new IllegalArgumentException("La sesion con ID " + idSesion + " no existe.");
 		}
 
-		// Comprobar si la sesion tiene clientes apuntados activos
 		int clientesActivos = daoSesion.countClientesActivos(idSesion);
 		if (clientesActivos > 0) {
-			return -2; // No se puede dar de baja: tiene clientes inscritos
+			return -2; 
 		}
 
-		// Si tiene sala o entrenador, el DAO limpiara las referencias antes de desactivar
 		int result = daoSesion.delete(idSesion);
 		if (result <= 0) {
 			throw new RuntimeException("No se pudo eliminar la sesion en base de datos.");
@@ -102,21 +97,18 @@ public class SASesionImp implements SASesion {
 		TSesion actualizada = combinarDatos(existente, datos);
 		validarSesionModificacion(actualizada);
 
-		// Verificar que la sala existe y está activa
 		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
 		TSala sala = daoSala.read(actualizada.getIdSala());
 		if (sala == null || sala.getActivo() != 1) {
 			throw new IllegalArgumentException("Sala inválida o inactiva: ID " + actualizada.getIdSala());
 		}
 
-		// Verificar que el entrenador existe y está activo
 		DAOEntrenador daoEntrenador = FactoriaIntegracion.getInstance().generaDAOEntrenador();
 		TEntrenador entrenador = daoEntrenador.read(actualizada.getIdEntrenador());
 		if (entrenador == null || entrenador.get_activo() != 1) {
 			throw new IllegalArgumentException("Entrenador inválido o inactivo: ID " + actualizada.getIdEntrenador());
 		}
 
-		// Check for time conflicts if sala, horario, or duracion changed
 		if (actualizada.getIdSala() != existente.getIdSala() || 
 			!actualizada.getFechaHora().equals(existente.getFechaHora()) ||
 			actualizada.getDuracion() != existente.getDuracion()) {

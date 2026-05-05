@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package Presentacion;
 
 import Controlador.Context;
@@ -12,11 +10,7 @@ import java.awt.*;
 import javax.swing.*;
 
 
-/** 
- * Main application window with all entities.
- * Only Sessions flow is functional for now.
- * @author azuri
- */
+
 public class VistaPrincipal extends JFrame implements IGUI {
 
 private static final long serialVersionUID = 1L;
