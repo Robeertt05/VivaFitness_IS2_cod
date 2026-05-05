@@ -123,21 +123,66 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 		add(buttonPanel, BorderLayout.SOUTH);
 
 		btnCrear.addActionListener(e -> {
-			Context result = Controller.getInstance().action(new Context(Evento.ALTA_SESION, getSessionData()));
-			JOptionPane.showMessageDialog(this, result.getMessage());
-			update(result);
+			if (validateInputs()) {
+				Context result = Controller.getInstance().action(new Context(Evento.ALTA_SESION, getSessionData()));
+				JOptionPane.showMessageDialog(this, result.getMessage() != null ? result.getMessage() : "Error desconocido");
+				if (result.isSuccess()) {
+					dispose();
+				}
+				update(result);
+			}
 		});
 		btnCancelar.addActionListener(e -> dispose());
 	}
 
 	public TSesion getSessionData() {
 		TSesion sesion = new TSesion();
-		sesion.setObjetivo(txtObjetivo.getText());
-		try { sesion.setDuracion(Integer.parseInt(txtDuracion.getText().trim())); } catch (NumberFormatException ex) { sesion.setDuracion(0); }
-		sesion.setHorario(txtHorario.getText());
-		try { sesion.setIdSala(Integer.parseInt(txtIdSala.getText().trim())); } catch (NumberFormatException ex) { sesion.setIdSala(0); }
-		try { sesion.setIdEntrenador(Integer.parseInt(txtIdEntrenador.getText().trim())); } catch (NumberFormatException ex) { sesion.setIdEntrenador(0); }
+		sesion.setObjetivo(txtObjetivo.getText().trim());
+		sesion.setDuracion(Integer.parseInt(txtDuracion.getText().trim()));
+		sesion.setHorario(txtHorario.getText().trim());
+		sesion.setIdSala(Integer.parseInt(txtIdSala.getText().trim()));
+		sesion.setIdEntrenador(Integer.parseInt(txtIdEntrenador.getText().trim()));
 		return sesion;
+	}
+
+	private boolean validateInputs() {
+		String obj = txtObjetivo.getText().trim();
+		if (obj.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "El objetivo es obligatorio.", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		String hor = txtHorario.getText().trim();
+		if (hor.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "El horario es obligatorio (yyyy-MM-dd).", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		try {
+			int dur = Integer.parseInt(txtDuracion.getText().trim());
+			if (dur <= 0) throw new NumberFormatException();
+		} catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(this, "Duración debe ser número > 0.", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		try {
+			int sala = Integer.parseInt(txtIdSala.getText().trim());
+			if (sala <= 0) throw new NumberFormatException();
+		} catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(this, "ID Sala debe ser número > 0.", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		try {
+			int ent = Integer.parseInt(txtIdEntrenador.getText().trim());
+			if (ent <= 0) throw new NumberFormatException();
+		} catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(this, "ID Entrenador debe ser número > 0.", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		// Basic date format check
+		if (!hor.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}")) {
+			JOptionPane.showMessageDialog(this, "Horario formato: yyyy-MM-dd HH:mm.", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
 	}
 	
 	public void addCreateButtonListener(ActionListener listener) {

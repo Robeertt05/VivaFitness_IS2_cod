@@ -5,6 +5,7 @@ package Controlador;
 
 import Integracion.Sesion.TSesion;
 import Negocio.Sala.SASala;
+import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import java.util.Set;
 
 /**
@@ -13,12 +14,6 @@ import java.util.Set;
  * @author azuri
  */
 public class CommandObtenerSesionesSala implements Command {
-	
-	private SASala saSala;
-	
-	public CommandObtenerSesionesSala(SASala saSala) {
-		this.saSala = saSala;
-	}
 
 	@Override
 	public Context execute(Object datos) {
@@ -31,6 +26,7 @@ public class CommandObtenerSesionesSala implements Command {
 		}
 		
 		int idSala = (Integer) datos;
+		SASala saSala = FactoriaServicioAplicacion.getInstance().generaSASala();
 		Set<TSesion> sesiones = saSala.obtener_sesiones_sala(idSala);
 		
 		if (sesiones != null && !sesiones.isEmpty()) {

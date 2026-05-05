@@ -3,9 +3,9 @@
  */
 package Controlador;
 
-import Negocio.Sesion.SASesion;
-import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Integracion.Sesion.TSesion;
+import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
+import Negocio.Sesion.SASesion;
 
 /**
  * Command to create a new session
@@ -30,9 +30,15 @@ public class CommandAltaSesion implements Command {
 			ctx.setSuccess(true);
 			ctx.setMessage("Sesion creada correctamente con ID: " + resultado);
 			ctx.setData(resultado);
+		} catch (IllegalArgumentException e) {
+			ctx.setSuccess(false);
+			ctx.setMessage("Datos invalidos: " + e.getMessage());
+		} catch (RuntimeException e) {
+			ctx.setSuccess(false);
+			ctx.setMessage("Error de base de datos: " + e.getMessage());
 		} catch (Exception e) {
 			ctx.setSuccess(false);
-			ctx.setMessage(e.getMessage());
+			ctx.setMessage("Error al crear sesion: " + e.getMessage());
 		}
 		
 		return ctx;

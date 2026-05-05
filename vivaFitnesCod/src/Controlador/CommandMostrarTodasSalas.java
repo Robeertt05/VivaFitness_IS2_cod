@@ -5,6 +5,7 @@ package Controlador;
 
 import Integracion.Sala.TSala;
 import Negocio.Sala.SASala;
+import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import java.util.Set;
 
 /**
@@ -13,17 +14,12 @@ import java.util.Set;
  * @author azuri
  */
 public class CommandMostrarTodasSalas implements Command {
-	
-	private SASala saSala;
-	
-	public CommandMostrarTodasSalas(SASala saSala) {
-		this.saSala = saSala;
-	}
 
 	@Override
 	public Context execute(Object datos) {
 		Context ctx = new Context();
 		
+		SASala saSala = FactoriaServicioAplicacion.getInstance().generaSASala();
 		Set<TSala> salas = saSala.mostrar_todas_salas();
 		
 		if (salas != null && !salas.isEmpty()) {

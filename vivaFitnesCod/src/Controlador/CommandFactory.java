@@ -5,8 +5,8 @@
  */
 package Controlador;
 
-import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.commands.*;
+import Presentacion.FactoriaPresentacion.Evento;
 
 /**
  * <!-- begin-UML-doc -->
@@ -81,12 +81,12 @@ public class CommandFactory {
 				return new CommandBajaSala();
 			case MODIFICAR_SALA:
 				return new CommandModificarSala();
-			case MOSTRAR_SALA:
-				return new CommandMostrarSala();
-			case MOSTRAR_TODAS_SALAS:
-				return new CommandMostrarTodasSalas();
-			case OBTENER_SESIONES_SALA:
-				return new CommandObtenerSesionesSala();
+		case MOSTRAR_SALA:
+			return new CommandMostrarSala();
+		case MOSTRAR_TODAS_SALAS:
+			return new CommandMostrarTodasSalas();
+		case OBTENER_SESIONES_SALA:
+			return new CommandObtenerSesionesSala();
 			
 			// --- Sesion ---
 			case ALTA_SESION:

@@ -5,6 +5,7 @@ package Controlador;
 
 import Integracion.Sala.TSala;
 import Negocio.Sala.SASala;
+import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 
 /**
  * Command to display a specific room
@@ -12,12 +13,6 @@ import Negocio.Sala.SASala;
  * @author azuri
  */
 public class CommandMostrarSala implements Command {
-	
-	private SASala saSala;
-	
-	public CommandMostrarSala(SASala saSala) {
-		this.saSala = saSala;
-	}
 
 	@Override
 	public Context execute(Object datos) {
@@ -30,6 +25,7 @@ public class CommandMostrarSala implements Command {
 		}
 		
 		int idSala = (Integer) datos;
+		SASala saSala = FactoriaServicioAplicacion.getInstance().generaSASala();
 		TSala sala = saSala.mostrar_sala(idSala);
 		
 		if (sala != null) {

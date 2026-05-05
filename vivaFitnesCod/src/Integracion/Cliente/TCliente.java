@@ -7,15 +7,15 @@ public class TCliente {
 	private int idCliente;
 	private String dni_cliente;
 	private String nombreCliente;
-	private Boolean activo;
+	private int activo;
 	private String telefonoCliente;
 	private String correoCliente;
 
 	public TCliente() {
-		this.activo = true;
+		this.activo = 1;
 	}
 
-	public TCliente(int idCliente, String dni_cliente, String nombreCliente, String telefonoCliente, String correoCliente, Boolean activo) {
+	public TCliente(int idCliente, String dni_cliente, String nombreCliente, String telefonoCliente, String correoCliente, int activo) {
 		this.idCliente = idCliente;
 		this.dni_cliente = dni_cliente;
 		this.nombreCliente = nombreCliente;
@@ -29,7 +29,7 @@ public class TCliente {
 		this.nombreCliente = nombreCliente;
 		this.telefonoCliente = telefonoCliente;
 		this.correoCliente = correoCliente;
-		this.activo = true;
+		this.activo = 1;
 	}
 
 	public int getId() {
@@ -64,11 +64,11 @@ public class TCliente {
 		this.nombreCliente = nombreCliente;
 	}
 
-	public Boolean get_activo() {
+	public int get_activo() {
 		return activo;
 	}
 
-	public void set_activo(Boolean activo) {
+	public void set_activo(int activo) {
 		this.activo = activo;
 	}
 
