@@ -1,11 +1,12 @@
 package Negocio.Sesion;
 
+import Integracion.Entrenador.DAOEntrenador;
+import Integracion.Entrenador.TEntrenador;
+import Integracion.FactoriaIntegracion.FactoriaIntegracion;
+import Integracion.Sala.DAOSala;
 import Integracion.Sala.TSala;
 import Integracion.Sesion.DAOSesion;
 import Integracion.Sesion.TSesion;
-import Integracion.Entrenador.TEntrenador;
-import Integracion.FactoriaIntegracion.FactoriaIntegracion;
-
 import java.util.Set;
 
 public class SASesionImp implements SASesion {
@@ -13,13 +14,35 @@ public class SASesionImp implements SASesion {
 	@Override
 	public int alta_sesion(TSesion datos) {
 		validarSesionAlta(datos);
+		
+		// Verificar que la sala existe y está activa
+		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
+		TSala sala = daoSala.read(datos.getIdSala());
+		if (sala == null || sala.getActivo() != 1) {
+			throw new IllegalArgumentException("Sala inválida o inactiva: ID " + datos.getIdSala());
+		}
+		
+		// Verificar que el entrenador existe y está activo
+		DAOEntrenador daoEntrenador = FactoriaIntegracion.getInstance().generaDAOEntrenador();
+		TEntrenador entrenador = daoEntrenador.read(datos.getIdEntrenador());
+		if (entrenador == null || entrenador.get_activo() != 1) {
+			throw new IllegalArgumentException("Entrenador invalidos o inactivo: ID " + datos.getIdEntrenador());
+		}
+		
+		// Check sala ocupada
+		DAOSesion daoCheck = FactoriaIntegracion.getInstance().generaDAOSesion();
+		int count = daoCheck.countSalaHorario(datos.getIdSala(), datos.getHorario());
+		if (count > 0) {
+			throw new IllegalArgumentException("Sala ocupada en ese horario: " + datos.getHorario());
+		}
+		
 		datos.setActivo(1);
 
 		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
 		try {
 			int id = daoSesion.create(datos);
 			if (id <= 0) {
-				throw new RuntimeException("No se pudo crear la sesion en base de datos.");
+				throw new RuntimeException("No se pudo crear la sesión en base de datos.");
 			}
 			return id;
 		} catch (RuntimeException e) {

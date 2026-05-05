@@ -6,7 +6,6 @@
 package Controlador;
 
 import Controlador.commands.*;
-import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Presentacion.FactoriaPresentacion.Evento;
 
 /**
@@ -82,12 +81,12 @@ public class CommandFactory {
 				return new CommandBajaSala();
 			case MODIFICAR_SALA:
 				return new CommandModificarSala();
-			case MOSTRAR_SALA:
-			return new CommandMostrarSala(FactoriaServicioAplicacion.getInstance().generaSASala());
+		case MOSTRAR_SALA:
+			return new CommandMostrarSala();
 		case MOSTRAR_TODAS_SALAS:
-			return new CommandMostrarTodasSalas(FactoriaServicioAplicacion.getInstance().generaSASala());
+			return new CommandMostrarTodasSalas();
 		case OBTENER_SESIONES_SALA:
-			return new CommandObtenerSesionesSala(FactoriaServicioAplicacion.getInstance().generaSASala());
+			return new CommandObtenerSesionesSala();
 			
 			// --- Sesion ---
 			case ALTA_SESION:

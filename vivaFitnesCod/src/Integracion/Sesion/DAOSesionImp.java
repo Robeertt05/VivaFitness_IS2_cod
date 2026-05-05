@@ -3,17 +3,15 @@
  */
 package Integracion.Sesion;
 
+import Integracion.ConnectionManager.ConnectionManager;
+import Integracion.Entrenador.TEntrenador;
+import Integracion.Sala.TSala;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
-
-import Integracion.ConnectionManager.ConnectionManager;
-import Integracion.Sala.TSala;
-import Integracion.Entrenador.TEntrenador;
 
 /** 
  * Data Access Object implementation for Sesion (SRS Aligned)
@@ -39,7 +37,7 @@ public class DAOSesionImp implements DAOSesion {
 			 PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			ps.setString(1, datos.getObjetivo());
 			ps.setInt(2, datos.getDuracion());
-			ps.setDate(3, Date.valueOf(datos.getHorario()));
+			ps.setString(3, datos.getHorario());
 			ps.setInt(4, datos.getIdSala());
 			ps.setInt(5, datos.getIdEntrenador());
 			ps.setInt(6, datos.getActivo());
@@ -51,8 +49,6 @@ public class DAOSesionImp implements DAOSesion {
 					}
 				}
 			}
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException("Formato de horario invalido. Use yyyy-MM-dd (ej: 2026-05-10)", e);
 		} catch (SQLException e) {
 			throw new RuntimeException("Error SQL al crear la sesion: " + e.getMessage(), e);
 		}
@@ -89,14 +85,12 @@ public class DAOSesionImp implements DAOSesion {
 			 PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, tSesion.getObjetivo());
 			ps.setInt(2, tSesion.getDuracion());
-			ps.setDate(3, Date.valueOf(tSesion.getHorario()));
+			ps.setString(3, tSesion.getHorario());
 			ps.setInt(4, tSesion.getIdSala());
 			ps.setInt(5, tSesion.getIdEntrenador());
 			ps.setInt(6, tSesion.getActivo());
 			ps.setInt(7, tSesion.getIdSesion());
 			return ps.executeUpdate();
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException("Formato de horario invalido. Use yyyy-MM-dd (ej: 2026-05-10)", e);
 		} catch (SQLException e) {
 			throw new RuntimeException("Error SQL al modificar la sesion con ID " + tSesion.getIdSesion() + ": " + e.getMessage(), e);
 		}
@@ -240,11 +234,29 @@ public class DAOSesionImp implements DAOSesion {
 		sesion.setIdSesion(rs.getInt("idSesion"));
 		sesion.setObjetivo(rs.getString("objetivo"));
 		sesion.setDuracion(rs.getInt("duracion"));
-		Date horario = rs.getDate("horario");
-		sesion.setHorario(horario != null ? horario.toString() : "");
+		sesion.setHorario(rs.getString("horario"));
 		sesion.setIdSala(rs.getInt("idSala"));
 		sesion.setIdEntrenador(rs.getInt("idEntrenador"));
 		sesion.setActivo(rs.getInt("activo"));
 		return sesion;
 	}
+
+	@Override
+	public int countSalaHorario(int idSala, String horario) {
+		String sql = "SELECT COUNT(*) FROM sesion WHERE idSala = ? AND horario = ? AND activo = 1";
+		try (Connection con = getConnection();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, idSala);
+			ps.setString(2, horario);
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Error checking sala horario: " + e.getMessage(), e);
+		}
+		return 0;
+	}
 }
+
