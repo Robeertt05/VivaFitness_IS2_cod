@@ -166,6 +166,25 @@ public class DAOEntrenadorImp implements DAOEntrenador {
 	 */
 	@Override
 	public int delete(int idEntrenador) {
+		// Validar que no existan sesiones activas para el entrenador
+		String checkQuery = "SELECT COUNT(*) FROM sesion WHERE idEntrenador = ? AND activo = 1";
+		try (Connection con = ConnectionManager.getConnection();
+		     PreparedStatement checkPs = con.prepareStatement(checkQuery)) {
+			checkPs.setInt(1, idEntrenador);
+			try (ResultSet rs = checkPs.executeQuery()) {
+				if (rs.next() && rs.getInt(1) > 0) {
+					int countSesiones = rs.getInt(1);
+					throw new RuntimeException(
+						"No se puede dar de baja el entrenador con ID " + idEntrenador + " porque tiene " + 
+						countSesiones + " sesión(es) activa(s) asignada(s).");
+				}
+			}
+		} catch (RuntimeException re) {
+			throw re;
+		} catch (SQLException e) {
+			throw databaseError(e);
+		}
+		
 		int result = -1;
 		Connection connection = null;
 		PreparedStatement ps = null;

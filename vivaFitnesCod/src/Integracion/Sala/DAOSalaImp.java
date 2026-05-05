@@ -92,6 +92,14 @@ public class DAOSalaImp implements DAOSala {
 	@Override
 	public int delete(int idSala) {
 		// begin-user-code
+		// Validar que no existan sesiones activas en la sala
+		Set<TSesion> sesionesActivas = readSessionsByRoom(idSala);
+		if (!sesionesActivas.isEmpty()) {
+			throw new RuntimeException(
+				"No se puede dar de baja la sala con ID " + idSala + " porque tiene " + 
+				sesionesActivas.size() + " sesión(es) activa(s) asignada(s).");
+		}
+		
 		String sql = "UPDATE sala SET activo = 0 WHERE idSala = ?";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
