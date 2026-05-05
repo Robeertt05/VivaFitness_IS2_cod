@@ -81,11 +81,4 @@ return button;
 public void update(Context context) {
 // VistaPrincipal no necesita actualizacion de datos
 }
-
-public static void main(String[] args) {
-SwingUtilities.invokeLater(() -> {
-VistaPrincipal vp = new VistaPrincipal();
-vp.setVisible(true);
-});
-}
 }

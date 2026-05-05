@@ -1,12 +1,11 @@
 package Negocio.Cliente;
 
-import java.util.Set;
-
 import Integracion.Cliente.DAOCliente;
 import Integracion.Cliente.TCliente;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.Sesion.TClienteSesion;
 import Integracion.Sesion.TSesion;
+import java.util.Set;
 
 public class SAClienteImp implements SACliente {
 
@@ -16,9 +15,7 @@ public class SAClienteImp implements SACliente {
 		if (!clienteValido(datos) || daoCliente.readByDni(datos.get_dni()) != null) {
 			return -1;
 		}
-		if (datos.get_activo() == null) {
-			datos.set_activo(true);
-		}
+		datos.set_activo(1);
 		return daoCliente.create(datos);
 	}
 
