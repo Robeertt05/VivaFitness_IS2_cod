@@ -40,17 +40,16 @@ public class SASalaImp implements SASala {
 			return 0;
 		}
 		
-		// Reactivar sala inactiva con el mismo nombre si existe
+		// Intentar reactivar una sala inactiva con el mismo nombre si existe
 		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
 		Set<TSala> salas = daoSala.read_all();
 		if (salas != null) {
 			String nombreNueva = datos.getNombreSala().trim();
 			for (TSala sala : salas) {
 				if (sala != null && sala.getNombreSala() != null
-						&& sala.getNombreSala().trim().equalsIgnoreCase(nombreNueva)) {
-					if (sala.getActivo() == 1) {
-						return 0;
-					}
+						&& sala.getNombreSala().trim().equalsIgnoreCase(nombreNueva)
+						&& sala.getActivo() == 0) {
+					// Solo reactivar si está inactiva
 					sala.setAforo(datos.getAforo());
 					sala.setNombreSala(datos.getNombreSala());
 					sala.setActivo(1);
@@ -60,7 +59,7 @@ public class SASalaImp implements SASala {
 			}
 		}
 
-		// Proceed with creation
+		// Proceed with creation (permite salas activas con el mismo nombre)
 		datos.setActivo(1);
 		return daoSala.create(datos);
 		// end-user-code
