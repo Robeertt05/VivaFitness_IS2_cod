@@ -25,7 +25,7 @@ public class VistaApuntarseSesion extends JFrame implements IGUI {
 	private static final long serialVersionUID = 1L;
 	private JTextField idCliente = new JTextField();
 	private JTextField idSesion = new JTextField();
-	private JTextField fecha = new JTextField("yyyy-MM-dd");
+	private JTextField fecha = new JTextField(new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()));
 	private JTextField hora = new JTextField(new SimpleDateFormat("HH:mm").format(new java.util.Date()));
 	private JTable tablaSesiones;
 	private DefaultTableModel modeloTabla;

@@ -38,8 +38,8 @@ public class CmdApuntarseSesion implements Command {
 			case -4: return "El cliente ya está apuntado a esta sesión.";
 			case -5: return "La sesión no tiene plazas disponibles.";
 			case -6: return "La fecha u hora son inválidas o error al procesar los datos.";
-			case -7: return "El registro debe efectuarse el mismo día que la sesión.";
-			case -8: return "Debe registrarse como mínimo 10 minutos antes de que comience la sesión.";
+			case -7: return "El registro debe efectuarse el mismo día que la sesión o antes.";
+			case -8: return "Si se registra el mismo día, debe ser como mínimo 10 minutos antes de que comience la sesión.";
 			default: return "No se pudo apuntar al cliente a la sesión.";
 		}
 	}
