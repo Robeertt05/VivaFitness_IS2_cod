@@ -4,22 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-/**
- * Pruebas unitarias para el Transfer Object TCliente.
- * 
- * Siguiendo la teoría de pruebas OO se verifican:
- * - Constructores (estado inicial del objeto)
- * - Getters y Setters (acceso y mutación)
- * - Encapsulación (independencia de atributos)
- * - toString (representación textual)
- * - Valores límite y nulos
- */
+
 @DisplayName("Pruebas del Transfer Object TCliente")
 class TClienteTest {
 
-	// =====================================================
-	// 1. PRUEBAS DE CONSTRUCTORES (Estado Inicial)
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Constructor vacío: activo debe ser 1 por defecto")
@@ -82,9 +71,7 @@ class TClienteTest {
 			"Constructor parcial debe inicializar activo a 1");
 	}
 
-	// =====================================================
-	// 2. PRUEBAS DE GETTERS Y SETTERS
-	// =====================================================
+
 
 	@Test
 	@DisplayName("setId y getId: asignar y recuperar id")
@@ -100,7 +87,7 @@ class TClienteTest {
 		TCliente cliente = new TCliente();
 		cliente.setIdCliente(99);
 		assertEquals(99, cliente.getIdCliente());
-		// Ambos getters deben devolver el mismo valor
+
 		assertEquals(cliente.getId(), cliente.getIdCliente());
 	}
 
@@ -145,9 +132,7 @@ class TClienteTest {
 		assertEquals(0, cliente.get_activo());
 	}
 
-	// =====================================================
-	// 3. PRUEBAS DE ENCAPSULACIÓN
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Encapsulación: modificar un campo no afecta a otros")
@@ -156,7 +141,7 @@ class TClienteTest {
 
 		cliente.set_nombre("Nuevo Nombre");
 
-		// Los demás campos no deben cambiar
+
 		assertEquals("12345678A", cliente.get_dni());
 		assertEquals("600000000", cliente.get_telefono());
 		assertEquals("juan@mail.com", cliente.get_correo());
@@ -174,9 +159,7 @@ class TClienteTest {
 		assertEquals("Nombre1", cliente.get_nombre());
 	}
 
-	// =====================================================
-	// 4. PRUEBAS DE toString
-	// =====================================================
+
 
 	@Test
 	@DisplayName("toString contiene todos los campos del cliente")
@@ -191,9 +174,7 @@ class TClienteTest {
 		assertTrue(result.contains("luis@mail.com"), "toString debe contener el correo");
 	}
 
-	// =====================================================
-	// 5. PRUEBAS DE VALORES LÍMITE Y NULOS
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Valores nulos: se permite asignar null a campos String")

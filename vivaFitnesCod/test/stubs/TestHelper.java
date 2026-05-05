@@ -3,18 +3,10 @@ package stubs;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import java.lang.reflect.Field;
 
-/**
- * Helper para inyectar la factoria stub mediante reflexión.
- * Sustituye el Singleton de FactoriaIntegracion por el stub de test.
- */
+
 public class TestHelper {
 
-	/**
-	 * Inyecta la FactoriaIntegracionStub como instancia Singleton
-	 * de FactoriaIntegracion usando reflexión.
-	 * 
-	 * @param stub la factoria stub a inyectar
-	 */
+	//Inyecta la FactoriaIntegracionStub como instancia Singleton
 	public static void inyectarFactoria(FactoriaIntegracionStub stub) {
 		try {
 			Field instanceField = FactoriaIntegracion.class.getDeclaredField("instance");
@@ -25,10 +17,8 @@ public class TestHelper {
 		}
 	}
 
-	/**
-	 * Restaura la factoria de integracion a null para que
-	 * el siguiente getInstance() cree la real.
-	 */
+	
+	//Restaura la factoria de integracion  a null
 	public static void restaurarFactoria() {
 		try {
 			Field instanceField = FactoriaIntegracion.class.getDeclaredField("instance");

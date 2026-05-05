@@ -4,23 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-/**
- * Pruebas unitarias para el Transfer Object TEntrenador.
- * 
- * Siguiendo la teoría de pruebas OO se verifican:
- * - Constructores (estado inicial)
- * - Getters y Setters
- * - Método set_all (mutación masiva)
- * - Encapsulación
- * - toString
- * - Valores límite
- */
+
 @DisplayName("Pruebas del Transfer Object TEntrenador")
 class TEntrenadorTest {
 
-	// =====================================================
-	// 1. PRUEBAS DE CONSTRUCTORES
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Constructor vacío: todos los campos en valores por defecto")
@@ -53,9 +41,7 @@ class TEntrenadorTest {
 		assertEquals(0, entrenador.get_activo());
 	}
 
-	// =====================================================
-	// 2. PRUEBAS DE GETTERS Y SETTERS
-	// =====================================================
+
 
 	@Test
 	@DisplayName("set_id y get_id")
@@ -99,9 +85,7 @@ class TEntrenadorTest {
 		assertEquals(0, entrenador.get_activo());
 	}
 
-	// =====================================================
-	// 3. PRUEBAS DE set_all (Mutación masiva)
-	// =====================================================
+
 
 	@Test
 	@DisplayName("set_all: asigna DNI, nombre y teléfono de una vez")
@@ -135,9 +119,7 @@ class TEntrenadorTest {
 		assertEquals("999", entrenador.get_telefono());
 	}
 
-	// =====================================================
-	// 4. PRUEBAS DE ENCAPSULACIÓN
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Encapsulación: modificar nombre no afecta DNI ni teléfono")
@@ -150,9 +132,7 @@ class TEntrenadorTest {
 		assertEquals(1, entrenador.get_activo());
 	}
 
-	// =====================================================
-	// 5. PRUEBAS DE toString
-	// =====================================================
+
 
 	@Test
 	@DisplayName("toString contiene todos los campos")
@@ -167,9 +147,7 @@ class TEntrenadorTest {
 		assertTrue(result.contains("1"), "toString debe contener activo");
 	}
 
-	// =====================================================
-	// 6. PRUEBAS DE VALORES LÍMITE
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Valores nulos: se permite null en campos String")

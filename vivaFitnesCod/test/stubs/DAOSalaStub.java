@@ -5,16 +5,13 @@ import Integracion.Sala.TSala;
 import Integracion.Sesion.TSesion;
 import java.util.*;
 
-/**
- * Stub (fake) de DAOSala para pruebas unitarias.
- * Almacena datos en memoria usando HashMap.
- */
+
 public class DAOSalaStub implements DAOSala {
 
 	private Map<Integer, TSala> salas = new HashMap<>();
 	private int nextId = 1;
 
-	// Referencia al stub de sesiones para consultas de relación 1:N
+
 	private DAOSesionStub daoSesionStub;
 
 	public void setDAOSesionStub(DAOSesionStub stub) {

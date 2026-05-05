@@ -6,11 +6,7 @@ import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.Sala.DAOSala;
 import Integracion.Sesion.DAOSesion;
 
-/**
- * Factoria de Integracion para pruebas.
- * Devuelve DAOs stub (en memoria) en lugar de DAOs reales (con BD).
- * Permite ejecutar pruebas unitarias sin dependencia de MySQL.
- */
+
 public class FactoriaIntegracionStub extends FactoriaIntegracion {
 
 	private DAOClienteStub daoCliente;
@@ -19,13 +15,12 @@ public class FactoriaIntegracionStub extends FactoriaIntegracion {
 	private DAOSesionStub daoSesion;
 
 	public FactoriaIntegracionStub() {
-		// Crear stubs
 		daoCliente = new DAOClienteStub();
 		daoEntrenador = new DAOEntrenadorStub();
 		daoSala = new DAOSalaStub();
 		daoSesion = new DAOSesionStub();
 
-		// Conectar stubs entre sí para relaciones
+		// Conectar entre sí para relaciones
 		daoSesion.setDAOSalaStub(daoSala);
 		daoSesion.setDAOEntrenadorStub(daoEntrenador);
 		daoSesion.setDAOClienteStub(daoCliente);
@@ -53,7 +48,7 @@ public class FactoriaIntegracionStub extends FactoriaIntegracion {
 		return daoSesion;
 	}
 
-	/** Limpia todos los datos de los stubs */
+	// Limpia todos los datos  
 	public void limpiarTodo() {
 		daoCliente.clear();
 		daoEntrenador.clear();

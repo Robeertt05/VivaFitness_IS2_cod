@@ -11,21 +11,11 @@ import Integracion.Sesion.TClienteSesion;
 import Integracion.Sesion.TSesion;
 import java.util.*;
 
-/**
- * Pruebas de relaciones entre entidades del dominio VivaFitness.
- *
- * Relaciones verificadas:
- *  - Sala → Sesion (1:N)
- *  - Entrenador → Sesion (1:N)
- *  - Cliente ↔ Sesion (M:N via TClienteSesion)
- *  - Grafo completo: todas las entidades conectadas
- */
+
 @DisplayName("Pruebas de Relaciones entre Entidades")
 class RelacionesEntidadesTest {
 
-	// =====================================================
-	// RELACIÓN 1:N  SALA → SESION
-	// =====================================================
+
 
 	@Test
 	@DisplayName("1:N Sala-Sesion: varias sesiones referencian la misma sala")
@@ -68,9 +58,7 @@ class RelacionesEntidadesTest {
 			"Sesiones en salas distintas deben tener idSala diferente");
 	}
 
-	// =====================================================
-	// RELACIÓN 1:N  ENTRENADOR → SESION
-	// =====================================================
+
 
 	@Test
 	@DisplayName("1:N Entrenador-Sesion: varias sesiones del mismo entrenador")
@@ -104,9 +92,7 @@ class RelacionesEntidadesTest {
 		assertNotEquals(s1.getIdEntrenador(), s2.getIdEntrenador());
 	}
 
-	// =====================================================
-	// RELACIÓN M:N  CLIENTE ↔ SESION
-	// =====================================================
+
 
 	@Test
 	@DisplayName("M:N Cliente-Sesion: un cliente se apunta a varias sesiones")
@@ -158,48 +144,45 @@ class RelacionesEntidadesTest {
 		assertEquals(idSes, cs.getIdSesion());
 	}
 
-	// =====================================================
-	// GRAFO COMPLETO: TODAS LAS ENTIDADES CONECTADAS
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Grafo completo: Sala + Entrenador + Sesion + Cliente + Apunta")
 	void grafoCompleto_navegabilidad() {
-		// 1. Crear entidades base
+
 		TSala sala = new TSala(1, "Sala Fitness", 25);
 		TEntrenador entrenador = new TEntrenador(1, "12345678A", "Carlos", "600111222", 1);
 		TCliente cliente = new TCliente(1, "99999999Z", "María", "611222333", "maria@x.com", 1);
 
-		// 2. Crear sesión que referencia Sala y Entrenador
+
 		TSesion sesion = new TSesion(1, "Crossfit", 60, "2026-06-01 10:00",
 			sala.getIdSala(), entrenador.get_id());
 
-		// 3. Crear inscripción (M:N)
+
 		TClienteSesion inscripcion = new TClienteSesion(
 			cliente.getId(), sesion.getIdSesion(), new Date(), "09:30");
 
-		// Verificar navegabilidad Sesion → Sala
+
 		assertEquals(sala.getIdSala(), sesion.getIdSala(),
 			"Sesión debe referenciar la sala correcta");
 
-		// Verificar navegabilidad Sesion → Entrenador
+
 		assertEquals(entrenador.get_id(), sesion.getIdEntrenador(),
 			"Sesión debe referenciar el entrenador correcto");
 
-		// Verificar navegabilidad Inscripción → Cliente
+
 		assertEquals(cliente.getId(), inscripcion.getIdCliente(),
 			"Inscripción debe referenciar el cliente correcto");
 
-		// Verificar navegabilidad Inscripción → Sesión
+
 		assertEquals(sesion.getIdSesion(), inscripcion.getIdSesion(),
 			"Inscripción debe referenciar la sesión correcta");
 
-		// Verificar navegabilidad transitiva: Inscripción → Sesión → Sala
-		TSesion sesRef = sesion; // simulando búsqueda por FK
+		TSesion sesRef = sesion;
 		assertEquals(sala.getIdSala(), sesRef.getIdSala(),
 			"Navegación transitiva: Inscripción → Sesión → Sala");
 
-		// Verificar navegabilidad transitiva: Inscripción → Sesión → Entrenador
+
 		assertEquals(entrenador.get_id(), sesRef.getIdEntrenador(),
 			"Navegación transitiva: Inscripción → Sesión → Entrenador");
 	}

@@ -6,17 +6,14 @@ import Integracion.Sesion.TClienteSesion;
 import Integracion.Sesion.TSesion;
 import java.util.*;
 
-/**
- * Stub (fake) de DAOCliente para pruebas unitarias.
- * Almacena datos en memoria usando HashMap.
- */
+
 public class DAOClienteStub implements DAOCliente {
 
 	private Map<Integer, TCliente> clientes = new HashMap<>();
 	private List<TClienteSesion> inscripciones = new ArrayList<>();
 	private int nextId = 1;
 
-	// Referencia al stub de sesiones para consultas cruzadas
+
 	private DAOSesionStub daoSesionStub;
 
 	public void setDAOSesionStub(DAOSesionStub stub) {
@@ -103,7 +100,7 @@ public class DAOClienteStub implements DAOCliente {
 		return result;
 	}
 
-	// Métodos auxiliares para tests
+
 	public List<TClienteSesion> getInscripciones() {
 		return inscripciones;
 	}

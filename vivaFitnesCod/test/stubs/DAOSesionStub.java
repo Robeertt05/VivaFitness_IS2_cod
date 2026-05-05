@@ -6,16 +6,13 @@ import Integracion.Sesion.DAOSesion;
 import Integracion.Sesion.TSesion;
 import java.util.*;
 
-/**
- * Stub (fake) de DAOSesion para pruebas unitarias.
- * Almacena datos en memoria usando HashMap.
- */
+
 public class DAOSesionStub implements DAOSesion {
 
 	private Map<Integer, TSesion> sesiones = new HashMap<>();
 	private int nextId = 1;
 
-	// Referencias a otros stubs para relaciones
+
 	private DAOSalaStub daoSalaStub;
 	private DAOEntrenadorStub daoEntrenadorStub;
 
@@ -128,7 +125,7 @@ public class DAOSesionStub implements DAOSesion {
 		return 0;
 	}
 
-	// Referencia al stub de clientes para consultas cruzadas
+
 	private DAOClienteStub daoClienteStub;
 
 	public void setDAOClienteStub(DAOClienteStub stub) {

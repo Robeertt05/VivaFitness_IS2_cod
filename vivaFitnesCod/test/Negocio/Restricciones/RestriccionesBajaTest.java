@@ -24,20 +24,7 @@ import stubs.TestHelper;
 import java.util.Date;
 import java.util.Set;
 
-/**
- * Pruebas de restricciones de baja en entidades con relaciones activas.
- *
- * Usa stubs (DAOs en memoria) inyectados via reflexión para
- * probar la lógica de negocio (SA) sin base de datos.
- *
- * Escenarios cubiertos:
- *  1. Baja sala CON sesiones activas → debe fallar
- *  2. Baja sala SIN sesiones → debe funcionar
- *  3. Baja entrenador CON sesiones activas (baja lógica)
- *  4. Baja sesión con clientes apuntados
- *  5. Baja cliente con inscripciones activas
- *  6. Validaciones de datos inválidos en operaciones de negocio
- */
+
 @DisplayName("Pruebas de Restricciones de Baja con Relaciones Activas")
 class RestriccionesBajaTest {
 
@@ -64,21 +51,19 @@ class RestriccionesBajaTest {
 		TestHelper.restaurarFactoria();
 	}
 
-	// =====================================================
-	// BAJA SALA CON/SIN SESIONES
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Baja sala CON sesiones activas: debe retornar 0 (impedida)")
 	void bajaSala_conSesionesActivas_debeRetornar0() {
-		// 1. Crear sala
+
 		TSala sala = new TSala();
 		sala.setNombreSala("Sala Ocupada");
 		sala.setAforo(30);
 		int idSala = saSala.alta_sala(sala);
 		assertTrue(idSala > 0, "La sala debe crearse correctamente");
 
-		// 2. Crear entrenador para la sesión
+
 		TEntrenador entrenador = new TEntrenador();
 		entrenador.set_dni("11111111A");
 		entrenador.set_nombre("Entrenador1");
@@ -86,7 +71,7 @@ class RestriccionesBajaTest {
 		int idEntrenador = saEntrenador.alta_entrenador(entrenador);
 		assertTrue(idEntrenador > 0, "El entrenador debe crearse correctamente");
 
-		// 3. Crear sesión en esa sala
+
 		TSesion sesion = new TSesion();
 		sesion.setObjetivo("Cardio");
 		sesion.setDuracion(60);
@@ -96,12 +81,12 @@ class RestriccionesBajaTest {
 		int idSesion = saSesion.alta_sesion(sesion);
 		assertTrue(idSesion > 0, "La sesión debe crearse correctamente");
 
-		// 4. Intentar dar de baja la sala → DEBE FALLAR
+
 		int resultado = saSala.baja_sala(idSala);
 		assertEquals(0, resultado,
 			"No se debe poder dar de baja una sala que tiene sesiones activas");
 
-		// 5. Verificar que la sala sigue existiendo
+
 		TSala salaLeida = saSala.mostrar_sala(idSala);
 		assertNotNull(salaLeida, "La sala debe seguir existiendo tras intento de baja fallido");
 	}
@@ -109,26 +94,24 @@ class RestriccionesBajaTest {
 	@Test
 	@DisplayName("Baja sala SIN sesiones: debe funcionar correctamente")
 	void bajaSala_sinSesiones_debeRetornar1() {
-		// 1. Crear sala sin sesiones
+
 		TSala sala = new TSala();
 		sala.setNombreSala("Sala Libre");
 		sala.setAforo(20);
 		int idSala = saSala.alta_sala(sala);
 		assertTrue(idSala > 0);
 
-		// 2. Dar de baja → DEBE FUNCIONAR
+
 		int resultado = saSala.baja_sala(idSala);
 		assertEquals(1, resultado,
 			"Una sala sin sesiones debe poderse dar de baja");
 
-		// 3. Verificar que ya no existe
+
 		TSala salaLeida = saSala.mostrar_sala(idSala);
 		assertNull(salaLeida, "La sala debe dejar de existir tras la baja");
 	}
 
-	// =====================================================
-	// BAJA ENTRENADOR CON/SIN SESIONES
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Baja entrenador activo SIN sesiones: baja lógica (activo=0)")
@@ -140,11 +123,11 @@ class RestriccionesBajaTest {
 		int idEnt = saEntrenador.alta_entrenador(ent);
 		assertTrue(idEnt > 0);
 
-		// Dar de baja (lógica: activo=0)
+
 		int resultado = saEntrenador.baja_entrenador(idEnt);
 		assertTrue(resultado >= 0, "Baja lógica debe tener éxito");
 
-		// Verificar que activo=0
+
 		TEntrenador entLeido = saEntrenador.mostrar_entrenador(idEnt);
 		assertNotNull(entLeido);
 		assertEquals(0, entLeido.get_activo(),
@@ -160,23 +143,21 @@ class RestriccionesBajaTest {
 		ent.set_telefono("600333444");
 		int idEnt = saEntrenador.alta_entrenador(ent);
 
-		// Primera baja: éxito
+
 		saEntrenador.baja_entrenador(idEnt);
 
-		// Segunda baja: ya inactivo → debe fallar
+
 		int resultado = saEntrenador.baja_entrenador(idEnt);
 		assertEquals(-1, resultado,
 			"No se debe poder dar de baja un entrenador ya inactivo");
 	}
 
-	// =====================================================
-	// BAJA SESIÓN
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Baja sesión existente: debe eliminarse")
 	void bajaSesion_existente_debeEliminarse() {
-		// Crear sala y entrenador previos
+
 		TSala sala = new TSala();
 		sala.setNombreSala("Sala S");
 		sala.setAforo(20);
@@ -197,11 +178,11 @@ class RestriccionesBajaTest {
 		int idSes = saSesion.alta_sesion(sesion);
 		assertTrue(idSes > 0);
 
-		// Dar de baja
+
 		int resultado = saSesion.baja_sesion(idSes);
 		assertTrue(resultado > 0, "La sesión debe poderse eliminar");
 
-		// Verificar que ya no existe
+
 		TSesion sesLeida = saSesion.mostrar_sesion(idSes);
 		assertNull(sesLeida, "La sesión debe dejar de existir tras la baja");
 	}
@@ -225,9 +206,7 @@ class RestriccionesBajaTest {
 		});
 	}
 
-	// =====================================================
-	// BAJA CLIENTE CON/SIN INSCRIPCIONES
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Baja cliente SIN inscripciones: debe funcionar")
@@ -258,9 +237,7 @@ class RestriccionesBajaTest {
 		assertEquals(-1, saCliente.baja_cliente(-5));
 	}
 
-	// =====================================================
-	// ALTA CON RELACIÓN INVÁLIDA
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Alta sesión con sala inexistente: debe lanzar excepción")
@@ -275,7 +252,7 @@ class RestriccionesBajaTest {
 		sesion.setObjetivo("Test");
 		sesion.setDuracion(30);
 		sesion.setFechaHora("2026-08-01 10:00");
-		sesion.setIdSala(999); // Sala inexistente
+		sesion.setIdSala(999);
 		sesion.setIdEntrenador(idEnt);
 
 		assertThrows(IllegalArgumentException.class, () -> {
@@ -296,7 +273,7 @@ class RestriccionesBajaTest {
 		sesion.setDuracion(30);
 		sesion.setFechaHora("2026-08-01 10:00");
 		sesion.setIdSala(idSala);
-		sesion.setIdEntrenador(999); // Entrenador inexistente
+		sesion.setIdEntrenador(999);
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			saSesion.alta_sesion(sesion);
@@ -311,9 +288,7 @@ class RestriccionesBajaTest {
 		}, "No se debe poder crear sesión con datos nulos");
 	}
 
-	// =====================================================
-	// VALIDACIONES DE NEGOCIO ADICIONALES
-	// =====================================================
+
 
 	@Test
 	@DisplayName("Alta cliente duplicado (mismo DNI): debe retornar -1")

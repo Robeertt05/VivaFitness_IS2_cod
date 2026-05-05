@@ -4,10 +4,6 @@ import Integracion.Entrenador.DAOEntrenador;
 import Integracion.Entrenador.TEntrenador;
 import java.util.*;
 
-/**
- * Stub (fake) de DAOEntrenador para pruebas unitarias.
- * Almacena datos en memoria usando HashMap.
- */
 public class DAOEntrenadorStub implements DAOEntrenador {
 
 	private Map<Integer, TEntrenador> entrenadores = new HashMap<>();
