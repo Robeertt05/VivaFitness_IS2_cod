@@ -117,13 +117,24 @@ public class SASesionImp implements SASesion {
 			return null;
 		}
 		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
-		return daoSesion.read(idSesion);
+		TSesion sesion = daoSesion.read(idSesion);
+		return (sesion != null && sesion.getActivo() == 1) ? sesion : null;
 	}
 
 	@Override
 	public Set<TSesion> mostrar_todas_sesiones() {
 		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
-		return daoSesion.read_all();
+		Set<TSesion> all = daoSesion.read_all();
+		if (all == null) {
+			return null;
+		}
+		java.util.Set<TSesion> activos = new java.util.HashSet<>();
+		for (TSesion s : all) {
+			if (s != null && s.getActivo() == 1) {
+				activos.add(s);
+			}
+		}
+		return activos;
 	}
 
 	@Override

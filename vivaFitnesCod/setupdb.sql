@@ -3,14 +3,14 @@ CREATE TABLE entrenador (
     idEntrenador INT AUTO_INCREMENT PRIMARY KEY,
     nombreEntrenador VARCHAR(100) NOT NULL,
     telefonoEntrenador VARCHAR(20),
-    DNI_entrenador VARCHAR(15) UNIQUE,
+    DNI_entrenador VARCHAR(15) UNIQUE NULL,
     activo TINYINT(1) DEFAULT 1
 );
 
 -- Tabla de Clientes
 CREATE TABLE cliente (
     idCliente INT AUTO_INCREMENT PRIMARY KEY,
-    DNI_cliente VARCHAR(15) UNIQUE,
+    DNI_cliente VARCHAR(15) UNIQUE NULL,
     nombreCliente VARCHAR(100) NOT NULL,
     telefonoCliente VARCHAR(20),
     correoElectronico VARCHAR(100),

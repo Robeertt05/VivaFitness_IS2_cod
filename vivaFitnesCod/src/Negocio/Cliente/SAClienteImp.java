@@ -1,6 +1,7 @@
 package Negocio.Cliente;
 
 import java.util.Set;
+import java.util.HashSet;
 import Integracion.Cliente.TCliente;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.Sesion.TClienteSesion;
@@ -13,9 +14,23 @@ public class SAClienteImp implements SACliente {
 	@Override
 	public int alta_cliente(TCliente datos) {
 		DAOCliente daoCliente = FactoriaIntegracion.getInstance().generaDAOCliente();
-		if (!clienteValido(datos) || daoCliente.readByDni(datos.get_dni()) != null) {
+		if (!clienteValido(datos)) {
 			return -1;
 		}
+
+		TCliente existente = daoCliente.readByDni(datos.get_dni());
+		if (existente != null) {
+			if (existente.get_activo() == 1) {
+				return -1;
+			}
+			existente.set_nombre(datos.get_nombre());
+			existente.set_telefono(datos.get_telefono());
+			existente.set_correo(datos.get_correo());
+			existente.set_activo(1);
+			int updated = daoCliente.update(existente);
+			return updated > 0 ? existente.getId() : -1;
+		}
+
 		datos.set_activo(1);
 		return daoCliente.create(datos);
 	}
@@ -37,7 +52,14 @@ public class SAClienteImp implements SACliente {
 		}
 		TCliente existenteDni = daoCliente.readByDni(datos.get_dni());
 		if (existenteDni != null && existenteDni.getId() != id) {
-			return -2;
+			if (existenteDni.get_activo() == 1) {
+				return -2;
+			}
+			// Libera el DNI en el registro inactivo para poder reutilizarlo.
+			existenteDni.set_dni(null);
+			if (daoCliente.update(existenteDni) <= 0) {
+				return -1;
+			}
 		}
 		datos.setId(id);
 		return daoCliente.update(datos);
@@ -46,13 +68,24 @@ public class SAClienteImp implements SACliente {
 	@Override
 	public TCliente mostrar_cliente(int id) {
 		DAOCliente daoCliente = FactoriaIntegracion.getInstance().generaDAOCliente();
-		return id > 0 ? daoCliente.read(id) : null;
+		TCliente cliente = id > 0 ? daoCliente.read(id) : null;
+		return (cliente != null && cliente.get_activo() == 1) ? cliente : null;
 	}
 
 	@Override
 	public Set<TCliente> mostrar_todos_clientes() {
 		DAOCliente daoCliente = FactoriaIntegracion.getInstance().generaDAOCliente();
-		return daoCliente.read_all();
+		Set<TCliente> all = daoCliente.read_all();
+		if (all == null) {
+			return null;
+		}
+		Set<TCliente> activos = new HashSet<>();
+		for (TCliente c : all) {
+			if (c != null && c.get_activo() == 1) {
+				activos.add(c);
+			}
+		}
+		return activos;
 	}
 
 	@Override

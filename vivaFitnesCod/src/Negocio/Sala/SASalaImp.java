@@ -8,6 +8,7 @@ import Integracion.Sesion.TSesion;
 import Integracion.Sala.DAOSala;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import java.util.Set;
+import java.util.HashSet;
 
 /** 
  * Service Application implementation for Sala (Room)
@@ -39,8 +40,28 @@ public class SASalaImp implements SASala {
 			return 0;
 		}
 		
-		// Proceed with creation
+		// Reactivar sala inactiva con el mismo nombre si existe
 		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
+		Set<TSala> salas = daoSala.read_all();
+		if (salas != null) {
+			String nombreNueva = datos.getNombreSala().trim();
+			for (TSala sala : salas) {
+				if (sala != null && sala.getNombreSala() != null
+						&& sala.getNombreSala().trim().equalsIgnoreCase(nombreNueva)) {
+					if (sala.getActivo() == 1) {
+						return 0;
+					}
+					sala.setAforo(datos.getAforo());
+					sala.setNombreSala(datos.getNombreSala());
+					sala.setActivo(1);
+					int updated = daoSala.update(sala);
+					return updated > 0 ? sala.getIdSala() : 0;
+				}
+			}
+		}
+
+		// Proceed with creation
+		datos.setActivo(1);
 		return daoSala.create(datos);
 		// end-user-code
 	}
@@ -128,7 +149,8 @@ public class SASalaImp implements SASala {
 		
 		// Get room from DAO
 		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
-		return daoSala.read(idSala);
+		TSala sala = daoSala.read(idSala);
+		return (sala != null && sala.getActivo() == 1) ? sala : null;
 		// end-user-code
 	}
 
@@ -140,7 +162,17 @@ public class SASalaImp implements SASala {
 		// begin-user-code
 		// Get all rooms from DAO
 		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
-		return daoSala.read_all();
+		Set<TSala> all = daoSala.read_all();
+		if (all == null) {
+			return null;
+		}
+		Set<TSala> activos = new HashSet<>();
+		for (TSala s : all) {
+			if (s != null && s.getActivo() == 1) {
+				activos.add(s);
+			}
+		}
+		return activos;
 		// end-user-code
 	}
 

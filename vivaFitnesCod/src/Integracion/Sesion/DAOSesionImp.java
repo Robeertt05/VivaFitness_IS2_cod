@@ -100,8 +100,8 @@ public class DAOSesionImp implements DAOSesion {
 	@Override
 	public int delete(int idSesion) {
 		// begin-user-code
-		// Baja lógica: limpiar relaciones (sala/entrenador) y desactivar
-		String sql = "UPDATE sesion SET idSala = 0, idEntrenador = 0, activo = 0 WHERE idSesion = ?";
+		// Baja lógica: solo desactivar (no limpiar sala/entrenador que son NOT NULL)
+		String sql = "UPDATE sesion SET activo = 0 WHERE idSesion = ?";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, idSesion);

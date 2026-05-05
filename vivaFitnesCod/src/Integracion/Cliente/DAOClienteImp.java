@@ -207,7 +207,7 @@ public class DAOClienteImp implements DAOCliente {
 	public Set<TSesion> readSesionesCliente(int idCliente) {
 		String sql = "SELECT s.*, a.fecha AS fechaApunte, a.hora AS horaApunte "
 				+ "FROM apunta a JOIN sesion s ON a.idSesion = s.idSesion "
-				+ "WHERE a.idCliente = ? ORDER BY s.horario";
+				+ "WHERE a.idCliente = ? AND a.activo = 1 AND s.activo = 1 ORDER BY s.horario";
 		Set<TSesion> sesiones = new HashSet<>();
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement ps = con.prepareStatement(sql)) {

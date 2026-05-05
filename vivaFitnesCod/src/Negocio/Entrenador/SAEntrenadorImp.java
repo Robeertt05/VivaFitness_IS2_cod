@@ -5,6 +5,7 @@
 package Negocio.Entrenador;
 
 import java.util.Set;
+import java.util.HashSet;
 
 import Integracion.Entrenador.TEntrenador;
 import Integracion.Entrenador.DAOEntrenador;
@@ -30,7 +31,14 @@ public class SAEntrenadorImp implements SAEntrenador {
 		DAOEntrenador dao = FactoriaIntegracion.getInstance().generaDAOEntrenador();
 		TEntrenador existente = dao.read_by_dni(datos.get_dni());
 		if (existente != null) {
-			return -1;
+			if (existente.get_activo() == 1) {
+				return -1;
+			}
+			existente.set_nombre(datos.get_nombre());
+			existente.set_telefono(datos.get_telefono());
+			existente.set_activo(1);
+			int updated = dao.update(existente);
+			return updated > 0 ? existente.get_id() : -1;
 		}
 
 		datos.set_activo(1);
@@ -79,6 +87,17 @@ public class SAEntrenadorImp implements SAEntrenador {
 			entrenador.set_telefono(datos.get_telefono());
 		}
 		if (datos.get_dni() != null && !datos.get_dni().isEmpty()) {
+			TEntrenador existenteDni = dao.read_by_dni(datos.get_dni());
+			if (existenteDni != null && existenteDni.get_id() != id) {
+				if (existenteDni.get_activo() == 1) {
+					return -2;
+				}
+				// Libera el DNI del registro inactivo para reutilizarlo.
+				existenteDni.set_dni(null);
+				if (dao.update(existenteDni) <= 0) {
+					return -1;
+				}
+			}
 			entrenador.set_dni(datos.get_dni());
 		}
 
@@ -91,12 +110,23 @@ public class SAEntrenadorImp implements SAEntrenador {
 			return null;
 		}
 
-		return FactoriaIntegracion.getInstance().generaDAOEntrenador().read(id);
+		TEntrenador entrenador = FactoriaIntegracion.getInstance().generaDAOEntrenador().read(id);
+		return (entrenador != null && entrenador.get_activo() == 1) ? entrenador : null;
 	}
 
 	@Override
 	public Set<TEntrenador> mostrar_entrenadores() {
-		return FactoriaIntegracion.getInstance().generaDAOEntrenador().read_all();
+		Set<TEntrenador> all = FactoriaIntegracion.getInstance().generaDAOEntrenador().read_all();
+		if (all == null) {
+			return null;
+		}
+		Set<TEntrenador> activos = new HashSet<>();
+		for (TEntrenador t : all) {
+			if (t != null && t.get_activo() == 1) {
+				activos.add(t);
+			}
+		}
+		return activos;
 	}
 
 	@Override
