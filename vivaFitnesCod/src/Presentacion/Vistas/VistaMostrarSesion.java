@@ -8,9 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -24,24 +25,26 @@ import Controlador.Context;
 import Integracion.Sesion.TSesion;
 
 /** 
- * View for displaying session details
+ * View for displaying session details in table format
  * @author azuri
  */
 public class VistaMostrarSesion extends JFrame implements IGUI {
 	
+	private static final long serialVersionUID = 1L;
 	private Set<ActionListener> actionListener;
 	private Set<JButton> jButton;
 	private Set<JPanel> jPanel;
 	private Set<JLabel> jLabel;
 	
 	private JTextField txtIdSesion;
-	private JTextArea txtDetalles;
+	private JTable table;
+	private DefaultTableModel tableModel;
 	private JButton btnMostrar;
 	private JButton btnCerrar;
 	
 	public VistaMostrarSesion() {
 		setTitle("Detalles de sesion");
-		setSize(400, 300);
+		setSize(900, 300);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -54,26 +57,34 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 	}
 	
 	private void initComponents() {
-		JPanel topPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+		JPanel topPanel = new JPanel(new GridLayout(1, 3, 10, 10));
 		
 		// Session ID input
 		jLabel.add(new JLabel("ID sesion:"));
 		topPanel.add(new JLabel("ID sesion:"));
 		txtIdSesion = new JTextField(10);
 		topPanel.add(txtIdSesion);
+		btnMostrar = new JButton("Mostrar");
+		topPanel.add(btnMostrar);
 		
-		// Details area
-		txtDetalles = new JTextArea();
-		txtDetalles.setEditable(false);
-		JScrollPane scrollPane = new JScrollPane(txtDetalles);
+		// Create table
+		String[] columnNames = {"ID", "Objetivo", "Duracion (min)", "Fecha y Hora", "Sala", "Entrenador"};
+		tableModel = new DefaultTableModel(columnNames, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		table = new JTable(tableModel);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		JScrollPane scrollPane = new JScrollPane(table);
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
-		btnMostrar = new JButton("Mostrar");
 		btnCerrar = new JButton("Cerrar");
 		jButton.add(btnMostrar);
 		jButton.add(btnCerrar);
-		buttonPanel.add(btnMostrar);
 		buttonPanel.add(btnCerrar);
 		
 		jPanel.add(topPanel);
@@ -102,10 +113,6 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 		}
 	}
 	
-	public void displaySessionDetails(String details) {
-		txtDetalles.setText(details);
-	}
-	
 	public void addShowButtonListener(ActionListener listener) {
 		btnMostrar.addActionListener(listener);
 		actionListener.add(listener);
@@ -118,18 +125,21 @@ public class VistaMostrarSesion extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
+		tableModel.setRowCount(0);
+		
 		if (context != null && context.isSuccess() && context.getData() instanceof TSesion) {
 			TSesion s = (TSesion) context.getData();
-			String detalles = "ID: " + s.getIdSesion() + "\n"
-					+ "Objetivo: " + s.getObjetivo() + "\n"
-					+ "Duracion: " + s.getDuracion() + " min\n"
-					+ "Horario: " + s.getHorario() + "\n"
-					+ "Sala: " + s.getIdSala() + "\n"
-					+ "Entrenador: " + s.getIdEntrenador() + "\n"
-					+ "Activo: " + s.getActivo();
-			displaySessionDetails(detalles);
+			Object[] row = {
+				s.getIdSesion(),
+				s.getObjetivo(),
+				s.getDuracion(),
+				s.getFechaHora(),
+				s.getIdSala(),
+				s.getIdEntrenador()
+			};
+			tableModel.addRow(row);
 		} else if (context != null) {
-			displaySessionDetails(context.getMessage());
+			JOptionPane.showMessageDialog(this, context.getMessage());
 		}
 	}
 }

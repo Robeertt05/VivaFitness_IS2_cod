@@ -4,6 +4,7 @@
 package Presentacion.Vistas;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import Presentacion.FactoriaPresentacion.IGUI;
 import Presentacion.FactoriaPresentacion.Evento;
@@ -13,19 +14,20 @@ import Integracion.Entrenador.TEntrenador;
 
 public class VistaMostrarEntrenador extends JFrame implements IGUI {
 
-	private JPanel panel;
-	private JLabel lblId, lblResultado;
+	private static final long serialVersionUID = 1L;
+	private JLabel lblId;
 	private JTextField txtId;
 	private JButton btnBuscar, btnCancelar;
-	private JTextArea txtResultado;
+	private JTable table;
+	private DefaultTableModel tableModel;
 
 	public VistaMostrarEntrenador() {
 		setTitle("Mostrar Entrenador - VivaFitness");
-		setSize(450, 350);
+		setSize(600, 300);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-		panel = new JPanel(new BorderLayout(10, 10));
+		JPanel panel = new JPanel(new BorderLayout(10, 10));
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
 		JPanel panelSuperior = new JPanel(new GridLayout(1, 3, 10, 10));
@@ -37,8 +39,17 @@ public class VistaMostrarEntrenador extends JFrame implements IGUI {
 		panelSuperior.add(txtId);
 		panelSuperior.add(btnBuscar);
 
-		txtResultado = new JTextArea();
-		txtResultado.setEditable(false);
+		// Create table
+		String[] columnNames = {"ID", "DNI", "Nombre", "Teléfono"};
+		tableModel = new DefaultTableModel(columnNames, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		table = new JTable(tableModel);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
 		btnCancelar = new JButton("Cerrar");
 		btnCancelar.addActionListener(e -> dispose());
@@ -57,30 +68,31 @@ public class VistaMostrarEntrenador extends JFrame implements IGUI {
 		});
 
 		panel.add(panelSuperior, BorderLayout.NORTH);
-		panel.add(new JScrollPane(txtResultado), BorderLayout.CENTER);
+		panel.add(new JScrollPane(table), BorderLayout.CENTER);
 		panel.add(btnCancelar, BorderLayout.SOUTH);
 		add(panel);
 	}
 
 	@Override
 	public void update(Context context) {
+		tableModel.setRowCount(0);
+		
 		if (context == null) return;
 
 		Evento evento = context.getEvento();
 
 		if (evento == Evento.RES_MOSTRAR_ENTRENADOR_OK) {
 			TEntrenador t = (TEntrenador) context.getObjeto();
-
-			txtResultado.setText(
-				"ID: " + t.get_id() + "\n" +
-				"DNI: " + t.get_dni() + "\n" +
-				"Nombre: " + t.get_nombre() + "\n" +
-				"Telefono: " + t.get_telefono() + "\n" +
-				"Activo: " + (t.get_activo() == 1 ? "Si" : "No")
-			);
+			Object[] row = {
+				t.get_id(),
+				t.get_dni(),
+				t.get_nombre(),
+				t.get_telefono()
+			};
+			tableModel.addRow(row);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_ENTRENADOR_KO) {
-			txtResultado.setText("No se encontro el entrenador con ese ID.");
+			JOptionPane.showMessageDialog(this, "No se encontro el entrenador con ese ID.", "Información", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 }

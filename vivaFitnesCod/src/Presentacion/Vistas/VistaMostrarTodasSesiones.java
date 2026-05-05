@@ -6,35 +6,42 @@ package Presentacion.Vistas;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import Integracion.Sesion.TSesion;
 import Presentacion.FactoriaPresentacion.IGUI;
 import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Controller;
 import Controlador.Context;
 
 /** 
- * View for listing all sessions
+ * View for listing all sessions in a table format
  * @author azuri
  */
 public class VistaMostrarTodasSesiones extends JFrame implements IGUI {
 	
+	private static final long serialVersionUID = 1L;
 	private Set<ActionListener> actionListener;
 	private Set<JButton> jButton;
 	private Set<JPanel> jPanel;
 	
-	private JTextArea txtSesiones;
+	private JTable table;
+	private DefaultTableModel tableModel;
 	private JButton btnActualizar;
 	private JButton btnCerrar;
 	
 	public VistaMostrarTodasSesiones() {
 		setTitle("Todas las sesiones");
-		setSize(500, 400);
+		setSize(900, 500);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -43,13 +50,27 @@ public class VistaMostrarTodasSesiones extends JFrame implements IGUI {
 		jPanel = new HashSet<>();
 		
 		initComponents();
+		refrescarSesiones();
+	}
+	
+	private void refrescarSesiones() {
+		Context res = Controller.getInstance().action(new Context(Evento.MOSTRAR_TODAS_SESIONES, null));
+		update(res);
 	}
 	
 	private void initComponents() {
-		// Sessions list area
-		txtSesiones = new JTextArea();
-		txtSesiones.setEditable(false);
-		JScrollPane scrollPane = new JScrollPane(txtSesiones);
+		// Create table
+		String[] columnNames = {"ID", "Objetivo", "Duracion (min)", "Fecha y Hora", "Sala", "Entrenador"};
+		tableModel = new DefaultTableModel(columnNames, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		table = new JTable(tableModel);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		JScrollPane scrollPane = new JScrollPane(table);
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
@@ -70,10 +91,6 @@ public class VistaMostrarTodasSesiones extends JFrame implements IGUI {
 		btnCerrar.addActionListener(e -> dispose());
 	}
 	
-	public void displaySessions(String sessionsList) {
-		txtSesiones.setText(sessionsList);
-	}
-	
 	public void addRefreshButtonListener(ActionListener listener) {
 		btnActualizar.addActionListener(listener);
 		actionListener.add(listener);
@@ -86,15 +103,36 @@ public class VistaMostrarTodasSesiones extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
+		tableModel.setRowCount(0);
+		
 		if (context != null && context.getData() instanceof Set) {
 			Set<?> sesiones = (Set<?>) context.getData();
-			StringBuilder sb = new StringBuilder();
-			for (Object sesion : sesiones) {
-				sb.append(sesion.toString()).append("\n\n");
+			
+			if (sesiones.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "No se encontraron sesiones.", "Información", JOptionPane.INFORMATION_MESSAGE);
+				return;
 			}
-			displaySessions(sb.toString());
+			
+			// Sort by ID and add to table
+			List<TSesion> sesionList = sesiones.stream()
+				.filter(s -> s instanceof TSesion)
+				.map(s -> (TSesion) s)
+				.sorted((a, b) -> Integer.compare(a.getIdSesion(), b.getIdSesion()))
+				.collect(Collectors.toList());
+			
+			for (TSesion sesion : sesionList) {
+				Object[] row = {
+					sesion.getIdSesion(),
+					sesion.getObjetivo(),
+					sesion.getDuracion(),
+					sesion.getFechaHora(),
+					sesion.getIdSala(),
+					sesion.getIdEntrenador()
+				};
+				tableModel.addRow(row);
+			}
 		} else if (context != null) {
-			displaySessions(context.getMessage());
+			JOptionPane.showMessageDialog(this, context.getMessage());
 		}
 	}
 }

@@ -14,7 +14,7 @@ public class TSesion {
 	private int idSesion;
 	private String objetivo;
 	private int duracion;
-	private String horario;
+	private String fechaHora;
 	private int idSala;
 	private int idEntrenador;
 	private int activo;
@@ -23,12 +23,12 @@ public class TSesion {
 		this.activo = 1;
 	}
 
-	public TSesion(int idSesion, String objetivo, int duracion, String horario,
+	public TSesion(int idSesion, String objetivo, int duracion, String fechaHora,
 			int idSala, int idEntrenador) {
 		this.idSesion = idSesion;
 		this.objetivo = objetivo;
 		this.duracion = duracion;
-		this.horario = horario;
+		this.fechaHora = fechaHora;
 		this.idSala = idSala;
 		this.idEntrenador = idEntrenador;
 		this.activo = 1;
@@ -43,8 +43,8 @@ public class TSesion {
 	public int getDuracion() { return duracion; }
 	public void setDuracion(int duracion) { this.duracion = duracion; }
 
-	public String getHorario() { return horario; }
-	public void setHorario(String horario) { this.horario = horario; }
+	public String getFechaHora() { return fechaHora; }
+	public void setFechaHora(String fechaHora) { this.fechaHora = fechaHora; }
 
 	public int getIdSala() { return idSala; }
 	public void setIdSala(int idSala) { this.idSala = idSala; }
@@ -58,7 +58,7 @@ public class TSesion {
 	@Override
 	public String toString() {
 		return "idSesion=" + idSesion + ", objetivo=" + objetivo +
-				", duracion=" + duracion + " (min), horario=" + horario +
+			", duracion=" + duracion + " (min), fechaHora=" + fechaHora +
 				", idSala=" + idSala + ", idEntrenador=" + idEntrenador +
 				", activo=" + activo;
 	}

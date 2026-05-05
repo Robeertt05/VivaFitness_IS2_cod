@@ -274,7 +274,7 @@ public class DAOClienteImp implements DAOCliente {
 		sesion.setActivo(rs.getInt("activo"));
 		java.sql.Timestamp horario = rs.getTimestamp("horario");
 		if (horario != null) {
-			sesion.setHorario(horario.toLocalDateTime().toLocalDate().toString());
+			sesion.setFechaHora(horario.toLocalDateTime().toLocalDate().toString());
 		}
 		return sesion;
 	}

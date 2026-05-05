@@ -1,36 +1,60 @@
 package Presentacion.Vistas;
 
 import java.awt.BorderLayout;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import Controlador.Context;
 import Controlador.Controller;
+import Integracion.Cliente.TCliente;
 import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.IGUI;
 
 public class VistaMostrarClientes extends JFrame implements IGUI {
 	private static final long serialVersionUID = 1L;
-	private JTextArea resultado = new JTextArea();
+	private JTable table;
+	private DefaultTableModel tableModel;
+	private JButton btnActualizar;
+	private JButton btnCerrar;
 
 	public VistaMostrarClientes() {
 		setTitle("Mostrar clientes");
-		setSize(640, 420);
+		setSize(900, 500);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		JButton actualizar = new JButton("Actualizar");
-		actualizar.addActionListener(e -> cargar());
+		
+		// Create table
+		String[] columnNames = {"ID", "DNI", "Nombre", "Teléfono", "Correo"};
+		tableModel = new DefaultTableModel(columnNames, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		table = new JTable(tableModel);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(e -> cargar());
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(e -> dispose());
+		
 		JPanel top = new JPanel();
-		top.add(actualizar);
-		resultado.setEditable(false);
+		top.add(btnActualizar);
+		top.add(btnCerrar);
+		
 		add(top, BorderLayout.NORTH);
-		add(new JScrollPane(resultado), BorderLayout.CENTER);
+		add(new JScrollPane(table), BorderLayout.CENTER);
 		cargar();
 	}
 
@@ -40,12 +64,33 @@ public class VistaMostrarClientes extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
+		tableModel.setRowCount(0);
+		
 		if (context.isSuccess() && context.getObjeto() instanceof Set) {
-			StringBuilder sb = new StringBuilder();
-			for (Object cliente : (Set<?>) context.getObjeto()) {
-				sb.append(cliente).append("\n\n");
+			Set<?> clientes = (Set<?>) context.getObjeto();
+			
+			if (clientes.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "No hay clientes registrados.", "Información", JOptionPane.INFORMATION_MESSAGE);
+				return;
 			}
-			resultado.setText(sb.length() == 0 ? "No hay clientes registrados." : sb.toString());
+			
+			// Sort by ID and add to table
+			List<TCliente> clienteList = clientes.stream()
+				.filter(c -> c instanceof TCliente)
+				.map(c -> (TCliente) c)
+				.sorted((a, b) -> Integer.compare(a.getId(), b.getId()))
+				.collect(Collectors.toList());
+			
+			for (TCliente cliente : clienteList) {
+				Object[] row = {
+					cliente.getId(),
+					cliente.get_dni(),
+					cliente.get_nombre(),
+					cliente.get_telefono(),
+					cliente.get_correo()
+				};
+				tableModel.addRow(row);
+			}
 		} else {
 			JOptionPane.showMessageDialog(this, context.getMessage());
 		}

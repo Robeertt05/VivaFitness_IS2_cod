@@ -31,9 +31,9 @@ public class SASesionImp implements SASesion {
 		
 		// Check sala ocupada
 		DAOSesion daoCheck = FactoriaIntegracion.getInstance().generaDAOSesion();
-		int count = daoCheck.countSalaHorario(datos.getIdSala(), datos.getHorario());
+		int count = daoCheck.countSalaHorario(datos.getIdSala(), datos.getFechaHora());
 		if (count > 0) {
-			throw new IllegalArgumentException("Sala ocupada en ese horario: " + datos.getHorario());
+			throw new IllegalArgumentException("Sala ocupada en ese horario: " + datos.getFechaHora());
 		}
 		
 		datos.setActivo(1);
@@ -144,7 +144,7 @@ public class SASesionImp implements SASesion {
 			throw new IllegalArgumentException("El objetivo de la sesion es obligatorio.");
 		}
 
-		if (datos.getHorario() == null || datos.getHorario().trim().isEmpty()) {
+		if (datos.getFechaHora() == null || datos.getFechaHora().trim().isEmpty()) {
 			throw new IllegalArgumentException("El horario de la sesion es obligatorio.");
 		}
 
@@ -166,7 +166,7 @@ public class SASesionImp implements SASesion {
 			throw new IllegalArgumentException("El objetivo de la sesion es obligatorio.");
 		}
 
-		if (datos.getHorario() == null || datos.getHorario().trim().isEmpty()) {
+		if (datos.getFechaHora() == null || datos.getFechaHora().trim().isEmpty()) {
 			throw new IllegalArgumentException("El horario de la sesion es obligatorio.");
 		}
 
@@ -188,7 +188,7 @@ public class SASesionImp implements SASesion {
 		merged.setIdSesion(existente.getIdSesion());
 		merged.setObjetivo(obtenerTexto(cambios.getObjetivo(), existente.getObjetivo()));
 		merged.setDuracion(cambios.getDuracion() > 0 ? cambios.getDuracion() : existente.getDuracion());
-		merged.setHorario(obtenerTexto(cambios.getHorario(), existente.getHorario()));
+		merged.setFechaHora(obtenerTexto(cambios.getFechaHora(), existente.getFechaHora()));
 		merged.setIdSala(cambios.getIdSala() > 0 ? cambios.getIdSala() : existente.getIdSala());
 		merged.setIdEntrenador(cambios.getIdEntrenador() > 0 ? cambios.getIdEntrenador() : existente.getIdEntrenador());
 		merged.setActivo(existente.getActivo());

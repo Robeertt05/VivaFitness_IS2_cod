@@ -37,7 +37,7 @@ public class DAOSesionImp implements DAOSesion {
 			 PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			ps.setString(1, datos.getObjetivo());
 			ps.setInt(2, datos.getDuracion());
-			ps.setString(3, datos.getHorario());
+			ps.setString(3, datos.getFechaHora());
 			ps.setInt(4, datos.getIdSala());
 			ps.setInt(5, datos.getIdEntrenador());
 			ps.setInt(6, datos.getActivo());
@@ -85,7 +85,7 @@ public class DAOSesionImp implements DAOSesion {
 			 PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, tSesion.getObjetivo());
 			ps.setInt(2, tSesion.getDuracion());
-			ps.setString(3, tSesion.getHorario());
+			ps.setString(3, tSesion.getFechaHora());
 			ps.setInt(4, tSesion.getIdSala());
 			ps.setInt(5, tSesion.getIdEntrenador());
 			ps.setInt(6, tSesion.getActivo());
@@ -234,7 +234,7 @@ public class DAOSesionImp implements DAOSesion {
 		sesion.setIdSesion(rs.getInt("idSesion"));
 		sesion.setObjetivo(rs.getString("objetivo"));
 		sesion.setDuracion(rs.getInt("duracion"));
-		sesion.setHorario(rs.getString("horario"));
+		sesion.setFechaHora(rs.getString("horario"));
 		sesion.setIdSala(rs.getInt("idSala"));
 		sesion.setIdEntrenador(rs.getInt("idEntrenador"));
 		sesion.setActivo(rs.getInt("activo"));

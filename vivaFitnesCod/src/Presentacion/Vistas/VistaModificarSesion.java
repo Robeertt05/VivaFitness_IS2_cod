@@ -126,14 +126,14 @@ public class VistaModificarSesion extends JFrame implements IGUI {
 		TSesion sesion = new TSesion();
 		sesion.setObjetivo(txtObjetivo.getText());
 		try { sesion.setDuracion(Integer.parseInt(txtDuracion.getText().trim())); } catch (NumberFormatException ex) { sesion.setDuracion(0); }
-		sesion.setHorario(txtHorario.getText());
+		sesion.setFechaHora(txtHorario.getText());
 		return sesion;
 	}
 	
 	public void loadSessionData(TSesion sesion) {
 		txtObjetivo.setText(sesion.getObjetivo());
 		txtDuracion.setText(String.valueOf(sesion.getDuracion()));
-		txtHorario.setText(sesion.getHorario());
+		txtHorario.setText(sesion.getFechaHora());
 	}
 	
 	public void addModifyButtonListener(ActionListener listener) {

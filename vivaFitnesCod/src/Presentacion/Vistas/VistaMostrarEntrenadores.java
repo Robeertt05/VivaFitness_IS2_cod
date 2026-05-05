@@ -1,8 +1,11 @@
 package Presentacion.Vistas;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import Controlador.Context;
 import Controlador.Controller;
@@ -13,13 +16,14 @@ import Presentacion.FactoriaPresentacion.IGUI;
 public class VistaMostrarEntrenadores extends JFrame implements IGUI {
 
 	private static final long serialVersionUID = 1L;
-	private JTextArea txtResultado;
+	private JTable table;
+	private DefaultTableModel tableModel;
 	private JButton btnActualizar;
 	private JButton btnCerrar;
 
 	public VistaMostrarEntrenadores() {
 		setTitle("Mostrar todos los Entrenadores - VivaFitness");
-		setSize(600, 420);
+		setSize(800, 500);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		initComponents();
@@ -30,8 +34,18 @@ public class VistaMostrarEntrenadores extends JFrame implements IGUI {
 		JPanel panel = new JPanel(new BorderLayout(10, 10));
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-		txtResultado = new JTextArea();
-		txtResultado.setEditable(false);
+		// Create table
+		String[] columnNames = {"ID", "DNI", "Nombre", "Teléfono"};
+		tableModel = new DefaultTableModel(columnNames, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		table = new JTable(tableModel);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		JScrollPane scrollPane = new JScrollPane(table);
 
 		JPanel panelBotones = new JPanel();
 		btnActualizar = new JButton("Actualizar");
@@ -42,7 +56,7 @@ public class VistaMostrarEntrenadores extends JFrame implements IGUI {
 		btnActualizar.addActionListener(e -> cargarEntrenadores());
 		btnCerrar.addActionListener(e -> dispose());
 
-		panel.add(new JScrollPane(txtResultado), BorderLayout.CENTER);
+		panel.add(scrollPane, BorderLayout.CENTER);
 		panel.add(panelBotones, BorderLayout.SOUTH);
 		add(panel);
 	}
@@ -55,6 +69,8 @@ public class VistaMostrarEntrenadores extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
+		tableModel.setRowCount(0);
+		
 		if (context == null) {
 			return;
 		}
@@ -62,25 +78,28 @@ public class VistaMostrarEntrenadores extends JFrame implements IGUI {
 		if (context.getEvento() == Evento.RES_MOSTRAR_ENTRENADORES_OK && context.getObjeto() instanceof Set) {
 			Set<?> entrenadores = (Set<?>) context.getObjeto();
 			if (entrenadores.isEmpty()) {
-				txtResultado.setText("No hay entrenadores registrados.");
+				JOptionPane.showMessageDialog(this, "No hay entrenadores registrados.", "Información", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 
-			StringBuilder sb = new StringBuilder();
-			for (Object item : entrenadores) {
-				if (item instanceof TEntrenador) {
-					TEntrenador entrenador = (TEntrenador) item;
-					sb.append("ID: ").append(entrenador.get_id()).append("\n");
-					sb.append("DNI: ").append(entrenador.get_dni()).append("\n");
-					sb.append("Nombre: ").append(entrenador.get_nombre()).append("\n");
-					sb.append("Telefono: ").append(entrenador.get_telefono()).append("\n");
-					sb.append("Activo: ").append(entrenador.get_activo() == 1 ? "Si" : "No").append("\n");
-					sb.append("----------------------------------------\n");
-				}
+			// Sort by ID and add to table
+			List<TEntrenador> entrenadorList = entrenadores.stream()
+				.filter(e -> e instanceof TEntrenador)
+				.map(e -> (TEntrenador) e)
+				.sorted((a, b) -> Integer.compare(a.get_id(), b.get_id()))
+				.collect(Collectors.toList());
+			
+			for (TEntrenador entrenador : entrenadorList) {
+				Object[] row = {
+					entrenador.get_id(),
+					entrenador.get_dni(),
+					entrenador.get_nombre(),
+					entrenador.get_telefono()
+				};
+				tableModel.addRow(row);
 			}
-			txtResultado.setText(sb.toString());
 		} else {
-			txtResultado.setText("No se pudieron cargar los entrenadores.");
+			JOptionPane.showMessageDialog(this, "No se pudieron cargar los entrenadores.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

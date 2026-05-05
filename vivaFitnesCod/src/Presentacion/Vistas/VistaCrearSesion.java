@@ -139,7 +139,7 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 		TSesion sesion = new TSesion();
 		sesion.setObjetivo(txtObjetivo.getText().trim());
 		sesion.setDuracion(Integer.parseInt(txtDuracion.getText().trim()));
-		sesion.setHorario(txtHorario.getText().trim());
+		sesion.setFechaHora(txtHorario.getText().trim());
 		sesion.setIdSala(Integer.parseInt(txtIdSala.getText().trim()));
 		sesion.setIdEntrenador(Integer.parseInt(txtIdEntrenador.getText().trim()));
 		return sesion;

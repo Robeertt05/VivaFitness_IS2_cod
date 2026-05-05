@@ -5,6 +5,7 @@ package Presentacion.Vistas;
 
 import Controlador.Context;
 import Controlador.Controller;
+import Integracion.Sala.TSala;
 import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.IGUI;
 import java.awt.BorderLayout;
@@ -18,28 +19,31 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /** 
- * View for displaying room details
+ * View for displaying room details in table format
  * @author azuri
  */
 public class VistaMostrarSala extends JFrame implements IGUI {
 	
+	private static final long serialVersionUID = 1L;
 	private Set<ActionListener> actionListener;
 	private Set<JButton> jButton;
 	private Set<JPanel> jPanel;
 	private Set<JLabel> jLabel;
 	
 	private JTextField txtIdSala;
-	private JTextArea txtDetalles;
+	private JTable table;
+	private DefaultTableModel tableModel;
 	private JButton btnMostrar;
 	private JButton btnCerrar;
 	
 	public VistaMostrarSala() {
 		setTitle("Detalles de Sala");
-		setSize(400, 300);
+		setSize(700, 300);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -52,28 +56,36 @@ public class VistaMostrarSala extends JFrame implements IGUI {
 	}
 	
 	private void initComponents() {
-		JPanel topPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+		JPanel topPanel = new JPanel(new GridLayout(1, 3, 10, 10));
 		
 		// Select Room
 		jLabel.add(new JLabel("ID Sala:"));
 		topPanel.add(new JLabel("ID Sala:"));
 		txtIdSala = new JTextField();
 		topPanel.add(txtIdSala);
+		btnMostrar = new JButton("Mostrar");
+		topPanel.add(btnMostrar);
 		
-		// Details area
-		txtDetalles = new JTextArea();
-		txtDetalles.setEditable(false);
-		JScrollPane scrollPane = new JScrollPane(txtDetalles);
+		// Create table
+		String[] columnNames = {"ID", "Nombre", "Aforo"};
+		tableModel = new DefaultTableModel(columnNames, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		table = new JTable(tableModel);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		JScrollPane scrollPane = new JScrollPane(table);
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
-		btnMostrar = new JButton("Mostrar");
 		btnCerrar = new JButton("Cerrar");
 		btnMostrar.addActionListener(e -> mostrarSala());
 		btnCerrar.addActionListener(e -> dispose());
 		jButton.add(btnMostrar);
 		jButton.add(btnCerrar);
-		buttonPanel.add(btnMostrar);
 		buttonPanel.add(btnCerrar);
 		
 		jPanel.add(topPanel);
@@ -94,10 +106,6 @@ public class VistaMostrarSala extends JFrame implements IGUI {
 		}
 	}
 	
-	public void displayRoomDetails(String details) {
-		txtDetalles.setText(details);
-	}
-	
 	public void addShowButtonListener(ActionListener listener) {
 		btnMostrar.addActionListener(listener);
 		actionListener.add(listener);
@@ -110,13 +118,20 @@ public class VistaMostrarSala extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
-		if (context != null && context.isSuccess() && context.getData() != null) {
-			displayRoomDetails(context.getData().toString());
+		tableModel.setRowCount(0);
+		
+		if (context != null && context.isSuccess() && context.getData() instanceof TSala) {
+			TSala sala = (TSala) context.getData();
+			Object[] row = {
+				sala.getIdSala(),
+				sala.getNombreSala(),
+				sala.getAforo()
+			};
+			tableModel.addRow(row);
 		} else if (context != null) {
-			displayRoomDetails("");
 			JOptionPane.showMessageDialog(this,
 				context.getMessage() != null ? context.getMessage() : "No se pudo mostrar la sala.",
-				"Informacion",
+				"Información",
 				JOptionPane.INFORMATION_MESSAGE);
 		}
 	}

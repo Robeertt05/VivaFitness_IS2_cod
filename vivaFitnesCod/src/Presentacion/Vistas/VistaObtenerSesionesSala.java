@@ -5,42 +5,48 @@ package Presentacion.Vistas;
 
 import Controlador.Context;
 import Controlador.Controller;
+import Integracion.Sesion.TSesion;
 import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.IGUI;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /** 
- * View for displaying all sessions in a room
-	 * CASO 6: Obtener sesiones de una sala (Relacion 1-N)
+ * View for displaying all sessions in a room in table format
+ * CASO 6: Obtener sesiones de una sala (Relacion 1-N)
  * @author azuri
  */
 public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 	
+	private static final long serialVersionUID = 1L;
 	private Set<ActionListener> actionListener;
 	private Set<JButton> jButton;
 	private Set<JPanel> jPanel;
 	private Set<JLabel> jLabel;
 	
 	private JTextField txtIdSala;
-	private JTextArea txtSesiones;
+	private JTable table;
+	private DefaultTableModel tableModel;
 	private JButton btnMostrar;
 	private JButton btnCerrar;
 	
 	public VistaObtenerSesionesSala() {
 		setTitle("Sesiones de Sala");
-		setSize(500, 400);
+		setSize(900, 500);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -61,10 +67,18 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 		txtIdSala = new JTextField();
 		topPanel.add(txtIdSala);
 		
-		// Sessions area
-		txtSesiones = new JTextArea();
-		txtSesiones.setEditable(false);
-		JScrollPane scrollPane = new JScrollPane(txtSesiones);
+		// Create table
+		String[] columnNames = {"ID", "Objetivo", "Duracion (min)", "Fecha y Hora", "Sala", "Entrenador"};
+		tableModel = new DefaultTableModel(columnNames, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		table = new JTable(tableModel);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		JScrollPane scrollPane = new JScrollPane(table);
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
@@ -95,10 +109,6 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 		}
 	}
 	
-	public void displaySessions(String sessionsList) {
-		txtSesiones.setText(sessionsList);
-	}
-	
 	public void addShowButtonListener(ActionListener listener) {
 		btnMostrar.addActionListener(listener);
 		actionListener.add(listener);
@@ -111,26 +121,39 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 
 	@Override
 	public void update(Context context) {
+		tableModel.setRowCount(0);
+		
 		if (context != null && context.isSuccess() && context.getData() instanceof Set) {
 			Set<?> sesiones = (Set<?>) context.getData();
 			if (sesiones.isEmpty()) {
-				displaySessions("");
 				JOptionPane.showMessageDialog(this,
 					"No hay sesiones disponibles para esta sala.",
 					"Sin Sesiones",
 					JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				StringBuilder sb = new StringBuilder();
-				for (Object sesion : sesiones) {
-					sb.append(sesion.toString()).append("\n\n");
+				// Sort by ID and add to table
+				List<TSesion> sesionList = sesiones.stream()
+					.filter(s -> s instanceof TSesion)
+					.map(s -> (TSesion) s)
+					.sorted((a, b) -> Integer.compare(a.getIdSesion(), b.getIdSesion()))
+					.collect(Collectors.toList());
+				
+				for (TSesion sesion : sesionList) {
+					Object[] row = {
+						sesion.getIdSesion(),
+						sesion.getObjetivo(),
+						sesion.getDuracion(),
+						sesion.getFechaHora(),
+						sesion.getIdSala(),
+						sesion.getIdEntrenador()
+					};
+					tableModel.addRow(row);
 				}
-				displaySessions(sb.toString());
 			}
 		} else if (context != null) {
-			displaySessions("");
 			JOptionPane.showMessageDialog(this,
 				context.getMessage() != null ? context.getMessage() : "No se encontraron sesiones para esta sala.",
-				"Informacion",
+				"Información",
 				JOptionPane.INFORMATION_MESSAGE);
 		}
 	}

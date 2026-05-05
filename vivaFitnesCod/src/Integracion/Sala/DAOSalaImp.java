@@ -248,7 +248,7 @@ public class DAOSalaImp implements DAOSala {
 		try {
 			connection = ConnectionManager.getConnection();
 			
-			String query = "SELECT * FROM sesiones WHERE idSala = ? AND activo = 1";
+			String query = "SELECT * FROM sesion WHERE idSala = ? AND activo = 1";
 			ps = connection.prepareStatement(query);
 			ps.setInt(1, idSala);
 			
@@ -260,7 +260,7 @@ public class DAOSalaImp implements DAOSala {
 				sesion.setIdSala(rs.getInt("idSala"));
 				sesion.setObjetivo(rs.getString("objetivo"));
 				sesion.setDuracion(rs.getInt("duracion"));
-				sesion.setHorario(rs.getString("horario"));
+				sesion.setFechaHora(rs.getString("horario"));
 				sesion.setActivo(rs.getInt("activo"));
 				
 				sesiones.add(sesion);

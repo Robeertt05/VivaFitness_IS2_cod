@@ -1,11 +1,15 @@
+/**
+ * Vista principal del menu de Sala.
+ * Muestra las opciones: Alta, Baja, Modificar, Mostrar, Mostrar todas las salas, Obtener sesiones.
+ */
 package Presentacion.Vistas;
 
 import javax.swing.*;
 import java.awt.*;
-
 import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.FactoriaVistas;
 import Presentacion.FactoriaPresentacion.IGUI;
+import Controlador.Context;
 
 public class VistaSala extends JFrame implements IGUI {
 
@@ -74,6 +78,7 @@ public class VistaSala extends JFrame implements IGUI {
 	}
 
 	@Override
-	public void update(Controlador.Context context) {
+	public void update(Context context) {
+		// La vista menu no procesa respuestas; las subvistas lo hacen.
 	}
 }
