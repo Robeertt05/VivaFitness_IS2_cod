@@ -92,9 +92,28 @@ public class DAOClienteImp implements DAOCliente {
 
 	@Override
 	public int delete(int idCliente) {
+		// Validar que no existan inscripciones activas para el cliente
+		String checkQuery = "SELECT COUNT(*) FROM apunta WHERE idCliente = ? AND activo = 1";
+		try (Connection con = ConnectionManager.getConnection();
+		     PreparedStatement checkPs = con.prepareStatement(checkQuery)) {
+			checkPs.setInt(1, idCliente);
+			try (ResultSet rs = checkPs.executeQuery()) {
+				if (rs.next() && rs.getInt(1) > 0) {
+					int countInscripciones = rs.getInt(1);
+					throw new RuntimeException(
+						"No se puede dar de baja el cliente con ID " + idCliente + " porque tiene " + 
+						countInscripciones + " inscripci\u00f3n(es) activa(s) en sesiones.");
+				}
+			}
+		} catch (RuntimeException re) {
+			throw re;
+		} catch (SQLException e) {
+			throw databaseError(e);
+		}
+		
 		String sql = "UPDATE cliente SET activo = 0 WHERE idCliente = ?";
 		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement ps = con.prepareStatement(sql)) {
+		     PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, idCliente);
 			return ps.executeUpdate();
 		} catch (SQLException e) {
@@ -173,7 +192,7 @@ public class DAOClienteImp implements DAOCliente {
 
 	@Override
 	public int desapuntarSesion(int idCliente, int idSesion) {
-		String sql = "DELETE FROM apunta WHERE idCliente = ? AND idSesion = ?";
+		String sql = "UPDATE apunta SET activo = 0 WHERE idCliente = ? AND idSesion = ?";
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, idCliente);

@@ -46,6 +46,7 @@ CREATE TABLE apunta (
     idSesion INT NOT NULL,
     fecha DATE,
     hora TIME,
+    activo TINYINT(1) DEFAULT 1,
     FOREIGN KEY (idCliente) REFERENCES cliente(idCliente),
     FOREIGN KEY (idSesion) REFERENCES sesion(idSesion)
 );

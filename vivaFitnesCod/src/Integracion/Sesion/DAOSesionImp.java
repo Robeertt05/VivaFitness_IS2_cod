@@ -100,7 +100,26 @@ public class DAOSesionImp implements DAOSesion {
 	@Override
 	public int delete(int idSesion) {
 		// begin-user-code
-		String sql = "DELETE FROM sesion WHERE idSesion = ?";
+		// Validar que no existan inscripciones activas para la sesión
+		String checkQuery = "SELECT COUNT(*) FROM apunta WHERE idSesion = ? AND activo = 1";
+		try (Connection con = getConnection();
+		     PreparedStatement checkPs = con.prepareStatement(checkQuery)) {
+			checkPs.setInt(1, idSesion);
+			try (ResultSet rs = checkPs.executeQuery()) {
+				if (rs.next() && rs.getInt(1) > 0) {
+					int countInscripciones = rs.getInt(1);
+					throw new RuntimeException(
+						"No se puede dar de baja la sesi\u00f3n con ID " + idSesion + " porque tiene " + 
+						countInscripciones + " inscripci\u00f3n(es) activa(s) de clientes.");
+				}
+			}
+		} catch (RuntimeException re) {
+			throw re;
+		} catch (SQLException e) {
+			throw new RuntimeException("Error SQL al validar inscripciones de la sesión con ID " + idSesion + ".", e);
+		}
+		
+		String sql = "UPDATE sesion SET activo = 0 WHERE idSesion = ?";
 		try (Connection con = getConnection();
 			 PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, idSesion);
