@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 
 public class TestHelper {
 
-	//Inyecta la FactoriaIntegracionStub como instancia Singleton
+	
 	public static void inyectarFactoria(FactoriaIntegracionStub stub) {
 		try {
 			Field instanceField = FactoriaIntegracion.class.getDeclaredField("instance");
@@ -18,7 +18,7 @@ public class TestHelper {
 	}
 
 	
-	//Restaura la factoria de integracion  a null
+
 	public static void restaurarFactoria() {
 		try {
 			Field instanceField = FactoriaIntegracion.class.getDeclaredField("instance");

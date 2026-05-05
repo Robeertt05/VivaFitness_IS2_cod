@@ -20,7 +20,7 @@ public class FactoriaIntegracionStub extends FactoriaIntegracion {
 		daoSala = new DAOSalaStub();
 		daoSesion = new DAOSesionStub();
 
-		// Conectar entre sí para relaciones
+		
 		daoSesion.setDAOSalaStub(daoSala);
 		daoSesion.setDAOEntrenadorStub(daoEntrenador);
 		daoSesion.setDAOClienteStub(daoCliente);
@@ -48,7 +48,7 @@ public class FactoriaIntegracionStub extends FactoriaIntegracion {
 		return daoSesion;
 	}
 
-	// Limpia todos los datos  
+	
 	public void limpiarTodo() {
 		daoCliente.clear();
 		daoEntrenador.clear();
@@ -56,7 +56,7 @@ public class FactoriaIntegracionStub extends FactoriaIntegracion {
 		daoSesion.clear();
 	}
 
-	// Getters para acceso directo en tests
+	
 	public DAOClienteStub getDAOClienteStub() { return daoCliente; }
 	public DAOEntrenadorStub getDAOEntrenadorStub() { return daoEntrenador; }
 	public DAOSalaStub getDAOSalaStub() { return daoSala; }
