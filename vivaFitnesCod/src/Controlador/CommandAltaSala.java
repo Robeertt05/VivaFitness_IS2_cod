@@ -34,7 +34,8 @@ public Context execute(Object datos) {
 	} else {
 		ctx.setSuccess(false);
 		ctx.setMessage("Error al crear la sala");
+	}
+	return ctx;
+	}
 }
-return ctx;
-}
-}
+

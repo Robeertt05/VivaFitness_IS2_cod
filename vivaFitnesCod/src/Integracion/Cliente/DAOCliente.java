@@ -4,10 +4,11 @@
 package Integracion.Cliente;
 
 import java.util.Set;
-import Integracion.FactoriaIntegracion.TSesion;
+
+import Integracion.Sesion.TSesion;
 import Integracion.Sesion.TClienteSesion;
 
-public interface DAOCliente {
+ public interface DAOCliente {
 	/** 
 	* <!-- begin-UML-doc -->
 	* <!-- end-UML-doc -->

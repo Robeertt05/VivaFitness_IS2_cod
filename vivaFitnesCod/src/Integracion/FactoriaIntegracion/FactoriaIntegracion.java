@@ -1,8 +1,5 @@
-/**
- * Factoria abstracta de DAOs.
- * Patron: Abstract Factory + Singleton.
- * Permite desacoplar la creacion de DAOs de su implementacion concreta.
- */
+
+
 package Integracion.FactoriaIntegracion;
 
 import Integracion.Entrenador.DAOEntrenador;

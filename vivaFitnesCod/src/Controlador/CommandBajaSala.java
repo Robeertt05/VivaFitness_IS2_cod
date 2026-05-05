@@ -14,19 +14,19 @@ import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
  */
 public class CommandBajaSala implements Command {
 
-        @Override
-        public Context execute(Object datos) {
-                Context ctx = new Context();
+	@Override
+	public Context execute(Object datos) {
+		Context ctx = new Context();
 
-                if (!(datos instanceof Integer)) {
-                        ctx.setSuccess(false);
-                        ctx.setMessage("El ID de la sala debe ser un numero entero");
-                        return ctx;
-                }
-					int idSala = (Integer) datos;
-			 		SASala saSala = FactoriaServicioAplicacion.getInstance().generaSASala();
-			 		int resultado = saSala.baja_sala(idSala);
-				
+		if (!(datos instanceof Integer)) {
+			ctx.setSuccess(false);
+			ctx.setMessage("El ID de la sala debe ser un numero entero");
+			return ctx;
+		}
+		int idSala = (Integer) datos;
+		SASala saSala = FactoriaServicioAplicacion.getInstance().generaSASala();
+		int resultado = saSala.baja_sala(idSala);
+		
 		if (resultado > 0) {
 			ctx.setSuccess(true);
 			ctx.setMessage("Sala eliminada correctamente");

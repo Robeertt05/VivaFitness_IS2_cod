@@ -2,11 +2,11 @@ package Negocio.Cliente;
 
 import java.util.Set;
 
-import Integracion.Cliente.DAOCliente;
-import Integracion.Cliente.TCliente;
+Import Integracion.Cliente.TCliente;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.Sesion.TClienteSesion;
 import Integracion.Sesion.TSesion;
+import Integracion.Cliente.DAOCliente;
 
 public class SAClienteImp implements SACliente {
 
