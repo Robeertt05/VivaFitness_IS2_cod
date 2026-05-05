@@ -1,0 +1,21 @@
+# Compiled Java classes
+*.class
+
+# Build output directories
+bin/
+out/
+build/
+
+# IDE files
+.idea/
+*.iml
+.eclipse/
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
