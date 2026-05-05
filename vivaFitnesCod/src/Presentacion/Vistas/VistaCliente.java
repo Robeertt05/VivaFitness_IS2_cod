@@ -1,20 +1,18 @@
 package Presentacion.Vistas;
 
+import Presentacion.FactoriaPresentacion.Evento;
+import Presentacion.FactoriaPresentacion.FactoriaVistas;
+import Presentacion.FactoriaPresentacion.IGUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-import Presentacion.FactoriaPresentacion.Evento;
-import Presentacion.FactoriaPresentacion.FactoriaVistas;
-import Presentacion.FactoriaPresentacion.IGUI;
 
 public class VistaCliente extends JFrame implements IGUI {
 	private static final long serialVersionUID = 1L;
@@ -54,11 +52,8 @@ public class VistaCliente extends JFrame implements IGUI {
 
 	private void addButton(JPanel grid, String texto, Evento evento) {
 		JButton button = new JButton(texto);
-		button.setFont(new Font("SansSerif", Font.PLAIN, 26));
-		button.setFocusPainted(false);
-		button.setBackground(new Color(188, 208, 225));
-		button.setOpaque(true);
-		button.setBorder(BorderFactory.createLineBorder(new Color(45, 45, 45), 2, true));
+		button.setFont(new Font("SansSerif", Font.BOLD, 16));
+		button.setHorizontalAlignment(SwingConstants.CENTER);
 		button.addActionListener(e -> abrirVista(evento));
 		grid.add(button);
 	}

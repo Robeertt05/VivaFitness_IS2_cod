@@ -1,6 +1,5 @@
 package Negocio.Sesion;
 
-import Integracion.Cliente.DAOCliente;
 import Integracion.Entrenador.DAOEntrenador;
 import Integracion.Entrenador.TEntrenador;
 import Integracion.FactoriaIntegracion.FactoriaIntegracion;
@@ -8,7 +7,6 @@ import Integracion.Sala.DAOSala;
 import Integracion.Sala.TSala;
 import Integracion.Sesion.DAOSesion;
 import Integracion.Sesion.TSesion;
-import Integracion.Sesion.TClienteSesion;
 import java.util.Set;
 
 public class SASesionImp implements SASesion {
@@ -31,11 +29,11 @@ public class SASesionImp implements SASesion {
 			throw new IllegalArgumentException("Entrenador invalidos o inactivo: ID " + datos.getIdEntrenador());
 		}
 		
-		// Check sala ocupada
+		// Check sala ocupada - verify no time conflicts considering duration
 		DAOSesion daoCheck = FactoriaIntegracion.getInstance().generaDAOSesion();
-		int count = daoCheck.countSalaHorario(datos.getIdSala(), datos.getFechaHora());
+		int count = daoCheck.countConflictoHorarioSala(datos.getIdSala(), datos.getFechaHora(), datos.getDuracion());
 		if (count > 0) {
-			throw new IllegalArgumentException("Sala ocupada en ese horario: " + datos.getFechaHora());
+			throw new IllegalArgumentException("Sala ocupada en ese horario. Existe otra sesion en el mismo horario o con solapamiento.");
 		}
 		
 		datos.setActivo(1);
@@ -103,6 +101,23 @@ public class SASesionImp implements SASesion {
 
 		TSesion actualizada = combinarDatos(existente, datos);
 		validarSesionModificacion(actualizada);
+
+		// Check for time conflicts if sala, horario, or duracion changed
+		if (actualizada.getIdSala() != existente.getIdSala() || 
+			!actualizada.getFechaHora().equals(existente.getFechaHora()) ||
+			actualizada.getDuracion() != existente.getDuracion()) {
+			
+			int conflictos = daoSesion.countConflictoHorarioSalaExcluyendo(
+				actualizada.getIdSala(), 
+				actualizada.getFechaHora(), 
+				actualizada.getDuracion(), 
+				idSesion
+			);
+			
+			if (conflictos > 0) {
+				throw new IllegalArgumentException("Sala ocupada en ese horario. Existe otra sesion en el mismo horario o con solapamiento.");
+			}
+		}
 
 		int result = daoSesion.update(actualizada);
 		if (result <= 0) {

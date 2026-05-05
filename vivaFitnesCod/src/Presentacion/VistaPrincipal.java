@@ -1,15 +1,16 @@
-/**
+ót/**
  * 
  */
 package Presentacion;
 
-import javax.swing.*;
-import java.awt.*;
+import Controlador.Context;
 import Presentacion.FactoriaPresentacion.IGUI;
+import Presentacion.Vistas.VistaCliente;
 import Presentacion.Vistas.VistaEntrenador;
 import Presentacion.Vistas.VistaSala;
-import Presentacion.Vistas.VistaCliente;
-import Controlador.Context;
+import java.awt.*;
+import javax.swing.*;
+
 
 /** 
  * Main application window with all entities.
@@ -67,14 +68,10 @@ root.add(entidades, BorderLayout.CENTER);
 setContentPane(root);
 }
 
-private JButton crearBotonEntidad(String texto) {
-JButton button = new JButton(texto);
-button.setFont(new Font("SansSerif", Font.PLAIN, 34));
-button.setFocusPainted(false);
-button.setBackground(new Color(188, 208, 225));
-button.setOpaque(true);
-button.setBorder(BorderFactory.createLineBorder(new Color(55, 55, 55), 2, true));
-return button;
+	private JButton crearBotonEntidad(String texto) {
+	JButton button = new JButton(texto);
+	button.setFont(new Font("SansSerif", Font.BOLD, 16));
+	return button;
 }
 
 @Override

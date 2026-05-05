@@ -131,7 +131,7 @@ public class VistaMostrarSala extends JFrame implements IGUI {
 		} else if (context != null) {
 			JOptionPane.showMessageDialog(this,
 				context.getMessage() != null ? context.getMessage() : "No se pudo mostrar la sala.",
-				"Información",
+				"Informacion",
 				JOptionPane.INFORMATION_MESSAGE);
 		}
 	}

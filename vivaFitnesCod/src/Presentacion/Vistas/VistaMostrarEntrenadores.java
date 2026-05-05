@@ -1,17 +1,16 @@
 package Presentacion.Vistas;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import Controlador.Context;
 import Controlador.Controller;
 import Integracion.Entrenador.TEntrenador;
 import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.IGUI;
+import java.awt.*;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class VistaMostrarEntrenadores extends JFrame implements IGUI {
 
@@ -35,7 +34,7 @@ public class VistaMostrarEntrenadores extends JFrame implements IGUI {
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
 		// Create table
-		String[] columnNames = {"ID", "DNI", "Nombre", "Teléfono"};
+		String[] columnNames = {"ID", "DNI", "Nombre", "Telefono"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -78,7 +77,7 @@ public class VistaMostrarEntrenadores extends JFrame implements IGUI {
 		if (context.getEvento() == Evento.RES_MOSTRAR_ENTRENADORES_OK && context.getObjeto() instanceof Set) {
 			Set<?> entrenadores = (Set<?>) context.getObjeto();
 			if (entrenadores.isEmpty()) {
-				JOptionPane.showMessageDialog(this, "No hay entrenadores registrados.", "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "No hay entrenadores registrados.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 

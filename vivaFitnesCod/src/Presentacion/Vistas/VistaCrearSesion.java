@@ -160,21 +160,21 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 			int dur = Integer.parseInt(txtDuracion.getText().trim());
 			if (dur <= 0) throw new NumberFormatException();
 		} catch (NumberFormatException ex) {
-			JOptionPane.showMessageDialog(this, "Duración debe ser número > 0.", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Duracion debe ser numero > 0.", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		try {
 			int sala = Integer.parseInt(txtIdSala.getText().trim());
 			if (sala <= 0) throw new NumberFormatException();
 		} catch (NumberFormatException ex) {
-			JOptionPane.showMessageDialog(this, "ID Sala debe ser número > 0.", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "ID Sala debe ser numero > 0.", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		try {
 			int ent = Integer.parseInt(txtIdEntrenador.getText().trim());
 			if (ent <= 0) throw new NumberFormatException();
 		} catch (NumberFormatException ex) {
-			JOptionPane.showMessageDialog(this, "ID Entrenador debe ser número > 0.", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "ID Entrenador debe ser numero > 0.", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		// Basic date format check

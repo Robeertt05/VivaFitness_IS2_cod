@@ -212,6 +212,7 @@ public class DAOSesionImp implements DAOSesion {
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
 					TEntrenador entrenador = new TEntrenador();
+					entrenador.set_id(rs.getInt("idEntrenador"));
 					entrenador.set_activo(rs.getInt("activo"));
 					entrenador.set_nombre(rs.getString("nombreEntrenador"));
 					entrenador.set_telefono(rs.getString("telefonoEntrenador"));
@@ -256,6 +257,64 @@ public class DAOSesionImp implements DAOSesion {
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Error checking sala horario: " + e.getMessage(), e);
+		}
+		return 0;
+	}
+
+	@Override
+	public int countConflictoHorarioSala(int idSala, String horario, int duracion) {
+		// Check if there are any sessions in the same room that overlap with the given time slot
+		// Two time slots overlap if: start1 < end2 AND end1 > start2
+		String sql = "SELECT COUNT(*) FROM sesion s1 " +
+				"WHERE s1.idSala = ? " +
+				"AND s1.activo = 1 " +
+				"AND DATE(s1.horario) = DATE(?) " +
+				"AND STR_TO_DATE(s1.horario, '%Y-%m-%d %H:%i') < DATE_ADD(STR_TO_DATE(?, '%Y-%m-%d %H:%i'), INTERVAL ? MINUTE) " +
+				"AND DATE_ADD(STR_TO_DATE(s1.horario, '%Y-%m-%d %H:%i'), INTERVAL s1.duracion MINUTE) > STR_TO_DATE(?, '%Y-%m-%d %H:%i')";
+		try (Connection con = getConnection();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, idSala);
+			ps.setString(2, horario);
+			ps.setString(3, horario);
+			ps.setInt(4, duracion);
+			ps.setString(5, horario);
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Error checking conflicto horario sala: " + e.getMessage(), e);
+		}
+		return 0;
+	}
+
+	@Override
+	public int countConflictoHorarioSalaExcluyendo(int idSala, String horario, int duracion, int idSesionExcluir) {
+		// Check if there are any other sessions in the same room that overlap with the given time slot
+		// Excludes the specified session from the check
+		String sql = "SELECT COUNT(*) FROM sesion s1 " +
+				"WHERE s1.idSala = ? " +
+				"AND s1.idSesion != ? " +
+				"AND s1.activo = 1 " +
+				"AND DATE(s1.horario) = DATE(?) " +
+				"AND STR_TO_DATE(s1.horario, '%Y-%m-%d %H:%i') < DATE_ADD(STR_TO_DATE(?, '%Y-%m-%d %H:%i'), INTERVAL ? MINUTE) " +
+				"AND DATE_ADD(STR_TO_DATE(s1.horario, '%Y-%m-%d %H:%i'), INTERVAL s1.duracion MINUTE) > STR_TO_DATE(?, '%Y-%m-%d %H:%i')";
+		try (Connection con = getConnection();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, idSala);
+			ps.setInt(2, idSesionExcluir);
+			ps.setString(3, horario);
+			ps.setString(4, horario);
+			ps.setInt(5, duracion);
+			ps.setString(6, horario);
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Error checking conflicto horario sala excluyendo sesion: " + e.getMessage(), e);
 		}
 		return 0;
 	}

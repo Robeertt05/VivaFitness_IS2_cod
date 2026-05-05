@@ -1,11 +1,15 @@
 package Presentacion.Vistas;
 
+import Controlador.Context;
+import Controlador.Controller;
+import Integracion.Sesion.TSesion;
+import Presentacion.FactoriaPresentacion.Evento;
+import Presentacion.FactoriaPresentacion.IGUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,12 +19,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
-import Controlador.Context;
-import Controlador.Controller;
-import Integracion.Sesion.TSesion;
-import Presentacion.FactoriaPresentacion.Evento;
-import Presentacion.FactoriaPresentacion.IGUI;
 
 public class VistaMostrarSesionesCliente extends JFrame implements IGUI {
 	private static final long serialVersionUID = 1L;
@@ -74,7 +72,7 @@ public class VistaMostrarSesionesCliente extends JFrame implements IGUI {
 			Set<?> sesiones = (Set<?>) context.getObjeto();
 			
 			if (sesiones.isEmpty()) {
-				JOptionPane.showMessageDialog(this, "El cliente no tiene sesiones.", "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "El cliente no tiene sesiones.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 			

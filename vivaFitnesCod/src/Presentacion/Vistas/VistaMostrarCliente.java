@@ -1,8 +1,12 @@
 package Presentacion.Vistas;
 
+import Controlador.Context;
+import Controlador.Controller;
+import Integracion.Cliente.TCliente;
+import Presentacion.FactoriaPresentacion.Evento;
+import Presentacion.FactoriaPresentacion.IGUI;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,12 +16,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
-import Controlador.Context;
-import Controlador.Controller;
-import Integracion.Cliente.TCliente;
-import Presentacion.FactoriaPresentacion.Evento;
-import Presentacion.FactoriaPresentacion.IGUI;
 
 public class VistaMostrarCliente extends JFrame implements IGUI {
 	private static final long serialVersionUID = 1L;
@@ -40,7 +38,7 @@ public class VistaMostrarCliente extends JFrame implements IGUI {
 		top.add(btnBuscar);
 		
 		// Create table
-		String[] columnNames = {"ID", "DNI", "Nombre", "Teléfono", "Correo"};
+		String[] columnNames = {"ID", "DNI", "Nombre", "Telefono", "Correo"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override
 			public boolean isCellEditable(int row, int column) {

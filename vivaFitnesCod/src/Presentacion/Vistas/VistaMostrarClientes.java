@@ -1,10 +1,14 @@
 package Presentacion.Vistas;
 
+import Controlador.Context;
+import Controlador.Controller;
+import Integracion.Cliente.TCliente;
+import Presentacion.FactoriaPresentacion.Evento;
+import Presentacion.FactoriaPresentacion.IGUI;
 import java.awt.BorderLayout;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -12,12 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import Controlador.Context;
-import Controlador.Controller;
-import Integracion.Cliente.TCliente;
-import Presentacion.FactoriaPresentacion.Evento;
-import Presentacion.FactoriaPresentacion.IGUI;
 
 public class VistaMostrarClientes extends JFrame implements IGUI {
 	private static final long serialVersionUID = 1L;
@@ -33,7 +31,7 @@ public class VistaMostrarClientes extends JFrame implements IGUI {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		// Create table
-		String[] columnNames = {"ID", "DNI", "Nombre", "Teléfono", "Correo"};
+		String[] columnNames = {"ID", "DNI", "Nombre", "Telefono", "Correo"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -70,7 +68,7 @@ public class VistaMostrarClientes extends JFrame implements IGUI {
 			Set<?> clientes = (Set<?>) context.getObjeto();
 			
 			if (clientes.isEmpty()) {
-				JOptionPane.showMessageDialog(this, "No hay clientes registrados.", "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "No hay clientes registrados.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 			

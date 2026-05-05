@@ -1,15 +1,11 @@
-/**
- * Vista principal del menu de Entrenador.
- * Muestra las opciones: Alta, Baja, Modificar, Mostrar, Crear Sesion.
- */
 package Presentacion.Vistas;
 
-import javax.swing.*;
-import java.awt.*;
+import Controlador.Context;
 import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.FactoriaVistas;
 import Presentacion.FactoriaPresentacion.IGUI;
-import Controlador.Context;
+import java.awt.*;
+import javax.swing.*;
 
 public class VistaEntrenador extends JFrame implements IGUI {
 
@@ -61,11 +57,8 @@ public class VistaEntrenador extends JFrame implements IGUI {
 
 	private JButton crearBotonAccion(String texto) {
 		JButton button = new JButton(texto);
-		button.setFont(new Font("SansSerif", Font.PLAIN, 28));
-		button.setFocusPainted(false);
-		button.setBackground(new Color(188, 208, 225));
-		button.setOpaque(true);
-		button.setBorder(BorderFactory.createLineBorder(new Color(45, 45, 45), 2, true));
+		button.setFont(new Font("SansSerif", Font.BOLD, 16));
+		button.setHorizontalAlignment(SwingConstants.CENTER);
 		return button;
 	}
 

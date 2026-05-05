@@ -3,14 +3,14 @@
  */
 package Presentacion.Vistas;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import Presentacion.FactoriaPresentacion.IGUI;
-import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.Context;
 import Controlador.Controller;
 import Integracion.Entrenador.TEntrenador;
+import Presentacion.FactoriaPresentacion.Evento;
+import Presentacion.FactoriaPresentacion.IGUI;
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class VistaMostrarEntrenador extends JFrame implements IGUI {
 
@@ -40,7 +40,7 @@ public class VistaMostrarEntrenador extends JFrame implements IGUI {
 		panelSuperior.add(btnBuscar);
 
 		// Create table
-		String[] columnNames = {"ID", "DNI", "Nombre", "Teléfono"};
+		String[] columnNames = {"ID", "DNI", "Nombre", "Telefono"};
 		tableModel = new DefaultTableModel(columnNames, 0) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -92,7 +92,7 @@ public class VistaMostrarEntrenador extends JFrame implements IGUI {
 			tableModel.addRow(row);
 		} 
 		else if (evento == Evento.RES_MOSTRAR_ENTRENADOR_KO) {
-			JOptionPane.showMessageDialog(this, "No se encontro el entrenador con ese ID.", "Información", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, "No se encontro el entrenador con ese ID.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 }

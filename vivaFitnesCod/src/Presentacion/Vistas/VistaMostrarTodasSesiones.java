@@ -3,25 +3,24 @@
  */
 package Presentacion.Vistas;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import Controlador.Context;
+import Controlador.Controller;
+import Integracion.Sesion.TSesion;
+import Presentacion.FactoriaPresentacion.Evento;
+import Presentacion.FactoriaPresentacion.IGUI;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import Integracion.Sesion.TSesion;
-import Presentacion.FactoriaPresentacion.IGUI;
-import Presentacion.FactoriaPresentacion.Evento;
-import Controlador.Controller;
-import Controlador.Context;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /** 
  * View for listing all sessions in a table format
@@ -109,7 +108,7 @@ public class VistaMostrarTodasSesiones extends JFrame implements IGUI {
 			Set<?> sesiones = (Set<?>) context.getData();
 			
 			if (sesiones.isEmpty()) {
-				JOptionPane.showMessageDialog(this, "No se encontraron sesiones.", "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "No se encontraron sesiones.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 			

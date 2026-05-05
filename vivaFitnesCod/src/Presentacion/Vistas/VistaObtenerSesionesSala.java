@@ -153,7 +153,7 @@ public class VistaObtenerSesionesSala extends JFrame implements IGUI {
 		} else if (context != null) {
 			JOptionPane.showMessageDialog(this,
 				context.getMessage() != null ? context.getMessage() : "No se encontraron sesiones para esta sala.",
-				"Información",
+				"Informacion",
 				JOptionPane.INFORMATION_MESSAGE);
 		}
 	}

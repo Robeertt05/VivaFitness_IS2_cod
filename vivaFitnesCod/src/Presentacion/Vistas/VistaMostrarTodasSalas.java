@@ -106,7 +106,7 @@ public class VistaMostrarTodasSalas extends JFrame implements IGUI {
 			Set<?> salas = (Set<?>) context.getData();
 			
 			if (salas.isEmpty()) {
-				JOptionPane.showMessageDialog(this, "No se encontraron salas.", "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "No se encontraron salas.", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
 			
@@ -128,7 +128,7 @@ public class VistaMostrarTodasSalas extends JFrame implements IGUI {
 		} else if (context != null) {
 			JOptionPane.showMessageDialog(this,
 				context.getMessage() != null ? context.getMessage() : "No se encontraron salas.",
-				"Información",
+				"Informacion",
 				JOptionPane.INFORMATION_MESSAGE);
 		}
 	}

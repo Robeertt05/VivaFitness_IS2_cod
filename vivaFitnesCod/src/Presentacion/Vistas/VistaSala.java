@@ -1,15 +1,11 @@
-/**
- * Vista principal del menu de Sala.
- * Muestra las opciones: Alta, Baja, Modificar, Mostrar, Mostrar todas las salas, Obtener sesiones.
- */
-package Presentacion.Vistas;
+bro package Presentacion.Vistas;
 
-import javax.swing.*;
-import java.awt.*;
+import Controlador.Context;
 import Presentacion.FactoriaPresentacion.Evento;
 import Presentacion.FactoriaPresentacion.FactoriaVistas;
 import Presentacion.FactoriaPresentacion.IGUI;
-import Controlador.Context;
+import java.awt.*;
+import javax.swing.*;
 
 public class VistaSala extends JFrame implements IGUI {
 
@@ -62,11 +58,8 @@ public class VistaSala extends JFrame implements IGUI {
 
 	private JButton crearBotonAccion(String texto) {
 		JButton button = new JButton(texto);
-		button.setFont(new Font("SansSerif", Font.PLAIN, 28));
-		button.setFocusPainted(false);
-		button.setBackground(new Color(188, 208, 225));
-		button.setOpaque(true);
-		button.setBorder(BorderFactory.createLineBorder(new Color(45, 45, 45), 2, true));
+		button.setFont(new Font("SansSerif", Font.BOLD, 16));
+		button.setHorizontalAlignment(SwingConstants.CENTER);
 		return button;
 	}
 
