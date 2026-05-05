@@ -1,5 +1,8 @@
 package Integracion.Cliente;
 
+import Integracion.ConnectionManager.ConnectionManager;
+import Integracion.Sesion.TClienteSesion;
+import Integracion.Sesion.TSesion;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -8,10 +11,6 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.HashSet;
 import java.util.Set;
-
-import Integracion.ConnectionManager.ConnectionManager;
-import Integracion.Sesion.TClienteSesion;
-import Integracion.Sesion.TSesion;
 
 public class DAOClienteImp implements DAOCliente {
 
@@ -29,7 +28,7 @@ public class DAOClienteImp implements DAOCliente {
 			ps.setString(2, datos.get_nombre());
 			ps.setString(3, datos.get_telefono());
 			ps.setString(4, datos.get_correo());
-			ps.setBoolean(5, datos.get_activo() == null || datos.get_activo());
+			ps.setInt(5, datos.get_activo());
 			ps.executeUpdate();
 			try (ResultSet rs = ps.getGeneratedKeys()) {
 				return rs.next() ? rs.getInt(1) : -1;
@@ -83,7 +82,7 @@ public class DAOClienteImp implements DAOCliente {
 			ps.setString(2, tCliente.get_nombre());
 			ps.setString(3, tCliente.get_telefono());
 			ps.setString(4, tCliente.get_correo());
-			ps.setBoolean(5, tCliente.get_activo() == null || tCliente.get_activo());
+			ps.setInt(5, tCliente.get_activo());
 			ps.setInt(6, tCliente.getId());
 			return ps.executeUpdate();
 		} catch (SQLException e) {
@@ -227,7 +226,7 @@ public class DAOClienteImp implements DAOCliente {
 		try (PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, idCliente);
 			try (ResultSet rs = ps.executeQuery()) {
-				return rs.next() && rs.getBoolean("activo");
+				return rs.next() && rs.getInt("activo") == 1;
 			}
 		}
 	}
@@ -261,7 +260,7 @@ public class DAOClienteImp implements DAOCliente {
 		cliente.set_nombre(rs.getString("nombreCliente"));
 		cliente.set_telefono(rs.getString("telefonoCliente"));
 		cliente.set_correo(rs.getString("correoElectronico"));
-		cliente.set_activo(rs.getBoolean("activo"));
+		cliente.set_activo(rs.getInt("activo"));
 		return cliente;
 	}
 

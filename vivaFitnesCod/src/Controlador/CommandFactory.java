@@ -5,8 +5,9 @@
  */
 package Controlador;
 
-import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.commands.*;
+import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
+import Presentacion.FactoriaPresentacion.Evento;
 
 /**
  * <!-- begin-UML-doc -->
@@ -82,11 +83,11 @@ public class CommandFactory {
 			case MODIFICAR_SALA:
 				return new CommandModificarSala();
 			case MOSTRAR_SALA:
-				return new CommandMostrarSala();
-			case MOSTRAR_TODAS_SALAS:
-				return new CommandMostrarTodasSalas();
-			case OBTENER_SESIONES_SALA:
-				return new CommandObtenerSesionesSala();
+			return new CommandMostrarSala(FactoriaServicioAplicacion.getInstance().generaSASala());
+		case MOSTRAR_TODAS_SALAS:
+			return new CommandMostrarTodasSalas(FactoriaServicioAplicacion.getInstance().generaSASala());
+		case OBTENER_SESIONES_SALA:
+			return new CommandObtenerSesionesSala(FactoriaServicioAplicacion.getInstance().generaSASala());
 			
 			// --- Sesion ---
 			case ALTA_SESION:
