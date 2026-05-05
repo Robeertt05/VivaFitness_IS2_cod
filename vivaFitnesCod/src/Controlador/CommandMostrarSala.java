@@ -3,9 +3,8 @@
  */
 package Controlador;
 
-import Negocio.Sala.SASala;
-
 import Integracion.Sala.TSala;
+import Negocio.Sala.SASala;
 
 /**
  * Command to display a specific room
@@ -26,7 +25,7 @@ public class CommandMostrarSala implements Command {
 		
 		if (!(datos instanceof Integer)) {
 			ctx.setSuccess(false);
-			ctx.setMessage("Room ID must be an integer");
+			ctx.setMessage("El ID de la sala debe ser un numero entero");
 			return ctx;
 		}
 		
@@ -35,11 +34,11 @@ public class CommandMostrarSala implements Command {
 		
 		if (sala != null) {
 			ctx.setSuccess(true);
-			ctx.setMessage("Room found");
+			ctx.setMessage("Sala encontrada");
 			ctx.setData(sala);
 		} else {
 			ctx.setSuccess(false);
-			ctx.setMessage("Room not found");
+			ctx.setMessage("Sala no encontrada");
 		}
 		
 		return ctx;

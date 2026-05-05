@@ -7,7 +7,6 @@ package Integracion.Sala;
 
 import Integracion.ConnectionManager.ConnectionManager;
 import Integracion.Sesion.TSesion;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +23,7 @@ public class DAOSalaImp implements DAOSala {
 
 	private RuntimeException databaseError(SQLException e) {
 		return new RuntimeException(
-				"No se pudo conectar con la base de datos. Compruebe que esté encendida.",
+				"No se pudo conectar con la base de datos. Compruebe que este encendida.",
 				e);
 	}
 
@@ -156,7 +155,7 @@ public class DAOSalaImp implements DAOSala {
 
 	/**
 	 * Elimina logicamente una sala por su id (baja logica: activo = 0).
-	 * Precondición: la sala no debe tener sesiones activas.
+	 * Precondicion: la sala no debe tener sesiones activas.
 	 * @param idSala identificador de la sala
 	 * @return 1 si correcto, 0 si falla
 	 */
@@ -249,7 +248,7 @@ public class DAOSalaImp implements DAOSala {
 		try {
 			connection = ConnectionManager.getConnection();
 			
-			String query = "SELECT * FROM sesion WHERE idSala = ? AND activo = 1";
+			String query = "SELECT * FROM sesiones WHERE idSala = ? AND activo = 1";
 			ps = connection.prepareStatement(query);
 			ps.setInt(1, idSala);
 			
@@ -268,14 +267,16 @@ public class DAOSalaImp implements DAOSala {
 			}
 			
 		} catch (SQLException e) {
-			throw databaseError(e);
+			// Retornar conjunto vacío si no hay sesiones o error de conexión
+			System.err.println("Error al obtener sesiones: " + e.getMessage());
+			return new HashSet<>();
 		} finally {
 			try {
 				if (rs != null) rs.close();
 				if (ps != null) ps.close();
 				if (connection != null) connection.close();
 			} catch (SQLException e) {
-				throw databaseError(e);
+				System.err.println("Error cerrando conexión: " + e.getMessage());
 			}
 		}
 		

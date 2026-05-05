@@ -3,21 +3,20 @@
  */
 package Presentacion.Vistas;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.JOptionPane;
+import Controlador.Context;
+import Controlador.Controller;
+import Presentacion.FactoriaPresentacion.Evento;
+import Presentacion.FactoriaPresentacion.IGUI;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
-
-import Presentacion.FactoriaPresentacion.IGUI;
-import Presentacion.FactoriaPresentacion.Evento;
-import Controlador.Context;
-import Controlador.Controller;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /** 
  * View for listing all rooms
@@ -34,8 +33,9 @@ public class VistaMostrarTodasSalas extends JFrame implements IGUI {
 	private JButton btnCerrar;
 	
 	public VistaMostrarTodasSalas() {
-		setTitle("All Rooms");
+		setTitle("Todas las Salas");
 		setSize(500, 400);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		actionListener = new HashSet<>();
@@ -53,8 +53,8 @@ public class VistaMostrarTodasSalas extends JFrame implements IGUI {
 		
 		// Buttons
 		JPanel buttonPanel = new JPanel();
-		btnActualizar = new JButton("Refresh");
-		btnCerrar = new JButton("Close");
+		btnActualizar = new JButton("Actualizar");
+		btnCerrar = new JButton("Cerrar");
 		btnActualizar.addActionListener(e -> refrescarSalas());
 		btnCerrar.addActionListener(e -> dispose());
 		jButton.add(btnActualizar);

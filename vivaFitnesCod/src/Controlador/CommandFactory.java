@@ -7,8 +7,6 @@ package Controlador;
 
 import Presentacion.FactoriaPresentacion.Evento;
 import Controlador.commands.*;
-import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
-import Negocio.Sala.SASala;
 
 /**
  * <!-- begin-UML-doc -->
@@ -20,13 +18,9 @@ public class CommandFactory {
 
 	/** Unica instancia (Singleton). */
 	private static CommandFactory instance;
-	private final SASala saSala;
 
 	/** Constructor privado para forzar uso del Singleton. */
-	private CommandFactory() {
-		FactoriaServicioAplicacion factory = FactoriaServicioAplicacion.getInstance();
-		this.saSala = factory.generaSASala();
-	}
+	private CommandFactory() {}
 
 	/**
 	 * Devuelve la unica instancia de CommandFactory (Singleton).
@@ -82,17 +76,17 @@ public class CommandFactory {
 
 			// --- Sala ---
 			case ALTA_SALA:
-				return new CommandAltaSala(saSala);
+				return new CommandAltaSala();
 			case BAJA_SALA:
-				return new CommandBajaSala(saSala);
+				return new CommandBajaSala();
 			case MODIFICAR_SALA:
-				return new CommandModificarSala(saSala);
+				return new CommandModificarSala();
 			case MOSTRAR_SALA:
-				return new CommandMostrarSala(saSala);
+				return new CommandMostrarSala();
 			case MOSTRAR_TODAS_SALAS:
-				return new CommandMostrarTodasSalas(saSala);
+				return new CommandMostrarTodasSalas();
 			case OBTENER_SESIONES_SALA:
-				return new CommandObtenerSesionesSala(saSala);
+				return new CommandObtenerSesionesSala();
 			
 			// --- Sesion ---
 			case ALTA_SESION:

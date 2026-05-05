@@ -4,7 +4,7 @@
 package Controlador;
 
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
-import Negocio.FactoriaNegocio.SASesion;
+import Negocio.Sesion.SASesion;
 import Integracion.Sesion.TSesion;
 import java.util.Set;
 
@@ -13,21 +13,12 @@ import java.util.Set;
  * @author azuri
  */
 public class CommandMostrarTodasSesiones implements Command {
-	
-	private SASesion saSesion;
-
-	public CommandMostrarTodasSesiones() {
-		this(FactoriaServicioAplicacion.getInstance().crearSASesion());
-	}
-	
-	public CommandMostrarTodasSesiones(SASesion saSesion) {
-		this.saSesion = saSesion;
-	}
 
 	@Override
 	public Context execute(Object datos) {
 		Context ctx = new Context();
 		
+		SASesion saSesion = FactoriaServicioAplicacion.getInstance().crearSASesion();
 		Set<TSesion> sesiones = saSesion.mostrar_todas_sesiones();
 		
 		if (sesiones != null && !sesiones.isEmpty()) {

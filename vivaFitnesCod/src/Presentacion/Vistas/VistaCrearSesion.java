@@ -3,23 +3,22 @@
  */
 package Presentacion.Vistas;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import Controlador.Context;
+import Controlador.Controller;
+import Integracion.Sesion.TSesion;
+import Presentacion.FactoriaPresentacion.Evento;
+import Presentacion.FactoriaPresentacion.IGUI;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
-
-import Presentacion.FactoriaPresentacion.IGUI;
-import Presentacion.FactoriaPresentacion.Evento;
-import Controlador.Controller;
-import Controlador.Context;
-import Integracion.Sesion.TSesion;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /** 
  * Vista para crear una nueva sesion
@@ -88,9 +87,9 @@ public class VistaCrearSesion extends JFrame implements IGUI {
 		mainPanel.add(txtDuracion);
 		
 		// Horario
-		jLabel.add(new JLabel("Horario (yyyy-MM-dd):"));
-		mainPanel.add(new JLabel("Horario (yyyy-MM-dd):"));
-		txtHorario = new JTextField("2026-05-10");
+		jLabel.add(new JLabel("Horario (yyyy-MM-dd HH:mm):"));
+		mainPanel.add(new JLabel("Horario (yyyy-MM-dd HH:mm):"));
+		txtHorario = new JTextField("2026-05-10 10:00");
 		jTextField.add(txtHorario);
 		mainPanel.add(txtHorario);
 		

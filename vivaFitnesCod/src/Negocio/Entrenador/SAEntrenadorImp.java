@@ -18,6 +18,7 @@ import Integracion.FactoriaIntegracion.FactoriaIntegracion;
  */
 public class SAEntrenadorImp implements SAEntrenador {
 
+	@Override
 	public int alta_entrenador(TEntrenador datos) {
 		if (datos == null || datos.get_dni() == null || datos.get_dni().isEmpty()
 				|| datos.get_nombre() == null || datos.get_nombre().isEmpty()) {
@@ -34,6 +35,7 @@ public class SAEntrenadorImp implements SAEntrenador {
 		return dao.create(datos);
 	}
 
+	@Override
 	public int baja_entrenador(int id) {
 		if (id <= 0) {
 			return -1;
@@ -49,6 +51,7 @@ public class SAEntrenadorImp implements SAEntrenador {
 		return dao.update(entrenador);
 	}
 
+	@Override
 	public int modificar_entrenador(int id, TEntrenador datos) {
 		if (id <= 0 || datos == null) {
 			return -1;
@@ -73,6 +76,7 @@ public class SAEntrenadorImp implements SAEntrenador {
 		return dao.update(entrenador);
 	}
 
+	@Override
 	public TEntrenador mostrar_entrenador(int id) {
 		if (id <= 0) {
 			return null;
@@ -81,10 +85,12 @@ public class SAEntrenadorImp implements SAEntrenador {
 		return FactoriaIntegracion.getInstance().generaDAOEntrenador().read(id);
 	}
 
+	@Override
 	public Set<TEntrenador> mostrar_entrenadores() {
 		return FactoriaIntegracion.getInstance().generaDAOEntrenador().read_all();
 	}
 
+	@Override
 	public int crear_sesion(int idEntrenador, TEntrenador datos) {
 		if (idEntrenador <= 0) {
 			return -1;

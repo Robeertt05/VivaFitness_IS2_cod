@@ -7,6 +7,7 @@ package Negocio.FactoriaNegocio;
 import Negocio.Entrenador.SAEntrenador;
 import Negocio.Sala.SASala;
 import Negocio.Cliente.SACliente;
+import Negocio.Sesion.SASesion;
 
 /**
  * Abstract factory for Service Application objects.
@@ -47,11 +48,7 @@ public abstract class FactoriaServicioAplicacion {
 
 
 	
-	public SASala generaSASala() {
-
-		return null;
-		// end-user-code
-	}
+	public abstract SASala generaSASala();
 
 	
 }
