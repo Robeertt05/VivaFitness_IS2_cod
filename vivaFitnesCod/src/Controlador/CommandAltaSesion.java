@@ -2,8 +2,8 @@
 package Controlador;
 
 import Integracion.Sesion.TSesion;
+import Negocio.Entrenador.SAEntrenador;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
-import Negocio.Sesion.SASesion;
 
 public class CommandAltaSesion implements Command {
 
@@ -19,8 +19,8 @@ public class CommandAltaSesion implements Command {
 		
 		TSesion sesion = (TSesion) datos;
 		try {
-			SASesion saSesion = FactoriaServicioAplicacion.getInstance().crearSASesion();
-			int resultado = saSesion.alta_sesion(sesion);
+			SAEntrenador saEntrenador = FactoriaServicioAplicacion.getInstance().crearSAEntrenador();
+			int resultado = saEntrenador.crear_sesion(sesion);
 			ctx.setSuccess(true);
 			ctx.setMessage("Sesion creada correctamente con ID: " + resultado);
 			ctx.setData(resultado);

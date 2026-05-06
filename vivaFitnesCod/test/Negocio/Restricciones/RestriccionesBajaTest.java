@@ -78,7 +78,7 @@ class RestriccionesBajaTest {
 		sesion.setFechaHora("2026-06-01 10:00");
 		sesion.setIdSala(idSala);
 		sesion.setIdEntrenador(idEntrenador);
-		int idSesion = saSesion.alta_sesion(sesion);
+		int idSesion = saEntrenador.crear_sesion(sesion);
 		assertTrue(idSesion > 0, "La sesion debe crearse correctamente");
 
 
@@ -175,7 +175,7 @@ class RestriccionesBajaTest {
 		sesion.setFechaHora("2026-07-01 15:00");
 		sesion.setIdSala(idSala);
 		sesion.setIdEntrenador(idEnt);
-		int idSes = saSesion.alta_sesion(sesion);
+		int idSes = saEntrenador.crear_sesion(sesion);
 		assertTrue(idSes > 0);
 
 
@@ -256,7 +256,7 @@ class RestriccionesBajaTest {
 		sesion.setIdEntrenador(idEnt);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			saSesion.alta_sesion(sesion);
+			saEntrenador.crear_sesion(sesion);
 		}, "No se debe poder crear sesión con sala inexistente");
 	}
 
@@ -276,7 +276,7 @@ class RestriccionesBajaTest {
 		sesion.setIdEntrenador(999);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			saSesion.alta_sesion(sesion);
+			saEntrenador.crear_sesion(sesion);
 		}, "No se debe poder crear sesión con entrenador inexistente");
 	}
 
@@ -284,7 +284,7 @@ class RestriccionesBajaTest {
 	@DisplayName("Alta sesión con datos nulos: debe lanzar excepción")
 	void altaSesion_datosNulos_lanzaExcepcion() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			saSesion.alta_sesion(null);
+			saEntrenador.crear_sesion(null);
 		}, "No se debe poder crear sesión con datos nulos");
 	}
 
@@ -373,7 +373,7 @@ class RestriccionesBajaTest {
 		s1.setFechaHora("2026-06-01 10:00");
 		s1.setIdSala(idSala);
 		s1.setIdEntrenador(idEnt);
-		saSesion.alta_sesion(s1);
+		saEntrenador.crear_sesion(s1);
 
 		TSesion s2 = new TSesion();
 		s2.setObjetivo("Yoga");
@@ -381,7 +381,7 @@ class RestriccionesBajaTest {
 		s2.setFechaHora("2026-06-01 11:00");
 		s2.setIdSala(idSala);
 		s2.setIdEntrenador(idEnt);
-		saSesion.alta_sesion(s2);
+		saEntrenador.crear_sesion(s2);
 
 		Set<TSesion> sesiones = saSala.obtener_sesiones_sala(idSala);
 		assertNotNull(sesiones);

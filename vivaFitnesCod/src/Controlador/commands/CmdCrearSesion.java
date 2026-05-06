@@ -4,7 +4,7 @@ package Controlador.commands;
 import Controlador.Command;
 import Controlador.Context;
 import Negocio.Entrenador.SAEntrenador;
-import Integracion.Entrenador.TEntrenador;
+import Integracion.Sesion.TSesion;
 import Negocio.FactoriaNegocio.FactoriaServicioAplicacion;
 import Presentacion.FactoriaPresentacion.Evento;
 
@@ -14,10 +14,10 @@ public class CmdCrearSesion implements Command {
 	public Context execute(Object datos) {
 		Context resultado = new Context();
 		try {
-			TEntrenador t = (TEntrenador) datos;
+			TSesion sesion = (TSesion) datos;
 			SAEntrenador sa = FactoriaServicioAplicacion.getInstance().crearSAEntrenador();
-			int res = sa.crear_sesion(t.get_id(), t);
-			if (res >= 0) {
+			int res = sa.crear_sesion(sesion);
+			if (res > 0) {
 				resultado.setEvento(Evento.RES_CREAR_SESION_OK);
 				resultado.setObjeto(res);
 			} else {

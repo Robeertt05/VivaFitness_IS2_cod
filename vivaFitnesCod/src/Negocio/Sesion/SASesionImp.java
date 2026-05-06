@@ -11,42 +11,6 @@ import Integracion.Sesion.TSesion;
 public class SASesionImp implements SASesion {
 
 	@Override
-	public int alta_sesion(TSesion datos) {
-		validarSesionAlta(datos);
-		
-		DAOSala daoSala = FactoriaIntegracion.getInstance().generaDAOSala();
-		TSala sala = daoSala.read(datos.getIdSala());
-		if (sala == null || sala.getActivo() != 1) {
-			throw new IllegalArgumentException("Sala inválida o inactiva: ID " + datos.getIdSala());
-		}
-		
-		DAOEntrenador daoEntrenador = FactoriaIntegracion.getInstance().generaDAOEntrenador();
-		TEntrenador entrenador = daoEntrenador.read(datos.getIdEntrenador());
-		if (entrenador == null || entrenador.get_activo() != 1) {
-			throw new IllegalArgumentException("Entrenador invalidos o inactivo: ID " + datos.getIdEntrenador());
-		}
-		
-		DAOSesion daoCheck = FactoriaIntegracion.getInstance().generaDAOSesion();
-		int count = daoCheck.countConflictoHorarioSala(datos.getIdSala(), datos.getFechaHora(), datos.getDuracion());
-		if (count > 0) {
-			throw new IllegalArgumentException("Sala ocupada en ese horario. Existe otra sesion en el mismo horario o con solapamiento.");
-		}
-		
-		datos.setActivo(1);
-
-		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
-		try {
-			int id = daoSesion.create(datos);
-			if (id <= 0) {
-				throw new RuntimeException("No se pudo crear la sesión en base de datos.");
-			}
-			return id;
-		} catch (RuntimeException e) {
-			throw e;
-		}
-	}
-
-	@Override
 	public int baja_sesion(int idSesion) {
 		if (idSesion <= 0) {
 			throw new IllegalArgumentException("El ID de sesion debe ser mayor que 0.");
@@ -159,32 +123,6 @@ public class SASesionImp implements SASesion {
 		}
 		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
 		return (TEntrenador) daoSesion.getTrainer(idSesion);
-	}
-
-	private void validarSesionAlta(TSesion datos) {
-		if (datos == null) {
-			throw new IllegalArgumentException("Los datos de la sesion no pueden ser nulos.");
-		}
-
-		if (datos.getObjetivo() == null || datos.getObjetivo().trim().isEmpty()) {
-			throw new IllegalArgumentException("El objetivo de la sesion es obligatorio.");
-		}
-
-		if (datos.getFechaHora() == null || datos.getFechaHora().trim().isEmpty()) {
-			throw new IllegalArgumentException("El horario de la sesion es obligatorio.");
-		}
-
-		if (datos.getDuracion() <= 0) {
-			throw new IllegalArgumentException("La duracion de la sesion debe ser mayor que 0.");
-		}
-
-		if (datos.getIdSala() <= 0) {
-			throw new IllegalArgumentException("Debe indicar una sala valida para la sesion.");
-		}
-
-		if (datos.getIdEntrenador() <= 0) {
-			throw new IllegalArgumentException("Debe indicar un entrenador valido para la sesion.");
-		}
 	}
 
 	private void validarSesionModificacion(TSesion datos) {

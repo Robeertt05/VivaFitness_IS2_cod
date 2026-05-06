@@ -6,8 +6,6 @@ import Integracion.Sesion.TSesion;
 
 public interface SASesion {
 
-	public int alta_sesion(TSesion datos);
-
 	public int baja_sesion(int idSesion);
 
 	public int modificar_sesion(int idSesion, TSesion datos);

@@ -2,6 +2,7 @@
 package Negocio.Entrenador;
 
 import Integracion.Entrenador.TEntrenador;
+import Integracion.Sesion.TSesion;
 
 
 public interface SAEntrenador {
@@ -14,5 +15,5 @@ public interface SAEntrenador {
 
 	public TEntrenador mostrar_entrenador(int id);
 
-	public int crear_sesion(int idEntrenador, TEntrenador datos);
+	public int crear_sesion(TSesion datos);
 }
