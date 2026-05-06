@@ -5,11 +5,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.Date;
 
-@DisplayName("Pruebas del Transfer Object TClienteSesion (Relación M:N)")
+@DisplayName("Pruebas del Transfer Object TClienteSesion (Relacion M:N)")
 class TClienteSesionTest {
 
 	@Test
-	@DisplayName("Constructor vacío: todos los campos en valores por defecto")
+	@DisplayName("Constructor vacio: todos los campos en valores por defecto")
 	void constructorVacio() {
 		TClienteSesion cs = new TClienteSesion();
 		assertEquals(0, cs.getIdCliente());
@@ -19,7 +19,7 @@ class TClienteSesionTest {
 	}
 
 	@Test
-	@DisplayName("Constructor completo: FKs y datos de inscripción correctos")
+	@DisplayName("Constructor completo: FKs y datos de inscripcion correctos")
 	void constructorCompleto() {
 		Date fecha = new Date();
 		TClienteSesion cs = new TClienteSesion(1, 5, fecha, "10:30");
@@ -51,7 +51,7 @@ class TClienteSesionTest {
 	}
 
 	@Test
-	@DisplayName("Relación M:N: FK idCliente e idSesion son coherentes")
+	@DisplayName("Relacion M:N: FK idCliente e idSesion son coherentes")
 	void relacionMN_fksCoherentes() {
 		int idCliente = 3;
 		int idSesion = 7;
@@ -61,7 +61,7 @@ class TClienteSesionTest {
 	}
 
 	@Test
-	@DisplayName("Encapsulación: modificar idCliente no afecta idSesion")
+	@DisplayName("Encapsulacion: modificar idCliente no afecta idSesion")
 	void encapsulacion() {
 		TClienteSesion cs = new TClienteSesion(1, 2, new Date(), "08:00");
 		cs.setIdCliente(99);

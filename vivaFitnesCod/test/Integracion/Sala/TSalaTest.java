@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class TSalaTest {
 
 	@Test
-	@DisplayName("Constructor vacío: activo=1 por defecto")
+	@DisplayName("Constructor vacio: activo=1 por defecto")
 	void constructorVacio_valoresPorDefecto() {
 		TSala sala = new TSala();
 		assertEquals(1, sala.getActivo());
@@ -18,7 +18,7 @@ class TSalaTest {
 	}
 
 	@Test
-	@DisplayName("Constructor con parámetros: campos asignados, activo=1")
+	@DisplayName("Constructor con parametros: campos asignados, activo=1")
 	void constructorConParametros() {
 		TSala sala = new TSala(1, "Sala Spinning", 25);
 		assertEquals(1, sala.getIdSala());
@@ -43,7 +43,7 @@ class TSalaTest {
 	}
 
 	@Test
-	@DisplayName("Encapsulación: modificar nombre no afecta aforo ni activo")
+	@DisplayName("Encapsulacion: modificar nombre no afecta aforo ni activo")
 	void encapsulacion_independenciaCampos() {
 		TSala sala = new TSala(1, "Original", 30);
 		sala.setNombreSala("Modificada");
@@ -63,7 +63,7 @@ class TSalaTest {
 	}
 
 	@Test
-	@DisplayName("Valores límite: aforo 0, negativo, MAX_VALUE")
+	@DisplayName("Valores limite: aforo 0, negativo, MAX_VALUE")
 	void valoresLimiteAforo() {
 		TSala sala = new TSala();
 		sala.setAforo(0);
@@ -75,7 +75,7 @@ class TSalaTest {
 	}
 
 	@Test
-	@DisplayName("Nombre null y vacío se permiten en TO")
+	@DisplayName("Nombre null y vacio se permiten en TO")
 	void nombreNullYVacio() {
 		TSala sala = new TSala();
 		sala.setNombreSala(null);

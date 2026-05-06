@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class TSesionTest {
 
 	@Test
-	@DisplayName("Constructor vacío: activo=1 por defecto")
+	@DisplayName("Constructor vacio: activo=1 por defecto")
 	void constructorVacio() {
 		TSesion s = new TSesion();
 		assertEquals(1, s.getActivo());
@@ -55,7 +55,7 @@ class TSesionTest {
 	}
 
 	@Test
-	@DisplayName("Relación FK: idSala e idEntrenador representan las FK")
+	@DisplayName("Relacion FK: idSala e idEntrenador representan las FK")
 	void fksSonConsistentes() {
 		TSesion s = new TSesion(1, "Yoga", 90, "2026-08-01 09:00", 5, 7);
 		assertEquals(5, s.getIdSala(), "FK idSala debe apuntar a la sala correcta");
@@ -63,7 +63,7 @@ class TSesionTest {
 	}
 
 	@Test
-	@DisplayName("Encapsulación: modificar objetivo no afecta FKs")
+	@DisplayName("Encapsulacion: modificar objetivo no afecta FKs")
 	void encapsulacion() {
 		TSesion s = new TSesion(1, "Original", 60, "2026-01-01 10:00", 3, 4);
 		s.setObjetivo("Modificado");
@@ -84,7 +84,7 @@ class TSesionTest {
 	}
 
 	@Test
-	@DisplayName("Valores límite: duración 0, negativa")
+	@DisplayName("Valores limite: duracion 0, negativa")
 	void valoresLimite() {
 		TSesion s = new TSesion();
 		s.setDuracion(0);

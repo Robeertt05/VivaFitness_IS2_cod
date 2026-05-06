@@ -79,7 +79,7 @@ class RestriccionesBajaTest {
 		sesion.setIdSala(idSala);
 		sesion.setIdEntrenador(idEntrenador);
 		int idSesion = saSesion.alta_sesion(sesion);
-		assertTrue(idSesion > 0, "La sesión debe crearse correctamente");
+		assertTrue(idSesion > 0, "La sesion debe crearse correctamente");
 
 
 		int resultado = saSala.baja_sala(idSala);
@@ -114,7 +114,7 @@ class RestriccionesBajaTest {
 
 
 	@Test
-	@DisplayName("Baja entrenador activo SIN sesiones: baja lógica (activo=0)")
+	@DisplayName("Baja entrenador activo SIN sesiones: baja logica (activo=0)")
 	void bajaEntrenador_sinSesiones_bajaLogica() {
 		TEntrenador ent = new TEntrenador();
 		ent.set_dni("22222222B");
@@ -125,7 +125,7 @@ class RestriccionesBajaTest {
 
 
 		int resultado = saEntrenador.baja_entrenador(idEnt);
-		assertTrue(resultado >= 0, "Baja lógica debe tener éxito");
+		assertTrue(resultado >= 0, "Baja logica debe tener exito");
 
 
 		TEntrenador entLeido = saEntrenador.mostrar_entrenador(idEnt);
@@ -155,7 +155,7 @@ class RestriccionesBajaTest {
 
 
 	@Test
-	@DisplayName("Baja sesión existente: debe eliminarse")
+	@DisplayName("Baja sesion existente: debe eliminarse")
 	void bajaSesion_existente_debeEliminarse() {
 
 		TSala sala = new TSala();
@@ -180,23 +180,23 @@ class RestriccionesBajaTest {
 
 
 		int resultado = saSesion.baja_sesion(idSes);
-		assertTrue(resultado > 0, "La sesión debe poderse eliminar");
+		assertTrue(resultado > 0, "La sesion debe poderse eliminar");
 
 
 		TSesion sesLeida = saSesion.mostrar_sesion(idSes);
-		assertNull(sesLeida, "La sesión debe dejar de existir tras la baja");
+		assertNull(sesLeida, "La sesion debe dejar de existir tras la baja");
 	}
 
 	@Test
-	@DisplayName("Baja sesión inexistente: debe lanzar excepción")
+	@DisplayName("Baja sesion inexistente: debe lanzar excepcion")
 	void bajaSesion_inexistente_lanzaExcepcion() {
 		assertThrows(IllegalArgumentException.class, () -> {
 			saSesion.baja_sesion(999);
-		}, "Dar de baja una sesión inexistente debe lanzar excepción");
+		}, "Dar de baja una sesion inexistente debe lanzar excepcion");
 	}
 
 	@Test
-	@DisplayName("Baja sesión con ID<=0: debe lanzar excepción")
+	@DisplayName("Baja sesion con ID<=0: debe lanzar excepcion")
 	void bajaSesion_idInvalido_lanzaExcepcion() {
 		assertThrows(IllegalArgumentException.class, () -> {
 			saSesion.baja_sesion(0);

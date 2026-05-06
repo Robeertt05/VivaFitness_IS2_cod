@@ -11,15 +11,15 @@ class TClienteTest {
 
 
 	@Test
-	@DisplayName("Constructor vacío: activo debe ser 1 por defecto")
+	@DisplayName("Constructor vacio: activo debe ser 1 por defecto")
 	void constructorVacio_activoPorDefecto() {
 		TCliente cliente = new TCliente();
 		assertEquals(1, cliente.get_activo(),
-			"El constructor vacío debe inicializar activo a 1");
+			"El constructor vacio debe inicializar activo a 1");
 	}
 
 	@Test
-	@DisplayName("Constructor vacío: id debe ser 0 (valor por defecto de int)")
+	@DisplayName("Constructor vacio: id debe ser 0 (valor por defecto de int)")
 	void constructorVacio_idPorDefecto() {
 		TCliente cliente = new TCliente();
 		assertEquals(0, cliente.getId(),
@@ -27,23 +27,23 @@ class TClienteTest {
 	}
 
 	@Test
-	@DisplayName("Constructor vacío: campos String deben ser null")
+	@DisplayName("Constructor vacio: campos String deben ser null")
 	void constructorVacio_camposNulos() {
 		TCliente cliente = new TCliente();
-		assertNull(cliente.get_dni(), "DNI debe ser null en constructor vacío");
-		assertNull(cliente.get_nombre(), "Nombre debe ser null en constructor vacío");
-		assertNull(cliente.get_telefono(), "Teléfono debe ser null en constructor vacío");
-		assertNull(cliente.get_correo(), "Correo debe ser null en constructor vacío");
+		assertNull(cliente.get_dni(), "DNI debe ser null en constructor vacio");
+		assertNull(cliente.get_nombre(), "Nombre debe ser null en constructor vacio");
+		assertNull(cliente.get_telefono(), "Telefono debe ser null en constructor vacio");
+		assertNull(cliente.get_correo(), "Correo debe ser null en constructor vacio");
 	}
 
 	@Test
 	@DisplayName("Constructor completo: todos los campos asignados correctamente")
 	void constructorCompleto_todosLosCampos() {
-		TCliente cliente = new TCliente(1, "12345678A", "Juan García", "600111222", "juan@mail.com", 1);
+		TCliente cliente = new TCliente(1, "12345678A", "Juan Garcia", "600111222", "juan@mail.com", 1);
 
 		assertEquals(1, cliente.getId());
 		assertEquals("12345678A", cliente.get_dni());
-		assertEquals("Juan García", cliente.get_nombre());
+		assertEquals("Juan Garcia", cliente.get_nombre());
 		assertEquals("600111222", cliente.get_telefono());
 		assertEquals("juan@mail.com", cliente.get_correo());
 		assertEquals(1, cliente.get_activo());
@@ -52,7 +52,7 @@ class TClienteTest {
 	@Test
 	@DisplayName("Constructor completo con activo=0: se respeta el valor")
 	void constructorCompleto_activoInactivo() {
-		TCliente cliente = new TCliente(2, "87654321B", "Ana López", "600333444", "ana@mail.com", 0);
+		TCliente cliente = new TCliente(2, "87654321B", "Ana Lopez", "600333444", "ana@mail.com", 0);
 		assertEquals(0, cliente.get_activo(),
 			"El constructor completo debe respetar activo=0");
 	}
@@ -103,8 +103,8 @@ class TClienteTest {
 	@DisplayName("set_nombre y get_nombre")
 	void setNombre_getNombre() {
 		TCliente cliente = new TCliente();
-		cliente.set_nombre("María Fernández");
-		assertEquals("María Fernández", cliente.get_nombre());
+		cliente.set_nombre("Maria Fernández");
+		assertEquals("Maria Fernandez", cliente.get_nombre());
 	}
 
 	@Test
@@ -149,7 +149,7 @@ class TClienteTest {
 	}
 
 	@Test
-	@DisplayName("Encapsulación: setId no afecta otros atributos")
+	@DisplayName("Encapsulacion: setId no afecta otros atributos")
 	void encapsulacion_setIdNoAfectaOtros() {
 		TCliente cliente = new TCliente(1, "DNI1", "Nombre1", "Tel1", "correo1@x.com", 1);
 		cliente.setId(100);
@@ -164,12 +164,12 @@ class TClienteTest {
 	@Test
 	@DisplayName("toString contiene todos los campos del cliente")
 	void toString_contieneTodosLosCampos() {
-		TCliente cliente = new TCliente(5, "44444444D", "Luis Martín", "622333444", "luis@mail.com", 1);
+		TCliente cliente = new TCliente(5, "44444444D", "Luis Martin", "622333444", "luis@mail.com", 1);
 		String result = cliente.toString();
 
 		assertTrue(result.contains("5"), "toString debe contener el ID");
 		assertTrue(result.contains("44444444D"), "toString debe contener el DNI");
-		assertTrue(result.contains("Luis Martín"), "toString debe contener el nombre");
+		assertTrue(result.contains("Luis Martin"), "toString debe contener el nombre");
 		assertTrue(result.contains("622333444"), "toString debe contener el teléfono");
 		assertTrue(result.contains("luis@mail.com"), "toString debe contener el correo");
 	}
@@ -192,7 +192,7 @@ class TClienteTest {
 	}
 
 	@Test
-	@DisplayName("String vacío: se permite asignar cadena vacía")
+	@DisplayName("String vacio: se permite asignar cadena vacia")
 	void stringVacio_sePermite() {
 		TCliente cliente = new TCliente();
 		cliente.set_dni("");
@@ -202,7 +202,7 @@ class TClienteTest {
 	}
 
 	@Test
-	@DisplayName("Id negativo: se permite asignar (no hay validación en TO)")
+	@DisplayName("Id negativo: se permite asignar (no hay validacion en TO)")
 	void idNegativo_sePermite() {
 		TCliente cliente = new TCliente();
 		cliente.setId(-1);

@@ -36,12 +36,12 @@ class RelacionesEntidadesTest {
 	}
 
 	@Test
-	@DisplayName("1:N Sala-Sesion: una sala sin sesiones es válida")
+	@DisplayName("1:N Sala-Sesion: una sala sin sesiones es valida")
 	void relacion1N_salaSinSesiones() {
-		TSala sala = new TSala(5, "Sala Vacía", 10);
+		TSala sala = new TSala(5, "Sala Vacia", 10);
 		List<TSesion> sesiones = new ArrayList<>();
 
-		assertTrue(sesiones.isEmpty(), "Una sala sin sesiones debe tener lista vacía");
+		assertTrue(sesiones.isEmpty(), "Una sala sin sesiones debe tener lista vacia");
 		assertEquals(5, sala.getIdSala());
 	}
 
@@ -73,7 +73,7 @@ class RelacionesEntidadesTest {
 	}
 
 	@Test
-	@DisplayName("1:N Entrenador-Sesion: entrenador sin sesiones es válido")
+	@DisplayName("1:N Entrenador-Sesion: entrenador sin sesiones es valido")
 	void relacion1N_entrenadorSinSesiones() {
 		TEntrenador entrenador = new TEntrenador(10, "99999999Z", "Nuevo", "666000000", 1);
 		List<TSesion> sesiones = new ArrayList<>();
@@ -112,7 +112,7 @@ class RelacionesEntidadesTest {
 	}
 
 	@Test
-	@DisplayName("M:N Cliente-Sesion: varios clientes en una misma sesión")
+	@DisplayName("M:N Cliente-Sesion: varios clientes en una misma sesion")
 	void relacionMN_variosClientesUnaSesion() {
 		TSesion sesion = new TSesion(1, "Spinning", 45, "2026-06-01 10:00", 1, 1);
 		TCliente c1 = new TCliente(1, "AAA", "Cliente1", "111", "c1@x.com", 1);
@@ -129,12 +129,12 @@ class RelacionesEntidadesTest {
 		assertEquals(3, inscripciones.size());
 		for (TClienteSesion cs : inscripciones) {
 			assertEquals(sesion.getIdSesion(), cs.getIdSesion(),
-				"Todas las inscripciones deben referenciar la misma sesión");
+				"Todas las inscripciones deben referenciar la misma sesion");
 		}
 	}
 
 	@Test
-	@DisplayName("M:N: la inscripción enlaza correctamente cliente y sesión")
+	@DisplayName("M:N: la inscripcion enlaza correctamente cliente y sesion")
 	void relacionMN_coherenciaFKs() {
 		int idCli = 7;
 		int idSes = 14;

@@ -11,25 +11,25 @@ class TEntrenadorTest {
 
 
 	@Test
-	@DisplayName("Constructor vacío: todos los campos en valores por defecto")
+	@DisplayName("Constructor vacio: todos los campos en valores por defecto")
 	void constructorVacio_valoresPorDefecto() {
 		TEntrenador entrenador = new TEntrenador();
 
 		assertEquals(0, entrenador.get_id(), "Id debe ser 0 por defecto");
-		assertEquals(0, entrenador.get_activo(), "Activo debe ser 0 por defecto en constructor vacío");
+		assertEquals(0, entrenador.get_activo(), "Activo debe ser 0 por defecto en constructor vacio");
 		assertNull(entrenador.get_dni(), "DNI debe ser null");
 		assertNull(entrenador.get_nombre(), "Nombre debe ser null");
-		assertNull(entrenador.get_telefono(), "Teléfono debe ser null");
+		assertNull(entrenador.get_telefono(), "Telefono debe ser null");
 	}
 
 	@Test
 	@DisplayName("Constructor completo: todos los campos asignados correctamente")
 	void constructorCompleto_todosLosCampos() {
-		TEntrenador entrenador = new TEntrenador(1, "12345678A", "Carlos López", "611222333", 1);
+		TEntrenador entrenador = new TEntrenador(1, "12345678A", "Carlos Lopez", "611222333", 1);
 
 		assertEquals(1, entrenador.get_id());
 		assertEquals("12345678A", entrenador.get_dni());
-		assertEquals("Carlos López", entrenador.get_nombre());
+		assertEquals("Carlos Lopez", entrenador.get_nombre());
 		assertEquals("611222333", entrenador.get_telefono());
 		assertEquals(1, entrenador.get_activo());
 	}
@@ -37,7 +37,7 @@ class TEntrenadorTest {
 	@Test
 	@DisplayName("Constructor completo con activo=0")
 	void constructorCompleto_inactivo() {
-		TEntrenador entrenador = new TEntrenador(2, "87654321B", "Laura Sánchez", "622333444", 0);
+		TEntrenador entrenador = new TEntrenador(2, "87654321B", "Laura Sanchez", "622333444", 0);
 		assertEquals(0, entrenador.get_activo());
 	}
 
@@ -122,7 +122,7 @@ class TEntrenadorTest {
 
 
 	@Test
-	@DisplayName("Encapsulación: modificar nombre no afecta DNI ni teléfono")
+	@DisplayName("Encapsulacion: modificar nombre no afecta DNI ni teléfono")
 	void encapsulacion_independenciaCampos() {
 		TEntrenador entrenador = new TEntrenador(1, "12345678A", "Original", "600000000", 1);
 		entrenador.set_nombre("Modificado");
@@ -142,8 +142,8 @@ class TEntrenadorTest {
 
 		assertTrue(result.contains("3"), "toString debe contener el id");
 		assertTrue(result.contains("33333333C"), "toString debe contener el DNI");
-		assertTrue(result.contains("Sofía Pérez"), "toString debe contener el nombre");
-		assertTrue(result.contains("633444555"), "toString debe contener el teléfono");
+		assertTrue(result.contains("Sofia Perez"), "toString debe contener el nombre");
+		assertTrue(result.contains("633444555"), "toString debe contener el telefono");
 		assertTrue(result.contains("1"), "toString debe contener activo");
 	}
 
@@ -163,7 +163,7 @@ class TEntrenadorTest {
 	}
 
 	@Test
-	@DisplayName("String vacío: se permite cadena vacía")
+	@DisplayName("String vacio: se permite cadena vacia")
 	void stringVacio() {
 		TEntrenador entrenador = new TEntrenador();
 		entrenador.set_nombre("");
