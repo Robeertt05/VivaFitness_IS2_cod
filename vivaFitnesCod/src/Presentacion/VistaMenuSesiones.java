@@ -32,7 +32,6 @@ public class VistaMenuSesiones extends JFrame {
 
         JButton btnMostrar = crearBotonAccion("Mostrar sesion");
         JButton btnBaja = crearBotonAccion("Baja sesion");
-        JButton btnMostrarTodas = crearBotonAccion("Mostrar todas las sesiones");
         JButton btnModificar = crearBotonAccion("Modificar sesion");
         JButton btnMostrarSala = crearBotonAccion("Mostrar sala de sesion");
         JButton btnMostrarEntrenador = crearBotonAccion("Mostrar entrenador de sesion");
@@ -40,13 +39,11 @@ public class VistaMenuSesiones extends JFrame {
         btnBaja.addActionListener(e -> abrirVista(Evento.BAJA_SESION));
         btnModificar.addActionListener(e -> abrirVista(Evento.MODIFICAR_SESION));
         btnMostrar.addActionListener(e -> abrirVista(Evento.MOSTRAR_SESION));
-        btnMostrarTodas.addActionListener(e -> abrirVista(Evento.MOSTRAR_TODAS_SESIONES));
         btnMostrarSala.addActionListener(e -> abrirVista(Evento.MOSTRAR_SALA_SESION));
         btnMostrarEntrenador.addActionListener(e -> abrirVista(Evento.MOSTRAR_ENTRENADOR_SESION));
 
         grid.add(btnMostrar);
         grid.add(btnBaja);
-        grid.add(btnMostrarTodas);
         grid.add(btnModificar);
         grid.add(btnMostrarSala);
         grid.add(btnMostrarEntrenador);

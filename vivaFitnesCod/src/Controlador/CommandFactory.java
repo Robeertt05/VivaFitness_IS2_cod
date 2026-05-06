@@ -73,8 +73,6 @@ public class CommandFactory {
 				return new CommandModificarSesion();
 			case MOSTRAR_SESION:
 				return new CommandMostrarSesion();
-			case MOSTRAR_TODAS_SESIONES:
-				return new CommandMostrarTodasSesiones();
 			case MOSTRAR_SALA_SESION:
 				return new CommandMostrarSalaSesion();
 			case MOSTRAR_ENTRENADOR_SESION:

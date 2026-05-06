@@ -7,7 +7,6 @@ import Integracion.Sala.DAOSala;
 import Integracion.Sala.TSala;
 import Integracion.Sesion.DAOSesion;
 import Integracion.Sesion.TSesion;
-import java.util.Set;
 
 public class SASesionImp implements SASesion {
 
@@ -142,21 +141,7 @@ public class SASesionImp implements SASesion {
 		return (sesion != null && sesion.getActivo() == 1) ? sesion : null;
 	}
 
-	@Override
-	public Set<TSesion> mostrar_todas_sesiones() {
-		DAOSesion daoSesion = FactoriaIntegracion.getInstance().generaDAOSesion();
-		Set<TSesion> all = daoSesion.read_all();
-		if (all == null) {
-			return null;
-		}
-		java.util.Set<TSesion> activos = new java.util.HashSet<>();
-		for (TSesion s : all) {
-			if (s != null && s.getActivo() == 1) {
-				activos.add(s);
-			}
-		}
-		return activos;
-	}
+
 
 	@Override
 	public TSala mostrar_sala_sesion(int idSesion) {

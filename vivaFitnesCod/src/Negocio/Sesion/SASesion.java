@@ -1,9 +1,8 @@
 package Negocio.Sesion;
 
-import Integracion.Sesion.TSesion;
-import Integracion.Sala.TSala;
 import Integracion.Entrenador.TEntrenador;
-import java.util.Set;
+import Integracion.Sala.TSala;
+import Integracion.Sesion.TSesion;
 
 public interface SASesion {
 
@@ -14,8 +13,6 @@ public interface SASesion {
 	public int modificar_sesion(int idSesion, TSesion datos);
 
 	public TSesion mostrar_sesion(int idSesion);
-
-	public Set<TSesion> mostrar_todas_sesiones();
 
 	public TSala mostrar_sala_sesion(int idSesion);
 

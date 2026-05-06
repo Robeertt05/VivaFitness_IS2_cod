@@ -4,10 +4,9 @@ package Presentacion.FactoriaPresentacion;
 import Presentacion.Vistas.VistaCrearSesion;
 import Presentacion.Vistas.VistaEliminarSesion;
 import Presentacion.Vistas.VistaModificarSesion;
-import Presentacion.Vistas.VistaMostrarSesion;
-import Presentacion.Vistas.VistaMostrarTodasSesiones;
-import Presentacion.Vistas.VistaMostrarSalaSesion;
 import Presentacion.Vistas.VistaMostrarEntrenadorSesion;
+import Presentacion.Vistas.VistaMostrarSalaSesion;
+import Presentacion.Vistas.VistaMostrarSesion;
 
 
 public class FactoriaVistas {
@@ -29,7 +28,6 @@ case ALTA_SESION:               return new VistaCrearSesion();
 case BAJA_SESION:               return new VistaEliminarSesion();
 case MODIFICAR_SESION:          return new VistaModificarSesion();
 case MOSTRAR_SESION:            return new VistaMostrarSesion();
-case MOSTRAR_TODAS_SESIONES:    return new VistaMostrarTodasSesiones();
 case MOSTRAR_SALA_SESION:       return new VistaMostrarSalaSesion();
 case MOSTRAR_ENTRENADOR_SESION: return new VistaMostrarEntrenadorSesion();
 default:                        return null;
