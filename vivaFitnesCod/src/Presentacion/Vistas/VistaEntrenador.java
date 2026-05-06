@@ -31,7 +31,6 @@ public class VistaEntrenador extends JFrame implements IGUI {
 		JButton btnAlta = crearBotonAccion("Alta entrenador");
 		JButton btnMostrar = crearBotonAccion("Mostrar entrenador");
 		JButton btnBaja = crearBotonAccion("Baja entrenador");
-		JButton btnMostrarTodos = crearBotonAccion("Mostrar todos los entrenadores");
 		JButton btnModificar = crearBotonAccion("Modificar entrenador");
 		JButton btnCrearSesion = crearBotonAccion("Crear sesion");
 
@@ -39,13 +38,11 @@ public class VistaEntrenador extends JFrame implements IGUI {
 		btnBaja.addActionListener(e -> abrirVista(Evento.BAJA_ENTRENADOR));
 		btnModificar.addActionListener(e -> abrirVista(Evento.MODIFICAR_ENTRENADOR));
 		btnMostrar.addActionListener(e -> abrirVista(Evento.MOSTRAR_ENTRENADOR));
-		btnMostrarTodos.addActionListener(e -> abrirVista(Evento.MOSTRAR_ENTRENADORES));
 		btnCrearSesion.addActionListener(e -> abrirVista(Evento.CREAR_SESION));
 
 		grid.add(btnAlta);
 		grid.add(btnMostrar);
 		grid.add(btnBaja);
-		grid.add(btnMostrarTodos);
 		grid.add(btnModificar);
 		grid.add(btnCrearSesion);
 

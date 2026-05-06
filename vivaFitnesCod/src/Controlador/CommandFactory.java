@@ -29,8 +29,7 @@ public class CommandFactory {
 				return new CmdModificarEntrenador();
 			case MOSTRAR_ENTRENADOR:
 				return new CmdMostrarEntrenador();
-			case MOSTRAR_ENTRENADORES:
-				return new CmdMostrarEntrenadores();
+
 			case CREAR_SESION:
 				return new CmdCrearSesion();
 			 

@@ -1,7 +1,6 @@
 
 package Negocio.Entrenador;
 
-import java.util.Set;
 import Integracion.Entrenador.TEntrenador;
 
 
@@ -14,8 +13,6 @@ public interface SAEntrenador {
 	public int modificar_entrenador(int id, TEntrenador datos);
 
 	public TEntrenador mostrar_entrenador(int id);
-
-	public Set<TEntrenador> mostrar_entrenadores();
 
 	public int crear_sesion(int idEntrenador, TEntrenador datos);
 }

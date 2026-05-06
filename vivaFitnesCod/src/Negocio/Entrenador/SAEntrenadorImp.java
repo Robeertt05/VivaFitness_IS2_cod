@@ -1,13 +1,11 @@
 package Negocio.Entrenador;
 
-import java.util.Set;
-import java.util.HashSet;
-
-import Integracion.Entrenador.TEntrenador;
 import Integracion.Entrenador.DAOEntrenador;
+import Integracion.Entrenador.TEntrenador;
+import Integracion.FactoriaIntegracion.FactoriaIntegracion;
 import Integracion.Sesion.DAOSesion;
 import Integracion.Sesion.TSesion;
-import Integracion.FactoriaIntegracion.FactoriaIntegracion;
+import java.util.Set;
 
 
 public class SAEntrenadorImp implements SAEntrenador {
@@ -102,21 +100,6 @@ public class SAEntrenadorImp implements SAEntrenador {
 
 		TEntrenador entrenador = FactoriaIntegracion.getInstance().generaDAOEntrenador().read(id);
 		return (entrenador != null && entrenador.get_activo() == 1) ? entrenador : null;
-	}
-
-	@Override
-	public Set<TEntrenador> mostrar_entrenadores() {
-		Set<TEntrenador> all = FactoriaIntegracion.getInstance().generaDAOEntrenador().read_all();
-		if (all == null) {
-			return null;
-		}
-		Set<TEntrenador> activos = new HashSet<>();
-		for (TEntrenador t : all) {
-			if (t != null && t.get_activo() == 1) {
-				activos.add(t);
-			}
-		}
-		return activos;
 	}
 
 	@Override
